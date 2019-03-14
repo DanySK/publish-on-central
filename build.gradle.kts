@@ -3,6 +3,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.kotlin.backend.common.onlyIf
 import java.net.URI
 
 plugins {
@@ -82,7 +83,7 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.6"
     }
-    configure<Sign> {
+    withType<Sign> {
         onlyIf { project.property("signArchivesIsEnabled")?.toString()?.toBoolean() ?: false }
     }
 }
