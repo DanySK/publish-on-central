@@ -25,18 +25,18 @@ fun Int.asBase(base: Int = 36, digits: Int = 3) = toString(base).let {
 val minVer = "0.1.0"
 val semVer = """^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?${'$'}""".toRegex()
 version = with(versionDetails) {
-    val tag = branchName?.let { lastTag }?.takeIf { it.matches(semVer) }
+    val tag = lastTag ?.takeIf { it.matches(semVer) }
     val baseVersion = tag ?: minVer
-    val appendix = branchName?.let {
-            tag?.let {
-                "".takeIf { commitDistance == 0 } ?: "-dev${commitDistance.asBase()}+${gitHash}"
-            } ?: "-archeo+${gitHash}"
-        } ?: "-archeo+${System.currentTimeMillis()}"
+    val appendix = tag?.let {
+        "".takeIf { commitDistance == 0 } ?: "-dev${commitDistance.asBase()}+${gitHash}"
+    } ?: "-archeo+${gitHash}"
     baseVersion + appendix
 }
 if (!version.toString().matches(semVer)) {
     throw IllegalStateException("Version ${version} does not match Semantic Versioning requirements")
 }
+println(versionDetails)
+println(version)
 
 repositories {
     mavenCentral()
