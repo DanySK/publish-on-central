@@ -3,3 +3,4 @@
 .gradle/
 build/
 out/
+prepare_environment.sh
