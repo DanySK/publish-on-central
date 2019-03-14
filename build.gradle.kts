@@ -3,13 +3,15 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
+import java.net.URI
 
 plugins {
-    id("java-gradle-plugin")
-    id("java")
+    `java-gradle-plugin`
+    `java`
+    `maven-publish`
+    `signing`
     id("com.palantir.git-version") version "0.12.0-rc2"
     kotlin("jvm") version "1.3.21"
-    `maven-publish`
 }
 
 group = "org.danilopianini"
@@ -42,17 +44,6 @@ dependencies {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_6
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.group.toString()
-            artifactId = project.name
-            version = project.version.toString()
-            from(components["java"])
-        }
-    }
 }
 
 tasks {
@@ -91,9 +82,54 @@ tasks {
     withType<KotlinCompile> {
         kotlinOptions.jvmTarget = "1.6"
     }
+    configure<Sign> {
+        onlyIf { project.property("signArchivesIsEnabled")?.toString()?.toBoolean() ?: false }
+    }
 }
 
 // Add the classpath file to the test runtime classpath
 dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("mavenCentral") {
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
+            from(components["java"])
+            artifact(project.property("sourcesJar"))
+            artifact(project.property("javadocJar"))
+            pom {
+                name.set("Gradle Publish On Central Plugin")
+                description.set("A Plugin for easily publishing artifacts on Maven Central")
+                url.set("https://github.com/DanySK/maven-central-gradle-plugin")
+                licenses {
+                    license {
+                        name.set("")
+                        url.set("")
+                    }
+                }
+                scm {
+                    url.set(this@pom.url.get())
+                    connection.set("git@github.com:DanySK/maven-central-gradle-plugin.git")
+                    developerConnection.set(connection.get())
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
+            credentials {
+                username = "danysk"
+                password = project.property("ossrhPassword").toString()
+            }
+        }
+    }
+}
+
+configure<SigningExtension> {
+    sign(publishing.publications.getByName("mavenCentral"))
 }
