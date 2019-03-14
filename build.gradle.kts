@@ -18,7 +18,7 @@ plugins {
 group = "org.danilopianini"
 val versionDetails: VersionDetails = (property("versionDetails") as? Closure<VersionDetails>)?.call()
     ?: throw IllegalStateException("Unable to fetch the git version for this repository")
-fun Int.asBase(base: Int = 36, digits: Int = 3) = toString(base).let {
+fun Int.asBase(base: Int = 36, digits: Int = 2) = toString(base).let {
     if (it.length >= digits) it
     else generateSequence {"0"}.take(digits - it.length).joinToString("") + it
 }
