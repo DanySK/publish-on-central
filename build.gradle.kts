@@ -2,6 +2,7 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
+import org.gradle.jvm.tasks.Jar
 
 plugins {
     id("java-gradle-plugin")
@@ -42,33 +43,13 @@ dependencies {
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_6
 }
-tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "1.6"
-}
-
-// Write the plugin's classpath to a file to share with the tests
-tasks.register("createClasspathManifest") {
-    val outputDir = file("$buildDir/$name")
-    inputs.files(sourceSets.main.get().runtimeClasspath)
-    outputs.dir(outputDir)
-    doLast {
-        outputDir.mkdirs()
-        file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
-    }
-}
-
-// Add the classpath file to the test runtime classpath
-dependencies {
-    testRuntimeOnly(files(tasks["createClasspathManifest"]))
-}
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
-            groupId = "org.gradle.sample"
-            artifactId = "project1-sample"
-            version = "1.1"
-
+            groupId = project.group.toString()
+            artifactId = project.name
+            version = project.version.toString()
             from(components["java"])
         }
     }
@@ -85,5 +66,34 @@ tasks {
             events(*TestLogEvent.values())
         }
     }
+    register("createClasspathManifest") {
+        val outputDir = file("$buildDir/$name")
+        inputs.files(sourceSets.main.get().runtimeClasspath)
+        outputs.dir(outputDir)
+        doLast {
+            outputDir.mkdirs()
+            file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
+        }
+    }
+    register<Jar>("sourcesJar") {
+        archiveClassifier.set("sources")
+        val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
+            ?: throw IllegalStateException("Unable to get sourceSets for project $project. Got ${project.properties["sourceSets"]}")
+        val main = sourceSets.getByName("main").allSource
+        from(main)
+    }
+    register<Jar>("javadocJar") {
+        archiveClassifier.set("javadoc")
+        val javadoc = project.tasks.findByName("javadoc") as? Javadoc
+            ?: throw IllegalStateException("Unable to get javadoc task for project $project. Got ${project.task("javadoc")}")
+        from(javadoc.destinationDir)
+    }
+    withType<KotlinCompile> {
+        kotlinOptions.jvmTarget = "1.6"
+    }
 }
 
+// Add the classpath file to the test runtime classpath
+dependencies {
+    testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
