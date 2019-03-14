@@ -25,11 +25,17 @@ fun Int.asBase(base: Int = 36, digits: Int = 3) = toString(base).let {
 val minVer = "0.1.0"
 val semVer = """^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?${'$'}""".toRegex()
 version = with(versionDetails) {
-    val baseVersion = branchName?.let { lastTag }?.takeIf { it.matches(semVer) } ?: "0.1.0"
+    val tag = branchName?.let { lastTag }?.takeIf { it.matches(semVer) }
+    val baseVersion = tag ?: minVer
     val appendix = branchName?.let {
-            if (isCleanTag) "" else "-dev${commitDistance.asBase()}+${gitHash}"
+            tag?.let {
+                "".takeIf { commitDistance == 0 } ?: "-dev${commitDistance.asBase()}+${gitHash}"
+            } ?: "-archeo+${gitHash}"
         } ?: "-archeo+${System.currentTimeMillis()}"
-    baseVersion + appendix + (".dirty".takeIf { version.endsWith(it) } ?: "")
+    baseVersion + appendix
+}
+if (!version.toString().matches(semVer)) {
+    throw IllegalStateException("Version ${version} does not match Semantic Versioning requirements")
 }
 
 repositories {
