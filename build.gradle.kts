@@ -35,8 +35,6 @@ version = with(versionDetails) {
 if (!version.toString().matches(semVer)) {
     throw IllegalStateException("Version ${version} does not match Semantic Versioning requirements")
 }
-println(versionDetails)
-println(version)
 
 repositories {
     mavenCentral()
