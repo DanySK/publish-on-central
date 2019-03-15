@@ -13,6 +13,14 @@ env:
     include:
       - jdk: openjdk8
         env: PUBLISH="true"
+      - jdk: openjdk9
+        env: PUBLISH="false"
+      - jdk: openjdk10
+        env: PUBLISH="false"
+      - jdk: openjdk11
+        env: PUBLISH="false"
+      - jdk: openjdk12
+        env: PUBLISH="false"
 
 install: >-
     if $SHOULD_CONFIGURE; then
@@ -22,7 +30,7 @@ install: >-
 
 script: >-
     if [ $SHOULD_CONFIGURE -a $PUBLISH ]; then
-        ./gradlew clean check publish
+        ./gradlew clean check publishPlugins publish
     else
         ./gradlew clean check sourcesJar javadocJar
     fi
