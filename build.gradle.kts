@@ -3,19 +3,29 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
-import org.jetbrains.kotlin.backend.common.onlyIf
 import java.net.URI
 
 plugins {
+    val gitVersionVersion = "0.12.0-rc2"
+    val gradlePluginPublisVersion = "0.10.1"
+    val kotlinVersion = "1.3.21"
+
     `java-gradle-plugin`
     `java`
     `maven-publish`
     `signing`
-    id("com.palantir.git-version") version "0.12.0-rc2"
-    kotlin("jvm") version "1.3.21"
+    id("com.palantir.git-version") version gitVersionVersion
+    kotlin("jvm") version kotlinVersion
+    id("com.gradle.plugin-publish") version gradlePluginPublisVersion
 }
 
 group = "org.danilopianini"
+val projectId = "$group.$name"
+val fullName = "Gradle Publish On Maven Central Plugin"
+val websiteUrl = "https://github.com/DanySK/maven-central-gradle-plugin"
+val projectDescription = "A Plugin for easily publishing artifacts on Maven Central"
+val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOnCentral"
+
 val versionDetails: VersionDetails = (property("versionDetails") as? Closure<VersionDetails>)?.call()
     ?: throw IllegalStateException("Unable to fetch the git version for this repository")
 fun Int.asBase(base: Int = 36, digits: Int = 2) = toString(base).let {
@@ -107,9 +117,9 @@ publishing {
             artifact(project.property("sourcesJar"))
             artifact(project.property("javadocJar"))
             pom {
-                name.set("Gradle Publish On Central Plugin")
-                description.set("A Plugin for easily publishing artifacts on Maven Central")
-                url.set("https://github.com/DanySK/maven-central-gradle-plugin")
+                name.set(fullName)
+                description.set(projectDescription)
+                url.set(websiteUrl)
                 licenses {
                     license {
                         name.set("")
@@ -137,4 +147,21 @@ publishing {
 
 configure<SigningExtension> {
     sign(publishing.publications.getByName("mavenCentral"))
+}
+
+pluginBundle {
+    website = websiteUrl
+    vcsUrl = websiteUrl
+    tags = listOf("maven", "maven central", "ossrh", "central", "publish")
+}
+
+gradlePlugin {
+    plugins {
+        create(projectId) {
+            id = projectId
+            displayName = fullName
+            description = projectDescription
+            implementationClass = pluginImplementationClass
+        }
+    }
 }
