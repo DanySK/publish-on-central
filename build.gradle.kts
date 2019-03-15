@@ -41,7 +41,7 @@ version = with(versionDetails) {
         "".takeIf { commitDistance == 0 } ?: "-dev${commitDistance.asBase()}+${gitHash}"
     } ?: "-archeo+${gitHash}"
     baseVersion + appendix
-}
+}.take(20)
 if (!version.toString().matches(semVer)) {
     throw IllegalStateException("Version ${version} does not match Semantic Versioning requirements")
 }
