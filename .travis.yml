@@ -21,7 +21,7 @@ install: >-
     fi
 
 script: >-
-    if $SHOULD_CONFIGURE -a $PUBLISH; then
+    if [ $SHOULD_CONFIGURE -a $PUBLISH ]; then
         ./gradlew clean check publish
     else
         ./gradlew clean check sourcesJar javadocJar
