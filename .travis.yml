@@ -13,15 +13,15 @@ env:
 matrix:
   include:
     - jdk: openjdk8
-    env: PUBLISH="true"
+      env: PUBLISH="true"
     - jdk: openjdk9
-    env: PUBLISH="false"
+      env: PUBLISH="false"
     - jdk: openjdk10
-    env: PUBLISH="false"
+      env: PUBLISH="false"
     - jdk: openjdk11
-    env: PUBLISH="false"
+      env: PUBLISH="false"
     - jdk: openjdk12
-    env: PUBLISH="false"
+      env: PUBLISH="false"
 
 install: >-
     if $SHOULD_CONFIGURE; then
