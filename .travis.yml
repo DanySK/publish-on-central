@@ -25,7 +25,7 @@ matrix:
 before_install:
     - echo travis pr $TRAVIS_PULL_REQUEST
     - echo travis repo $TRAVIS_REPO_SLUG
-    - export SHOULD_CONFIGURE="$(if [ ! $TRAVIS_PULL_REQUEST -a $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
+    - export SHOULD_CONFIGURE="$(if [ $TRAVIS_PULL_REQUEST="false" -a $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
 
 install: >-
     if $SHOULD_CONFIGURE; then
