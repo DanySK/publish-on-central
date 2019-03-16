@@ -31,9 +31,6 @@ install: >-
         bash prepare_environment.sh
     fi
 
-script: >
-    if $SHOULD_CONFIGURE && $PUBLISH; then
-        ./gradlew clean check publishPlugins publish
-    else
-        ./gradlew clean check sourcesJar javadocJar
-    fi
+script: ./gradlew clean check sourcesJar javadocJar
+
+after_success: if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins publish; fi
