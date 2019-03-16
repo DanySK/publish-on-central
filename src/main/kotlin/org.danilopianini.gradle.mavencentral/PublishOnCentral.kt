@@ -25,7 +25,6 @@ private inline fun <reified T> Project.configure(crossinline  body: T.() -> Unit
     project.extensions.configure(T::class.java) { it.body() }
 private inline fun <reified T: Task> Project.configureTask(crossinline  body: T.() -> Unit) =
     project.tasks.withType(T::class.java) { it.body() }
-private operator fun <T> Property<T>.invoke(): T = get()
 
 class PublishOnCentral : Plugin<Project> {
     override fun apply(project: Project) {
@@ -44,32 +43,30 @@ class PublishOnCentral : Plugin<Project> {
                             artifact(project.property("sourcesJar"))
                             artifact(project.property("javadocJar"))
                             pom { with(it) {
-                                name.set(extension.artifactId())
-                                description.set(extension.projectDescription())
+                                name.set(extension.projectLongName)
+                                description.set(extension.projectDescription)
                                 packaging = "jar"
-                                val ref = "${extension.scmRootUrl()}/${extension.artifactId()}"
-                                url.set(ref)
+                                url.set(extension.projectUrl)
                                 licenses {
                                     it.license { license ->
-                                        license.name.set(extension.licenseName())
-                                        license.url.set(extension.licenseUrl())
+                                        license.name.set(extension.licenseName)
+                                        license.url.set(extension.licenseUrl)
                                     }
                                 }
                                 scm { scm ->
-                                    scm.url.set(ref)
-                                    val scmConnection = "${extension.scmType()}:${extension.scmLogin()}/${extension.scmRepoName()}"
-                                    scm.connection.set(scmConnection)
-                                    scm.developerConnection.set(scmConnection)
+                                    scm.url.set(extension.projectUrl)
+                                    scm.connection.set(extension.scmConnection)
+                                    scm.developerConnection.set(extension.scmConnection)
                                 }
                             }}
                         }}
                     }
                     repositories {
                         it.maven {
-                            it.url = extension.repositoryURL()
+                            it.url = extension.repositoryURL.get()
                             it.credentials {
-                                it.username = extension.ossrhUsername()
-                                it.password = extension.ossrhPassword()
+                                it.username = project.property(PublishOnCentralExtension.userName).toString()
+                                it.password = project.property(PublishOnCentralExtension.pwdName).toString()
                             }
                         }
                     }

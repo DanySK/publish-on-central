@@ -18,18 +18,10 @@ class CentralTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) = newFile(name).writeText(content().trimIndent())
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-//        file("gradle.properties") { """
-//        artifactId = testproject
-//        projectDescription = A test project
-//        scmRootUrl = someUrl
-//        licenseName = myLicense
-//        licenseUrl = anotherUrl
-//        scmType = git
-//        scmRepoName = myrepo
-//        scmLogin = danysk
-//        ossrhUsername = myOSSRHusername
-//        ossrhPassword = This should be configured elsewhere
-//    """ }
+        file("gradle.properties") { """
+        ossrhUsername = myOSSRHusername
+        ossrhPassword = This should be configured elsewhere
+    """ }
         file("build.gradle.kts") { """
         plugins {
 //            id("java")
