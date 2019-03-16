@@ -9,6 +9,12 @@ import java.lang.IllegalStateException
 import java.net.URI
 import java.net.URL
 
+inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
+    objects.property(T::class.java).apply { convention(default) }
+
+inline fun <reified T> Project.propertyWithDefault(noinline default: () -> T): Property<T> =
+    objects.property(T::class.java).apply { convention( default()) }
+
 open class PublishOnCentralExtension @JvmOverloads constructor(
     private val project: Project,
     val projectLongName: Property<String> = project.propertyWithDefault(project.name),
