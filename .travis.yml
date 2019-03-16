@@ -23,6 +23,9 @@ matrix:
     - jdk: openjdk12
       env: PUBLISH="false"
 
+before_install:
+    export SHOULD_CONFIGURE = $(if ! $TRAVIS_PULL_REQUEST -a $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin"; then "true"; else "false")
+
 install: >-
     if $SHOULD_CONFIGURE; then
         openssl aes-256-cbc -K $encrypted_e7e03982aaff_key -iv $encrypted_e7e03982aaff_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
