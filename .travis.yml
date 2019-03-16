@@ -29,7 +29,7 @@ install: >-
         bash prepare_environment.sh
     fi
 
-script: >-
+script: >
     echo "souldconfigure: $SHOULD_CONFIGURE"
     echo "shouldpublish: $PUBLISH"
     if [ $SHOULD_CONFIGURE -a $PUBLISH ]; then
