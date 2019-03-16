@@ -30,8 +30,8 @@ install: >-
     fi
 
 script: >
-    echo "souldconfigure: $SHOULD_CONFIGURE"
-    echo "shouldpublish: $PUBLISH"
+    echo "souldconfigure: $SHOULD_CONFIGURE";
+    echo "shouldpublish: $PUBLISH";
     if [ $SHOULD_CONFIGURE -a $PUBLISH ]; then
         ./gradlew clean check publishPlugins publish
     else
