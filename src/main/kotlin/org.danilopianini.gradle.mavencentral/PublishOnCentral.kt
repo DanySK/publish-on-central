@@ -39,7 +39,6 @@ class PublishOnCentral : Plugin<Project> {
                         publications.create(publicationName, MavenPublication::class.java) { with(it){
                             val javaComponent = project.components.find { it.name == "java" }
                                 ?: throw IllegalStateException("Cannot find Java project component.")
-                            println(javaComponent)
                             from(javaComponent)
                             artifact(project.property("sourcesJar"))
                             artifact(project.property("javadocJar"))
