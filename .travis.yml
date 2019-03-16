@@ -37,7 +37,7 @@ install: >-
 script: >
     echo "souldconfigure: $SHOULD_CONFIGURE";
     echo "shouldpublish: $PUBLISH";
-    if [ $SHOULD_CONFIGURE -a $PUBLISH ]; then
+    if $SHOULD_CONFIGURE && $PUBLISH; then
         ./gradlew clean check publishPlugins publish
     else
         ./gradlew clean check sourcesJar javadocJar
