@@ -23,8 +23,6 @@ matrix:
       env: PUBLISH="false"
 
 before_install:
-    - echo travis pr $TRAVIS_PULL_REQUEST
-    - echo travis repo $TRAVIS_REPO_SLUG
     - export SHOULD_CONFIGURE="$(if ! $TRAVIS_PULL_REQUEST && [ $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
 
 install: >-
@@ -34,8 +32,6 @@ install: >-
     fi
 
 script: >
-    echo "souldconfigure: $SHOULD_CONFIGURE";
-    echo "shouldpublish: $PUBLISH";
     if $SHOULD_CONFIGURE && $PUBLISH; then
         ./gradlew clean check publishPlugins publish
     else
