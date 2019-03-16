@@ -16,6 +16,7 @@ import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import java.lang.IllegalStateException
+import java.net.URI
 
 const val publicationName = "mavenCentral"
 private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
@@ -63,7 +64,7 @@ class PublishOnCentral : Plugin<Project> {
                     }
                     repositories {
                         it.maven {
-                            it.url = extension.repositoryURL.get()
+                            it.url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                             it.credentials {
                                 it.username = project.property(PublishOnCentralExtension.userName).toString()
                                 it.password = project.property(PublishOnCentralExtension.pwdName).toString()
