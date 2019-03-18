@@ -21,13 +21,13 @@ open class PublishOnCentralExtension @JvmOverloads constructor(
     val projectDescription: Property<String> = project.propertyWithDefault("No description provided"),
     val licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0"),
     val licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0"),
-    val signArchives: Property<Boolean> = project.propertyWithDefault(false),
     val scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}"),
     val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 ) {
     companion object {
         const val userName = "ossrhUsername"
         const val pwdName = "ossrhPassword"
+        const val shouldSignName = "signArchivesIsEnabled"
         const val extensionName = "publishOnCentral"
     }
 }

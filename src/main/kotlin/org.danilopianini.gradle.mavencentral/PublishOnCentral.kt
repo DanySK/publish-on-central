@@ -76,7 +76,11 @@ class PublishOnCentral : Plugin<Project> {
                         sign(project.extension<PublishingExtension>().publications.getByName(publicationName))
                     }
                     project.configureTask<Sign> {
-                        onlyIf { extension.signArchives.get() }
+                        onlyIf {
+                            val sign = PublishOnCentralExtension.shouldSignName
+                            project.hasProperty(sign)
+                                .and(project.property(sign)?.toString()?.toBoolean() ?: false)
+                        }
                     }
                 }
             }
