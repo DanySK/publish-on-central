@@ -6,18 +6,15 @@ import org.gradle.jvm.tasks.Jar
 import java.net.URI
 
 plugins {
-    val gitVersionVersion = "0.12.0-rc2"
-    val gradlePluginPublisVersion = "0.10.1"
-    val kotlinVersion = "1.3.21"
-
     `java-gradle-plugin`
     `java`
     `maven-publish`
     `signing`
-    id("com.palantir.git-version") version gitVersionVersion
-    kotlin("jvm") version kotlinVersion
-    id("com.gradle.plugin-publish") version gradlePluginPublisVersion
+    id("com.palantir.git-version") version "0.12.0-rc2"
+    kotlin("jvm") version "1.3.21"
+    id("com.gradle.plugin-publish") version "0.10.1"
     id ("org.danilopianini.publish-on-central") version "0.1.0-archeo+8de0c55"
+    id("org.jetbrains.dokka") version "0.9.17"
 }
 
 group = "org.danilopianini"
@@ -99,7 +96,6 @@ dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
 }
 
-
 publishing {
     publications {
         withType<MavenPublication>() {
@@ -132,3 +128,4 @@ gradlePlugin {
         }
     }
 }
+
