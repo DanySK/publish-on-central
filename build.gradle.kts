@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
+import org.jetbrains.dokka.DokkaConfiguration
+import org.jetbrains.dokka.gradle.DokkaTask
 import java.net.URI
 
 plugins {
@@ -57,6 +59,13 @@ dependencies {
 
 configure<JavaPluginConvention> {
     sourceCompatibility = JavaVersion.VERSION_1_6
+}
+
+tasks.withType<DokkaTask> {
+    outputDirectory = "$buildDir/javadoc"
+    jdkVersion = 8
+    reportUndocumented = false
+    outputFormat = "javadoc"
 }
 
 publishOnCentral {

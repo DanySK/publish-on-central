@@ -18,16 +18,24 @@ import org.gradle.plugins.signing.SigningPlugin
 import java.lang.IllegalStateException
 import java.net.URI
 
-const val publicationName = "mavenCentral"
-private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
-private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T = project.extensions.create(name, T::class.java, *args)
-private inline fun <reified S, reified T: Plugin<S>> Project.plugin(): PluginCollection<T> = project.plugins.withType(T::class.java)
-private inline fun <reified T> Project.configure(crossinline  body: T.() -> Unit): Unit =
-    project.extensions.configure(T::class.java) { it.body() }
-private inline fun <reified T: Task> Project.configureTask(crossinline  body: T.() -> Unit) =
-    project.tasks.withType(T::class.java) { it.body() }
-
+/**
+ * A Plugin configuring the project for publishing on Maven Central
+ */
 class PublishOnCentral : Plugin<Project> {
+    companion object {
+        /**
+         * The name of the publication to be created.
+         */
+        const val publicationName = "mavenCentral"
+        private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
+        private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T = project.extensions.create(name, T::class.java, *args)
+        private inline fun <reified S, reified T: Plugin<S>> Project.plugin(): PluginCollection<T> = project.plugins.withType(T::class.java)
+        private inline fun <reified T> Project.configure(crossinline  body: T.() -> Unit): Unit =
+            project.extensions.configure(T::class.java) { it.body() }
+        private inline fun <reified T: Task> Project.configureTask(crossinline  body: T.() -> Unit) =
+            project.tasks.withType(T::class.java) { it.body() }
+
+    }
     override fun apply(project: Project) {
         project.plugins.withType(JavaPlugin::class.java) {
             project.plugins.withType(MavenPublishPlugin::class.java) {
