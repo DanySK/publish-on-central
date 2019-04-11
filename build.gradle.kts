@@ -15,7 +15,7 @@ plugins {
     id("com.palantir.git-version") version "0.12.0-rc2"
     kotlin("jvm") version "1.3.21"
     id("com.gradle.plugin-publish") version "0.10.1"
-    id ("org.danilopianini.publish-on-central") version "0.1.0-dev01+4274224e"
+    id ("org.danilopianini.publish-on-central") version "0.1.1"
     id("org.jetbrains.dokka") version "0.9.17"
 }
 
@@ -129,7 +129,7 @@ pluginBundle {
 
 gradlePlugin {
     plugins {
-        create(projectId) {
+        create("PublishOnCentralPlugin") {
             id = projectId
             displayName = fullName
             description = projectDetails
