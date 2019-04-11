@@ -21,6 +21,8 @@ matrix:
       env: PUBLISH="false"
     - jdk: openjdk12
       env: PUBLISH="false"
+    - jdk: openjdk13
+      env: PUBLISH="false"
 
 before_install:
     - export SHOULD_CONFIGURE="$(if ! $TRAVIS_PULL_REQUEST && [ $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
