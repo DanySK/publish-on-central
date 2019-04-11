@@ -3,12 +3,14 @@ package org.danilopianini.gradle.mavencentral.test
 import io.kotlintest.matchers.file.shouldBeAFile
 import io.kotlintest.shouldBe
 import io.kotlintest.matchers.file.shouldExist
+import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.specs.StringSpec
 import org.gradle.internal.impldep.com.google.common.io.Files
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
+import java.util.*
 
 class CentralTests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
@@ -51,6 +53,15 @@ class CentralTests : StringSpec({
         with(File("${workingDirectory.root}/build/publications/mavenCentral/pom-default.xml")){
             shouldExist()
             shouldBeAFile()
+            val contents = readText(Charsets.UTF_8)
+            println(contents)
+            contents shouldContain "artifactId"
+            contents shouldContain "groupId"
+            contents shouldContain "name"
+            contents shouldContain "description"
+            contents shouldContain "url"
+            contents shouldContain "license"
+            contents shouldContain "scm"
         }
     }
 })
