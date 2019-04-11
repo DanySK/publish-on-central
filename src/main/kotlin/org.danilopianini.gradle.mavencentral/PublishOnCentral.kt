@@ -44,30 +44,32 @@ class PublishOnCentral : Plugin<Project> {
                 project.tasks.register("javadocJar", JavadocJar::class.java)
                 project.configure<PublishingExtension> {
                     publications { publications ->
-                        publications.create(publicationName, MavenPublication::class.java) { with(it){
-                            val javaComponent = project.components.find { it.name == "java" }
-                                ?: throw IllegalStateException("Cannot find Java project component.")
-                            from(javaComponent)
-                            artifact(project.property("sourcesJar"))
-                            artifact(project.property("javadocJar"))
-                            pom { with(it) {
-                                name.set(extension.projectLongName)
-                                description.set(extension.projectDescription)
-                                packaging = "jar"
-                                url.set(extension.projectUrl)
-                                licenses {
-                                    it.license { license ->
-                                        license.name.set(extension.licenseName)
-                                        license.url.set(extension.licenseUrl)
+                        publications.create(publicationName, MavenPublication::class.java) {
+                            with(it){
+                                val javaComponent = project.components.find { it.name == "java" }
+                                    ?: throw IllegalStateException("Cannot find Java project component.")
+                                from(javaComponent)
+                                artifact(project.property("sourcesJar"))
+                                artifact(project.property("javadocJar"))
+                                pom { with(it) {
+                                    name.set(extension.projectLongName)
+                                    description.set(extension.projectDescription)
+                                    packaging = "jar"
+                                    url.set(extension.projectUrl)
+                                    licenses {
+                                        it.license { license ->
+                                            license.name.set(extension.licenseName)
+                                            license.url.set(extension.licenseUrl)
+                                        }
                                     }
-                                }
-                                scm { scm ->
-                                    scm.url.set(extension.projectUrl)
-                                    scm.connection.set(extension.scmConnection)
-                                    scm.developerConnection.set(extension.scmConnection)
-                                }
-                            }}
-                        }}
+                                    scm { scm ->
+                                        scm.url.set(extension.projectUrl)
+                                        scm.connection.set(extension.scmConnection)
+                                        scm.developerConnection.set(extension.scmConnection)
+                                    }
+                                }}
+                            }
+                        }
                     }
                     repositories {
                         it.maven {
