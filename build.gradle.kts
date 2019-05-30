@@ -12,6 +12,7 @@ plugins {
     `java`
     `maven-publish`
     `signing`
+    id("de.fayard.buildSrcVersions") version "0.3.2"
     id("com.palantir.git-version") version "0.12.0-rc2"
     kotlin("jvm") version "1.3.21"
     id("com.gradle.plugin-publish") version "0.10.1"
