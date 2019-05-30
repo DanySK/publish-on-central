@@ -1,5 +1,4 @@
 language: java
-dist: trusty
 git:
   depth: false
 
