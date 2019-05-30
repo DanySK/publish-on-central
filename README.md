@@ -4,7 +4,8 @@ A Gradle plugin for streamlined publishing on Maven Central
 ## Rationale
 Publishing on Maven Central requires too much configuration?
 Well, I agree.
-This plugin is here to simplify your life by automatically configuring (when applied) the Java plugin and the Publish Plugin to create source and javadoc jars, sign them for you and send them to OSSRH's Sonatype Nexus.
+This plugin is here to simplify your life by automatically configuring (when applied) the Java plugin and the Publish
+Plugin to create source and javadoc jars, sign them for you and send them to OSSRH's Sonatype Nexus.
 
 ## Usage
 
@@ -23,6 +24,7 @@ If you do not apply one of them, the plugin won't apply: it reacts to the applic
 ### Configuring the plugin
 
 ```kotlin
+group = "your.group.id" // This must be configured for the generated pom.xml to work correctly
 /*
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
@@ -31,8 +33,8 @@ publishOnCentral {
     projectLongName.set("full project name") // Defaults to the project name
     licenseName.set("your license") // Defaults to "Apache License, Version 2.0"
     licenseUrl.set("link to your license") // Defaults to http://www.apache.org/licenses/LICENSE-2.0
-    projectUrl.set("website url") // Defaults to "git:git@github.com:DanySK/${project.name}"
-    scmConnection.set("git:git@github.com:youruser/yourrepo") // Defaults to 
+    projectUrl.set("website url") // Defaults to "https://github.com/DanySK/${project.name}"
+    scmConnection.set("git:git@github.com:youruser/yourrepo") // Defaults to "git:git@github.com:DanySK/${project.name}"
 }
 ```
 
