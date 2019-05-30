@@ -44,8 +44,12 @@ matrix:
     - jdk: openjdk10
       os: osx
 
-before_install:
-    - export SHOULD_CONFIGURE="$(if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
+before_install: >-
+  if [ $TRAVIS_OS_NAME = 'linux' ]; then
+      export SHOULD_CONFIGURE="$(if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
+  else
+      export SHOULD_CONFIGURE="$(echo 'false')"
+  fi
 
 install: >-
     if $SHOULD_CONFIGURE; then
