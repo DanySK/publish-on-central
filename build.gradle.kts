@@ -11,12 +11,12 @@ plugins {
     `java`
     `maven-publish`
     `signing`
-    id("org.danilopianini.git-sensitive-semantic-versioning") version "0.2.2"
-    id("de.fayard.buildSrcVersions") version "0.3.2"
-    kotlin("jvm") version "1.3.21"
-    id("com.gradle.plugin-publish") version "0.10.1"
-    id ("org.danilopianini.publish-on-central") version "0.1.1"
-    id("org.jetbrains.dokka") version "0.9.17"
+    id("org.danilopianini.git-sensitive-semantic-versioning") version Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
+    id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
+    kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
+    id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
+    id ("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
+    id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka_gradle_plugin
 }
 
 gitSemVer {
@@ -38,7 +38,7 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(gradleApi())
     testImplementation(gradleTestKit())
-    testImplementation("io.kotlintest:kotlintest-runner-junit5:+")
+    testImplementation(Libs.kotlintest_runner_junit5)
 }
 
 configure<JavaPluginConvention> {

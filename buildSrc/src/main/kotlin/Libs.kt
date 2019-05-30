@@ -10,10 +10,6 @@ object Libs {
             "com.gradle.plugin-publish:com.gradle.plugin-publish.gradle.plugin:" +
             Versions.com_gradle_plugin_publish_gradle_plugin
 
-    const val com_palantir_git_version_gradle_plugin: String =
-            "com.palantir.git-version:com.palantir.git-version.gradle.plugin:" +
-            Versions.com_palantir_git_version_gradle_plugin
-
     const val de_fayard_buildsrcversions_gradle_plugin: String =
             "de.fayard.buildSrcVersions:de.fayard.buildSrcVersions.gradle.plugin:" +
             Versions.de_fayard_buildsrcversions_gradle_plugin
@@ -22,6 +18,10 @@ object Libs {
      * http://www.github.com/kotlintest/kotlintest */
     const val kotlintest_runner_junit5: String = "io.kotlintest:kotlintest-runner-junit5:" +
             Versions.kotlintest_runner_junit5
+
+    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String =
+            "org.danilopianini.git-sensitive-semantic-versioning:org.danilopianini.git-sensitive-semantic-versioning.gradle.plugin:" +
+            Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
 
     const val org_danilopianini_publish_on_central_gradle_plugin: String =
             "org.danilopianini.publish-on-central:org.danilopianini.publish-on-central.gradle.plugin:" +

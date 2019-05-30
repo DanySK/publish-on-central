@@ -9,11 +9,11 @@ import kotlin.String
 object Versions {
     const val com_gradle_plugin_publish_gradle_plugin: String = "0.10.1" 
 
-    const val com_palantir_git_version_gradle_plugin: String = "0.12.0-rc2" 
-
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.3.2" 
 
     const val kotlintest_runner_junit5: String = "3.3.2" 
+
+    const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2" 
 
     const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.1" 
 
