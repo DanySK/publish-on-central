@@ -29,7 +29,7 @@ object Versions {
      *      ./gradle/wrapper/gradle-wrapper.properties
      */
     object Gradle {
-        const val runningVersion: String = "5.2.1"
+        const val runningVersion: String = "5.4.1"
 
         const val currentVersion: String = "5.4.1"
 
