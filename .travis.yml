@@ -54,6 +54,6 @@ install: >-
         bash prepare_environment.sh
     fi
 
-script: ./gradlew clean check sourcesJar javadocJar
+script: ./gradlew clean check sourcesJar javadocJar --parallel
 
 after_success: if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins publish; fi
