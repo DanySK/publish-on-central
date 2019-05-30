@@ -79,7 +79,7 @@ You can add your team as follows:
 ```kotlin
 publishing {
     publications {
-        withType<MavenPublication>() {
+        withType<MavenPublication> {
             pom {
                 developers {
                     developer {
