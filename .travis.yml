@@ -14,6 +14,14 @@ jdk:
 git:
   depth: false
 
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
 env:
   global:
     - secure: "f0fnxgVNlERe5SH+5TgknEM8Cf+EuI0HYvGIrCj5u7ZJslDHkEvcrD+KakPPdliORVamAe3vLczyO1ql9fKMZckgT13agj17XN9OGnExvU/mPUxu/nMQnWcXafy1nSWPYVyEmjm3/4VNbCOs/NJki2kUQXZJvzymIjhHGD/XGSxyzZ04QG/VEKMu1/D+f3EiRMWkHomTRK7VpVPFVSI3ueds55H7H2XIGL/X3zn9gJdtrdD3PHTpL6cyQuqnntgheL6k30WxBruoj3FlB3xm/nAoqWbYsvMH/3wPRGaMXmhxAzp7Qa6qvaO96d8TSxsvKkZJSupjSzi8ckjTf7/CVZ4xkOVKwia/Of+jtBHms74BBMEAuHYcqULcbTOzfWLNUizgnnchun1W+zSIYvaSU5e3mo5WAfbXddJ81SBoCBbDzrp1oNubTUmTAnFUQsdRuTfaSQk0YxAobvqhMO3+0lHC6sPAxQF3NZ/mebX/nPN9wm3tMKfVvLp08M/ChrzD7lsfVkg2MzQBB1n3qMz3vKMhYR/Qo7XsG4iUSFb2uWwGWU9WjOeNx4bKjITavX3aqXLaFQnF74CAsijf7E+lRKq5zGAi2XKO2QZ6wtw8FuAoeD3C84WxzhIrUNzNTKNOUkh0FwwSJ85Vsa0omvclsX3aNQXZ0yJSiy0ij70r5iI="
