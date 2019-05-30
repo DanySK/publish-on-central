@@ -19,9 +19,9 @@ object Versions {
 
     const val org_jetbrains_dokka_gradle_plugin: String = "0.9.18" 
 
-    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.21" // available: "1.3.31"
+    const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.31" 
 
-    const val org_jetbrains_kotlin: String = "1.3.21" // available: "1.3.31"
+    const val org_jetbrains_kotlin: String = "1.3.31" 
 
     /**
      *
