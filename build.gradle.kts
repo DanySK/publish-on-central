@@ -1,6 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import com.palantir.gradle.gitversion.*
 import groovy.lang.Closure
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.DokkaConfiguration
@@ -12,12 +11,16 @@ plugins {
     `java`
     `maven-publish`
     `signing`
+    id("org.danilopianini.git-sensitive-semantic-versioning") version "0.2.2"
     id("de.fayard.buildSrcVersions") version "0.3.2"
-    id("com.palantir.git-version") version "0.12.0-rc2"
     kotlin("jvm") version "1.3.21"
     id("com.gradle.plugin-publish") version "0.10.1"
     id ("org.danilopianini.publish-on-central") version "0.1.1"
     id("org.jetbrains.dokka") version "0.9.17"
+}
+
+gitSemVer {
+    version = computeGitSemVer()
 }
 
 group = "org.danilopianini"
@@ -26,26 +29,6 @@ val fullName = "Gradle Publish On Maven Central Plugin"
 val websiteUrl = "https://github.com/DanySK/maven-central-gradle-plugin"
 val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
 val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOnCentral"
-
-val versionDetails: VersionDetails = (property("versionDetails") as? Closure<VersionDetails>)?.call()
-    ?: throw IllegalStateException("Unable to fetch the git version for this repository")
-fun Int.asBase(base: Int = 36, digits: Int = 2) = toString(base).let {
-    if (it.length >= digits) it
-    else generateSequence {"0"}.take(digits - it.length).joinToString("") + it
-}
-val minVer = "0.1.0"
-val semVer = """^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(-(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(\.(0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*)?(\+[0-9a-zA-Z-]+(\.[0-9a-zA-Z-]+)*)?${'$'}""".toRegex()
-version = with(versionDetails) {
-    val tag = lastTag ?.takeIf { it.matches(semVer) }
-    val baseVersion = tag ?: minVer
-    val appendix = tag?.let {
-        "".takeIf { commitDistance == 0 } ?: "-dev${commitDistance.asBase()}+${gitHash}"
-    } ?: "-archeo+${gitHash}"
-    baseVersion + appendix
-}.take(20)
-if (!version.toString().matches(semVer)) {
-    throw IllegalStateException("Version ${version} does not match Semantic Versioning requirements")
-}
 
 repositories {
     mavenCentral()
