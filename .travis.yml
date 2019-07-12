@@ -1,55 +1,73 @@
+reference_jdk: &reference_jdk
+  'JDK="adopt@1.8.212-04"'
+reference_os: &reference_os
+  'linux'
 language: bash
 git:
   depth: false
 os:
   - osx
-  - linux
   - windows
+  - *reference_os
 dist: xenial
+addons:
+  apt:
+    packages:
+    - graphviz
+stages:
+  - check
+  - test
+  - deploy
 env:
   global:
     - secure: "f0fnxgVNlERe5SH+5TgknEM8Cf+EuI0HYvGIrCj5u7ZJslDHkEvcrD+KakPPdliORVamAe3vLczyO1ql9fKMZckgT13agj17XN9OGnExvU/mPUxu/nMQnWcXafy1nSWPYVyEmjm3/4VNbCOs/NJki2kUQXZJvzymIjhHGD/XGSxyzZ04QG/VEKMu1/D+f3EiRMWkHomTRK7VpVPFVSI3ueds55H7H2XIGL/X3zn9gJdtrdD3PHTpL6cyQuqnntgheL6k30WxBruoj3FlB3xm/nAoqWbYsvMH/3wPRGaMXmhxAzp7Qa6qvaO96d8TSxsvKkZJSupjSzi8ckjTf7/CVZ4xkOVKwia/Of+jtBHms74BBMEAuHYcqULcbTOzfWLNUizgnnchun1W+zSIYvaSU5e3mo5WAfbXddJ81SBoCBbDzrp1oNubTUmTAnFUQsdRuTfaSQk0YxAobvqhMO3+0lHC6sPAxQF3NZ/mebX/nPN9wm3tMKfVvLp08M/ChrzD7lsfVkg2MzQBB1n3qMz3vKMhYR/Qo7XsG4iUSFb2uWwGWU9WjOeNx4bKjITavX3aqXLaFQnF74CAsijf7E+lRKq5zGAi2XKO2QZ6wtw8FuAoeD3C84WxzhIrUNzNTKNOUkh0FwwSJ85Vsa0omvclsX3aNQXZ0yJSiy0ij70r5iI="
     - secure: "VKGZ0bakj7uoetLjRbSDK/kd9Mx7MSgy3KqI936FOAg0o0ZM5Xu0e6KTtqydmzP8aPrs7/Sceq1T8WHaF2kFZM2CXDRUkx79Ax4fB9j/IwfdIBortj2teCIzxjSM9QzMos7ePeYNB7/MzOwBshdkdNyWgjrblEim6yrzpqbpoeTE4slIkYS347W+Ze0vSL3KABoEVBCHgyENIm04wCMjjMR3hiQSaAnMHzlos0zfMwehlIEy0vnJuP15JEbl/QgX0ds2ZrrXW1vCI3kWsFmjaoFYXG6TyHZWI9j3vGx9HnMhYTsOm6OTL6ulRty+DiaK/pZwSt6x0e0RxrIoOsR/QgtRWVQpdBZwGmVBlPl/TdXCz+jASh2PN1y52e0wpJBu19c2SxjoqjKOqWRg2SeGwWe+SSaNs8acadu6ep6P4RYkIenP5X5bOGf65D2tjIF6Y5YlyA9I8FwIhyxPjUww33hAMwfSKSMDTGt1kYkaCK9iNt3JZZCtZdEOOKzH4uXAdQlEwU4VSFE/kiuo7tUonED1VDZNbpwR1x79OGyniggpUSrPmUPIA/jo3nd7UY1YKJjhxL0FHxNt9bYyRUbVzsnsOv5zVF+8JQNLnSitmr2zR0ARlufZB9Xj5XjO8Z5vZcxgTiwVp5aTOxN+tuuz+g26IAuivf3HqSPIGqLHb+I="
     - secure: "XHZA70J7+Z8XTC4iWsg/cdZhss2Ti4C5GhY74nUrFOQ8NERwpxlJlqiYM8ou8+tkt6GNQRCW9k5Sybx2X4aP2w8KRWVLu7hRnZl2ySJU7DeDC1P7uG2BFQiNPodsJw+X5JnHlvItuy15OZy8zEY39o6iSTEbq5goVln8xjcGzcY4mPkbdGPf2tPbXdxx71GE/KZf4IZVMWOg/sGbl2GKKkUTvI3A692PSHM7/YlKlKREaqNh5IHnATGiQKHr923UxkfS/zvIhfJq1VoWuPr7e11No431h4T0R4xcDKQeF+bzW+XiOeIQPz00DWncajoSKox6yZglAqD7Xw3y27+XJzsJutbDyReTxGA5y24Ri7Esdi05BE/2maDkYfPqU4BTJuqqN7RDb5OPF5RaI39ZnCN4M1rjTiZqeDjQ7p7XN21orKcdpw2+ImQ1SSIavufmO7aYBL98ekGnEd3BVaWoFIHkObtybd7QdHYOtSo1YgU72Ut5jpSLZywqtBVQo7Oj56U1zOk8gSJWdp0ZhDi4VHKoGD0HMf8PkpHOg1eG8dzZPLYmkeWquzrnxc7xZwSSkCwJbEl7Xod9blHC8gFnuUoZCsif0qICw8xz1HeLEHGZrgegP6L8gIx0WN2Yq+nmuq1BRPvMqjyaxZ7HY3YvMCRHN6tuX/lltBGwPbo1NPA="
+    - TERM=dumb
     - GRAVIS="https://raw.githubusercontent.com/DanySK/Gravis-CI/master/"
     - PUBLISH="false"
+    - OFFICIAL_REPO_SLUG="DanySK/maven-central-gradle-plugin"
   matrix:
-    - JDK="adopt@1.8.212-04"
+    - *reference_jdk
     - JDK="adopt-openj9@1.8.212-04"
-    - JDK="adopt@1.9.181-0"
-    - JDK="adopt@1.10.0-2"
     - JDK="adopt@1.11.28-0"
     - JDK="adopt-openj9@1.11.0-3"
     - JDK="adopt@1.12.33-0"
     - JDK="1.12.0-1"
 matrix:
-  include:
-    - os: linux
-      env: PUBLISH="true" JDK="adopt@1.8.212-04"
   exclude:
-    - os: linux
-      env: JDK="adopt@1.8.212-04"
-    # No certificates configured
-    - os: windows
-      env: JDK="adopt@1.9.181-0"
-    - os: windows
-      env: JDK="adopt@1.10.0-2"
-before_install: |-
-  curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
-  source .install-jdk-travis.sh
-  if [ $TRAVIS_OS_NAME = 'linux' ]; then
-      export SHOULD_CONFIGURE="$(if [ $TRAVIS_PULL_REQUEST == "false" ] && [ $TRAVIS_REPO_SLUG="DanySK/maven-central-gradle-plugin" ]; then echo "true"; else echo "false"; fi)"
-  else
-      export SHOULD_CONFIGURE="$(echo 'false')"
-  fi
-install: >-
-    if $SHOULD_CONFIGURE; then
-        openssl aes-256-cbc -K $encrypted_e7e03982aaff_key -iv $encrypted_e7e03982aaff_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
-        source prepare_environment.sh
-    fi
-before_script:
-  - "if [ -f ~/.windows_config ]; then source ~/.windows_config; fi"
-script: ./gradlew clean check sourcesJar javadocJar --parallel
+    - os: *reference_os
+      env: *reference_jdk
+jobs:
+  include:
+    - stage: check
+      name: "Deep check on reference OS and JDK"
+      os: *reference_os
+      env:
+        - *reference_jdk
+      script:
+        - ./gradlew clean check --scan --parallel
+    - stage: deploy
+      name: "Reports and deployment"
+      if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
+      os: *reference_os
+      env:
+        - PUBLISH="true"
+        - *reference_jdk
+      install:
+        - openssl aes-256-cbc -K $encrypted_e7e03982aaff_key -iv $encrypted_e7e03982aaff_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
+        - bash prepare_environment.sh
+      script:
+        - ./gradlew sourcesJar javadocJar --scan
+      after_success:
+        - ./gradlew publishPlugins publish --scan
+before_install:
+  - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
+  - source .disable-windows-defender.sh
+  - curl "${GRAVIS}.install-jdk-travis.sh" --output .install-jdk-travis.sh
+  - source .install-jdk-travis.sh
+script:
+  - ./gradlew clean test --scan --parallel
 before_cache:
   - curl "${GRAVIS}.clean_gradle_cache.sh" --output .clean_gradle_cache.sh
   - source .clean_gradle_cache.sh
@@ -57,5 +75,3 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
-    - $HOME/.jabba/
-after_success: if $SHOULD_CONFIGURE && $PUBLISH; then ./gradlew publishPlugins publish; fi
