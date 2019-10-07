@@ -1,5 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
+import groovy.lang.Closure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -75,10 +76,13 @@ class PublishOnCentral : Plugin<Project> {
                         it.maven {
                             it.url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                             it.credentials {
-                                it.username = extension.mavenCentralUsername.orNull
-                                it.password = extension.mavenCentralPassword.orNull
-                                it.username ?: logger.warn("No username provided for logging in Maven Central, the actual deployment will fail.")
-                                it.password ?: logger.warn("No password provided for logging in Maven Central, the actual deployment will fail.")
+                                fun resolve(name: String): String? = project.hasProperty(name).let {
+                                    if (it) project.property(name) else null
+                                }?.toString() ?: System.getenv()[name]
+                                it.username = resolve(PublishOnCentralExtension.userNamePropertyName)
+                                it.password = resolve(PublishOnCentralExtension.passwordPropertyName)
+                                it.username ?: logger.warn("No username provided for logging in Maven Central. Please set ${PublishOnCentralExtension.userNamePropertyName}")
+                                it.password ?: logger.warn("No password provided for logging in Maven Central. Please set ${PublishOnCentralExtension.passwordPropertyName}")
                             }
                         }
                     }

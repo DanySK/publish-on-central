@@ -16,11 +16,11 @@ open class PublishOnCentralExtension @JvmOverloads constructor(
     val licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0"),
     val licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0"),
     val scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}"),
-    val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}"),
-    val mavenCentralUsername: Property<String?> = project.propertyWithDefault<String?>(null),
-    val mavenCentralPassword: Property<String?> = project.propertyWithDefault<String?>(null)
+    val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 ) {
     companion object {
         const val extensionName = "publishOnCentral"
+        val userNamePropertyName: String = "MAVEN_CENTRAL_USERNAME"
+        val passwordPropertyName: String = "MAVEN_CENTRAL_PASSWORD"
     }
 }

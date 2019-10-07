@@ -1,6 +1,7 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import groovy.lang.Closure
+import org.danilopianini.gradle.mavencentral.PublishOnCentralExtension
 import org.gradle.jvm.tasks.Jar
 import org.jetbrains.dokka.DokkaConfiguration
 import org.jetbrains.dokka.gradle.DokkaTask

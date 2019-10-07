@@ -21,8 +21,6 @@ class CentralTests : StringSpec({
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
         file("gradle.properties") { """
-        ossrhUsername = myOSSRHusername
-        ossrhPassword = This should be configured elsewhere
     """ }
         file("build.gradle.kts") { """
         plugins {
@@ -44,7 +42,7 @@ class CentralTests : StringSpec({
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath(classpath)
-            .withArguments("-PossrhPassword=testpwd", "generatePomFileForMavenCentralPublication", "sourcesJar", "javadocJar")
+            .withArguments("generatePomFileForMavenCentralPublication", "sourcesJar", "javadocJar")
             .build()
         println(result.tasks)
         println(result.output)
