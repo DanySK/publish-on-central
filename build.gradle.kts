@@ -133,10 +133,10 @@ signing {
 val registerCredentials = tasks.register("registerGradlePluginPortalCredentials") {
     doLast {
         listOf("gradle.publish.key", "gradle.publish.secret").forEach {
-            if (!(project.hasProperty(name) or System.getenv().containsKey(name))) {
+            if (!(project.hasProperty(it) or System.getenv().containsKey(it))) {
                 val bashName = it.toUpperCase().replace(".", "_")
                 System.getProperties().setProperty(it, System.getenv(bashName)
-                    ?: throw IllegalStateException("Property $name is unset and bash variable $bashName unavailable")
+                    ?: throw IllegalStateException("Property $it is unset and environment variable $bashName unavailable")
                 )
             }
         }
