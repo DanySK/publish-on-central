@@ -9,7 +9,7 @@ os:
 #  - osx
 #  - windows
   - *reference_os
-dist: xenial
+dist: bionic
 addons:
   apt:
     packages:
