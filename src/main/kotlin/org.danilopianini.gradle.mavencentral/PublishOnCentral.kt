@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import groovy.lang.Closure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -15,7 +14,6 @@ import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import org.slf4j.LoggerFactory
-import java.lang.IllegalStateException
 import java.net.URI
 
 /**
