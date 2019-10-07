@@ -130,6 +130,23 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
 }
 
+val registerCredentials = tasks.register("registerGradlePluginPortalCredentials") {
+    doLast {
+        listOf("gradle.publish.key", "gradle.publish.secret").forEach {
+            if (!(project.hasProperty(name) or System.getenv().containsKey(name))) {
+                val bashName = it.toUpperCase().replace(".", "_")
+                System.getProperties().setProperty(it, System.getenv(bashName)
+                    ?: throw IllegalStateException("Property $name is unset and bash variable $bashName unavailable")
+                )
+            }
+        }
+    }
+}
+
+tasks.publishPlugins {
+    dependsOn(registerCredentials)
+}
+
 buildScan {
     termsOfServiceUrl = "https://gradle.com/terms-of-service"
     termsOfServiceAgree = "yes"
