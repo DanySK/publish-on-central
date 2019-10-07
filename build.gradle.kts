@@ -17,6 +17,7 @@ plugins {
     id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
     id ("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
     id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka_gradle_plugin
+    id("com.gradle.build-scan") version Versions.com_gradle_build_scan_gradle_plugin
 }
 
 gitSemVer {
@@ -122,3 +123,7 @@ gradlePlugin {
     }
 }
 
+buildScan {
+    termsOfServiceUrl = "https://gradle.com/terms-of-service"
+    termsOfServiceAgree = "yes"
+}

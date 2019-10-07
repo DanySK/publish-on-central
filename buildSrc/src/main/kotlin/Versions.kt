@@ -14,13 +14,15 @@ import org.gradle.plugin.use.PluginDependencySpec
 object Versions {
     const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2"
 
-    const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.1"
+    const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.2-dev0t+cd469de"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.6.4"
 
     const val com_gradle_plugin_publish_gradle_plugin: String = "0.10.1"
 
     const val org_jetbrains_kotlin_jvm_gradle_plugin: String = "1.3.50"
+
+    const val com_gradle_build_scan_gradle_plugin: String = "2.4.2"
 
     const val org_jetbrains_dokka_gradle_plugin: String = "0.9.18"
 

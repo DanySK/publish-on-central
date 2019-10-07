@@ -27,6 +27,10 @@ object Libs {
             "org.jetbrains.kotlin.jvm:org.jetbrains.kotlin.jvm.gradle.plugin:" +
             Versions.org_jetbrains_kotlin_jvm_gradle_plugin
 
+    const val com_gradle_build_scan_gradle_plugin: String =
+            "com.gradle.build-scan:com.gradle.build-scan.gradle.plugin:" +
+            Versions.com_gradle_build_scan_gradle_plugin
+
     const val org_jetbrains_dokka_gradle_plugin: String =
             "org.jetbrains.dokka:org.jetbrains.dokka.gradle.plugin:" +
             Versions.org_jetbrains_dokka_gradle_plugin
