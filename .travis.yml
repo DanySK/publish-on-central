@@ -55,9 +55,6 @@ jobs:
         - secure: "JqYCzozZ6pWU44QyK2DStXWGZCXz1i2eKgNDwxSeiBwp6ZJzTfkLQTKQbmD1r1qLqNaZ8pb2++FfpMNimSByM01kBvqF9wL+NFZOo7KMaOPVlOn3Xm3wzmOZD0lO4NP62eUHOUwsXLhfeilOqQFbSRuta2D3p3zKe6HAMDm9vZIHeAUxcJB5wdyssg5IZRKYAeGH4yCkjugZ192acd4ahMhJd7K08DH+VMGiXAuXMTjjCMFwQEAPHBwTGY74O/fZKnF8LRWaGCwL2tA21yJvXyUUqY0dstJElIfFcEbDYIgBO9XTu5W1Z++kGF8AyigRf7HLMUWt+ja9APYx/riImR6l/4TamZ33klPfHjhhXNdRovrlWAoOLIQYIXvi+Ouxujgt+tXzrQpu3FEdhN0faG88xgsQyOuxf5qmv3RLHytfk7yZosThnGI7Ys5y+ocfi2c3PVltr61Ege1xPvnsqHeZ0LfJxZ5btWPzOKXkziLeETpBekyfKVoyzER3m6vvsfT56GemSegxGs+Qz5OHQNS2eqADb5zepsicMJ1tysCPSHmihzFiM+tcCzz9vD70fLNgMDcCgoiMKJoSM1HRmbhYIfUCvu/esEWJiNL7IMGoWTlA9brctlIRy4UgkrBsTvh4gnBg2WH+GBlpNSdAiWJXqsCVW3wnjKr8k0fuqbQ="
         - PUBLISH="true"
         - *reference_jdk
-      install:
-        - openssl aes-256-cbc -K $encrypted_e7e03982aaff_key -iv $encrypted_e7e03982aaff_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
-        - bash prepare_environment.sh
       script:
         - ./gradlew sourcesJar javadocJar
       after_success:
