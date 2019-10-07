@@ -5,16 +5,15 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.PluginCollection
-import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
-import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import org.slf4j.LoggerFactory
 import java.lang.IllegalStateException
 import java.net.URI
 
@@ -27,6 +26,7 @@ class PublishOnCentral : Plugin<Project> {
          * The name of the publication to be created.
          */
         const val publicationName = "mavenCentral"
+        val logger = LoggerFactory.getLogger("publish-on-central plugin")
         private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T = project.extensions.create(name, T::class.java, *args)
         private inline fun <reified S, reified T: Plugin<S>> Project.plugin(): PluginCollection<T> = project.plugins.withType(T::class.java)
@@ -75,8 +75,10 @@ class PublishOnCentral : Plugin<Project> {
                         it.maven {
                             it.url = URI("https://oss.sonatype.org/service/local/staging/deploy/maven2/")
                             it.credentials {
-                                it.username = project.property(PublishOnCentralExtension.userName).toString()
-                                it.password = project.property(PublishOnCentralExtension.pwdName).toString()
+                                it.username = extension.mavenCentralUsername.orNull
+                                it.password = extension.mavenCentralPassword.orNull
+                                it.username ?: logger.warn("No username provided for logging in Maven Central, the actual deployment will fail.")
+                                it.password ?: logger.warn("No password provided for logging in Maven Central, the actual deployment will fail.")
                             }
                         }
                     }
