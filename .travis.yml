@@ -1,5 +1,5 @@
 reference_jdk: &reference_jdk
-  'JDK="adopt@1.8.212-04"'
+  'JDK="adopt@1.8"'
 reference_os: &reference_os
   'linux'
 language: bash
@@ -29,10 +29,10 @@ env:
     - OFFICIAL_REPO_SLUG="DanySK/maven-central-gradle-plugin"
   matrix:
     - *reference_jdk
-    - JDK="adopt-openj9@1.8.212-04"
-    - JDK="adopt@1.11.28-0"
-    - JDK="adopt-openj9@1.11.0-3"
-    - JDK="adopt@1.12.33-0"
+    - JDK="adopt-openj9@1.8"
+    - JDK="adopt@1.11"
+    - JDK="adopt-openj9@1.11"
+    - JDK="adopt@1.12"
 matrix:
   exclude:
     - os: *reference_os
