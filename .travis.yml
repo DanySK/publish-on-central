@@ -47,7 +47,7 @@ jobs:
       env:
         - *reference_jdk
       script:
-        - ./gradlew clean check --scan --parallel
+        - ./gradlew clean check
     - stage: deploy
       name: "Reports and deployment"
       if: repo = env(OFFICIAL_REPO_SLUG) AND type != pull_request
@@ -59,9 +59,9 @@ jobs:
         - openssl aes-256-cbc -K $encrypted_e7e03982aaff_key -iv $encrypted_e7e03982aaff_iv -in prepare_environment.sh.enc -out prepare_environment.sh -d
         - bash prepare_environment.sh
       script:
-        - ./gradlew sourcesJar javadocJar --scan
+        - ./gradlew sourcesJar javadocJar
       after_success:
-        - ./gradlew publishPlugins publish --scan
+        - ./gradlew publishPlugins publish
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
