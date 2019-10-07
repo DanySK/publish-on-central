@@ -15,7 +15,7 @@ Plugin to create source and javadoc jars, sign them for you and send them to OSS
 plugins {
     `java`
     `maven-publish`
-    id ("org.danilopianini.publish-on-central") version "0.1.0"
+    id ("org.danilopianini.publish-on-central") version "0.2.0"
 }
 ```
 These three plugins must be applied.
@@ -47,29 +47,19 @@ plugins {
     `java`
     `maven-publish`
     `signing`
-    id ("org.danilopianini.publish-on-central") version "0.1.0"
+    id ("org.danilopianini.publish-on-central") version "0.2.0"
 }
 ```
-Now, the plugin won't sing automatically in order to prevent build breackages outside systems configured with the GPG keys.
-Signing is enabled by adding in `gradle.properties`:
-```gradle.properties
-signArchivesIsEnabled = true
-```
-or by passing the property to the gradle executable with `-PsignArchivesIsEnabled=true`
 
 ### OSSRH credentials
-Credentials for upload to Maven Central must be specified as gradle properties.
+Credentials for upload to Maven Central must be specified as gradle properties or environment properties, named respectively `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD`.
 You have fundamentally three choices:
 1. set them up in a `gradle.properties` file in `GRADLE_HOME`;
 2. pass the credentials with the command line;
 3. write them in your project local `gradle.properties` (don't).
+4. set them up in your environment (preferred for continuous integration)
 
-You should still have a pleaceholder in your local `gradle.properties`:
-```
-signArchivesIsEnabled = false
-ossrhUsername = YourUserName
-ossrhPassword = SetThisOneElsewhere!
-```
+
 
 ### Adding developers
 
