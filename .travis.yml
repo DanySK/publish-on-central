@@ -56,7 +56,7 @@ jobs:
         - PUBLISH="true"
         - *reference_jdk
       script:
-        - ./gradlew sourcesJar javadocJar
+        - ./gradlew sourcesJar javadocJar sign
       after_success:
         - ./gradlew publishPlugins publish --stacktrace
 before_install:
