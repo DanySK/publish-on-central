@@ -14,7 +14,7 @@ import org.gradle.plugin.use.PluginDependencySpec
 object Versions {
     const val org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin: String = "0.2.2"
 
-    const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.2-dev0x+6a3e870"
+    const val org_danilopianini_publish_on_central_gradle_plugin: String = "0.1.2-dev18+176603f"
 
     const val de_fayard_buildsrcversions_gradle_plugin: String = "0.6.4"
 
