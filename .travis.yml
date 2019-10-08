@@ -6,8 +6,8 @@ language: bash
 git:
   depth: false
 os:
-#  - osx
-#  - windows
+  - osx
+  - windows
   - *reference_os
 dist: bionic
 addons:
@@ -29,10 +29,10 @@ env:
     - OFFICIAL_REPO_SLUG="DanySK/maven-central-gradle-plugin"
   matrix:
     - *reference_jdk
-#    - JDK="adopt-openj9@1.8"
-#    - JDK="adopt@1.11"
-#    - JDK="adopt-openj9@1.11"
-#    - JDK="adopt@1.12"
+    - JDK="adopt-openj9@1.8"
+    - JDK="adopt@1.11"
+    - JDK="adopt-openj9@1.11"
+    - JDK="adopt@1.12"
 matrix:
   exclude:
     - os: *reference_os
