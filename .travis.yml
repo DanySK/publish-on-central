@@ -65,7 +65,8 @@ jobs:
       script:
         - ./gradlew sourcesJar javadocJar sign
       after_success:
-        - ./gradlew publishPlugins publishMavenCentralPublicationToMavenRepository --stacktrace
+        - ./gradlew publishPlugins --stacktrace
+        - ./gradlew publishMavenCentralPublicationToMavenRepository --stacktrace
 before_install:
   - curl "${GRAVIS}.disable-windows-defender.sh" --output .disable-windows-defender.sh
   - source .disable-windows-defender.sh
