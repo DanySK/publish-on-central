@@ -36,11 +36,11 @@ class PublishOnCentral : Plugin<Project> {
 
     }
     override fun apply(project: Project) {
+        val extension = project.createExtension<PublishOnCentralExtension>(PublishOnCentralExtension.extensionName, project)
+        project.tasks.register("sourcesJar", SourcesJar::class.java)
+        project.tasks.register("javadocJar", JavadocJar::class.java)
         project.plugins.withType(JavaPlugin::class.java) {
             project.plugins.withType(MavenPublishPlugin::class.java) {
-                val extension = project.createExtension<PublishOnCentralExtension>(PublishOnCentralExtension.extensionName, project)
-                project.tasks.register("sourcesJar", SourcesJar::class.java)
-                project.tasks.register("javadocJar", JavadocJar::class.java)
                 project.configure<PublishingExtension> {
                     publications { publications ->
                         publications.create(publicationName, MavenPublication::class.java) {
