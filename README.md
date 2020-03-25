@@ -84,6 +84,25 @@ publishing {
 }
 ```
 
+### OSSRH Timeouts
+
+The Maven Central infrastructure seems to be not always... responsive.
+I often got build failures due to timeouts.
+```
+FAILURE: Build failed with an exception.
+* What went wrong:
+Execution failed for task ':publishMavenCentralPublicationToMavenRepository'.
+> Failed to publish publication 'mavenCentral' to repository 'maven'
+   > Could not write to resource 'https://oss.sonatype.org/service/local/staging/deploy/maven2/my/group/my-artifact/0.1.0/my-artifact-0.1.0-.jar'.
+      > Read timed out
+```
+My current workaround is to add the following in my `gradle.properties` file:
+```
+systemProp.org.gradle.internal.http.connectionTimeout=500000
+systemProp.org.gradle.internal.http.socketTimeout=500000
+```
+which seem to instruct Gradle to be more tolerant with network delays.
+
 ## Contributing to the project
 
 I gladly review pull requests and I'm happy to improve the work.
