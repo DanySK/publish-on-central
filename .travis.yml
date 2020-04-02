@@ -30,7 +30,8 @@ env:
     - JDK="adopt-openj9@1.8"
     - JDK="adopt@1.11"
     - JDK="adopt-openj9@1.11"
-    - JDK="adopt@1.12"
+    - JDK="adopt@"
+    - JDK="adopt-openj9@"
 matrix:
   exclude:
     - os: *reference_os
