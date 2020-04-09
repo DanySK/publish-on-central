@@ -9,7 +9,6 @@ os:
   - osx
   - windows
   - *reference_os
-dist: bionic
 addons:
   apt:
     packages:
@@ -32,11 +31,11 @@ env:
     - JDK="adopt-openj9@1.11"
     - JDK="adopt@"
     - JDK="adopt-openj9@"
-matrix:
-  exclude:
-    - os: *reference_os
-      env: *reference_jdk
 jobs:
+  exclude:
+    - stage: test
+      os: *reference_os
+      env: *reference_jdk
   include:
     - stage: check
       name: "Deep check on reference OS and JDK"
