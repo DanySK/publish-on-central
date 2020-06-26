@@ -1,16 +1,14 @@
 package org.danilopianini.gradle.mavencentral.test
 
-import io.kotlintest.matchers.file.shouldBeAFile
-import io.kotlintest.shouldBe
-import io.kotlintest.matchers.file.shouldExist
-import io.kotlintest.matchers.string.shouldContain
-import io.kotlintest.specs.StringSpec
-import org.gradle.internal.impldep.com.google.common.io.Files
+import io.kotest.core.spec.style.StringSpec
+import io.kotest.matchers.file.shouldBeAFile
+import io.kotest.matchers.file.shouldExist
+import io.kotest.matchers.shouldBe
+import io.kotest.matchers.string.shouldContain
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
-import java.util.*
 
 class CentralTests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {

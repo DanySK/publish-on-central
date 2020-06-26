@@ -12,12 +12,11 @@ plugins {
     `java`
     `maven-publish`
     `signing`
-    id("org.danilopianini.git-sensitive-semantic-versioning") version Versions.org_danilopianini_git_sensitive_semantic_versioning_gradle_plugin
-    id("de.fayard.buildSrcVersions") version Versions.de_fayard_buildsrcversions_gradle_plugin
-    kotlin("jvm") version Versions.org_jetbrains_kotlin_jvm_gradle_plugin
-    id("com.gradle.plugin-publish") version Versions.com_gradle_plugin_publish_gradle_plugin
-    id ("org.danilopianini.publish-on-central") version Versions.org_danilopianini_publish_on_central_gradle_plugin
-    id("org.jetbrains.dokka") version Versions.org_jetbrains_dokka_gradle_plugin
+    id("org.danilopianini.git-sensitive-semantic-versioning")
+    kotlin("jvm")
+    id("com.gradle.plugin-publish")
+    id ("org.danilopianini.publish-on-central")
+    id("org.jetbrains.dokka")
 }
 
 gitSemVer {
@@ -39,11 +38,8 @@ dependencies {
     implementation(kotlin("stdlib"))
     implementation(gradleApi())
     testImplementation(gradleTestKit())
-    testImplementation(Libs.kotlintest_runner_junit5)
-}
-
-configure<JavaPluginConvention> {
-    sourceCompatibility = JavaVersion.VERSION_1_6
+    testImplementation("io.kotest:kotest-runner-junit5:_")
+    testImplementation("io.kotest:kotest-assertions-core-jvm:_")
 }
 
 tasks.withType<DokkaTask> {
@@ -79,9 +75,6 @@ tasks {
             outputDir.mkdirs()
             file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
         }
-    }
-    withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.6"
     }
 }
 
