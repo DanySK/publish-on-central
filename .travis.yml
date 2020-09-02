@@ -1,7 +1,12 @@
-reference_jdk: &reference_jdk
+# Do not double-build branches and PRs from this repo, as PRs won't get merged if they are not up to date
+if: repo != head_repo
+
+# Reference environment
+_reference_jdk: &reference_jdk
   'JDK="adopt@1.8"'
-reference_os: &reference_os
+_reference_os: &reference_os
   'linux'
+
 language: bash
 git:
   depth: false
