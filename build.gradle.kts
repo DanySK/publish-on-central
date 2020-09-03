@@ -84,11 +84,6 @@ dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
 }
 
-tasks.javadocJar {
-    dependsOn(tasks.dokkaJavadoc)
-    from(tasks.dokkaJavadoc.get().outputDirectory)
-}
-
 publishing {
     publications {
         withType<MavenPublication>() {
