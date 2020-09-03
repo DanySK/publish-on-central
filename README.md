@@ -9,6 +9,16 @@ Plugin to create source and javadoc jars, sign them for you and send them to OSS
 
 ## Usage
 
+### Provided tasks
+
+* `sourcesJar`: a `Jar` task preconfigured to collect and pack `allSource` from the `main` source set
+* `javadocJar`: a `Jar` task preconfigured to
+    1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
+    2. Detect if a dokkaJavadoc tasks exists, and to the same as above
+* All tasks of the Gradle Publish plugin for a publication named `MavenCentral`,
+you are likely mostly interested in `publishMavenCentralPublicationToMavenRepository`,
+which is what needs to get called to have your artifacts uploaded on OSSRH Nexus instance.
+
 ### Importing the plugin
 
 ```kotlin
@@ -58,7 +68,6 @@ You have fundamentally three choices:
 2. pass the credentials with the command line;
 3. write them in your project local `gradle.properties` (don't).
 4. set them up in your environment (preferred for continuous integration)
-
 
 
 ### Adding developers
