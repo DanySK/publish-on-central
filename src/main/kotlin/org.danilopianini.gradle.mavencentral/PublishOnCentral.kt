@@ -112,8 +112,13 @@ open class SourcesJar: JarWithClassifier("sources") {
 
 open class JavadocJar: JarWithClassifier("javadoc") {
     init {
-        val javadoc = project.tasks.findByName("javadoc") as? Javadoc
-            ?: throw IllegalStateException("Unable to get javadoc task for project $project. Got ${project.task("javadoc")}")
-        from(javadoc.destinationDir)
+        (project.tasks.findByName("javadoc") as? Javadoc)?.also {
+            dependsOn(it)
+            from(it.destinationDir)
+        }
+        project.tasks.findByName("dokkaJavadoc")
+            ?.also { dependsOn(it) }
+            ?.property("outputDirectory")
+            ?.also { from(it) }
     }
 }

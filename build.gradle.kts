@@ -32,6 +32,14 @@ val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOn
 
 repositories {
     mavenCentral()
+    jcenter {
+        content {
+            onlyForConfigurations(
+                "dokkaJavadocPlugin",
+                "dokkaJavadocRuntime"
+            )
+        }
+    }
 }
 
 dependencies {
@@ -40,13 +48,6 @@ dependencies {
     testImplementation(gradleTestKit())
     testImplementation("io.kotest:kotest-runner-junit5:_")
     testImplementation("io.kotest:kotest-assertions-core-jvm:_")
-}
-
-tasks.withType<DokkaTask> {
-    outputDirectory = "$buildDir/javadoc"
-    jdkVersion = 8
-    reportUndocumented = false
-    outputFormat = "javadoc"
 }
 
 publishOnCentral {
@@ -81,6 +82,11 @@ tasks {
 // Add the classpath file to the test runtime classpath
 dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
+}
+
+tasks.javadocJar {
+    dependsOn(tasks.dokkaJavadoc)
+    from(tasks.dokkaJavadoc.get().outputDirectory)
 }
 
 publishing {
