@@ -50,13 +50,6 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-publishOnCentral {
-    projectDescription.set(projectDetails)
-    projectLongName.set(fullName)
-    projectUrl.set(websiteUrl)
-    scmConnection.set("git:git@github.com:DanySK/maven-central-gradle-plugin")
-}
-
 tasks {
     "test"(Test::class) {
         useJUnitPlatform()
@@ -84,22 +77,6 @@ dependencies {
     testRuntimeOnly(files(tasks["createClasspathManifest"]))
 }
 
-publishing {
-    publications {
-        withType<MavenPublication>() {
-            pom {
-                developers {
-                    developer {
-                        name.set("Danilo Pianini")
-                        email.set("danilo.pianini@gmail.com")
-                        url.set("http://www.danilopianini.org/")
-                    }
-                }
-            }
-        }
-    }
-}
-
 pluginBundle {
     website = websiteUrl
     vcsUrl = websiteUrl
@@ -113,6 +90,33 @@ gradlePlugin {
             displayName = fullName
             description = projectDetails
             implementationClass = pluginImplementationClass
+        }
+    }
+}
+
+publishOnCentral {
+    projectDescription = projectDetails
+    projectLongName = fullName
+    projectUrl = websiteUrl
+    scmConnection = "git:git@github.com:DanySK/maven-central-gradle-plugin"
+    repository("https://maven.pkg.github.com/DanySK/maven-central-gradle-plugin".toLowerCase()) {
+        user = "danysk"
+        password = System.getenv("GITHUB_TOKEN")
+    }
+    publishing {
+        publications {
+            withType<MavenPublication> {
+                configurePomForMavenCentral()
+                pom {
+                    developers {
+                        developer {
+                            name.set("Danilo Pianini")
+                            email.set("danilo.pianini@gmail.com")
+                            url.set("http://www.danilopianini.org/")
+                        }
+                    }
+                }
+            }
         }
     }
 }
