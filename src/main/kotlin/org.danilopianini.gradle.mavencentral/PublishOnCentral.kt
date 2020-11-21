@@ -54,8 +54,9 @@ class PublishOnCentral : Plugin<Project> {
             project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             // Create the publication
             publications { publications ->
-                val publication = publications.create(publicationName, MavenPublication::class.java) { publication ->
-                    project.components.forEach {
+                project.components.forEach {
+                    val name = "${it.name}For${publicationName.capitalize()}"
+                    val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(it)
                     }
                     publication.artifact(project.property("sourcesJar"))
@@ -63,10 +64,10 @@ class PublishOnCentral : Plugin<Project> {
                     with (extension) {
                         publication.configurePomForMavenCentral()
                     }
-                }
-                // Signing
-                project.configure<SigningExtension> {
-                    sign(publication)
+                    // Signing
+                    project.configure<SigningExtension> {
+                        sign(publication)
+                    }
                 }
             }
             // Add all destinations
