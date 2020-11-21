@@ -25,7 +25,7 @@ which is what needs to get called to have your artifacts uploaded on OSSRH Nexus
 plugins {
     `java`
     `maven-publish`
-    id ("org.danilopianini.publish-on-central") version "0.2.0"
+    id ("org.danilopianini.publish-on-central") version "0.4.0"
 }
 ```
 These three plugins must be applied.
@@ -39,43 +39,47 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
-    projectDescription.set("description") // Defaults to "No description provided"
-    projectLongName.set("full project name") // Defaults to the project name
-    licenseName.set("your license") // Defaults to "Apache License, Version 2.0"
-    licenseUrl.set("link to your license") // Defaults to http://www.apache.org/licenses/LICENSE-2.0
-    projectUrl.set("website url") // Defaults to "https://github.com/DanySK/${project.name}"
-    scmConnection.set("git:git@github.com:youruser/yourrepo") // Defaults to "git:git@github.com:DanySK/${project.name}"
+    // The following values are the default, if they are ok with you, just omit them
+    projectDescription = "No description provided"
+    projectLongName = project.name
+    licenseName = "Apache License, Version 2.0"
+    licenseUrl = "http://www.apache.org/licenses/LICENSE-2.0"
+    projectUrl = "https://github.com/DanySK/${project.name}"
+    scmConnection = "git:git@github.com:DanySK/${project.name}"
+    /*
+     * The plugin is pre-configured to fetch credentials for Maven Central from the environment
+     * Username from: MAVEN_CENTRAL_USERNAME
+     * Password from: MAVEN_CENTRAL_PASSWORD
+     *
+     * This bahavior can be overridden by passing new providers
+     */
+    mavenCentralUsername { System.getenv("MAVEN_CENTRAL_USERNAME") }
+    mavenCentralPassword { System.getenv("MAVEN_CENTRAL_USERNAME") }
+    /*
+     * This publication can be sent to other destinations, e.g. GitHub
+     */
+    repository("https://maven.pkg.github.com/OWNER/REPOSITORY") {
+        name = "github"
+        user = System.getenv("GITHUB_USERNAME")
+        password = System.getenv("GITHUB_TOKEN")
+    }
+    /*
+     * You may also want to configure publications created by other plugins
+     * like the one that goes on Central. Typically, for instance, for publishing
+     * Gradle plugins to Maven Central.
+     * It can be done as follows.
+     */
+    publishing {
+        publications {
+            withType<MavenPublication> {
+                configurePomForMavenCentral()
+            }
+        }
+    }
 }
-```
-
-### Signing artifacts
-
-You likely want your artifact to be signed.
-To do so, you must have a correctly configured GPG key, and the signign plugin enabled:
-```kotlin
-plugins {
-    `java`
-    `maven-publish`
-    `signing`
-    id ("org.danilopianini.publish-on-central") version "0.2.0"
-}
-```
-
-### OSSRH credentials
-Credentials for upload to Maven Central must be specified as gradle properties or environment properties, named respectively `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD`.
-You have fundamentally three choices:
-1. set them up in a `gradle.properties` file in `GRADLE_HOME`;
-2. pass the credentials with the command line;
-3. write them in your project local `gradle.properties` (don't).
-4. set them up in your environment (preferred for continuous integration)
-
-
-### Adding developers
-
-By default, the plugin does not add any developer or contributor to the generated pom file.
-You can add your team as follows:
-
-```kotlin
+/*
+ * Developers and contributors must be added manually
+ */
 publishing {
     publications {
         withType<MavenPublication> {

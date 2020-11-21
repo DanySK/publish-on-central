@@ -18,17 +18,20 @@ class CentralTests : StringSpec({
     fun TemporaryFolder.file(name: String, content: () -> String) = newFile(name).writeText(content().trimIndent())
     val workingDirectory = folder {
         file("settings.gradle") { "rootProject.name = 'testproject'" }
-        file("gradle.properties") { """
-    """ }
-        file("build.gradle.kts") { """
-        plugins {
-//            id("java")
-            id("java-library")
-            id("maven-publish")
-            id("signing")
-            id("org.danilopianini.publish-on-central")
+        file("build.gradle.kts") {
+            """
+                plugins {
+                    id("org.danilopianini.publish-on-central")
+                }
+                publishOnCentral {
+                    projectDescription = "test"
+                    repository("https://maven.pkg.github.com/OWNER/REPOSITORY") {
+                        name = "github"
+                        user = "test"
+                    }
+                }
+            """.trimIndent()
         }
-    """ }
     }
     val pluginClasspathResource = ClassLoader.getSystemClassLoader()
         .getResource("plugin-classpath.txt")
@@ -40,7 +43,7 @@ class CentralTests : StringSpec({
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath(classpath)
-            .withArguments("generatePomFileForMavenCentralPublication", "sourcesJar", "javadocJar")
+            .withArguments("generatePomFileForMavenCentralPublication", "sourcesJar", "javadocJar", "--stacktrace")
             .build()
         println(result.tasks)
         println(result.output)

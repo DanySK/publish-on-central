@@ -1,11 +1,5 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import groovy.lang.Closure
-import org.danilopianini.gradle.mavencentral.PublishOnCentralExtension
-import org.gradle.jvm.tasks.Jar
-import org.jetbrains.dokka.DokkaConfiguration
-import org.jetbrains.dokka.gradle.DokkaTask
-import java.net.URI
 
 plugins {
     `java-gradle-plugin`
@@ -48,6 +42,12 @@ dependencies {
     testImplementation(gradleTestKit())
     testImplementation("io.kotest:kotest-runner-junit5:_")
     testImplementation("io.kotest:kotest-assertions-core-jvm:_")
+}
+
+tasks.withType<KotlinCompile> {
+    kotlinOptions {
+        allWarningsAsErrors = true
+    }
 }
 
 publishOnCentral {
