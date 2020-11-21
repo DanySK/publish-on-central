@@ -50,10 +50,12 @@ fun Project.mavenCentral() = Repository(
     user = project.providers
         .environmentVariable("MAVEN_CENTRAL_USERNAME")
         .forUseAtConfigurationTime()
-        .orElse(project.providers.gradleProperty("mavenCentralUsername")),
+        .orElse(project.providers.gradleProperty("mavenCentralUsername"))
+        .forUseAtConfigurationTime(),
     password = project.providers.environmentVariable("MAVEN_CENTRAL_PASSWORD")
         .forUseAtConfigurationTime()
         .orElse(project.providers.gradleProperty("mavenCentralPassword"))
+        .forUseAtConfigurationTime()
 )
 
 internal class PublishOnCentralConfiguration(project: Project) {
