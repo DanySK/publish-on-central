@@ -108,10 +108,11 @@ open class SourcesJar: JarWithClassifier("sources") {
             throw IllegalStateException("Project has no property 'sourceSets' of type 'SourceSetContainer'")
         }
         val sourceSet = sourceSets?.getByName(name)
-        if (sourceSet == null && failOnMissingName) {
+        if (sourceSet != null) {
+            sourceSet(sourceSet)
+        } else if (failOnMissingName) {
             throw IllegalStateException("Project has no source set named $name")
         }
-        from(sourceSet)
     }
 
     fun sourceSet(sourceSet: SourceSet) {
