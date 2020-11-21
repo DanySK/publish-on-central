@@ -70,21 +70,7 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
-            // Add all destinations
-            extension.configuration.repositories.forEach { (repoName, repoDescriptor) ->
-                repositories { repository ->
-                    repository.maven { mavenArtifactRepository ->
-                        mavenArtifactRepository.name = repoName
-                        mavenArtifactRepository.url = URI(repoDescriptor.url.get())
-                        mavenArtifactRepository.credentials { credentials ->
-                            credentials.username = repoDescriptor.user.orNull
-                            credentials.password = repoDescriptor.password.orNull
-                            credentials.username ?: logger.warn("No username configured for ${repoDescriptor}.")
-                            credentials.password ?: logger.warn("No password configured for ${repoDescriptor}.")
-                        }
-                    }
-                }
-            }
+            project.mavenCentral().configureProject(project)
         }
     }
 

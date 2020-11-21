@@ -51,10 +51,8 @@ publishOnCentral {
      * Username from: MAVEN_CENTRAL_USERNAME
      * Password from: MAVEN_CENTRAL_PASSWORD
      *
-     * This bahavior can be overridden by passing new providers
+     * In case of failure, it falls back to properties mavenCentralUsername and mavenCentralPassword respectively
      */
-    mavenCentralUsername { System.getenv("MAVEN_CENTRAL_USERNAME") }
-    mavenCentralPassword { System.getenv("MAVEN_CENTRAL_USERNAME") }
     /*
      * This publication can be sent to other destinations, e.g. GitHub
      */

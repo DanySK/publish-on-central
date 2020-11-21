@@ -7,8 +7,10 @@ import org.gradle.api.internal.provider.ValueSupplier
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.api.provider.ProviderFactory
+import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import java.lang.IllegalStateException
+import java.net.URI
 import java.util.function.BiFunction
 
 inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
@@ -19,14 +21,39 @@ fun environmentVariable(name: String) =
         ?.takeIf { it.isNotBlank() }
         ?: throw IllegalStateException("Environment variable $name is not available")
 
-data class Repository(val url: Property<String>, val user: Provider<String>, val password: Provider<String>) {
+data class Repository(val name: String, val url: Property<String>, val user: Provider<String>, val password: Provider<String>) {
     override fun toString() = url.get()
+
+    fun configureProject(project: Project) {
+        project.extensions.configure(PublishingExtension::class.java) { publishing ->
+            publishing.repositories { repository ->
+                repository.maven { mavenArtifactRepository ->
+                    mavenArtifactRepository.name = name
+                    mavenArtifactRepository.url = URI(url.get())
+                    mavenArtifactRepository.credentials { credentials ->
+                        credentials.username = user.get()
+                        credentials.password = password.get()
+                        credentials.username
+                            ?: PublishOnCentral.logger.warn("No username configured for $name at ${url}.")
+                        credentials.password
+                            ?: PublishOnCentral.logger.warn("No password configured for $name at ${url}.")
+                    }
+                }
+            }
+        }
+    }
 }
 
 fun Project.mavenCentral() = Repository(
+    "MavenCentral",
     url = project.propertyWithDefault("https://oss.sonatype.org/service/local/staging/deploy/maven2/"),
-    user = project.providers.environmentVariable("MAVEN_CENTRAL_USERNAME").forUseAtConfigurationTime(),
-    password = project.providers.environmentVariable("MAVEN_CENTRAL_PASSWORD").forUseAtConfigurationTime()
+    user = project.providers
+        .environmentVariable("MAVEN_CENTRAL_USERNAME")
+        .forUseAtConfigurationTime()
+        .orElse(project.providers.gradleProperty("mavenCentralUsername")),
+    password = project.providers.environmentVariable("MAVEN_CENTRAL_PASSWORD")
+        .forUseAtConfigurationTime()
+        .orElse(project.providers.gradleProperty("mavenCentralPassword"))
 )
 
 internal class PublishOnCentralConfiguration(project: Project) {
@@ -42,11 +69,6 @@ internal class PublishOnCentralConfiguration(project: Project) {
 
     val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 
-    val repositories: MutableMap<String, Repository> = mutableMapOf(mavenCentralId to project.mavenCentral())
-
-    companion object {
-        var mavenCentralId = "MavenCentral"
-    }
 }
 
 open class PublishOnCentralExtension(val project: Project) {
@@ -80,30 +102,12 @@ open class PublishOnCentralExtension(val project: Project) {
     fun repository(url: Property<String>, configurator: MavenRepositoryDescriptor.() -> Unit) {
         val name = extractName.find(url.get())?.destructured?.component1() ?: "unknown"
         val repoDescriptor = MavenRepositoryDescriptor(name, project).apply(configurator)
-        val repo = Repository(url, repoDescriptor.userProperty, repoDescriptor.passwordProperty)
-        configuration.repositories[repoDescriptor.name] = repo
+        Repository(name, url, repoDescriptor.userProperty, repoDescriptor.passwordProperty)
+            .configureProject(project)
     }
 
     fun repository(url: String, configurator: MavenRepositoryDescriptor.() -> Unit) =
         repository(project.propertyWithDefault(url), configurator)
-
-    fun mavenCentralUsername(producer: () -> String) {
-        val central = configuration.repositories[PublishOnCentralConfiguration.mavenCentralId]
-        if (central == null) {
-            throw IllegalStateException("Repository ${PublishOnCentralConfiguration.mavenCentralId} has been removed.")
-        }
-        configuration.repositories[PublishOnCentralConfiguration.mavenCentralId] =
-            Repository(central.url, project.provider(producer).forUseAtConfigurationTime(), central.password)
-    }
-
-    fun mavenCentralPassword(producer: () -> String) {
-        val central = configuration.repositories[PublishOnCentralConfiguration.mavenCentralId]
-        if (central == null) {
-            throw IllegalStateException("Repository ${PublishOnCentralConfiguration.mavenCentralId} has been removed.")
-        }
-        configuration.repositories[PublishOnCentralConfiguration.mavenCentralId] =
-            Repository(central.url, central.user, project.provider(producer).forUseAtConfigurationTime())
-    }
 
     fun MavenPublication.configurePomForMavenCentral() {
         pom { pom ->
