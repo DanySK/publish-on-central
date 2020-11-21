@@ -21,6 +21,7 @@ class CentralTests : StringSpec({
         file("build.gradle.kts") {
             """
                 plugins {
+                    java
                     id("org.danilopianini.publish-on-central")
                 }
                 publishOnCentral {
@@ -43,13 +44,14 @@ class CentralTests : StringSpec({
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath(classpath)
-            .withArguments("generatePomFileForMavenCentralPublication", "sourcesJar", "javadocJar", "--stacktrace")
+//            .withArguments("tasks", "--all")
+            .withArguments("generatePomFileForJavaToMavenCentralPublication", "sourcesJar", "javadocJar", "--stacktrace")
             .build()
         println(result.tasks)
         println(result.output)
-        val deps = result.task(":generatePomFileForMavenCentralPublication")
+        val deps = result.task(":generatePomFileForJavaToMavenCentralPublication")
         deps?.outcome shouldBe TaskOutcome.SUCCESS
-        with(File("${workingDirectory.root}/build/publications/mavenCentral/pom-default.xml")){
+        with(File("${workingDirectory.root}/build/publications/javaToMavenCentral/pom-default.xml")){
             shouldExist()
             shouldBeAFile()
             val contents = readText(Charsets.UTF_8)

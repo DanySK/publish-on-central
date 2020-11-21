@@ -16,7 +16,6 @@ import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 import org.slf4j.LoggerFactory
 import java.io.File
-import java.net.URI
 
 /**
  * A Plugin configuring the project for publishing on Maven Central
@@ -55,7 +54,7 @@ class PublishOnCentral : Plugin<Project> {
             // Create the publication
             publications { publications ->
                 project.components.forEach {
-                    val name = "${it.name}For${publicationName.capitalize()}"
+                    val name = "${it.name}To${publicationName.capitalize()}"
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(it)
                     }
