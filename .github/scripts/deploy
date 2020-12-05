@@ -1,6 +1,6 @@
 #!/bin/sh
 set -e
-TO_CENTRAL='./gradlew publishKotlinToMavenCentralPublicationToMavenCentralRepository --parallel'
+TO_CENTRAL='./gradlew publishKotlinMavenPublicationToMavenCentral --parallel'
 TO_GH='./gradlew publishAllPublicationsToGithubRepository --parallel'
 TO_PLUGIN_PORTAL='./gradlew publishPlugins --parallel'
 $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL
