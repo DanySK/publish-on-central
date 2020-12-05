@@ -2,5 +2,7 @@
 set -e
 TO_CENTRAL='./gradlew publishKotlinToMavenCentralPublicationToMavenCentralRepository --parallel'
 TO_GH='./gradlew publishAllPublicationsToGithubRepository --parallel'
+TO_PLUGIN_PORTAL='./gradlew publishPlugins --parallel'
 $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL || $TO_CENTRAL
 $TO_GH || true
+$TO_PLUGIN_PORTAL || true
