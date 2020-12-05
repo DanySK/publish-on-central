@@ -40,18 +40,19 @@ class CentralTests : StringSpec({
     val classpath = pluginClasspathResource.openStream().bufferedReader().use { reader ->
         reader.readLines().map { File(it) }
     }
+    val taskName = "generatePomFileForJavaMavenPublication"
     "correct configuration should work" {
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath(classpath)
 //            .withArguments("tasks", "--all")
-            .withArguments("generatePomFileForJavaToMavenCentralPublication", "sourcesJar", "javadocJar", "--stacktrace")
+            .withArguments(taskName, "sourcesJar", "javadocJar", "--stacktrace")
             .build()
         println(result.tasks)
         println(result.output)
-        val deps = result.task(":generatePomFileForJavaToMavenCentralPublication")
+        val deps = result.task(":$taskName")
         deps?.outcome shouldBe TaskOutcome.SUCCESS
-        with(File("${workingDirectory.root}/build/publications/javaToMavenCentral/pom-default.xml")){
+        with(File("${workingDirectory.root}/build/publications/javaMaven/pom-default.xml")){
             shouldExist()
             shouldBeAFile()
             val contents = readText(Charsets.UTF_8)
