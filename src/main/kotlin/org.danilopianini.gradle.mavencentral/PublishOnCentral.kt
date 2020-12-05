@@ -25,7 +25,7 @@ class PublishOnCentral : Plugin<Project> {
         /**
          * The name of the publication to be created.
          */
-        const val publicationName = "mavenCentral"
+        const val publicationName = "maven"
         val logger = LoggerFactory.getLogger("publish-on-central plugin")
         private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
@@ -54,7 +54,7 @@ class PublishOnCentral : Plugin<Project> {
             // Create the publication
             publications { publications ->
                 project.components.forEach {
-                    val name = "${it.name}To${publicationName.capitalize()}"
+                    val name = "${it.name}${publicationName.capitalize()}"
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(it)
                     }
