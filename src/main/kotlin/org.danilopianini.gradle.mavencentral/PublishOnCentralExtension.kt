@@ -93,8 +93,11 @@ open class PublishOnCentralExtension(val project: Project) {
         get() = configuration.projectUrl.get()
         set(value) = configuration.projectUrl.set(value)
 
-    fun repository(url: String, configurator: MavenRepositoryDescriptor.() -> Unit) {
-        val name = extractName.find(url)?.destructured?.component1() ?: "unknown"
+    @JvmOverloads fun repository(
+        url: String,
+        name: String = extractName.find(url)?.destructured?.component1() ?: "unknown",
+        configurator: MavenRepositoryDescriptor.() -> Unit = { }
+    ) {
         val repoDescriptor = MavenRepositoryDescriptor(name, project).apply(configurator)
         Repository(name, url, { repoDescriptor.user } , { repoDescriptor.password })
             .configureProject(project)
