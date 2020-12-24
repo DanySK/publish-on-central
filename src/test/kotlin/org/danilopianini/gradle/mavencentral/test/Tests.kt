@@ -22,6 +22,7 @@ class CentralTests : StringSpec({
             """
                 plugins {
                     java
+                    `java-gradle-plugin`
                     id("org.danilopianini.publish-on-central")
                 }
                 publishOnCentral {
