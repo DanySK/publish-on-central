@@ -42,16 +42,16 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.withType(T::class.java) { it.body() }
     }
 
-    inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String) =
-        tasks.findByName(name) ?: project.tasks.register(name, T::class.java)
+    inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String): Task =
+        tasks.findByName(name) ?: project.tasks.register(name, T::class.java).get()
 
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
         project.configure<PublishingExtension> {
-            project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
-            project.registerTaskIfNeeded<JavadocJar>("javadocJar")
+            val sourcesJarTask = project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
+            val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             // Create the publication
             publications { publications ->
                 project.components.forEach {
@@ -59,8 +59,8 @@ class PublishOnCentral : Plugin<Project> {
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(it)
                     }
-                    publication.artifact(project.property("sourcesJar"))
-                    publication.artifact(project.property("javadocJar"))
+                    publication.artifact(sourcesJarTask.outputs)
+                    publication.artifact(javadocJarTask.outputs)
                     with (extension) {
                         publication.configurePomForMavenCentral()
                     }
@@ -68,6 +68,7 @@ class PublishOnCentral : Plugin<Project> {
                     project.configure<SigningExtension> {
                         sign(publication)
                     }
+                    println(publication.name + ": " + publication.artifacts)
                 }
             }
             project.mavenCentral().configureProject(project)
