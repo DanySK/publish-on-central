@@ -59,11 +59,11 @@ class PublishOnCentral : Plugin<Project> {
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(component)
                     }
-//                    publication.artifact(project.property("sourcesJar"))
-//                    publication.artifact(project.property("javadocJar"))
-                    (sourcesJarTask.outputs.files + javadocJarTask.outputs.files).forEach { file ->
-                        publication.artifact(file)
-                    }
+//                    (sourcesJarTask.outputs.files + javadocJarTask.outputs.files).forEach { file ->
+//                        publication.artifact(file)
+//                    }
+                    publication.artifact(sourcesJarTask)
+                    publication.artifact(javadocJarTask)
                     with (extension) {
                         publication.configurePomForMavenCentral()
                     }
