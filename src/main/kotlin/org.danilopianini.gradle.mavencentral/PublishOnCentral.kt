@@ -59,6 +59,8 @@ class PublishOnCentral : Plugin<Project> {
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
                         publication.from(component)
                     }
+//                    publication.artifact(project.property("sourcesJar"))
+//                    publication.artifact(project.property("javadocJar"))
                     (sourcesJarTask.outputs.files + javadocJarTask.outputs.files).forEach { file ->
                         publication.artifact(file)
                     }
@@ -69,7 +71,6 @@ class PublishOnCentral : Plugin<Project> {
                     project.configure<SigningExtension> {
                         sign(publication)
                     }
-                    println(publication.name + ": " + publication.artifacts)
                 }
             }
             project.mavenCentral().configureProject(project)
