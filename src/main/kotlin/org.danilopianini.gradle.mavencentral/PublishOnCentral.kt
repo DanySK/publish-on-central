@@ -4,6 +4,7 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.file.SourceDirectorySet
+import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.PluginCollection
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -71,8 +72,29 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.mavenCentral().configureProject(project)
         }
+        project.plugins.withType(JavaPlugin::class.java) { _ ->
+            project.tasks.withType(JavadocJar::class.java) { javadocJar ->
+                val javadocTask = project.tasks.findByName("javadoc") as? Javadoc
+                    ?: throw IllegalStateException("Java plugin applied but no Javadoc task existing!")
+                javadocJar.dependsOn(javadocTask)
+                javadocJar.from(javadocTask.destinationDir)
+            }
+        }
+        val dokkaPluginClass = kotlin.runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
+        if (dokkaPluginClass.isSuccess) {
+            project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>) {
+                project.tasks.withType(JavadocJar::class.java) { javadocJar ->
+                    val dokkaJavadoc = project.tasks.findByName("dokkaJavadoc")
+                        ?: throw IllegalStateException("Dokka plugin applied but no dokkaJavadoc task existing!")
+                    val outputDirectory = dokkaJavadoc.property("outputDirectory")
+                        ?: throw IllegalStateException("dokkaJavadoc has no property 'outputDirectory' - " +
+                            "maybe this version is incompatible with publish-on-central?")
+                    javadocJar.dependsOn(dokkaJavadoc)
+                    javadocJar.from(outputDirectory)
+                }
+            }
+        }
     }
-
 }
 
 open class JarWithClassifier(classifier: String) : Jar() {
@@ -114,15 +136,4 @@ open class SourcesJar: JarWithClassifier("sources") {
 
 }
 
-open class JavadocJar: JarWithClassifier("javadoc") {
-    init {
-        (project.tasks.findByName("javadoc") as? Javadoc)?.also {
-            dependsOn(it)
-            from(it.destinationDir)
-        }
-        project.tasks.findByName("dokkaJavadoc")
-            ?.also { dependsOn(it) }
-            ?.property("outputDirectory")
-            ?.also { from(it) }
-    }
-}
+open class JavadocJar: JarWithClassifier("javadoc")
