@@ -54,13 +54,14 @@ class PublishOnCentral : Plugin<Project> {
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             // Create the publication
             publications { publications ->
-                project.components.forEach {
-                    val name = "${it.name}${publicationName.capitalize()}"
+                project.components.forEach { component ->
+                    val name = "${component.name}${publicationName.capitalize()}"
                     val publication = publications.create(name, MavenPublication::class.java) { publication ->
-                        publication.from(it)
+                        publication.from(component)
                     }
-                    publication.artifact(sourcesJarTask.outputs)
-                    publication.artifact(javadocJarTask.outputs)
+                    (sourcesJarTask.outputs.files + javadocJarTask.outputs.files).forEach { file ->
+                        publication.artifact(file)
+                    }
                     with (extension) {
                         publication.configurePomForMavenCentral()
                     }
