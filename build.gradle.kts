@@ -1,3 +1,4 @@
+import org.danilopianini.gradle.mavencentral.mavenCentral
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -102,6 +103,11 @@ publishOnCentral {
     repository("https://maven.pkg.github.com/DanySK/maven-central-gradle-plugin".toLowerCase()) {
         user = "danysk"
         password = System.getenv("GITHUB_TOKEN")
+    }
+    val central = mavenCentral()
+    repository(central.url.replace("://", "://s01."), "CentralS01") {
+        user = central.user()
+        password = central.password()
     }
     publishing {
         publications {
