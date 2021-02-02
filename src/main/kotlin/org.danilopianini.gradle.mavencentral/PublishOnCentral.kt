@@ -1,8 +1,10 @@
 package org.danilopianini.gradle.mavencentral
 
+import org.danilopianini.gradle.mavencentral.PublishOnCentral.Companion.configure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.component.SoftwareComponent
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.plugins.PluginCollection
@@ -52,27 +54,29 @@ class PublishOnCentral : Plugin<Project> {
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
-            // Create the publication
-            publications { publications ->
-                project.components.forEach { component ->
+            fun createPublications(component: SoftwareComponent) {
+                logger.debug("Reacting to the creation of component ${component.name}")
+                publications { publications ->
                     val name = "${component.name}${publicationName.capitalize()}"
-                    val publication = publications.create(name, MavenPublication::class.java) { publication ->
-                        publication.from(component)
-                    }
-//                    (sourcesJarTask.outputs.files + javadocJarTask.outputs.files).forEach { file ->
-//                        publication.artifact(file)
-//                    }
-                    publication.artifact(sourcesJarTask)
-                    publication.artifact(javadocJarTask)
-                    with (extension) {
-                        publication.configurePomForMavenCentral()
-                    }
-                    // Signing
-                    project.configure<SigningExtension> {
-                        sign(publication)
+                    if (publications.none { it.name == name }) {
+                        val publication = publications.create(name, MavenPublication::class.java) { publication ->
+                            publication.from(component)
+                        }
+                        logger.debug("Created new publication $name")
+                        publication.artifact(sourcesJarTask)
+                        publication.artifact(javadocJarTask)
+                        with (extension) {
+                            publication.configurePomForMavenCentral()
+                        }
+                        // Signing
+                        project.configure<SigningExtension> {
+                            sign(publication)
+                        }
                     }
                 }
             }
+            project.components.forEach(::createPublications)
+            project.components.whenObjectAdded(::createPublications)
             project.mavenCentral().configureProject(project)
         }
         project.plugins.withType(JavaPlugin::class.java) { _ ->

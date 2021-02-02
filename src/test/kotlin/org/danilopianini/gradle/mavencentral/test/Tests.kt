@@ -21,7 +21,7 @@ class CentralTests : StringSpec({
         file("build.gradle.kts") {
             """
                 plugins {
-                    java
+                    `java-library`
                     `java-gradle-plugin`
                     id("org.danilopianini.publish-on-central")
                 }
@@ -46,7 +46,6 @@ class CentralTests : StringSpec({
         val result = GradleRunner.create()
             .withProjectDir(workingDirectory.root)
             .withPluginClasspath(classpath)
-//            .withArguments("tasks", "--all")
             .withArguments(taskName, "sourcesJar", "javadocJar", "--stacktrace")
             .build()
         println(result.tasks)
@@ -66,5 +65,13 @@ class CentralTests : StringSpec({
             contents shouldContain "license"
             contents shouldContain "scm"
         }
+        val tasks = GradleRunner.create()
+            .withProjectDir(workingDirectory.root)
+            .withPluginClasspath(classpath)
+            .withArguments("tasks")
+            .build()
+        println(tasks.output)
+        tasks.output shouldContain "publishJavaMavenPublication"
+        tasks.output shouldContain "publishPluginMavenPublicationToGithubRepository"
     }
 })
