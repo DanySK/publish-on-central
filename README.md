@@ -93,6 +93,18 @@ publishing {
         }
     }
 }
+/*
+ * The plugin automatically adds every publication to the list of objects to sign
+ * The configuration of the signing process is left to the user, though,
+ * as in a normal Gradle build.
+ * In the following example, in-memory signing is configured.
+ * For further options, please refer to: https://docs.gradle.org/current/userguide/signing_plugin.html
+ */
+signing {
+    val signingKey: String? by project
+    val signingPassword: String? by project
+    useInMemoryPgpKeys(signingKey, signingPassword)
+}
 ```
 
 ### OSSRH Timeouts
