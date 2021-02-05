@@ -56,8 +56,7 @@ publishOnCentral {
     /*
      * This publication can be sent to other destinations, e.g. GitHub
      */
-    repository("https://maven.pkg.github.com/OWNER/REPOSITORY") {
-        name = "github"
+    repository("https://maven.pkg.github.com/OWNER/REPOSITORY", "GitHub") {
         user = System.getenv("GITHUB_USERNAME")
         password = System.getenv("GITHUB_TOKEN")
     }
