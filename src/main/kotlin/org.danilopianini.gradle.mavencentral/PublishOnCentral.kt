@@ -86,6 +86,7 @@ class PublishOnCentral : Plugin<Project> {
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
+            project.tasks.withType(SourcesJar::class.java) { it.sourceSet("main", true) }
         }
         val dokkaPluginClass = kotlin.runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
