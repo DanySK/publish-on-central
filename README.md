@@ -23,13 +23,10 @@ which is what needs to get called to have your artifacts uploaded on OSSRH Nexus
 
 ```kotlin
 plugins {
-    `java`
-    `maven-publish`
     id ("org.danilopianini.publish-on-central") version "0.4.0"
 }
 ```
-These three plugins must be applied.
-If you do not apply one of them, the plugin won't apply: it reacts to the application of both.
+The plugin is configured to react to the application of the `java` plugin, and to apply the `maven-publish` and `signing` plugin if they are not applied.
 
 ### Configuring the plugin
 
