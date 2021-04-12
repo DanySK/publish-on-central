@@ -51,6 +51,9 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks {
+    withType<Copy> {
+        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
+    }
     "test"(Test::class) {
         useJUnitPlatform()
         testLogging.showStandardStreams = true
