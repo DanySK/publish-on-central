@@ -109,6 +109,7 @@ class PublishOnCentral : Plugin<Project> {
 open class JarWithClassifier(classifier: String) : Jar() {
     init {
         archiveClassifier.set(classifier)
+        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
     }
 }
 
