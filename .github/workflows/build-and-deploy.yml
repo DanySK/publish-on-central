@@ -3,10 +3,9 @@ on:
   push:
     tags:
       - '*'
-    branches:
-      - '*'
-      - '!autodelivery**'
-      - '!bump-**'
+    branches-ignore:
+      - 'autodelivery**'
+      - 'bump-**'
   pull_request:
   schedule:
     - cron: '0 3 * * SUN'
