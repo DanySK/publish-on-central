@@ -39,7 +39,7 @@ data class Repository(val name: String, val url: String, val user: () -> String?
 
 fun Project.mavenCentral() = Repository(
     "MavenCentral",
-    url = "https://oss.sonatype.org/service/local/staging/deploy/maven2/",
+    url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/",
     user = {
         System.getenv("MAVEN_CENTRAL_USERNAME")
             ?: project.properties["mavenCentralUsername"]?.toString()
