@@ -106,11 +106,6 @@ publishOnCentral {
         user = "danysk"
         password = System.getenv("GITHUB_TOKEN")
     }
-    val central = mavenCentral()
-    repository(central.url.replace("://", "://s01."), "CentralS01") {
-        user = central.user()
-        password = central.password()
-    }
     publishing {
         publications {
             withType<MavenPublication> {
