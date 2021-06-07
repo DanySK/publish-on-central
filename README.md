@@ -16,7 +16,7 @@ Plugin to create source and javadoc jars, sign them for you and send them to OSS
     1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
     2. Detect if a dokkaJavadoc tasks exists, and to the same as above
 * All tasks of the Gradle Publish plugin for a publication named `MavenCentral`,
-you are likely mostly interested in `publishMavenCentralPublicationToMavenRepository`,
+you are likely mostly interested in `publishAllPublicationsToMavenCentralRepository`,
 which is what needs to get called to have your artifacts uploaded on OSSRH Nexus instance.
 
 ### Importing the plugin
@@ -52,7 +52,7 @@ publishOnCentral {
      */
     /*
      * This publication can be sent to other destinations, e.g. GitHub
-     * The task name would be 'publishAllPulicationsOnGitHubRepository'
+     * The task name would be 'publishAllPublicationsToGitHubRepository'
      */
     repository("https://maven.pkg.github.com/OWNER/REPOSITORY", "GitHub") {
         user = System.getenv("GITHUB_USERNAME")
@@ -111,7 +111,7 @@ I often got build failures due to timeouts.
 ```
 FAILURE: Build failed with an exception.
 * What went wrong:
-Execution failed for task ':publishMavenCentralPublicationToMavenRepository'.
+Execution failed for task ':publishAllPublicationsToMavenCentralRepository'.
 > Failed to publish publication 'mavenCentral' to repository 'maven'
    > Could not write to resource 'https://oss.sonatype.org/service/local/staging/deploy/maven2/my/group/my-artifact/0.1.0/my-artifact-0.1.0-.jar'.
       > Read timed out
