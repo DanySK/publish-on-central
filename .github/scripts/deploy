@@ -1,5 +1,4 @@
 #!/bin/sh
 set -e
-UPLOAD='./gradlew publishKotlinMavenPublicationToCentralS01Repository'
-$UPLOAD || $UPLOAD || $UPLOAD || $UPLOAD || $UPLOAD
+./gradlew publishPluginMavenPublicationToMavenCentralRepository
 ./gradlew publishPlugins -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET || true
