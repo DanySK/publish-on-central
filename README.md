@@ -52,6 +52,7 @@ publishOnCentral {
      */
     /*
      * This publication can be sent to other destinations, e.g. GitHub
+     * The task name would be 'publishAllPulicationsOnGitHubRepository'
      */
     repository("https://maven.pkg.github.com/OWNER/REPOSITORY", "GitHub") {
         user = System.getenv("GITHUB_USERNAME")
