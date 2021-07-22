@@ -42,6 +42,9 @@ data class Repository(
     }
 
     companion object {
+        /**
+         * The pre-configured Maven Central repository
+         */
         val mavenCentral = Repository(
             "MavenCentral",
             url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/",
