@@ -34,7 +34,7 @@ class PublishOnCentral : Plugin<Project> {
             project.extensions.configure(T::class.java) { it.body() }
     }
 
-    inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String): Task =
+    private inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String): Task =
         tasks.findByName(name) ?: project.tasks.register(name, T::class.java).get()
 
     override fun apply(project: Project) {
