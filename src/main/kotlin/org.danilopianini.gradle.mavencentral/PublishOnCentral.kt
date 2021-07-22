@@ -19,7 +19,7 @@ import org.gradle.plugins.signing.SigningPlugin
 import java.io.File
 
 /**
- * A Plugin configuring the project for publishing on Maven Central
+ * A Plugin configuring the project for publishing on Maven Central.
  */
 class PublishOnCentral : Plugin<Project> {
     companion object {
