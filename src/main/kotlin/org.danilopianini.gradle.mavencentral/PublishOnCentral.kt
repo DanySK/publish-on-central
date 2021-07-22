@@ -55,7 +55,7 @@ class PublishOnCentral : Plugin<Project> {
                         project.logger.debug("Created new publication $name")
                         publication.artifact(sourcesJarTask)
                         publication.artifact(javadocJarTask)
-                        with (extension) {
+                        with(extension) {
                             publication.configurePomForMavenCentral()
                         }
                         // Signing
@@ -109,7 +109,7 @@ open class JarWithClassifier(classifier: String) : Jar() {
     }
 }
 
-open class SourcesJar: JarWithClassifier("sources") {
+open class SourcesJar : JarWithClassifier("sources") {
     init {
         sourceSet("main", false)
     }
@@ -142,4 +142,4 @@ open class SourcesJar: JarWithClassifier("sources") {
 
 }
 
-open class JavadocJar: JarWithClassifier("javadoc")
+open class JavadocJar : JarWithClassifier("javadoc")
