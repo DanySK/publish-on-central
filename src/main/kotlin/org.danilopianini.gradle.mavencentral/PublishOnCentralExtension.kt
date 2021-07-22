@@ -14,6 +14,10 @@ fun environmentVariable(name: String) =
         ?.takeIf { it.isNotBlank() }
         ?: throw IllegalStateException("Environment variable $name is not available")
 
+/**
+ * A class modelling the concept of target Maven repository.
+ * Includes a [name], an [url], and methods to compute [user] and [password] given a [Project].
+ */
 data class Repository(
     val name: String,
     val url: String,
