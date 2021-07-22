@@ -40,7 +40,7 @@ data class Repository(
 
     companion object {
         /**
-         * The pre-configured Maven Central repository
+         * The pre-configured Maven Central repository.
          */
         val mavenCentral = Repository(
             "MavenCentral",
