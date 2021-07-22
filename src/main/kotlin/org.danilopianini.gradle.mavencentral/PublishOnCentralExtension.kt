@@ -104,7 +104,7 @@ open class PublishOnCentralExtension(val project: Project) {
         name: String = extractName.find(url)?.destructured?.component1() ?: "unknown",
         configurator: MavenRepositoryDescriptor.() -> Unit = { }
     ) {
-        val repoDescriptor = MavenRepositoryDescriptor(name, project).apply(configurator)
+        val repoDescriptor = MavenRepositoryDescriptor(name).apply(configurator)
         Repository(name, url, { repoDescriptor.user }, { repoDescriptor.password })
             .configureForProject(project)
     }
@@ -148,10 +148,20 @@ open class PublishOnCentralExtension(val project: Project) {
     }
 }
 
-data class MavenRepositoryDescriptor(
+/**
+ * A descriptor of a Maven repository.
+ * Requires a [name], and optionally authentication in form of [user] and [password].
+ */
+class MavenRepositoryDescriptor internal constructor(
     var name: String,
-    private val project: Project
 ) {
+    /**
+     * The username.
+     */
     var user: String? = null
+
+    /**
+     * The password.
+     */
     var password: String? = null
 }
