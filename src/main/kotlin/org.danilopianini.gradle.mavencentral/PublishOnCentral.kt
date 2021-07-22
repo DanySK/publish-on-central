@@ -139,7 +139,6 @@ open class SourcesJar : JarWithClassifier("sources") {
     fun source(file: File) {
         from(file)
     }
-
 }
 
 open class JavadocJar : JarWithClassifier("javadoc")
