@@ -105,7 +105,7 @@ open class PublishOnCentralExtension(val project: Project) {
         configurator: MavenRepositoryDescriptor.() -> Unit = { }
     ) {
         val repoDescriptor = MavenRepositoryDescriptor(name, project).apply(configurator)
-        Repository(name, url, { repoDescriptor.user } , { repoDescriptor.password })
+        Repository(name, url, { repoDescriptor.user }, { repoDescriptor.password })
             .configureForProject(project)
     }
 
