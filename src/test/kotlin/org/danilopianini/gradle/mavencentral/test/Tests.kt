@@ -56,7 +56,7 @@ class Tests : StringSpec({
         println(result.output)
         val deps = result.task(":$taskName")
         deps?.outcome shouldBe TaskOutcome.SUCCESS
-        with(File("${workingDirectory.root}/build/publications/javaMaven/pom-default.xml")){
+        with(File("${workingDirectory.root}/build/publications/javaMaven/pom-default.xml")) {
             shouldExist()
             shouldBeAFile()
             val contents = readText(Charsets.UTF_8)
