@@ -31,6 +31,10 @@ class CentralTests : StringSpec({
                         name = "github"
                         user = "test"
                     }
+                    mavenCentralSnapshotsRepository()
+                    mavenCentralSnapshotsRepository() {
+                        user = "test"
+                    }
                 }
             """.trimIndent()
         }
@@ -73,5 +77,7 @@ class CentralTests : StringSpec({
         println(tasks.output)
         tasks.output shouldContain "publishJavaMavenPublication"
         tasks.output shouldContain "publishPluginMavenPublicationToGithubRepository"
+        tasks.output shouldContain "publishPluginMavenPublicationToMavenCentralRepository"
+        tasks.output shouldContain "publishPluginMavenPublicationToMavenCentralSnapshotsRepository"
     }
 })
