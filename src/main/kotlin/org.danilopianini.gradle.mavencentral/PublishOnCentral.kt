@@ -128,14 +128,23 @@ open class SourcesJar : JarWithClassifier("sources") {
         }
     }
 
+    /**
+     * Adds a [sourceSet] source.
+     */
     fun sourceSet(sourceSet: SourceSet) {
         sourceSet(sourceSet.allSource)
     }
 
-    fun sourceSet(sourceSet: SourceDirectorySet) {
-        from(sourceSet)
+    /**
+     * Adds a [sourceDirectorySet] source.
+     */
+    fun sourceSet(sourceDirectorySet: SourceDirectorySet) {
+        from(sourceDirectorySet)
     }
 
+    /**
+     * Adds a [file] source.
+     */
     fun source(file: File) {
         from(file)
     }
