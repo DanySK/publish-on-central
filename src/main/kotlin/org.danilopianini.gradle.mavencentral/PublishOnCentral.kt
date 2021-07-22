@@ -36,9 +36,6 @@ class PublishOnCentral : Plugin<Project> {
 
         private inline fun <reified T> Project.configure(crossinline body: T.() -> Unit): Unit =
             project.extensions.configure(T::class.java) { it.body() }
-
-        private inline fun <reified T : Task> Project.configureTask(crossinline body: T.() -> Unit) =
-            project.tasks.withType(T::class.java) { it.body() }
     }
 
     inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String): Task =
