@@ -50,8 +50,8 @@ fun Project.mavenCentral() = Repository(
     }
 )
 
-fun Project.mavenCentralSnapshot() = mavenCentral().copy(
-    name = "MavenCentralSnapshot",
+fun Project.mavenCentralSnapshots() = mavenCentral().copy(
+    name = "MavenCentralSnapshots",
     url = "https://s01.oss.sonatype.org/content/repositories/snapshots/",
 )
 
