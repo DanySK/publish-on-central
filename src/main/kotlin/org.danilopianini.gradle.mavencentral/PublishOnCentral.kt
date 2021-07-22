@@ -114,6 +114,10 @@ open class SourcesJar : JarWithClassifier("sources") {
         sourceSet("main", false)
     }
 
+    /**
+     * Adds the [SourceSet] with the provided [name] to the contents of the [SourcesJar].
+     * In case the source set does not exist, if [failOnMissingName] is set, the task throws [IllegalStateException].
+     */
     @JvmOverloads
     fun sourceSet(name: String, failOnMissingName: Boolean = true) {
         val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
