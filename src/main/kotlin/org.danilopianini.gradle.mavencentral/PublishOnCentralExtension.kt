@@ -75,26 +75,44 @@ open class PublishOnCentralExtension(val project: Project) {
 
     internal val configuration = PublishOnCentralConfiguration(project)
 
+    /**
+     * The full project name.
+     */
     var projectLongName: String
         get() = configuration.projectLongName.get()
         set(value) = configuration.projectLongName.set(value)
 
+    /**
+     * A description of the project.
+     */
     var projectDescription: String
         get() = configuration.projectDescription.get()
         set(value) = configuration.projectDescription.set(value)
 
+    /**
+     * The project's license name.
+     */
     var licenseName: String
         get() = configuration.licenseName.get()
         set(value) = configuration.licenseName.set(value)
 
+    /**
+     * The license URL connection of the project.
+     */
     var licenseUrl: String
         get() = configuration.licenseUrl.get()
         set(value) = configuration.licenseUrl.set(value)
 
+    /**
+     * The SCM connection of the project.
+     */
     var scmConnection: String
         get() = configuration.scmConnection.get()
         set(value) = configuration.scmConnection.set(value)
 
+    /**
+     * The URL of the project.
+     */
     var projectUrl: String
         get() = configuration.projectUrl.get()
         set(value) = configuration.projectUrl.set(value)
