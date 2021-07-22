@@ -75,6 +75,9 @@ open class PublishOnCentralExtension(val project: Project) {
         get() = configuration.projectUrl.get()
         set(value) = configuration.projectUrl.set(value)
 
+    /**
+     * Utility to configure a new Maven repository as target.
+     */
     @JvmOverloads fun repository(
         url: String,
         name: String = repositoryNameFromURL(url),
