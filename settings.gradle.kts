@@ -1,15 +1,8 @@
-import de.fayard.refreshVersions.bootstrapRefreshVersions
-import org.danilopianini.VersionAliases.justAdditionalAliases
-buildscript {
-    repositories {
-        gradlePluginPortal()
-        mavenCentral()
-    }
-    dependencies {
-        classpath("de.fayard.refreshVersions:refreshVersions:0.9.5")
-        classpath("org.danilopianini:refreshversions-aliases:+")
+plugins {
+    id("de.fayard.refreshVersions") version "0.10.1"
+}
+refreshVersions {
+    featureFlags {
+        enable(de.fayard.refreshVersions.core.FeatureFlag.LIBS)
     }
 }
-bootstrapRefreshVersions(justAdditionalAliases)
-rootProject.name = "publish-on-central"
-

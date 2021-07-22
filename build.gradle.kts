@@ -1,16 +1,14 @@
-import org.danilopianini.gradle.mavencentral.mavenCentral
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     `java-gradle-plugin`
-    `maven-publish`
-    `signing`
     id("org.danilopianini.git-sensitive-semantic-versioning")
     kotlin("jvm")
     id("com.gradle.plugin-publish")
-    id ("org.danilopianini.publish-on-central")
+    id("org.danilopianini.publish-on-central")
     id("org.jetbrains.dokka")
+    id("kotlin-qa")
 }
 
 gitSemVer {
@@ -43,9 +41,6 @@ tasks.withType<KotlinCompile> {
 }
 
 tasks {
-    withType<Copy> {
-        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
-    }
     "test"(Test::class) {
         useJUnitPlatform()
         testLogging.showStandardStreams = true
@@ -129,8 +124,11 @@ val registerCredentials = tasks.register("registerGradlePluginPortalCredentials"
         listOf("gradle.publish.key", "gradle.publish.secret").forEach {
             if (!(project.hasProperty(it) or System.getenv().containsKey(it))) {
                 val bashName = it.toUpperCase().replace(".", "_")
-                System.getProperties().setProperty(it, System.getenv(bashName)
-                    ?: throw IllegalStateException("Property $it is unset and environment variable $bashName unavailable")
+                System.getProperties().setProperty(
+                    it,
+                    System.getenv(bashName) ?: throw IllegalStateException(
+                        "Property $it is unset and environment variable $bashName unavailable"
+                    )
                 )
             }
         }
