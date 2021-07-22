@@ -85,6 +85,9 @@ open class PublishOnCentralExtension(val project: Project) {
             .configureForProject(project)
     }
 
+    /**
+     * Utility to pre-configure a deployment towards the Maven Central Snapshots repository.
+     */
     @JvmOverloads fun mavenCentralSnapshotsRepository(
         name: String = "MavenCentralSnapshots",
         configurator: MavenRepositoryDescriptor.() -> Unit = { },
