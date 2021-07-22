@@ -7,11 +7,6 @@ import org.gradle.api.publish.maven.MavenPublication
 inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
     objects.property(T::class.java).apply { convention(default) }
 
-fun environmentVariable(name: String) =
-    System.getenv(name)
-        ?.takeIf { it.isNotBlank() }
-        ?: throw IllegalStateException("Environment variable $name is not available")
-
 internal class PublishOnCentralConfiguration(project: Project) {
     val projectLongName: Property<String> = project.propertyWithDefault(project.name)
 
