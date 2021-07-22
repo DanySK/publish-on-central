@@ -2,9 +2,7 @@ package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
-import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
-import java.net.URI
 
 inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
     objects.property(T::class.java).apply { convention(default) }
