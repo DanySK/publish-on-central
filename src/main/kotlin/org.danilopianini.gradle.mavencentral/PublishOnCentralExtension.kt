@@ -32,9 +32,9 @@ data class Repository(
                         credentials.username = project.user()
                         credentials.password = project.password()
                         credentials.username
-                            ?: project.logger.warn("No username configured for $name at ${url}.")
+                            ?: project.logger.warn("No username configured for $name at $url.")
                         credentials.password
-                            ?: project.logger.warn("No password configured for $name at ${url}.")
+                            ?: project.logger.warn("No password configured for $name at $url.")
                     }
                 }
             }
