@@ -4,7 +4,7 @@ import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.maven.MavenPublication
 
-inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
+private inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
     objects.property(T::class.java).apply { convention(default) }
 
 internal class PublishOnCentralConfiguration(project: Project) {
