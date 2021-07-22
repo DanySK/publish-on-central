@@ -10,7 +10,7 @@ import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import java.io.File
 
-class CentralTests : StringSpec({
+class Tests : StringSpec({
     fun folder(closure: TemporaryFolder.() -> Unit) = TemporaryFolder().apply {
         create()
         closure()
