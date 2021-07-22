@@ -16,6 +16,9 @@ data class Repository(
 ) {
     override fun toString() = "$name at $url"
 
+    /**
+     * Reifies this repository setup onto every [PublishingExtension] configuration of the provided [project].
+     */
     fun configureForProject(project: Project) {
         project.extensions.configure(PublishingExtension::class.java) { publishing ->
             publishing.repositories { repository ->
