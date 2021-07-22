@@ -71,6 +71,9 @@ internal class PublishOnCentralConfiguration(project: Project) {
     val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 }
 
+/**
+ * The extension in charge of configuring the publish-on-central plugin on the target [project].
+ */
 open class PublishOnCentralExtension(val project: Project) {
 
     internal val configuration = PublishOnCentralConfiguration(project)
