@@ -78,7 +78,7 @@ class PublishOnCentral : Plugin<Project> {
             project.components.forEach(::createPublications)
             project.components.whenObjectAdded(::createPublications)
             project.mavenCentral().configureProject(project)
-            project.mavenCentralSnapshot().configureProject(project)
+            project.mavenCentralSnapshots().configureProject(project)
         }
         project.plugins.withType(JavaPlugin::class.java) { _ ->
             project.tasks.withType(JavadocJar::class.java) { javadocJar ->
