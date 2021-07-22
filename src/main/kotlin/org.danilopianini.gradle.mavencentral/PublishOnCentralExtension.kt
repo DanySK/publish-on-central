@@ -101,7 +101,7 @@ open class PublishOnCentralExtension(val project: Project) {
 
     @JvmOverloads fun repository(
         url: String,
-        name: String = extractName.find(url)?.destructured?.component1() ?: "unknown",
+        name: String = repositoryNameFromURL(url),
         configurator: MavenRepositoryDescriptor.() -> Unit = { }
     ) {
         val repoDescriptor = MavenRepositoryDescriptor(name).apply(configurator)
@@ -142,9 +142,12 @@ open class PublishOnCentralExtension(val project: Project) {
     }
 
     companion object {
-        val extractName = Regex(
+
+        private val extractName = Regex(
             """.*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?"""
         )
+
+        private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
     }
 }
 
