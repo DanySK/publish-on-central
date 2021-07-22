@@ -109,6 +109,9 @@ open class JarWithClassifier(classifier: String) : Jar() {
     }
 }
 
+/**
+ * A task generating a Jar file with the project source code.
+ */
 open class SourcesJar : JarWithClassifier("sources") {
     init {
         sourceSet("main", false)
@@ -154,4 +157,7 @@ open class SourcesJar : JarWithClassifier("sources") {
     }
 }
 
+/**
+ * A task generating a Jar file with the Javadoc.
+ */
 open class JavadocJar : JarWithClassifier("javadoc")
