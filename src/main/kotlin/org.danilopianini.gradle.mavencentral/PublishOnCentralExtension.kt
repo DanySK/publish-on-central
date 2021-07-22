@@ -50,6 +50,11 @@ fun Project.mavenCentral() = Repository(
     }
 )
 
+fun Project.mavenCentralSnapshot() = mavenCentral().copy(
+    name = "MavenCentralSnapshot",
+    url = "https://s01.oss.sonatype.org/content/repositories/snapshots/",
+)
+
 internal class PublishOnCentralConfiguration(project: Project) {
     val projectLongName: Property<String> = project.propertyWithDefault(project.name)
 
@@ -62,7 +67,6 @@ internal class PublishOnCentralConfiguration(project: Project) {
     val scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}")
 
     val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
-
 }
 
 open class PublishOnCentralExtension(val project: Project) {
