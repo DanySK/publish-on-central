@@ -30,7 +30,7 @@ class PublishOnCentral : Plugin<Project> {
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
             project.extensions.create(name, T::class.java, *args)
 
-        private inline fun <reified T> Project.configure(crossinline body: T.() -> Unit): Unit =
+        private inline fun <reified T : Any> Project.configure(crossinline body: T.() -> Unit): Unit =
             project.extensions.configure(T::class.java) { it.body() }
     }
 
@@ -88,8 +88,10 @@ class PublishOnCentral : Plugin<Project> {
                     val dokkaJavadoc = project.tasks.findByName("dokkaJavadoc")
                         ?: throw IllegalStateException("Dokka plugin applied but no dokkaJavadoc task existing!")
                     val outputDirectory = dokkaJavadoc.property("outputDirectory")
-                        ?: throw IllegalStateException("dokkaJavadoc has no property 'outputDirectory' - " +
-                            "maybe this version is incompatible with publish-on-central?")
+                        ?: throw IllegalStateException(
+                            "dokkaJavadoc has no property 'outputDirectory' - " +
+                                "maybe this version is incompatible with publish-on-central?"
+                        )
                     javadocJar.dependsOn(dokkaJavadoc)
                     javadocJar.from(outputDirectory)
                 }
