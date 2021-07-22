@@ -31,9 +31,6 @@ class PublishOnCentral : Plugin<Project> {
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
             project.extensions.create(name, T::class.java, *args)
 
-        private inline fun <reified S, reified T : Plugin<S>> Project.plugin(): PluginCollection<T> =
-            project.plugins.withType(T::class.java)
-
         private inline fun <reified T> Project.configure(crossinline body: T.() -> Unit): Unit =
             project.extensions.configure(T::class.java) { it.body() }
     }
