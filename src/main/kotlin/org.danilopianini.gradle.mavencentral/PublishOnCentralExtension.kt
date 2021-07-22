@@ -95,6 +95,9 @@ open class PublishOnCentralExtension(val project: Project) {
         apply(configurator)
     }
 
+    /**
+     * Configures the pom.xml file of a [MavenPublication] with the information specified in this configuration.
+     */
     fun MavenPublication.configurePomForMavenCentral() {
         pom { pom ->
             with(pom) {
