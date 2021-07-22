@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.PublishOnCentral.Companion.configure
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -17,7 +16,6 @@ import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
-import org.slf4j.LoggerFactory
 import java.io.File
 
 /**
@@ -29,7 +27,6 @@ class PublishOnCentral : Plugin<Project> {
          * The name of the publication to be created.
          */
         const val publicationName = "maven"
-        val logger = LoggerFactory.getLogger("publish-on-central plugin")
         private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
             project.extensions.create(name, T::class.java, *args)
@@ -55,14 +52,14 @@ class PublishOnCentral : Plugin<Project> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             fun createPublications(component: SoftwareComponent) {
-                logger.debug("Reacting to the creation of component ${component.name}")
+                project.logger.debug("Reacting to the creation of component ${component.name}")
                 publications { publications ->
                     val name = "${component.name}${publicationName.capitalize()}"
                     if (publications.none { it.name == name }) {
                         val publication = publications.create(name, MavenPublication::class.java) { publication ->
                             publication.from(component)
                         }
-                        logger.debug("Created new publication $name")
+                        project.logger.debug("Created new publication $name")
                         publication.artifact(sourcesJarTask)
                         publication.artifact(javadocJarTask)
                         with (extension) {
@@ -77,8 +74,9 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.components.forEach(::createPublications)
             project.components.whenObjectAdded(::createPublications)
-            project.mavenCentral().configureProject(project)
-            project.mavenCentralSnapshots().configureProject(project)
+        }
+        project.afterEvaluate {
+            Repository.mavenCentral.configureForProject(project)
         }
         project.plugins.withType(JavaPlugin::class.java) { _ ->
             project.tasks.withType(JavadocJar::class.java) { javadocJar ->

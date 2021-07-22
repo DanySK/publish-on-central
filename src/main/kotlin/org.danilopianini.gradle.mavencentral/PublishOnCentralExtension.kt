@@ -14,46 +14,48 @@ fun environmentVariable(name: String) =
         ?.takeIf { it.isNotBlank() }
         ?: throw IllegalStateException("Environment variable $name is not available")
 
-data class Repository(val name: String, val url: String, val user: () -> String?, val password: () -> String?) {
+data class Repository(
+    val name: String,
+    val url: String,
+    val user: Project.() -> String?,
+    val password: Project.() -> String?,
+) {
     override fun toString() = "$name at $url"
 
-    fun configureProject(project: Project) {
+    fun configureForProject(project: Project) {
         project.extensions.configure(PublishingExtension::class.java) { publishing ->
             publishing.repositories { repository ->
                 repository.maven { mavenArtifactRepository ->
                     mavenArtifactRepository.name = name
                     mavenArtifactRepository.url = URI(url)
                     mavenArtifactRepository.credentials { credentials ->
-                        credentials.username = user()
-                        credentials.password = password()
+                        credentials.username = project.user()
+                        credentials.password = project.password()
                         credentials.username
-                            ?: PublishOnCentral.logger.warn("No username configured for $name at ${url}.")
+                            ?: project.logger.warn("No username configured for $name at ${url}.")
                         credentials.password
-                            ?: PublishOnCentral.logger.warn("No password configured for $name at ${url}.")
+                            ?: project.logger.warn("No password configured for $name at ${url}.")
                     }
                 }
             }
         }
     }
-}
 
-fun Project.mavenCentral() = Repository(
-    "MavenCentral",
-    url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/",
-    user = {
-        System.getenv("MAVEN_CENTRAL_USERNAME")
-            ?: project.properties["mavenCentralUsername"]?.toString()
-    },
-    password = {
-        System.getenv("MAVEN_CENTRAL_PASSWORD")
-            ?: project.properties["mavenCentralUsername"].toString()
+    companion object {
+        val mavenCentral = Repository(
+            "MavenCentral",
+            url = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/",
+            user = {
+                System.getenv("MAVEN_CENTRAL_USERNAME")
+                    ?: this.properties["mavenCentralUsername"]?.toString()
+            },
+            password = {
+                System.getenv("MAVEN_CENTRAL_PASSWORD")
+                    ?: project.properties["mavenCentralUsername"].toString()
+            }
+        )
     }
-)
-
-fun Project.mavenCentralSnapshots() = mavenCentral().copy(
-    name = "MavenCentralSnapshots",
-    url = "https://s01.oss.sonatype.org/content/repositories/snapshots/",
-)
+}
 
 internal class PublishOnCentralConfiguration(project: Project) {
     val projectLongName: Property<String> = project.propertyWithDefault(project.name)
@@ -104,7 +106,17 @@ open class PublishOnCentralExtension(val project: Project) {
     ) {
         val repoDescriptor = MavenRepositoryDescriptor(name, project).apply(configurator)
         Repository(name, url, { repoDescriptor.user } , { repoDescriptor.password })
-            .configureProject(project)
+            .configureForProject(project)
+    }
+
+    @JvmOverloads fun mavenCentralSnapshotsRepository(
+        name: String = "MavenCentralSnapshots",
+        configurator: MavenRepositoryDescriptor.() -> Unit = { },
+    ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
+        user = Repository.mavenCentral.user(project)
+        password = Repository.mavenCentral.password(project)
+        password = Repository.mavenCentral.password(project)
+        apply(configurator)
     }
 
     fun MavenPublication.configurePomForMavenCentral() {
