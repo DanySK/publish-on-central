@@ -26,14 +26,6 @@ val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOn
 
 repositories {
     mavenCentral()
-    jcenter {
-        content {
-            onlyForConfigurations(
-                "dokkaJavadocPlugin",
-                "dokkaJavadocRuntime"
-            )
-        }
-    }
 }
 
 dependencies {
