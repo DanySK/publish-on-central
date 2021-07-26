@@ -15,15 +15,33 @@ Plugin to create source and javadoc jars, sign them for you and send them to OSS
 * `javadocJar`: a `Jar` task preconfigured to
     1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
     2. Detect if a dokkaJavadoc tasks exists, and to the same as above
-* All tasks of the Gradle Publish plugin for a publication named `MavenCentral`,
-you are likely mostly interested in `publishAllPublicationsToMavenCentralRepository`,
+* One task for each combination of `SoftwareComponent` and repositories.
+  The `MavenCentral` and `MavenCentralSnapshots` are predefined, other repositories can be added.
+* One task for publishing `All` software components to any target repository
+
+In short, if you have (for instance) a mixed Java-Kotlin project,
+you should find the following tasks:
+
+* `publishJavaMavenPublicationToMavenCentralRepository`
+* `publishKotlinMavenPublicationToMavenCentralRepository`
+* `publishAllPublicationsToMavenCentralRepository`
+* `publishJavaMavenPublicationToMavenLocalRepository`
+* `publishKotlinMavenPublicationToMavenLocalRepository`
+* `publishAllPublicationsToMavenLocalRepository`
+
+If you add a custom repository, say `myRepo`, you would also find the following tasks:
+
+* `publishJavaMavenPublicationToMyRepoRepository`
+* `publishKotlinMavenPublicationToMyRepoRepository`
+* `publishAllPublicationsToMyRepoRepository`
+
 which is what needs to get called to have your artifacts uploaded on OSSRH Nexus instance.
 
 ### Importing the plugin
 
 ```kotlin
 plugins {
-    id ("org.danilopianini.publish-on-central") version "0.4.0"
+    id ("org.danilopianini.publish-on-central") version "0.5.1"
 }
 ```
 The plugin is configured to react to the application of the `java` plugin, and to apply the `maven-publish` and `signing` plugin if they are not applied.
@@ -57,6 +75,15 @@ publishOnCentral {
     repository("https://maven.pkg.github.com/OWNER/REPOSITORY", "GitHub") {
         user = System.getenv("GITHUB_USERNAME")
         password = System.getenv("GITHUB_TOKEN")
+    }
+    /*
+     * A simplified handler is available for publishing on the Snapshots repository of Maven Central
+     */
+    if (project.version.endsWith("-SNAPSHOT")) { // Avoid stable versions being pushed there...
+        mavenCentralSnapshotRepository() // Imports user and password from the configuration for Maven Central
+        // mavenCentralSnapshotRepository() {
+        //     ...but they can be customized as per any other repository
+        // }
     }
     /*
      * You may also want to configure publications created by other plugins
