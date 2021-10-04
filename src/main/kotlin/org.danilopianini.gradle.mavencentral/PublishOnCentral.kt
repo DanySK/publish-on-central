@@ -44,6 +44,7 @@ class PublishOnCentral : Plugin<Project> {
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
+            project.tasks.findByName("assemble")?.dependsOn(sourcesJarTask, javadocJarTask)
             fun createPublications(component: SoftwareComponent) {
                 project.logger.debug("Reacting to the creation of component ${component.name}")
                 publications { publications ->
