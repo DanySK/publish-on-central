@@ -6,3 +6,4 @@ refreshVersions {
         enable(de.fayard.refreshVersions.core.FeatureFlag.LIBS)
     }
 }
+rootProject.name = "publish-on-central"
