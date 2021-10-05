@@ -1,3 +1,7 @@
+# 0.6.1
+* The `assemble` task (if existing) now depends on `sourcesJar` and `javadocJar`
+* Removed references to `maven-central-gradle-plugin` in favor of `publish-on-central`
+
 # 0.6.0
 
 * Adds better support for the Snapshot repository of Central.
