@@ -18,7 +18,7 @@ gitSemVer {
 group = "org.danilopianini"
 val projectId = "$group.$name"
 val fullName = "Gradle Publish On Maven Central Plugin"
-val websiteUrl = "https://github.com/DanySK/maven-central-gradle-plugin"
+val websiteUrl = "https://github.com/DanySK/$name"
 val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
 val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOnCentral"
 
@@ -88,8 +88,8 @@ publishOnCentral {
     projectDescription = projectDetails
     projectLongName = fullName
     projectUrl = websiteUrl
-    scmConnection = "git:git@github.com:DanySK/maven-central-gradle-plugin"
-    repository("https://maven.pkg.github.com/DanySK/maven-central-gradle-plugin".toLowerCase()) {
+    scmConnection = "git:git@github.com:DanySK/$name"
+    repository("https://maven.pkg.github.com/DanySK/$name".toLowerCase()) {
         user = "danysk"
         password = System.getenv("GITHUB_TOKEN")
     }
