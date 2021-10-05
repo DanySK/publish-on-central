@@ -1,4 +1,4 @@
-# maven-central-gradle-plugin
+# publish-on-central
 A Gradle plugin for streamlined publishing on Maven Central
 
 ## Rationale
