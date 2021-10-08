@@ -1,14 +1,17 @@
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
+@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     `java-gradle-plugin`
-    id("org.danilopianini.git-sensitive-semantic-versioning")
-    kotlin("jvm")
-    id("com.gradle.plugin-publish")
-    id("org.danilopianini.publish-on-central")
-    id("org.jetbrains.dokka")
-    id("kotlin-qa")
+    alias(libs.plugins.dokka)
+    alias(libs.plugins.gitSemVer)
+    alias(libs.plugins.gradlePluginPublish)
+    alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.kotlin.qa)
+    alias(libs.plugins.publishOnCentral)
+    alias(libs.plugins.multiJvmTesting)
+    alias(libs.plugins.taskTree)
 }
 
 gitSemVer {
@@ -26,12 +29,30 @@ repositories {
     mavenCentral()
 }
 
+multiJvm {
+    maximumSupportedJvmVersion.set(latestJavaSupportedByGradle)
+}
+
+/*
+ * By default, Gradle does not include all the plugin classpath into the testing classpath.
+ * This task creates a descriptor of the runtime classpath, to be injected (manually) when running tests.
+ */
+val createClasspathManifest = tasks.register("createClasspathManifest") {
+    val outputDir = file("$buildDir/$name")
+    inputs.files(sourceSets.main.get().runtimeClasspath)
+    outputs.dir(outputDir)
+    doLast {
+        outputDir.mkdirs()
+        file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
+    }
+}
+
 dependencies {
     implementation(kotlin("stdlib"))
     implementation(gradleApi())
     testImplementation(gradleTestKit())
-    testImplementation("io.kotest:kotest-runner-junit5:_")
-    testImplementation("io.kotest:kotest-assertions-core-jvm:_")
+    testImplementation(libs.bundles.kotlin.testing)
+    testRuntimeOnly(files(createClasspathManifest))
 }
 
 tasks.withType<KotlinCompile> {
@@ -40,31 +61,15 @@ tasks.withType<KotlinCompile> {
     }
 }
 
-tasks {
-    "test"(Test::class) {
-        useJUnitPlatform()
-        testLogging.showStandardStreams = true
-        testLogging {
-            showCauses = true
-            showStackTraces = true
-            showStandardStreams = true
-            events(*TestLogEvent.values())
-        }
+tasks.withType<Test> {
+    useJUnitPlatform()
+    testLogging {
+        showStandardStreams = true
+        showCauses = true
+        showStackTraces = true
+        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
+        exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
-    register("createClasspathManifest") {
-        val outputDir = file("$buildDir/$name")
-        inputs.files(sourceSets.main.get().runtimeClasspath)
-        outputs.dir(outputDir)
-        doLast {
-            outputDir.mkdirs()
-            file("$outputDir/plugin-classpath.txt").writeText(sourceSets.main.get().runtimeClasspath.joinToString("\n"))
-        }
-    }
-}
-
-// Add the classpath file to the test runtime classpath
-dependencies {
-    testRuntimeOnly(files(tasks["createClasspathManifest"]))
 }
 
 pluginBundle {

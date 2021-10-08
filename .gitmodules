@@ -1,3 +1,0 @@
-[submodule "config/detekt"]
-	path = config/detekt
-	url = git@github.com:DanySK/detekt-configuration.git
