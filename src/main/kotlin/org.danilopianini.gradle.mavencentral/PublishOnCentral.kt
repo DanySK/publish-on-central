@@ -25,7 +25,7 @@ class PublishOnCentral : Plugin<Project> {
         /**
          * The name of the publication to be created.
          */
-        const val publicationName = "maven"
+        private const val publicationName = "Maven"
         private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
             project.extensions.create(name, T::class.java, *args)
@@ -48,7 +48,7 @@ class PublishOnCentral : Plugin<Project> {
             fun createPublications(component: SoftwareComponent) {
                 project.logger.debug("Reacting to the creation of component ${component.name}")
                 publications { publications ->
-                    val name = "${component.name}${publicationName.capitalize()}"
+                    val name = "${component.name}$publicationName"
                     if (publications.none { it.name == name }) {
                         val publication = publications.create(name, MavenPublication::class.java) { publication ->
                             publication.from(component)
