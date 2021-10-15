@@ -7,10 +7,12 @@ on:
       - 'bump-**'
       - 'renovate/**'
     paths-ignore:
-      - 'README.md'
       - 'CHANGELOG.md'
       - 'LICENSE'
+      - 'README.md'
+      - 'renovate.json'
   pull_request:
+  workflow_dispatch:
 
 jobs:
   Build:
@@ -24,16 +26,6 @@ jobs:
       # Checkout the repository
       - name: Checkout
         uses: danysk/action-checkout@0.1.0
-      # Install the JDK
-      - uses: actions/setup-java@v2
-        with:
-          distribution: adopt
-          java-version: 16
-          server-id: ossrh
-          server-username: MAVEN_CENTRAL_USERNAME
-          server-password: MAVEN_CENTRAL_PASSWORD
-          gpg-private-key: ${{ secrets.SIGNING_KEY }}
-          gpg-passphrase: SIGNING_PASSWORD
       - name: Configure the Windows Pagefile
         if: ${{ runner.os == 'Windows' }}
         uses: al-cheb/configure-pagefile-action@v1.2
@@ -43,6 +35,7 @@ jobs:
           path: |
             ~/.gradle/caches
             ~/.gradle/wrapper
+            ~/.gradle/jdks
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
