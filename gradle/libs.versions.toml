@@ -1,7 +1,7 @@
 [versions]
 kotest = "4.6.3"
 kotlin = "1.5.31"
-mockito = "4.0.0"
+mockito = "4.1.0"
 
 [libraries]
 kotest-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
