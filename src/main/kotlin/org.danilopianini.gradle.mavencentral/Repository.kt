@@ -10,7 +10,10 @@ import java.util.Locale
 /**
  * A class modelling the concept of target Maven repository.
  * Includes a [name], an [url], and methods to compute [user] and [password] given a [Project].
- * If the repository is managed with Sonatype Nexus, then the Nexus uri should be provided as [nexusUrl].
+ * If the repository is managed with Sonatype Nexus,
+ * then the Nexus uri should be provided as [nexusUrl],
+ * and the staging URL should be provided in [nexusStagingUrl].
+ * They must be either both set, or both null.
  */
 data class Repository(
     val name: String,
@@ -18,7 +21,15 @@ data class Repository(
     val user: Project.() -> String?,
     val password: Project.() -> String?,
     val nexusUrl: String? = null,
+    val nexusStagingUrl: String? = null,
 ) {
+
+    init {
+        val nexusUrls = listOf(nexusUrl, nexusStagingUrl)
+        require(nexusUrls.all { it == null } || nexusUrls.none { it == null }) {
+            "Inconsistent repository configuration: Nexus URL: $nexusUrl -- Nexus staging URL: $nexusStagingUrl"
+        }
+    }
 
     /**
      * Same as [name], but capitalized.
@@ -49,12 +60,12 @@ data class Repository(
                 }
             }
         }
-        if (nexusUrl != null) {
+        if (nexusUrl != null && nexusStagingUrl != null) {
             project.extensions.configure(NexusPublishExtension::class) { nexusPublishing ->
                 nexusPublishing.repositories { repository ->
                     repository.create(name) {
                         it.nexusUrl.set(project.uri(nexusUrl))
-                        it.snapshotRepositoryUrl.set(it.nexusUrl)
+                        it.snapshotRepositoryUrl.set(project.uri(nexusStagingUrl))
                         it.username.set(project.provider { user(project) })
                         it.password.set(project.provider { password(project) })
                     }
@@ -91,6 +102,7 @@ data class Repository(
                     ?: project.properties["mavenCentralUsername"].toString()
             },
             nexusUrl = "https://s01.oss.sonatype.org/service/local/",
+            nexusStagingUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
         )
     }
 }

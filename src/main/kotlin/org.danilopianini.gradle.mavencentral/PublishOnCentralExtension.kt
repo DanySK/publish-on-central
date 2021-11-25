@@ -84,19 +84,6 @@ open class PublishOnCentralExtension(val project: Project) {
     }
 
     /**
-     * Utility to pre-configure a deployment towards the Maven Central Snapshots repository.
-     */
-    @JvmOverloads fun mavenCentralSnapshotsRepository(
-        name: String = "MavenCentralSnapshots",
-        configurator: MavenRepositoryDescriptor.() -> Unit = { },
-    ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
-        user = Repository.mavenCentral.user(project)
-        password = Repository.mavenCentral.password(project)
-        password = Repository.mavenCentral.password(project)
-        apply(configurator)
-    }
-
-    /**
      * Configures the pom.xml file of a [MavenPublication] with the information specified in this configuration.
      */
     fun MavenPublication.configurePomForMavenCentral() {
