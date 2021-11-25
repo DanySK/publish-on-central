@@ -49,13 +49,10 @@ data class Repository(
                 }
             }
         }
-        println("$name NEXUS URL: $nexusUrl")
         if (nexusUrl != null) {
             project.extensions.configure(NexusPublishExtension::class) { nexusPublishing ->
-                println("COnfiguring NexusPublishing: $nexusPublishing")
                 nexusPublishing.repositories { repository ->
                     repository.create(name) {
-                        println("CREATED REPO ${it.name}")
                         it.nexusUrl.set(project.uri(nexusUrl))
                         it.username.set(project.provider { user(project) })
                         it.password.set(project.provider { password(project) })
