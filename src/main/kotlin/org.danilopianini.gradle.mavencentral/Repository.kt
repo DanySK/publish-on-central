@@ -54,6 +54,7 @@ data class Repository(
                 nexusPublishing.repositories { repository ->
                     repository.create(name) {
                         it.nexusUrl.set(project.uri(nexusUrl))
+                        it.snapshotRepositoryUrl.set(it.nexusUrl)
                         it.username.set(project.provider { user(project) })
                         it.password.set(project.provider { password(project) })
                     }
