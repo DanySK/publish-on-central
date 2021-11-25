@@ -7,6 +7,7 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.named
@@ -77,31 +78,33 @@ data class Repository(
                 val releaseTask = rootProject.tasks.named<Task>(
                     "closeAndRelease${capitalizedName}StagingRepository"
                 )
-                rootProject.allprojects {
-                    it.tasks.withType<AbstractPublishToMaven> {
-                        val publicationName = publication.name.replace("Maven", "Publication")
-                            .replaceFirstChar(Char::titlecase)
-                        mustRunAfter(initializeTask)
-                        closeTask.get().mustRunAfter(this)
-                        releaseTask.get().mustRunAfter(this)
-                        val suffix = "${publicationName}On${capitalizedName}Nexus"
-                        val closeTaskName = "close$suffix"
-                        val releaseTaskName = "release$suffix"
-                        val closePublicationTask = it.tasks.findByName(closeTaskName)
-                            ?: it.tasks.register(closeTaskName).get()
-                        val releasePublicationTask = it.tasks.findByName(releaseTaskName)
-                            ?: it.tasks.register(releaseTaskName).get()
-                        val descriptionSuffix = "the staging repository $capitalizedName" +
-                            " after the upload of ${publication.name}"
-                        closePublicationTask.description = "Closes $descriptionSuffix"
-                        releasePublicationTask.description = "Closes and relases $descriptionSuffix"
-                        listOf(closePublicationTask, releasePublicationTask).forEach {
-                            it.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                rootProject.allprojects { subproject ->
+                    subproject.tasks.withType<PublishToMavenRepository> {
+                        if (repository.name == this@Repository.name) {
+                            val publicationName = publication.name.replace("Maven", "Publication")
+                                .replaceFirstChar(Char::titlecase)
+                            mustRunAfter(initializeTask)
+                            closeTask.get().mustRunAfter(this)
+                            releaseTask.get().mustRunAfter(this)
+                            val suffix = "${publicationName}On${capitalizedName}Nexus"
+                            val closeTaskName = "close$suffix"
+                            val releaseTaskName = "release$suffix"
+                            val closePublicationTask = subproject.tasks.findByName(closeTaskName)
+                                ?: subproject.tasks.register(closeTaskName).get()
+                            val releasePublicationTask = subproject.tasks.findByName(releaseTaskName)
+                                ?: subproject.tasks.register(releaseTaskName).get()
+                            val descriptionSuffix = "the staging repository $capitalizedName" +
+                                    " after the upload of ${publication.name}"
+                            closePublicationTask.description = "Closes $descriptionSuffix"
+                            releasePublicationTask.description = "Closes and relases $descriptionSuffix"
+                            listOf(closePublicationTask, releasePublicationTask).forEach {
+                                it.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                            }
+                            closePublicationTask.dependsOn(this)
+                            closePublicationTask.dependsOn(initializeTask)
+                            releasePublicationTask.dependsOn(closePublicationTask)
+                            releasePublicationTask.dependsOn(releaseTask)
                         }
-                        closePublicationTask.dependsOn(this)
-                        closePublicationTask.dependsOn(initializeTask)
-                        releasePublicationTask.dependsOn(closePublicationTask)
-                        releasePublicationTask.dependsOn(releaseTask)
                     }
                 }
             }
