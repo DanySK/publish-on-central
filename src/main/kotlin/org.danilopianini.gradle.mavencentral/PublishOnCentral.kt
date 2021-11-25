@@ -4,18 +4,14 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.component.SoftwareComponent
-import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
-import org.gradle.api.tasks.SourceSet
-import org.gradle.api.tasks.SourceSetContainer
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
-import java.io.File
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
@@ -42,7 +38,7 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
         project.configure<PublishingExtension> {
-            val sourcesJarTask = project.registerTaskIfNeeded<SourcesJar>("sourcesJar")
+            val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             project.tasks.findByName("assemble")?.dependsOn(sourcesJarTask, javadocJarTask)
             fun createPublications(component: SoftwareComponent) {
@@ -79,7 +75,7 @@ class PublishOnCentral : Plugin<Project> {
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
-            project.tasks.withType(SourcesJar::class.java) { it.sourceSet("main", true) }
+            project.tasks.withType(JarTasks::class.java) { it.sourceSet("main", true) }
         }
         val dokkaPluginClass = kotlin.runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
@@ -101,66 +97,3 @@ class PublishOnCentral : Plugin<Project> {
     }
 }
 
-/**
- * A [Jar] task with the specified classifier, and adopting the duplicate strategy
- * [org.gradle.api.file.DuplicatesStrategy.WARN].
- */
-open class JarWithClassifier(classifier: String) : Jar() {
-    init {
-        archiveClassifier.set(classifier)
-        duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
-    }
-}
-
-/**
- * A task generating a Jar file with the project source code.
- */
-open class SourcesJar : JarWithClassifier("sources") {
-    init {
-        sourceSet("main", false)
-    }
-
-    /**
-     * Adds the [SourceSet] with the provided [name] to the contents of the [SourcesJar].
-     * In case the source set does not exist, if [failOnMissingName] is set, the task throws [IllegalStateException].
-     */
-    @JvmOverloads
-    fun sourceSet(name: String, failOnMissingName: Boolean = true) {
-        val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
-        if (sourceSets == null && failOnMissingName) {
-            throw IllegalStateException("Project has no property 'sourceSets' of type 'SourceSetContainer'")
-        }
-        val sourceSet = sourceSets?.getByName(name)
-        if (sourceSet != null) {
-            sourceSet(sourceSet)
-        } else if (failOnMissingName) {
-            throw IllegalStateException("Project has no source set named $name")
-        }
-    }
-
-    /**
-     * Adds a [sourceSet] source.
-     */
-    fun sourceSet(sourceSet: SourceSet) {
-        sourceSet(sourceSet.allSource)
-    }
-
-    /**
-     * Adds a [sourceDirectorySet] source.
-     */
-    fun sourceSet(sourceDirectorySet: SourceDirectorySet) {
-        from(sourceDirectorySet)
-    }
-
-    /**
-     * Adds a [file] source.
-     */
-    fun source(file: File) {
-        from(file)
-    }
-}
-
-/**
- * A task generating a Jar file with the Javadoc.
- */
-open class JavadocJar : JarWithClassifier("javadoc")
