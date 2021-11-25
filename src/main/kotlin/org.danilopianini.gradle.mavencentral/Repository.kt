@@ -6,7 +6,6 @@ import io.github.gradlenexus.publishplugin.NexusPublishExtension
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
-import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.kotlin.dsl.configure
@@ -94,14 +93,15 @@ data class Repository(
                             val releasePublicationTask = subproject.tasks.findByName(releaseTaskName)
                                 ?: subproject.tasks.register(releaseTaskName).get()
                             val descriptionSuffix = "the staging repository $capitalizedName" +
-                                    " after the upload of ${publication.name}"
+                                " after the upload of ${publication.name}"
                             closePublicationTask.description = "Closes $descriptionSuffix"
                             releasePublicationTask.description = "Closes and relases $descriptionSuffix"
                             listOf(closePublicationTask, releasePublicationTask).forEach {
                                 it.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                                it.dependsOn(this)
+                                it.dependsOn(closeTask)
+                                it.dependsOn(initializeTask)
                             }
-                            closePublicationTask.dependsOn(this)
-                            closePublicationTask.dependsOn(initializeTask)
                             releasePublicationTask.dependsOn(closePublicationTask)
                             releasePublicationTask.dependsOn(releaseTask)
                         }
