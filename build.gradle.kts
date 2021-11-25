@@ -127,6 +127,8 @@ if (System.getenv("CI") == true.toString()) {
     }
 }
 
+tasks.publishJavaMavenPublicationToMavenLocal
+
 val registerCredentials = tasks.register("registerGradlePluginPortalCredentials") {
     doLast {
         listOf("gradle.publish.key", "gradle.publish.secret").forEach {

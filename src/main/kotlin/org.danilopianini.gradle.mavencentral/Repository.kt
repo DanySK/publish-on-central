@@ -1,11 +1,17 @@
 package org.danilopianini.gradle.mavencentral
 
+import io.github.gradlenexus.publishplugin.CloseNexusStagingRepository
+import io.github.gradlenexus.publishplugin.InitializeNexusStagingRepository
 import io.github.gradlenexus.publishplugin.NexusPublishExtension
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.publish.PublishingExtension
+import org.gradle.api.publish.maven.tasks.AbstractPublishToMaven
+import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.named
+import org.gradle.kotlin.dsl.withType
 import java.net.URI
-import java.util.Locale
 
 /**
  * A class modelling the concept of target Maven repository.
@@ -13,7 +19,6 @@ import java.util.Locale
  * If the repository is managed with Sonatype Nexus,
  * then the Nexus uri should be provided as [nexusUrl],
  * and the staging URL should be provided in [nexusStagingUrl].
- * They must be either both set, or both null.
  */
 data class Repository(
     val name: String,
@@ -24,19 +29,10 @@ data class Repository(
     val nexusStagingUrl: String? = null,
 ) {
 
-    init {
-        val nexusUrls = listOf(nexusUrl, nexusStagingUrl)
-        require(nexusUrls.all { it == null } || nexusUrls.none { it == null }) {
-            "Inconsistent repository configuration: Nexus URL: $nexusUrl -- Nexus staging URL: $nexusStagingUrl"
-        }
-    }
-
     /**
      * Same as [name], but capitalized.
      */
-    val capitalizedName = name.replaceFirstChar {
-        if (it.isLowerCase()) it.titlecase(Locale.getDefault()) else it.toString()
-    }
+    val capitalizedName = name.replaceFirstChar(Char::titlecase)
 
     override fun toString() = "$name at $url"
 
@@ -60,29 +56,55 @@ data class Repository(
                 }
             }
         }
-        if (nexusUrl != null && nexusStagingUrl != null) {
+        if (nexusUrl != null) {
             project.extensions.configure(NexusPublishExtension::class) { nexusPublishing ->
                 nexusPublishing.repositories { repository ->
                     repository.create(name) {
                         it.nexusUrl.set(project.uri(nexusUrl))
-                        it.snapshotRepositoryUrl.set(project.uri(nexusStagingUrl))
+                        it.snapshotRepositoryUrl.set(project.uri(nexusStagingUrl ?: nexusUrl))
                         it.username.set(project.provider { user(project) })
                         it.password.set(project.provider { password(project) })
                     }
                 }
             }
-//            project.rootProject.afterEvaluate { rootProject ->
-//
-//                val initializeTask = rootProject.tasks.named<InitializeNexusStagingRepository>(
-//                    "initialize${capitalizedName}StagingRepository"
-//                )
-//                val closeTask = rootProject.tasks.named<CloseNexusStagingRepository>(
-//                    "close${capitalizedName}StagingRepository"
-//                )
-//                val releaseTask = rootProject.tasks.named<ReleaseNexusStagingRepository>(
-//                    "release${capitalizedName}StagingRepository"
-//                )
-//            }
+            project.rootProject.afterEvaluate { rootProject ->
+                val initializeTask = rootProject.tasks.named<InitializeNexusStagingRepository>(
+                    "initialize${capitalizedName}StagingRepository"
+                )
+                val closeTask = rootProject.tasks.named<CloseNexusStagingRepository>(
+                    "close${capitalizedName}StagingRepository"
+                )
+                val releaseTask = rootProject.tasks.named<Task>(
+                    "closeAndRelease${capitalizedName}StagingRepository"
+                )
+                rootProject.allprojects {
+                    it.tasks.withType<AbstractPublishToMaven> {
+                        val publicationName = publication.name.replace("Maven", "Publication")
+                            .replaceFirstChar(Char::titlecase)
+                        mustRunAfter(initializeTask)
+                        closeTask.get().mustRunAfter(this)
+                        releaseTask.get().mustRunAfter(this)
+                        val suffix = "${publicationName}On${capitalizedName}Nexus"
+                        val closeTaskName = "close$suffix"
+                        val releaseTaskName = "release$suffix"
+                        val closePublicationTask = it.tasks.findByName(closeTaskName)
+                            ?: it.tasks.register(closeTaskName).get()
+                        val releasePublicationTask = it.tasks.findByName(releaseTaskName)
+                            ?: it.tasks.register(releaseTaskName).get()
+                        val descriptionSuffix = "the staging repository $capitalizedName" +
+                            " after the upload of ${publication.name}"
+                        closePublicationTask.description = "Closes $descriptionSuffix"
+                        closePublicationTask.description = "Closes and relases $descriptionSuffix"
+                        listOf(closePublicationTask, releasePublicationTask).forEach {
+                            it.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                        }
+                        closePublicationTask.dependsOn(this)
+                        closePublicationTask.dependsOn(initializeTask)
+                        releasePublicationTask.dependsOn(closePublicationTask)
+                        releasePublicationTask.dependsOn(releaseTask)
+                    }
+                }
+            }
         }
     }
 

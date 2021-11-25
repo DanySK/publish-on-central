@@ -75,5 +75,6 @@ class Tests : StringSpec({
         tasks.output shouldContain "publishPluginMavenPublicationToGithubRepository"
         tasks.output shouldContain "publishPluginMavenPublicationToMavenCentralRepository"
         tasks.output shouldContain "releaseMavenCentralStagingRepository"
+        tasks.output shouldContain "releaseJavaPublicationOnMavenCentralNexus"
     }
 })
