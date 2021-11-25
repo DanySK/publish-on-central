@@ -27,6 +27,7 @@ val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOn
 
 repositories {
     mavenCentral()
+    gradlePluginPortal()
 }
 
 multiJvm {
@@ -48,8 +49,10 @@ val createClasspathManifest = tasks.register("createClasspathManifest") {
 }
 
 dependencies {
-    implementation(kotlin("stdlib"))
-    implementation(gradleApi())
+    api(kotlin("stdlib"))
+    api(gradleApi())
+    api(gradleKotlinDsl())
+    api(libs.nexus.publish)
     testImplementation(gradleTestKit())
     testImplementation(libs.bundles.kotlin.testing)
     testRuntimeOnly(files(createClasspathManifest))

@@ -1,5 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
+import io.github.gradlenexus.publishplugin.NexusPublishPlugin
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
@@ -9,7 +10,6 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
-import org.gradle.jvm.tasks.Jar
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
@@ -36,6 +36,7 @@ class PublishOnCentral : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
+        project.plugins.apply(NexusPublishPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
@@ -96,4 +97,3 @@ class PublishOnCentral : Plugin<Project> {
         }
     }
 }
-
