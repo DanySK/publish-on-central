@@ -94,7 +94,7 @@ data class Repository(
                         val descriptionSuffix = "the staging repository $capitalizedName" +
                             " after the upload of ${publication.name}"
                         closePublicationTask.description = "Closes $descriptionSuffix"
-                        closePublicationTask.description = "Closes and relases $descriptionSuffix"
+                        releasePublicationTask.description = "Closes and relases $descriptionSuffix"
                         listOf(closePublicationTask, releasePublicationTask).forEach {
                             it.group = PublishingPlugin.PUBLISH_TASK_GROUP
                         }
