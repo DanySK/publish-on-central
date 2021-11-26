@@ -9,6 +9,8 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.kotlin.dsl.the
+import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
@@ -21,7 +23,6 @@ class PublishOnCentral : Plugin<Project> {
          * The name of the publication to be created.
          */
         private const val publicationName = "Maven"
-        private inline fun <reified T> Project.extension(): T = project.extensions.getByType(T::class.java)
         private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
             project.extensions.create(name, T::class.java, *args)
 
@@ -51,9 +52,6 @@ class PublishOnCentral : Plugin<Project> {
                         project.logger.debug("Created new publication $name")
                         publication.artifact(sourcesJarTask)
                         publication.artifact(javadocJarTask)
-                        with(extension) {
-                            publication.configurePomForMavenCentral()
-                        }
                         // Signing
                         project.configure<SigningExtension> {
                             sign(publication)
@@ -65,7 +63,14 @@ class PublishOnCentral : Plugin<Project> {
             project.components.whenObjectAdded(::createPublications)
         }
         project.afterEvaluate {
-            Repository.mavenCentral.configureForProject(project)
+            project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
+                it.configurePomForMavenCentral(extension)
+            }
+        }
+        project.afterEvaluate {
+            if (extension.configureMavenCentral.getOrElse(true)) {
+                project.configureRepository(extension.mavenCentral)
+            }
         }
         project.plugins.withType(JavaPlugin::class.java) { _ ->
             project.tasks.withType(JavadocJar::class.java) { javadocJar ->
