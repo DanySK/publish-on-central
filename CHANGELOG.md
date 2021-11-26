@@ -1,3 +1,10 @@
+## [0.7.4](https://github.com/DanySK/publish-on-central/compare/0.7.3...0.7.4) (2021-11-26)
+
+
+### Bug Fixes
+
+* try to publish the Kotlin publication on GH packages ([7ef1d15](https://github.com/DanySK/publish-on-central/commit/7ef1d1535b8f72a7c555e93f7f25a45349136f96))
+
 ## [0.7.3](https://github.com/DanySK/publish-on-central/compare/0.7.2...0.7.3) (2021-11-26)
 
 
