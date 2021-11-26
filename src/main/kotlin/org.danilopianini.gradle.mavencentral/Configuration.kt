@@ -96,7 +96,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
                 repo.url = project.uri(repoToConfigure.url)
                 repo.credentials {
                     it.username = repoToConfigure.user.orNull
-                    it.password = repoToConfigure.user.orNull
+                    it.password = repoToConfigure.password.orNull
                 }
             }
             publishTask.doFirst {
