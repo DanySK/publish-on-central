@@ -28,6 +28,9 @@ open class PublishOnCentralExtension(val project: Project) {
 
     internal val configuration = PublishOnCentralConfiguration(project)
 
+    /**
+     * Easier access to the default Maven Central configuration.
+     */
     val mavenCentral: Repository get() = Repository.mavenCentral
 
     /**
