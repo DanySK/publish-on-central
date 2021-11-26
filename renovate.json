@@ -8,7 +8,7 @@
       "description": "Trigger a minor update on some dependencies",
       "matchPackageNames": [
         "io.github.gradle-nexus.publish-plugin",
-        "io.github.gradle-nexus:publish-plugin"
+        "io.github.gradle-nexus.publish-plugin"
       ],
       "semanticCommitType": "feat"
     },
