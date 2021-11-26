@@ -25,14 +25,25 @@ jobs:
         uses: DanySK/action-checkout@0.1.0
       - uses: DanySK/build-check-deploy-gradle-action@1.0.4
         with:
+          should-run-codecov: ${{ runner.os == 'Linux' }}
+          should-deploy: false
+  Release:
+    needs:
+      - Build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.4.0
+      - uses: DanySK/build-check-deploy-gradle-action@1.0.4
+        with:
+          build-command: true
+          check-command: true
           deploy-command: |
             npm install
             npx semantic-release
-          gradle-termination-command: ./gradlew --stop
-          java-distribution: temurin
-          java-version: '17'
-          should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: ${{ runner.os == 'Linux' && github.event_name == 'push' }}
+          should-run-codecov: false
+          should-deploy: true
           github-token: ${{ github.token }}
           gradle-publish-secret: ${{ secrets.GRADLE_PUBLISH_SECRET }}
           gradle-publish-key: ${{ secrets.GRADLE_PUBLISH_KEY }}
