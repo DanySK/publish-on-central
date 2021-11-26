@@ -1,3 +1,10 @@
+## [0.7.2](https://github.com/DanySK/publish-on-central/compare/0.7.1...0.7.2) (2021-11-26)
+
+
+### Bug Fixes
+
+* ignore node_modules ([da4976d](https://github.com/DanySK/publish-on-central/commit/da4976d340bd45fdd95accebe45fb4b56aa35bf6))
+
 # [0.7.0](https://github.com/DanySK/publish-on-central/compare/0.6.1...0.7.0) (2021-11-26)
 
 
