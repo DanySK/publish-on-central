@@ -99,7 +99,7 @@ publishOnCentral {
     scmConnection.set("git:git@github.com:DanySK/$name")
     repository("https://maven.pkg.github.com/DanySK/$name".toLowerCase()) {
         user.set("danysk")
-        password.set("GITHUB_TOKEN")
+        password.set(System.getenv("GITHUB_TOKEN"))
     }
     publishing {
         publications {
