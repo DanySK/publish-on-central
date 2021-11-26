@@ -6,3 +6,4 @@ out/
 prepare_environment.sh
 secrets.asc
 deleteme
+node_modules/
