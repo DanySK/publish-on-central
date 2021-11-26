@@ -75,6 +75,7 @@ data class Repository(
                     ) { publishTask ->
                         publishTask.repository = project.repositories.maven { repo ->
                             repo.name = name
+                            repo.url = project.uri(url)
                             repo.credentials {
                                 it.username = project.user()
                                 it.password = project.password()
