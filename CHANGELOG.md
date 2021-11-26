@@ -1,3 +1,12 @@
+## [0.7.3](https://github.com/DanySK/publish-on-central/compare/0.7.2...0.7.3) (2021-11-26)
+
+
+### Bug Fixes
+
+* read GITHUB_TOKEN from the environment ([8fb018b](https://github.com/DanySK/publish-on-central/commit/8fb018bb6b9b1079362fe06ce9aeee437d89ae4d))
+* temporarily disable all CI checks to fiddle with semantic release ([4b1e97b](https://github.com/DanySK/publish-on-central/commit/4b1e97b17d3ae722344c99027a6d62050d610322))
+* try to force semantic release to annotate the tag, see issue semantic-release/semantic-release[#1871](https://github.com/DanySK/publish-on-central/issues/1871) ([c479ac3](https://github.com/DanySK/publish-on-central/commit/c479ac3b1ce80789ff450eb6089701823e8742c6))
+
 ## [0.7.2](https://github.com/DanySK/publish-on-central/compare/0.7.1...0.7.2) (2021-11-26)
 
 
