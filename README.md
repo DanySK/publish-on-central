@@ -124,8 +124,8 @@ publishOnCentral {
      * A simplified handler is available for publishing on the Snapshots repository of Maven Central
      */
     if (project.version.endsWith("-SNAPSHOT")) { // Avoid stable versions being pushed there...
-        mavenCentralSnapshotRepository() // Imports user and password from the configuration for Maven Central
-        // mavenCentralSnapshotRepository() {
+      mavenCentralSnapshotsRepository() // Imports user and password from the configuration for Maven Central
+        // mavenCentralSnapshotsRepository() {
         //     ...but they can be customized as per any other repository
         // }
     }
