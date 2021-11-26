@@ -97,7 +97,6 @@ open class PublishOnCentralExtension(val project: Project) {
         )
 
         private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
-
     }
 }
 
