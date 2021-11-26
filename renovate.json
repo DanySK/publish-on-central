@@ -2,5 +2,24 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "local>DanySK/renovate-config"
+  ],
+  "packageRules": [
+    {
+      "description": "Trigger a minor update on some dependencies",
+      "matchPackageNames": [
+        "io.github.gradle-nexus.publish-plugin",
+        "io.github.gradle-nexus:publish-plugin"
+      ],
+      "semanticCommitType": "feat"
+    },
+    {
+      "description": "Trigger a patch update on some dependencies",
+      "matchPackageNames": [
+        "gradle",
+        "org.jetbrains.kotlin.jvm",
+        "org.jetbrains.dokka"
+      ],
+      "semanticCommitType": "fix"
+    }
   ]
 }

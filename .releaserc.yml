@@ -1,0 +1,13 @@
+tagFormat: "${version}"
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - "@semantic-release/changelog"
+  -
+    - "@semantic-release/exec"
+    - publishCmd: |
+        ./gradlew releaseKotlin
+        ./gradlew publishPlugins -Pgradle.publish.key=$GRADLE_PUBLISH_KEY -Pgradle.publish.secret=$GRADLE_PUBLISH_SECRET
+        ./gradlew publishPluginMavenPublicationToGithubRepository || true
+  - "@semantic-release/github"
+  - "@semantic-release/git"
