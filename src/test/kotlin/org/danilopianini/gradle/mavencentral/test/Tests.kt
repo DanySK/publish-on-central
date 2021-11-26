@@ -5,6 +5,7 @@ import io.kotest.matchers.file.shouldBeAFile
 import io.kotest.matchers.file.shouldExist
 import io.kotest.matchers.shouldBe
 import io.kotest.matchers.string.shouldContain
+import io.kotest.matchers.string.shouldNotContain
 import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
@@ -74,7 +75,7 @@ class Tests : StringSpec({
         tasks.output shouldContain "publishJavaMavenPublication"
         tasks.output shouldContain "publishPluginMavenPublicationToGithubRepository"
         tasks.output shouldContain "publishPluginMavenPublicationToMavenCentralRepository"
-        tasks.output shouldContain "releaseMavenCentralStagingRepository"
-        tasks.output shouldContain "releaseJavaPublicationOnMavenCentralNexus"
+        tasks.output shouldContain "releaseJavaMavenOnMavenCentralNexus"
+        tasks.output shouldNotContain "releaseJavaMavenOnGitHubNexus"
     }
 })
