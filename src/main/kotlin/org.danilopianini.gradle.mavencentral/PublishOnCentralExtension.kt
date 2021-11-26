@@ -28,6 +28,8 @@ open class PublishOnCentralExtension(val project: Project) {
 
     internal val configuration = PublishOnCentralConfiguration(project)
 
+    val mavenCentral: Repository get() = Repository.mavenCentral
+
     /**
      * The full project name.
      */
@@ -81,6 +83,19 @@ open class PublishOnCentralExtension(val project: Project) {
         val repoDescriptor = MavenRepositoryDescriptor(name).apply(configurator)
         Repository(name, url, { repoDescriptor.user }, { repoDescriptor.password })
             .configureForProject(project)
+    }
+
+    /**
+     * Utility to pre-configure a deployment towards the Maven Central Snapshots repository.
+     */
+    @JvmOverloads fun mavenCentralSnapshotsRepository(
+        name: String = "MavenCentralSnapshots",
+        configurator: MavenRepositoryDescriptor.() -> Unit = { },
+    ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
+        user = Repository.mavenCentral.user(project)
+        password = Repository.mavenCentral.password(project)
+        password = Repository.mavenCentral.password(project)
+        apply(configurator)
     }
 
     /**
