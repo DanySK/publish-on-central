@@ -93,18 +93,17 @@ gradlePlugin {
 }
 
 publishOnCentral {
-    projectDescription = projectDetails
-    projectLongName = fullName
-    projectUrl = websiteUrl
-    scmConnection = "git:git@github.com:DanySK/$name"
+    projectDescription.set(projectDetails)
+    projectLongName.set(fullName)
+    projectUrl.set(websiteUrl)
+    scmConnection.set("git:git@github.com:DanySK/$name")
     repository("https://maven.pkg.github.com/DanySK/$name".toLowerCase()) {
-        user = "danysk"
-        password = System.getenv("GITHUB_TOKEN")
+        user.set("danysk")
+        password.set("GITHUB_TOKEN")
     }
     publishing {
         publications {
             withType<MavenPublication> {
-                configurePomForMavenCentral()
                 pom {
                     developers {
                         developer {
