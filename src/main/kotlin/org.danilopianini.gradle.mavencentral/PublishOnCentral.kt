@@ -37,9 +37,9 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
-        val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
-        val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
         project.configure<PublishingExtension> {
+            val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
+            val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             project.tasks.findByName("assemble")?.dependsOn(sourcesJarTask, javadocJarTask)
             fun createPublications(component: SoftwareComponent) {
                 project.logger.debug("Reacting to the creation of component ${component.name}")
@@ -50,6 +50,8 @@ class PublishOnCentral : Plugin<Project> {
                             publication.from(component)
                         }
                         project.logger.debug("Created new publication $name")
+                        publication.artifact(sourcesJarTask)
+                        publication.artifact(javadocJarTask)
                         // Signing
                         project.configure<SigningExtension> {
                             sign(publication)
@@ -62,8 +64,6 @@ class PublishOnCentral : Plugin<Project> {
         }
         project.afterEvaluate {
             project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
-                it.artifact(sourcesJarTask)
-                it.artifact(javadocJarTask)
                 it.configurePomForMavenCentral(extension)
             }
         }
