@@ -53,7 +53,6 @@ dependencies {
     api(gradleApi())
     api(gradleKotlinDsl())
     api(libs.nexus.publish)
-    implementation(libs.turtle)
     testImplementation(gradleTestKit())
     testImplementation(libs.bundles.kotlin.testing)
     testRuntimeOnly(files(createClasspathManifest))
