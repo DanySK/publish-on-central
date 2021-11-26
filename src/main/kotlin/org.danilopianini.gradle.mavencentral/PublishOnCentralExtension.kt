@@ -2,78 +2,68 @@ package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
-import org.gradle.api.publish.maven.MavenPublication
-
-private inline fun <reified T> Project.propertyWithDefault(default: T): Property<T> =
-    objects.property(T::class.java).apply { convention(default) }
-
-internal class PublishOnCentralConfiguration(project: Project) {
-    val projectLongName: Property<String> = project.propertyWithDefault(project.name)
-
-    val projectDescription: Property<String> = project.propertyWithDefault("No description provided")
-
-    val licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0")
-
-    val licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0")
-
-    val scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}")
-
-    val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
-}
+import org.gradle.kotlin.dsl.property
 
 /**
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
  */
 open class PublishOnCentralExtension(val project: Project) {
 
-    internal val configuration = PublishOnCentralConfiguration(project)
-
     /**
      * Easier access to the default Maven Central configuration.
      */
-    val mavenCentral: Repository get() = Repository.mavenCentral
+    val mavenCentral: Repository = Repository(
+        Repository.mavenCentralName,
+        url = Repository.mavenCentralURL,
+        user = project.propertyWithDefaultProvider {
+            System.getenv("MAVEN_CENTRAL_USERNAME")
+                ?: project.properties["mavenCentralUsername"]?.toString()
+                ?: project.properties["sonatypeUsername"]?.toString()
+                ?: project.properties["sonatypeUsername"]?.toString()
+        },
+        password = project.propertyWithDefaultProvider {
+            System.getenv("MAVEN_CENTRAL_PASSWORD")
+                ?: project.properties["mavenCentralPassword"]?.toString()
+                ?: project.properties["sonatypePassword"]?.toString()
+        },
+        nexusUrl = Repository.mavenCentralNexusUrl,
+    )
 
     /**
      * The full project name.
      */
-    var projectLongName: String
-        get() = configuration.projectLongName.get()
-        set(value) = configuration.projectLongName.set(value)
+    val projectLongName: Property<String> = project.propertyWithDefault(project.name)
+
+    /**
+     * A property, defaulting to true, that is used to disable the default configuration for Maven Central.
+     * To be used in case of deployment towards only targets other than Maven Central.
+     */
+    val configureMavenCentral: Property<Boolean> = project.propertyWithDefault(true)
 
     /**
      * A description of the project.
      */
-    var projectDescription: String
-        get() = configuration.projectDescription.get()
-        set(value) = configuration.projectDescription.set(value)
+    var projectDescription: Property<String> = project.propertyWithDefault("No description provided")
 
     /**
      * The project's license name.
      */
-    var licenseName: String
-        get() = configuration.licenseName.get()
-        set(value) = configuration.licenseName.set(value)
+    var licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0")
 
     /**
      * The license URL connection of the project.
      */
-    var licenseUrl: String
-        get() = configuration.licenseUrl.get()
-        set(value) = configuration.licenseUrl.set(value)
+    var licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0")
 
     /**
      * The SCM connection of the project.
      */
-    var scmConnection: String
-        get() = configuration.scmConnection.get()
-        set(value) = configuration.scmConnection.set(value)
+    var scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}")
 
     /**
      * The URL of the project.
      */
-    var projectUrl: String
-        get() = configuration.projectUrl.get()
-        set(value) = configuration.projectUrl.set(value)
+    var projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 
     /**
      * Utility to configure a new Maven repository as target.
@@ -83,9 +73,9 @@ open class PublishOnCentralExtension(val project: Project) {
         name: String = repositoryNameFromURL(url),
         configurator: MavenRepositoryDescriptor.() -> Unit = { }
     ) {
-        val repoDescriptor = MavenRepositoryDescriptor(name).apply(configurator)
-        Repository(name, url, { repoDescriptor.user }, { repoDescriptor.password })
-            .configureForProject(project)
+        val repoDescriptor = MavenRepositoryDescriptor(project, name).apply(configurator)
+        Repository(name, url, repoDescriptor.user, repoDescriptor.password)
+            .apply { project.afterEvaluate { it.configureRepository(this) } }
     }
 
     /**
@@ -95,35 +85,9 @@ open class PublishOnCentralExtension(val project: Project) {
         name: String = "MavenCentralSnapshots",
         configurator: MavenRepositoryDescriptor.() -> Unit = { },
     ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
-        user = Repository.mavenCentral.user(project)
-        password = Repository.mavenCentral.password(project)
-        password = Repository.mavenCentral.password(project)
+        user.set(mavenCentral.user)
+        password.set(mavenCentral.password)
         apply(configurator)
-    }
-
-    /**
-     * Configures the pom.xml file of a [MavenPublication] with the information specified in this configuration.
-     */
-    fun MavenPublication.configurePomForMavenCentral() {
-        pom { pom ->
-            with(pom) {
-                name.set(projectLongName)
-                description.set(projectDescription)
-                packaging = "jar"
-                url.set(projectUrl)
-                licenses {
-                    it.license { license ->
-                        license.name.set(licenseName)
-                        license.url.set(licenseUrl)
-                    }
-                }
-                scm { scm ->
-                    scm.url.set(projectUrl)
-                    scm.connection.set(scmConnection)
-                    scm.developerConnection.set(scmConnection)
-                }
-            }
-        }
     }
 
     companion object {
@@ -133,6 +97,7 @@ open class PublishOnCentralExtension(val project: Project) {
         )
 
         private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
+
     }
 }
 
@@ -141,15 +106,16 @@ open class PublishOnCentralExtension(val project: Project) {
  * Requires a [name], and optionally authentication in form of [user] and [password].
  */
 class MavenRepositoryDescriptor internal constructor(
+    project: Project,
     var name: String,
 ) {
     /**
      * The username.
      */
-    var user: String? = null
+    val user: Property<String> = project.objects.property()
 
     /**
      * The password.
      */
-    var password: String? = null
+    var password: Property<String> = project.objects.property()
 }
