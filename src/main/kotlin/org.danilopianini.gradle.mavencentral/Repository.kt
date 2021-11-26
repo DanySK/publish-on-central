@@ -77,6 +77,7 @@ data class Repository(
                             it.name = name
                             it.setUrl { nexus.repoUrl }
                         }
+                        publishTask.publication = publication
                         publishTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
                         publishTask.description = "Initializes a new Nexus repository on $name and uploads the " +
                             "$publicationName publication."
