@@ -27,10 +27,11 @@ class Tests : StringSpec({
                     id("org.danilopianini.publish-on-central")
                 }
                 publishOnCentral {
-                    projectDescription = "test"
+                    projectDescription.set("test")
                     repository("https://maven.pkg.github.com/OWNER/REPOSITORY") {
                         name = "github"
-                        user = "test"
+                        user.set("test")
+                        password.set("pwd")
                     }
                 }
             """.trimIndent()
