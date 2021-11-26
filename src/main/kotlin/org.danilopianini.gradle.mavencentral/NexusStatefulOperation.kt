@@ -1,7 +1,11 @@
 package org.danilopianini.gradle.mavencentral
 
+import io.github.gradlenexus.publishplugin.internal.ActionRetrier
+import io.github.gradlenexus.publishplugin.internal.BasicActionRetrier
 import io.github.gradlenexus.publishplugin.internal.NexusClient
+import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryDescriptor
+import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitioner
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import java.net.URI
@@ -51,6 +55,7 @@ data class NexusStatefulOperation(
      * Lazily computed staging repository descriptor.
      */
     val stagingRepository: StagingRepositoryDescriptor by lazy {
+        println("Creating repo for $stagingProfile")
         client.createStagingRepository(
             stagingProfile,
             description,
@@ -67,13 +72,26 @@ data class NexusStatefulOperation(
      */
     val repoId: String by lazy { stagingRepository.stagingRepositoryId }
 
+    private val transitioner by lazy {
+        StagingRepositoryTransitioner(
+            client,
+            BasicActionRetrier(Int.MAX_VALUE, Duration.ofSeconds(retryInterval), StagingRepository::transitioning),
+        )
+    }
+
     /**
      * Closes the repository.
      */
-    fun close() = client.closeStagingRepository(repoId, description)
+    fun close() = transitioner.effectivelyClose(repoId, description)
 
     /**
      * Releases the repository. Must be called after close().
      */
-    fun release() = client.releaseStagingRepository(repoId, description)
+    fun release() {
+        transitioner.effectivelyRelease(repoId, description)
+    }
+
+    companion object {
+        const val retryInterval: Long = 10
+    }
 }
