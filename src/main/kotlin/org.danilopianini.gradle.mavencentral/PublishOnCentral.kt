@@ -9,6 +9,8 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.kotlin.dsl.the
+import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
@@ -50,7 +52,6 @@ class PublishOnCentral : Plugin<Project> {
                         project.logger.debug("Created new publication $name")
                         publication.artifact(sourcesJarTask)
                         publication.artifact(javadocJarTask)
-                        publication.configurePomForMavenCentral(extension)
                         // Signing
                         project.configure<SigningExtension> {
                             sign(publication)
@@ -60,6 +61,11 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.components.forEach(::createPublications)
             project.components.whenObjectAdded(::createPublications)
+        }
+        project.afterEvaluate {
+            project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
+                it.configurePomForMavenCentral(extension)
+            }
         }
         project.afterEvaluate {
             if (extension.configureMavenCentral.getOrElse(true)) {

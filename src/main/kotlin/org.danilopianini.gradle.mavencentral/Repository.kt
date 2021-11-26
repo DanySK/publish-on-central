@@ -21,14 +21,6 @@ data class Repository(
     val nexusConnectTimeOut: Duration = Duration.ofMinutes(3),
 ) {
 
-    constructor(
-        project: Project,
-        name: String,
-        url: String,
-        user: String?,
-        password: String?,
-    ) : this (name, url, project.propertyWithDefault(user), project.propertyWithDefault(password))
-
     /**
      * Same as [name], but capitalized.
      */

@@ -3,6 +3,7 @@ package org.danilopianini.gradle.mavencentral
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
+import java.time.Duration
 
 /**
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
@@ -19,12 +20,13 @@ open class PublishOnCentralExtension(val project: Project) {
             System.getenv("MAVEN_CENTRAL_USERNAME")
                 ?: project.properties["mavenCentralUsername"]?.toString()
                 ?: project.properties["sonatypeUsername"]?.toString()
-                ?: project.properties["sonatypeUsername"]?.toString()
+                ?: project.properties["ossrhUsername"]?.toString()
         },
         password = project.propertyWithDefaultProvider {
             System.getenv("MAVEN_CENTRAL_PASSWORD")
                 ?: project.properties["mavenCentralPassword"]?.toString()
                 ?: project.properties["sonatypePassword"]?.toString()
+                ?: project.properties["ossrhPassword"]?.toString()
         },
         nexusUrl = Repository.mavenCentralNexusUrl,
     )
@@ -74,8 +76,16 @@ open class PublishOnCentralExtension(val project: Project) {
         configurator: MavenRepositoryDescriptor.() -> Unit = { }
     ) {
         val repoDescriptor = MavenRepositoryDescriptor(project, name).apply(configurator)
-        Repository(name, url, repoDescriptor.user, repoDescriptor.password)
-            .apply { project.afterEvaluate { it.configureRepository(this) } }
+        val repo = Repository(
+            repoDescriptor.name,
+            url,
+            repoDescriptor.user,
+            repoDescriptor.password,
+            repoDescriptor.nexusUrl,
+            repoDescriptor.nexusTimeOut,
+            repoDescriptor.nexusConnectionTimeout,
+        )
+        project.afterEvaluate { it.configureRepository(repo) }
     }
 
     /**
@@ -116,5 +126,20 @@ class MavenRepositoryDescriptor internal constructor(
     /**
      * The password.
      */
-    var password: Property<String> = project.objects.property()
+    val password: Property<String> = project.objects.property()
+
+    /**
+     * The Nexus URL, if installed.
+     */
+    var nexusUrl: String? = null
+
+    /**
+     * The Nexus timeout.
+     */
+    var nexusTimeOut: Duration = Duration.ofMinutes(1)
+
+    /**
+     * The Nexus connection timeout.
+     */
+    var nexusConnectionTimeout: Duration = nexusTimeOut
 }
