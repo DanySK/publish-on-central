@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-      - uses: DanySK/build-check-deploy-gradle-action@1.0.0
+      - uses: DanySK/build-check-deploy-gradle-action@1.0.4
         with:
           deploy-command: |
             npm install
