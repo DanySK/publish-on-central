@@ -75,11 +75,13 @@ data class Repository(
                     ) { publishTask ->
                         publishTask.repository = project.repositories.maven { repo ->
                             repo.name = name
-                            repo.setUrl { nexus.repoUrl }
                             repo.credentials {
                                 it.username = project.user()
                                 it.password = project.password()
                             }
+                        }
+                        publishTask.doFirst {
+                            publishTask.repository.url = nexus.repoUrl
                         }
                         publishTask.publication = publication
                         publishTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
