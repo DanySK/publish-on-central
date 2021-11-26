@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import io.github.gradlenexus.publishplugin.internal.ActionRetrier
 import io.github.gradlenexus.publishplugin.internal.BasicActionRetrier
 import io.github.gradlenexus.publishplugin.internal.NexusClient
 import io.github.gradlenexus.publishplugin.internal.StagingRepository
@@ -46,6 +45,7 @@ data class NexusStatefulOperation(
      * Lazily computed staging profile id.
      */
     val stagingProfile: String by lazy {
+        project.logger.lifecycle("Retrieving the profile id for $group on Nexus installed at $nexusUrl")
         requireNotNull(client.findStagingProfileId(group)) {
             "Invalid group id '$group': could not find an appropriate staging profile"
         }
@@ -55,7 +55,7 @@ data class NexusStatefulOperation(
      * Lazily computed staging repository descriptor.
      */
     val stagingRepository: StagingRepositoryDescriptor by lazy {
-        println("Creating repo for $stagingProfile")
+        project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
         client.createStagingRepository(
             stagingProfile,
             description,
@@ -82,16 +82,22 @@ data class NexusStatefulOperation(
     /**
      * Closes the repository.
      */
-    fun close() = transitioner.effectivelyClose(repoId, description)
+    fun close() {
+        project.logger.lifecycle("Closing repository {} on Nexus at {}", repoId, repoUrl)
+        transitioner.effectivelyClose(repoId, description)
+        project.logger.lifecycle("Repository $repoId closed")
+    }
 
     /**
      * Releases the repository. Must be called after close().
      */
     fun release() {
+        project.logger.lifecycle("Releasing repository {} on Nexus at {}", repoId, repoUrl)
         transitioner.effectivelyRelease(repoId, description)
+        project.logger.lifecycle("Repository {} released", repoId)
     }
 
     companion object {
-        const val retryInterval: Long = 10
+        private const val retryInterval: Long = 10
     }
 }
