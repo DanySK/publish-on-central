@@ -1,3 +1,10 @@
+## [0.7.5](https://github.com/DanySK/publish-on-central/compare/0.7.4...0.7.5) (2021-11-27)
+
+
+### Bug Fixes
+
+* **logging:** warn only if publishing tasks get executed ([d5cf58d](https://github.com/DanySK/publish-on-central/commit/d5cf58d155f4608701eef5137e5055d199f7c05b))
+
 ## [0.7.4](https://github.com/DanySK/publish-on-central/compare/0.7.3...0.7.4) (2021-11-26)
 
 
