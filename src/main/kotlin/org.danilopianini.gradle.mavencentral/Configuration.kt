@@ -55,17 +55,13 @@ fun Project.configureRepository(repoToConfigure: Repository) {
                 mavenArtifactRepository.credentials { credentials ->
                     credentials.username = repoToConfigure.user.orNull
                     credentials.password = repoToConfigure.password.orNull
-                    credentials.username ?: project.logger.warn(
-                        "No username configured for repository {} at {}.",
-                        repoToConfigure.name,
-                        repoToConfigure.url,
-                    )
-                    credentials.password ?: project.logger.warn(
-                        "No password configured for user {} on repository {} at {}.",
-                        repoToConfigure.user,
-                        repoToConfigure.name,
-                        repoToConfigure.url,
-                    )
+                }
+                tasks.withType(PublishToMavenRepository::class) {
+                    if (it.repository == mavenArtifactRepository) {
+                        it.doFirst {
+                            warnIfCredentialsAreMissing(repoToConfigure)
+                        }
+                    }
                 }
             }
         }
@@ -100,6 +96,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
                 }
             }
             publishTask.doFirst {
+                warnIfCredentialsAreMissing(repoToConfigure)
                 publishTask.repository.url = nexus.repoUrl
             }
             publishTask.publication = publication
@@ -121,5 +118,23 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
             it.description = "Releases the Nexus repo on ${repoToConfigure.name} " +
                 "with the $publicationName publication."
         }
+    }
+}
+
+private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
+    if (repository.user.orNull == null) {
+        logger.warn(
+            "No username configured for repository {} at {}.",
+            repository.name,
+            repository.url,
+        )
+    }
+    if (repository.password.orNull == null) {
+        logger.warn(
+            "No password configured for user {} on repository {} at {}.",
+            repository.user.orNull,
+            repository.name,
+            repository.url,
+        )
     }
 }
