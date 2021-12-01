@@ -1,3 +1,10 @@
+## [0.7.6](https://github.com/DanySK/publish-on-central/compare/0.7.5...0.7.6) (2021-12-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency gradle to v7.3.1 ([10259f2](https://github.com/DanySK/publish-on-central/commit/10259f2fe8655fae98b38ed0f1c0c3e5998da163))
+
 ## [0.7.5](https://github.com/DanySK/publish-on-central/compare/0.7.4...0.7.5) (2021-11-27)
 
 
