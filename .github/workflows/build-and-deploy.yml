@@ -23,7 +23,7 @@ jobs:
     steps:
       - name: Checkout
         uses: DanySK/action-checkout@0.1.0
-      - uses: DanySK/build-check-deploy-gradle-action@1.0.4
+      - uses: DanySK/build-check-deploy-gradle-action@1.1.1
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: false
@@ -35,7 +35,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2.4.0
-      - uses: DanySK/build-check-deploy-gradle-action@1.0.4
+      - uses: DanySK/build-check-deploy-gradle-action@1.1.1
         with:
           build-command: true
           check-command: true
