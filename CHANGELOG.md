@@ -1,3 +1,10 @@
+## [0.7.9](https://github.com/DanySK/publish-on-central/compare/0.7.8...0.7.9) (2021-12-27)
+
+
+### Bug Fixes
+
+* **deps:** update plugin dokka to v1.6.10 ([139cc40](https://github.com/DanySK/publish-on-central/commit/139cc40043a5c530dcad5d0653f639be639866d6))
+
 ## [0.7.8](https://github.com/DanySK/publish-on-central/compare/0.7.7...0.7.8) (2021-12-22)
 
 
