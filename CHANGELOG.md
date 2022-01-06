@@ -1,3 +1,26 @@
+### [0.7.10](https://github.com/DanySK/publish-on-central/compare/0.7.9...0.7.10) (2022-01-06)
+
+
+### Bug Fixes
+
+* **release:** correctly enable semantic commit conventions ([b9785cb](https://github.com/DanySK/publish-on-central/commit/b9785cb49174999c3823f8af634b707e80e92045))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.1 ([503f293](https://github.com/DanySK/publish-on-central/commit/503f2938697f1e9bf0e5396d22a9a09f8d70f118))
+* **deps:** update plugin gradlepluginpublish to v0.19.0 ([15c821e](https://github.com/DanySK/publish-on-central/commit/15c821e540463121171b7d96a02c83c9366744c3))
+* **deps:** update plugin kotlin-qa to v0.8.3 ([d4244b0](https://github.com/DanySK/publish-on-central/commit/d4244b0b771355a95f325f17e53a4b052878b75e))
+* **deps:** update plugin kotlin-qa to v0.9.0 ([9efecce](https://github.com/DanySK/publish-on-central/commit/9efecce7074a2b8e767d0621328c630d286f7a4a))
+* **deps:** update plugin multijvmtesting to v0.3.3 ([59bedf6](https://github.com/DanySK/publish-on-central/commit/59bedf638811b0bd3568ab274b35185926949399))
+* **deps:** update plugin publishoncentral to v0.7.9 ([35cc253](https://github.com/DanySK/publish-on-central/commit/35cc253aae9e60e0193f1cd9573b5e281077ce73))
+
+
+### Build and continuous integration
+
+* **release:** enable commit-analyzer ([ed191d9](https://github.com/DanySK/publish-on-central/commit/ed191d984eb6a97e24f2f5fe51228a8ae875e4db))
+* **release:** inherit the configuration from the shared preset ([#191](https://github.com/DanySK/publish-on-central/issues/191)) ([0bce9c5](https://github.com/DanySK/publish-on-central/commit/0bce9c5ac7b85706eed385d3dd30430d96fd68fb))
+
 ## [0.7.9](https://github.com/DanySK/publish-on-central/compare/0.7.8...0.7.9) (2021-12-27)
 
 
