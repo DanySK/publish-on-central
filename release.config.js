@@ -7,12 +7,9 @@ git push --force origin \${nextRelease.version}
 `
 var config = require('semantic-release-preconfigured-conventional-commits');
 config.plugins.push(
-    [
-        "@semantic-release/exec",
-        {
-            "publishCmd": publishCmd,
-        }
-    ],
+    ["@semantic-release/exec", {
+        "publishCmd": publishCmd,
+    }],
     "@semantic-release/github",
     "@semantic-release/git",
 )
