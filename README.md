@@ -56,10 +56,12 @@ If you add a custom repository, say `myRepo`, you would also find the following 
 
 and if `myRepo` has configured an URL for an associated Nexus instance, the following ones:
 
-* `publishJavaMavenPublicationToMyRepoRepository`
-* `publishKotlinMavenPublicationToMyRepoRepository`
-* `publishAllPublicationsToMyRepoRepository`
-
+* `closeJavaMavenOnMyRepoNexus`
+* `closeKotlinMavenOnMyRepoNexus`
+* `releaseJavaMavenOnMyRepoNexus`
+* `releaseKotlinMavenOnMyRepoNexus`
+* `uploadJavaMavenToMyRepoNexus`
+* `uploadKotlinMavenToMyRepoNexus`
 
 which is what needs to get called to have your artifacts uploaded on OSSRH Nexus instance.
 
