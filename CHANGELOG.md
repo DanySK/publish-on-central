@@ -1,3 +1,27 @@
+### [0.7.11](https://github.com/DanySK/publish-on-central/compare/0.7.10...0.7.11) (2022-01-09)
+
+
+### General maintenance
+
+* **release:** fail on failed publication ([83f87ec](https://github.com/DanySK/publish-on-central/commit/83f87ec4e7c28526e5f2326d135cdf03ec989caf))
+
+
+### Style improvements
+
+* **release:** use a more compact syntax for the release config ([f9d29f3](https://github.com/DanySK/publish-on-central/commit/f9d29f3a4943bb991d7af03ac1671e7dabeb64e0))
+
+
+### Documentation
+
+* **readme:** fix the list of automatically created tasks for custom Nexus repositories ([b864187](https://github.com/DanySK/publish-on-central/commit/b8641873520bc3754f8daf0e3b45cdbbfb69bd05))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.3 ([07abae9](https://github.com/DanySK/publish-on-central/commit/07abae9867a2a10a7e5a1e40eaa78681b800b44b))
+* **deps:** update plugin multijvmtesting to v0.3.4 ([ce6bca2](https://github.com/DanySK/publish-on-central/commit/ce6bca244333dd3b881cb3781fa11ca3c3f77e5f))
+* **deps:** update plugin publishoncentral to v0.7.10 ([37f8d64](https://github.com/DanySK/publish-on-central/commit/37f8d64e94b44bd656c70aa86ddd1676cb02be9d))
+
 ### [0.7.10](https://github.com/DanySK/publish-on-central/compare/0.7.9...0.7.10) (2022-01-06)
 
 
