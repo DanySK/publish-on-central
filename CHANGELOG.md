@@ -1,3 +1,25 @@
+### [0.7.12](https://github.com/DanySK/publish-on-central/compare/0.7.11...0.7.12) (2022-01-25)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.1.3 ([da2e05f](https://github.com/DanySK/publish-on-central/commit/da2e05ffea204bc0e01070f05a201b6c92138624))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.0 ([4852534](https://github.com/DanySK/publish-on-central/commit/48525342a7c12397f8c6a11dd3b2cc0e09a19c95))
+
+
+### Dependency updates
+
+* **deps:** update dependency org.mockito:mockito-core to v4.3.0 ([2e4352f](https://github.com/DanySK/publish-on-central/commit/2e4352f3e97b9c4ecc9d1f0094c90c4ff68390c4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.4 ([234ddfe](https://github.com/DanySK/publish-on-central/commit/234ddfeef68edf1dc65787e8d5608b430ae925da))
+* **deps:** update plugin com.gradle.enterprise to v3.8.1 ([a8c2eae](https://github.com/DanySK/publish-on-central/commit/a8c2eae2c1cc0f2ffab74d893e0db21a8208ee74))
+* **deps:** update plugin gradlepluginpublish to v0.20.0 ([b7fb0eb](https://github.com/DanySK/publish-on-central/commit/b7fb0eb2cd71ffa37fa61d26cd47d57158cd0459))
+* **deps:** update plugin publishoncentral to v0.7.11 ([2950018](https://github.com/DanySK/publish-on-central/commit/2950018ee8b885f0b31c9bebb2d986ae8344fc5d))
+
+
+### Documentation
+
+* fix typo ([f42ab94](https://github.com/DanySK/publish-on-central/commit/f42ab942eb8de283f77917199b9e12b866c2a95f))
+
 ### [0.7.11](https://github.com/DanySK/publish-on-central/compare/0.7.10...0.7.11) (2022-01-09)
 
 
