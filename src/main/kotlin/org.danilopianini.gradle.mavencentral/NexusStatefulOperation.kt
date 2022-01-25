@@ -68,7 +68,7 @@ data class NexusStatefulOperation(
     val repoUrl: URI by lazy { stagingRepository.stagingRepositoryUrl }
 
     /**
-     * Lazily computed staging repository it.
+     * Lazily computed staging repository id.
      */
     val repoId: String by lazy { stagingRepository.stagingRepositoryId }
 
