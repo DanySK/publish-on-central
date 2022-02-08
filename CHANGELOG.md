@@ -1,3 +1,13 @@
+### [0.7.13](https://github.com/DanySK/publish-on-central/compare/0.7.12...0.7.13) (2022-02-08)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.4 ([3d25c6f](https://github.com/DanySK/publish-on-central/commit/3d25c6fd094b0d90a1576103d05c35f27f847566))
+* **deps:** update dependency org.mockito:mockito-core to v4.3.1 ([f48766f](https://github.com/DanySK/publish-on-central/commit/f48766f71c7f09171e1a6b99ff3675f78c58937e))
+* **deps:** update plugin kotlin-qa to v0.10.0 ([d23eac6](https://github.com/DanySK/publish-on-central/commit/d23eac60b1ed52de826c8d57e398750bb0d885be))
+* **deps:** update plugin publishoncentral to v0.7.12 ([fdc169f](https://github.com/DanySK/publish-on-central/commit/fdc169fb4bbaf715f003df8cba757c9841a921a2))
+
 ### [0.7.12](https://github.com/DanySK/publish-on-central/compare/0.7.11...0.7.12) (2022-01-25)
 
 
