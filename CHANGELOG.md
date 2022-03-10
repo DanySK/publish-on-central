@@ -1,3 +1,26 @@
+### [0.7.14](https://github.com/DanySK/publish-on-central/compare/0.7.13...0.7.14) (2022-03-10)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3 ([ef14017](https://github.com/DanySK/publish-on-central/commit/ef14017345e40136dbbf13cc80a366e353ab3a0b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.1 ([456174d](https://github.com/DanySK/publish-on-central/commit/456174da80928e932deace72c7af5e68ef4d5fc1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.3 ([a85329c](https://github.com/DanySK/publish-on-central/commit/a85329c54193fe5a84e25f827e2c2792c4b4d64f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.4 ([51766c7](https://github.com/DanySK/publish-on-central/commit/51766c746eb354ad0c7c6e1ca512cd2df356b106))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.6 ([9422518](https://github.com/DanySK/publish-on-central/commit/94225188377cc09ae23fa82399506bed56b3b700))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.4.1 ([4f8880a](https://github.com/DanySK/publish-on-central/commit/4f8880a41219edb803aa61cd44b2b1ea5eab7721))
+* **deps:** update dependency node-fetch to 2.6.7 [security] ([6296608](https://github.com/DanySK/publish-on-central/commit/629660867789f1f1c0391647daaa4a6b4e810827))
+* **deps:** update dependency org.mockito:mockito-core to v4.4.0 ([fd2e0bc](https://github.com/DanySK/publish-on-central/commit/fd2e0bca1a434441e8b7d63cf7c2adfee72e62ce))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.5 ([bb851d5](https://github.com/DanySK/publish-on-central/commit/bb851d59805592583e79c9a5c417678516b86feb))
+* **deps:** update node.js to 16.14 ([721e619](https://github.com/DanySK/publish-on-central/commit/721e6194e95b1a8a0d988f63715bd5732ce18401))
+* **deps:** update plugin kotlin-qa to v0.10.1 ([0400771](https://github.com/DanySK/publish-on-central/commit/04007716a40e30157791361e3ccf3c069abf1664))
+* **deps:** update plugin kotlin-qa to v0.12.0 ([c964ccb](https://github.com/DanySK/publish-on-central/commit/c964ccb8e9703b287883e1910368dd3801bf075a))
+* **deps:** update plugin publishoncentral to v0.7.13 ([d9875c8](https://github.com/DanySK/publish-on-central/commit/d9875c8233640fbf66c212c7d6f2a9b1a8314882))
+
 ### [0.7.13](https://github.com/DanySK/publish-on-central/compare/0.7.12...0.7.13) (2022-02-08)
 
 
