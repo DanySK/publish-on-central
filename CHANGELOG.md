@@ -1,3 +1,24 @@
+### [0.7.15](https://github.com/DanySK/publish-on-central/compare/0.7.14...0.7.15) (2022-03-31)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.7 ([bae38dd](https://github.com/DanySK/publish-on-central/commit/bae38dd1376c79319e9aba4b300b5181b0d6a377))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.4.2 ([067687b](https://github.com/DanySK/publish-on-central/commit/067687b08c681cff413af00738cd91e0880a0843))
+* **deps:** update dependency io.kotest:kotest-runner-junit5-jvm to v5.2.1 ([82d4dc1](https://github.com/DanySK/publish-on-central/commit/82d4dc10432e481c83de0e363b36ce011aa41282))
+* **deps:** update io.kotest to v5 ([c75de97](https://github.com/DanySK/publish-on-central/commit/c75de97f4219cfa23e130e2cccced93e1f3aa631))
+* **deps:** update io.kotest to v5.2.2 ([bb9d448](https://github.com/DanySK/publish-on-central/commit/bb9d44844cbdcb79c5c954a40d2c535ac84a20aa))
+* **deps:** update plugin com.gradle.enterprise to v3.9 ([dac8b84](https://github.com/DanySK/publish-on-central/commit/dac8b844dd0ba3d15f8e986a443fe7fa949db0d9))
+* **deps:** update plugin gradlepluginpublish to v0.21.0 ([5840fb7](https://github.com/DanySK/publish-on-central/commit/5840fb7a3e9366a736d02572eb2fb5c8c7dcabf2))
+* **deps:** update plugin kotlin-qa to v0.12.1 ([e581429](https://github.com/DanySK/publish-on-central/commit/e581429a8a89319d60b0a32c05a5865bd69c9b05))
+* **deps:** update plugin kotlin-qa to v0.13.0 ([e010145](https://github.com/DanySK/publish-on-central/commit/e0101451d245719d5f1c4dc07aecc38387775e58))
+* **deps:** update plugin kotlin-qa to v0.14.0 ([084c66a](https://github.com/DanySK/publish-on-central/commit/084c66a73d02750a363a99e0d8e9ba30fe3d9133))
+* **deps:** update plugin publishoncentral to v0.7.14 ([4254f83](https://github.com/DanySK/publish-on-central/commit/4254f839f7a80ef59bcfed866eb858d31f99949e))
+
 ### [0.7.14](https://github.com/DanySK/publish-on-central/compare/0.7.13...0.7.14) (2022-03-10)
 
 
