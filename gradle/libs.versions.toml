@@ -1,7 +1,7 @@
 [versions]
 dokka = "1.6.10"
 kotest = "5.2.2"
-kotlin = "1.6.10"
+kotlin = "1.6.20"
 mockito = "4.4.0"
 nexus-publish = "1.1.0"
 
