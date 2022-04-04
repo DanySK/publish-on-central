@@ -1,3 +1,20 @@
+### [0.7.16](https://github.com/DanySK/publish-on-central/compare/0.7.15...0.7.16) (2022-04-04)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.8 ([89e458d](https://github.com/DanySK/publish-on-central/commit/89e458dc06eb99efcba1c8a5917e1389bde7d62e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.9 ([ea0f8d6](https://github.com/DanySK/publish-on-central/commit/ea0f8d671678151f937061e3a485a28f597126d6))
+* separate the versions of Kotlin and Dokka ([a918100](https://github.com/DanySK/publish-on-central/commit/a91810015d62814dc36719857438b2901f378667))
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-jvm to v1.6.20 ([af0b93e](https://github.com/DanySK/publish-on-central/commit/af0b93e17d02d95d7807c7b438f5bfc57393341b))
+* **deps:** bump minimist from 1.2.5 to 1.2.6 ([26fbcbb](https://github.com/DanySK/publish-on-central/commit/26fbcbb1e798c887eaaf3bcd33270c780e621353))
+* **deps:** update plugin kotlin-qa to v0.14.1 ([8ca5562](https://github.com/DanySK/publish-on-central/commit/8ca556224cab0d4722dbbc695a340a925fcd411a))
+* **deps:** update plugin publishoncentral to v0.7.15 ([d7b706f](https://github.com/DanySK/publish-on-central/commit/d7b706f61b9690837f01502bbcfe220caeaf441d))
+
 ### [0.7.15](https://github.com/DanySK/publish-on-central/compare/0.7.14...0.7.15) (2022-03-31)
 
 
