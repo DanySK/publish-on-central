@@ -1,3 +1,22 @@
+### [0.7.17](https://github.com/DanySK/publish-on-central/compare/0.7.16...0.7.17) (2022-04-14)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.10 ([4414478](https://github.com/DanySK/publish-on-central/commit/4414478e5f50b93d6a854db5258f7a1609d87218))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.11 ([f79655c](https://github.com/DanySK/publish-on-central/commit/f79655c47d6d77f5ad24ccce5457914d1826694c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.12 ([1c58333](https://github.com/DanySK/publish-on-central/commit/1c58333ebaeff0d70ec8fbff6d23dbc11143004e))
+
+
+### Dependency updates
+
+* **core-deps:** update plugin dokka to v1.6.20 ([20383f5](https://github.com/DanySK/publish-on-central/commit/20383f5fb1bdc16370c2e4f53fee4db20d135432))
+* **deps:** update io.kotest to v5.2.3 ([8b2dc15](https://github.com/DanySK/publish-on-central/commit/8b2dc15c11c900ba95853cf261f23079fd1e10ae))
+* **deps:** update plugin kotlin-qa to v0.14.2 ([0927b6b](https://github.com/DanySK/publish-on-central/commit/0927b6b05519a66c2e2dca98021435d01f18e187))
+* **deps:** update plugin kotlin-qa to v0.15.0 ([fab7b9a](https://github.com/DanySK/publish-on-central/commit/fab7b9a1821a161f5327b1e73ab7929569947f39))
+* **deps:** update plugin multijvmtesting to v0.3.5 ([255c747](https://github.com/DanySK/publish-on-central/commit/255c74754436399444d116027a0da56225b49e27))
+* **deps:** update plugin publishoncentral to v0.7.16 ([370784b](https://github.com/DanySK/publish-on-central/commit/370784b76a731a8f28b0880d0a6adabf4553e79a))
+
 ### [0.7.16](https://github.com/DanySK/publish-on-central/compare/0.7.15...0.7.16) (2022-04-04)
 
 
