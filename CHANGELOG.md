@@ -1,3 +1,21 @@
+### [0.7.18](https://github.com/DanySK/publish-on-central/compare/0.7.17...0.7.18) (2022-04-19)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.0.1 ([a382766](https://github.com/DanySK/publish-on-central/commit/a38276684f520b2fb0dd25ad776577a75c47e7cd))
+
+
+### Dependency updates
+
+* **core-deps:** update plugin kotlin-jvm to v1.6.21 ([f6b11b4](https://github.com/DanySK/publish-on-central/commit/f6b11b4bc9648aa2878ff9cdae3986f257e82440))
+* **deps:** update plugin com.gradle.enterprise to v3.10 ([9626295](https://github.com/DanySK/publish-on-central/commit/962629528a76f1b95ac45d5e34262ce5aa659708))
+* **deps:** update plugin kotlin-qa to v0.15.1 ([9c5d421](https://github.com/DanySK/publish-on-central/commit/9c5d421cd1bbf37cbf596be14c0c83e9d9e1b215))
+* **deps:** update plugin kotlin-qa to v0.16.0 ([1ac2f0f](https://github.com/DanySK/publish-on-central/commit/1ac2f0fc7ddb2eb15b6fab6341cc94fdf3547d7c))
+* **deps:** update plugin kotlin-qa to v0.16.1 ([66c6edb](https://github.com/DanySK/publish-on-central/commit/66c6edbd9bd461a4bc7b85901b8dc688f84041b6))
+* **deps:** update plugin multijvmtesting to v0.3.6 ([5e270fb](https://github.com/DanySK/publish-on-central/commit/5e270fba80d737700b52dbcd77af7a295a06f141))
+* **deps:** update plugin publishoncentral to v0.7.17 ([5c161fc](https://github.com/DanySK/publish-on-central/commit/5c161fc84811c73f59ac09c6f7bfe52e91f0bec9))
+
 ### [0.7.17](https://github.com/DanySK/publish-on-central/compare/0.7.16...0.7.17) (2022-04-14)
 
 
