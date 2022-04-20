@@ -2,7 +2,7 @@
 dokka = "1.6.20"
 kotest = "5.2.3"
 kotlin = "1.6.21"
-mockito = "4.4.0"
+mockito = "4.5.0"
 nexus-publish = "1.1.0"
 
 [libraries]
