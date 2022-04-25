@@ -1,3 +1,19 @@
+### [0.7.19](https://github.com/DanySK/publish-on-central/compare/0.7.18...0.7.19) (2022-04-25)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.0.2 ([a542432](https://github.com/DanySK/publish-on-central/commit/a542432d7f4802f7c5467bc40e000622c606fb97))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v1.2.13 ([2ead83a](https://github.com/DanySK/publish-on-central/commit/2ead83abf5c3e93cf24c03d253adde814e3a061d))
+
+
+### Dependency updates
+
+* **core-deps:** update plugin dokka to v1.6.21 ([13a952c](https://github.com/DanySK/publish-on-central/commit/13a952c2b2b6f0de3b072e88abf78d6e47cb2906))
+* **deps:** update dependency org.mockito:mockito-core to v4.5.0 ([2155ae1](https://github.com/DanySK/publish-on-central/commit/2155ae159271a3c6a1e2327867850ddda4114dc5))
+* **deps:** update dependency org.mockito:mockito-core to v4.5.1 ([30dcc2d](https://github.com/DanySK/publish-on-central/commit/30dcc2d30735d2a530ad8bd55af029c5ef2af86f))
+* **deps:** update plugin publishoncentral to v0.7.18 ([5d267e6](https://github.com/DanySK/publish-on-central/commit/5d267e627de6e10b93096c204beec7cbf8d65bf6))
+
 ### [0.7.18](https://github.com/DanySK/publish-on-central/compare/0.7.17...0.7.18) (2022-04-19)
 
 
