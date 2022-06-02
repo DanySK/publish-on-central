@@ -2,17 +2,15 @@
 dokka = "1.6.21"
 kotest = "5.3.0"
 kotlin = "1.6.21"
-mockito = "4.6.1"
 nexus-publish = "1.1.0"
 
 [libraries]
 kotest-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
-mockito-core = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 nexus-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "nexus-publish" }
 
 [bundles]
-kotlin-testing = [ "kotest-junit5-jvm", "kotest-assertions-core-jvm", "mockito-core" ]
+kotlin-testing = [ "kotest-junit5-jvm", "kotest-assertions-core-jvm" ]
 
 [plugins]
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
