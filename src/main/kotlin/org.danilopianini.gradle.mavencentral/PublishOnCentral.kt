@@ -11,7 +11,6 @@ import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
-import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
 /**
@@ -37,6 +36,7 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
+        var createdPublications = emptySet<MavenPublication>()
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
@@ -46,16 +46,11 @@ class PublishOnCentral : Plugin<Project> {
                 publications { publications ->
                     val name = "${component.name}$publicationName"
                     if (publications.none { it.name == name }) {
-                        val publication = publications.create(name, MavenPublication::class.java) { publication ->
+                        publications.create(name, MavenPublication::class.java) { publication ->
                             publication.from(component)
+                            createdPublications += publication
                         }
                         project.logger.debug("Created new publication $name")
-                        publication.artifact(sourcesJarTask)
-                        publication.artifact(javadocJarTask)
-                        // Signing
-                        project.configure<SigningExtension> {
-                            sign(publication)
-                        }
                     }
                 }
             }
@@ -63,8 +58,12 @@ class PublishOnCentral : Plugin<Project> {
             project.components.whenObjectAdded(::createPublications)
         }
         project.afterEvaluate {
-            project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
-                it.configurePomForMavenCentral(extension)
+            if (extension.autoConfigureAllPublications.orNull == true) {
+                project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
+                    it.configureForMavenCentral(extension)
+                }
+            } else {
+                createdPublications.forEach { it.configureForMavenCentral(extension) }
             }
         }
         project.afterEvaluate {

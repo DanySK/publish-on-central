@@ -1,15 +1,18 @@
 package org.danilopianini.gradle.mavencentral
 
+import org.gradle.api.DomainObjectCollection
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.SigningExtension
 import java.net.URI
 
 internal inline fun <reified T> Project.propertyWithDefault(default: T?): Property<T> =
@@ -17,6 +20,83 @@ internal inline fun <reified T> Project.propertyWithDefault(default: T?): Proper
 
 internal inline fun <reified T> Project.propertyWithDefaultProvider(noinline default: () -> T?): Property<T> =
     objects.property(T::class.java).apply { convention(provider(default)) }
+
+/**
+ * Configures a [MavenPublication] for publication on Maven Central, adding the following.
+ * - appropriate pom.xml configuration
+ * - a main jar file
+ * - a source jar file
+ * - a javadoc jar file
+ */
+fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtension) {
+    val project = extension.project
+    configurePomForMavenCentral(extension)
+    val jarTasks = project.tasks.withType<Jar>()
+    // Required artifacts
+    if (artifacts.none { it.extension == "jar" && it.classifier.isNullOrEmpty() }) {
+        project.logger.debug("Publication '{}' has no pre-configured classifier-less jar", name)
+        artifact(jarTasks.findJarTaskWithClassifier("", "jar", name))
+    }
+    if (artifacts.none { it.classifier == "sources" }) {
+        project.logger.debug("Publication '{}' has no pre-configured source jar", name)
+        artifact(jarTasks.findJarTaskWithClassifier("sources", "sourcesJar", name))
+    }
+    if (artifacts.none { it.classifier == "javadoc" }) {
+        project.logger.debug("Publication '{}' has no pre-configured javadoc jar", name)
+        artifact(jarTasks.findJarTaskWithClassifier("javadoc", "javadocJar", name))
+    }
+    // Signing
+    project.configure<SigningExtension> {
+        sign(this@configureForMavenCentral)
+    }
+}
+
+private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
+    classifier: String,
+    preferredName: String,
+    publicationName: String = "",
+): Jar {
+    val withClassifier = filter {
+        with(it.archiveClassifier.orNull) {
+            if (classifier.isEmpty()) isNullOrEmpty() else this == classifier
+        }
+    }
+    fun instructions() = """
+        |You can either:
+        |    - create a task that generates a jar without the correct classifier for publish-on-central to bind, or
+        |    - bind yourself a jar with the right classifier as artifact for the publication, or
+        |    - disable the automatic configuration of all Maven publications for Maven Central with:
+        |        publishOnCentral {
+        |            autoConfigureAllPublications.set(false)
+        |        }
+        |      then manually configure the publications you want on Central with
+        |        publishing.publications.withType<MavenPublication>/* filter the ones you want*/ {
+        |            configureForMavenCentral(publishOnCentral)
+        |        }
+    """.trimMargin()
+    check(withClassifier.isNotEmpty()) {
+        val classifierString = if (classifier.isEmpty()) "no  classifier" else "classifier '$classifier'"
+        """
+        |Publication $publicationName has no jar with $classifierString, which is required for Maven Central.
+        |${instructions()}
+        """.trimMargin()
+    }
+    return when (withClassifier.size) {
+        1 -> withClassifier.first()
+        else -> {
+            val best = withClassifier.find { it.name == preferredName }
+            check(best != null) {
+                """
+                |Publication $publicationName needs a jar with classifier '', and these tasks are available:
+                |${withClassifier.map { it.name }}
+                |Publish-on-central tried to find one named '$preferredName' among them, but there was none.
+                |${instructions()}
+                """.trimMargin()
+            }
+            best
+        }
+    }
+}
 
 /**
  * Configures the pom.xml file of a [MavenPublication] with the information specified in this configuration.
@@ -44,7 +124,7 @@ fun MavenPublication.configurePomForMavenCentral(extension: PublishOnCentralExte
 }
 
 /**
- * Reifies this repository setup onto every [PublishingExtension] configuration of the provided [project].
+ * Reifies this repository setup onto every [PublishingExtension] configuration of the provided [Project].
  */
 fun Project.configureRepository(repoToConfigure: Repository) {
     extensions.configure(PublishingExtension::class) { publishing ->

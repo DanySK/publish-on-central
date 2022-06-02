@@ -11,6 +11,14 @@ import java.time.Duration
 open class PublishOnCentralExtension(val project: Project) {
 
     /**
+     * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
+     * and should thus configure them appropriately.
+     * If disabled, the publications to be sent on Central must be configured manually by calling
+     * [configureForMavenCentral] on them in the buildscript.
+     */
+    val autoConfigureAllPublications: Property<Boolean> = project.propertyWithDefault(true)
+
+    /**
      * Easier access to the default Maven Central configuration.
      */
     val mavenCentral: Repository = Repository(
