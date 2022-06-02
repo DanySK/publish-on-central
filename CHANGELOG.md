@@ -1,3 +1,39 @@
+## [0.8.0](https://github.com/DanySK/publish-on-central/compare/0.7.19...0.8.0) (2022-06-02)
+
+
+### Features
+
+* preconfigure all publications to publish on Maven Central. The plugin now aggressively tries to add all the required artifacts to all the `MavenPublication`s. This should allow a streamlined publication of Kotlin-multiplatform artifacts. The feature can be turned off (resorting to manual configuration) by appropriate configuration in the build file. ([14b6b0a](https://github.com/DanySK/publish-on-central/commit/14b6b0aecaf5991c540a2b33fa02a9a72e3729e1))
+
+
+### Build and continuous integration
+
+* **deps:** update [secure]/build-check-deploy-gradle-action action to v1.2.14 ([8ff29fb](https://github.com/DanySK/publish-on-central/commit/8ff29fbf47851d3db45ec55c44775bd8ecd5f519))
+* **deps:** update [secure]/build-check-deploy-gradle-action action to v1.2.15 ([1350ef5](https://github.com/DanySK/publish-on-central/commit/1350ef5315f47aee9941400903ef27b21a7d1ca0))
+* **deps:** update [secure]/build-check-deploy-gradle-action action to v1.2.16 ([61aedf5](https://github.com/DanySK/publish-on-central/commit/61aedf5d301e2b1219264e0845eec8213c216093))
+* **deps:** update [secure]/build-check-deploy-gradle-action action to v2 ([8763247](https://github.com/DanySK/publish-on-central/commit/8763247c0fde735b64c988b70234a611a8424197))
+* enable the git hooks generation ([ef52639](https://github.com/DanySK/publish-on-central/commit/ef5263937812169e21cbc07a89f26bd20a2396a5))
+
+
+### Dependency updates
+
+* **deps:** bump npm from 8.3.1 to 8.12.0 ([cbe9d1e](https://github.com/DanySK/publish-on-central/commit/cbe9d1eb58dda6a7b2c6271b101f41b556045824))
+* **deps:** drop unused test library (mockito) ([c27a0ec](https://github.com/DanySK/publish-on-central/commit/c27a0eca7bf658ce7455931897aa8f65bf881a8a))
+* **deps:** update dependency org.mockito:mockito-core to v4.6.0 ([a4be576](https://github.com/DanySK/publish-on-central/commit/a4be576da58b9e1cb4c5ce88075f32c1e78fca02))
+* **deps:** update dependency org.mockito:mockito-core to v4.6.1 ([69a0001](https://github.com/DanySK/publish-on-central/commit/69a0001685ab12037cf4970449bbd7bb0f8e3b81))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.6 ([492aa38](https://github.com/DanySK/publish-on-central/commit/492aa386e4decd7334e3554610310d991729780d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.7 ([031d028](https://github.com/DanySK/publish-on-central/commit/031d0288cf8bf17ab78726d085b121ec79ce6289))
+* **deps:** update io.kotest to v5.3.0 ([f4d2176](https://github.com/DanySK/publish-on-central/commit/f4d21769d61b5aafe0e784d708c1494069beeee1))
+* **deps:** update node.js to 16.15 ([6744fd7](https://github.com/DanySK/publish-on-central/commit/6744fd7f920bbb4842b4af5ada38185f31b4f14a))
+* **deps:** update plugin com.gradle.enterprise to v3.10.1 ([7eddca5](https://github.com/DanySK/publish-on-central/commit/7eddca57f01184f6f04ec46f36bbca0623eb09a7))
+* **deps:** update plugin kotlin-qa to v0.16.2 ([e2e40af](https://github.com/DanySK/publish-on-central/commit/e2e40af5cb43cb73617b84786c3f5364452bc946))
+* **deps:** update plugin kotlin-qa to v0.17.0 ([9e86cec](https://github.com/DanySK/publish-on-central/commit/9e86cec617a6ffd9b3dde788fc35c90031cbaeab))
+* **deps:** update plugin kotlin-qa to v0.18.0 ([bd2509a](https://github.com/DanySK/publish-on-central/commit/bd2509ac977c2d328bc2e4e7f8833f279f000283))
+* **deps:** update plugin kotlin-qa to v0.19.0 ([dfc8806](https://github.com/DanySK/publish-on-central/commit/dfc88067d9417fc35d2ecfac11bfeebc4b28fb8a))
+* **deps:** update plugin multijvmtesting to v0.3.7 ([cbd62d1](https://github.com/DanySK/publish-on-central/commit/cbd62d104a99577db8fbe0cec5b3c5b733ddd91f))
+* **deps:** update plugin multijvmtesting to v0.4.0 ([1d7c9fd](https://github.com/DanySK/publish-on-central/commit/1d7c9fdffadb21ce51d835430468a42eee4c6fc7))
+* **deps:** update plugin publishoncentral to v0.7.19 ([dd78f2a](https://github.com/DanySK/publish-on-central/commit/dd78f2a9d08a9ffb5cdebcdbe5562e8a1df1e9c6))
+
 ### [0.7.19](https://github.com/DanySK/publish-on-central/compare/0.7.18...0.7.19) (2022-04-25)
 
 
