@@ -59,7 +59,7 @@ class PublishOnCentral : Plugin<Project> {
         }
         project.afterEvaluate {
             if (extension.autoConfigureAllPublications.orNull == true) {
-                project.the<PublishingExtension>().publications.withType<MavenPublication>().forEach {
+                project.the<PublishingExtension>().publications.withType<MavenPublication>().configureEach {
                     it.configureForMavenCentral(extension)
                 }
             } else {
@@ -71,20 +71,20 @@ class PublishOnCentral : Plugin<Project> {
                 project.configureRepository(extension.mavenCentral)
             }
         }
-        project.plugins.withType(JavaPlugin::class.java) { _ ->
-            project.tasks.withType(JavadocJar::class.java) { javadocJar ->
+        project.plugins.withType(JavaPlugin::class.java).configureEach { _ ->
+            project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
                 val javadocTask = project.tasks.findByName("javadoc") as? Javadoc
                     ?: throw IllegalStateException("Java plugin applied but no Javadoc task existing!")
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
-            project.tasks.withType(JarTasks::class.java) { it.sourceSet("main", true) }
+            project.tasks.withType(JarTasks::class.java).configureEach { it.sourceSet("main", true) }
         }
         val dokkaPluginClass = kotlin.runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
             @Suppress("UNCHECKED_CAST")
-            project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>) {
-                project.tasks.withType(JavadocJar::class.java) { javadocJar ->
+            project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>).configureEach {
+                project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
                     val dokkaJavadoc = project.tasks.findByName("dokkaJavadoc")
                         ?: throw IllegalStateException("Dokka plugin applied but no dokkaJavadoc task existing!")
                     val outputDirectory = dokkaJavadoc.property("outputDirectory")
