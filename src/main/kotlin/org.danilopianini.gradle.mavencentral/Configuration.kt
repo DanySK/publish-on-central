@@ -31,19 +31,21 @@ internal inline fun <reified T> Project.propertyWithDefaultProvider(noinline def
 fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtension) {
     val project = extension.project
     configurePomForMavenCentral(extension)
-    val jarTasks = project.tasks.withType<Jar>()
-    // Required artifacts
-    if (artifacts.none { it.extension == "jar" && it.classifier.isNullOrEmpty() }) {
-        project.logger.debug("Publication '{}' has no pre-configured classifier-less jar", name)
-        artifact(jarTasks.findJarTaskWithClassifier("", "jar", name))
-    }
-    if (artifacts.none { it.classifier == "sources" }) {
-        project.logger.debug("Publication '{}' has no pre-configured source jar", name)
-        artifact(jarTasks.findJarTaskWithClassifier("sources", "sourcesJar", name))
-    }
-    if (artifacts.none { it.classifier == "javadoc" }) {
-        project.logger.debug("Publication '{}' has no pre-configured javadoc jar", name)
-        artifact(jarTasks.findJarTaskWithClassifier("javadoc", "javadocJar", name))
+    if (pom.packaging == "jar") {
+        val jarTasks = project.tasks.withType<Jar>()
+        // Required artifacts
+        if (artifacts.none { it.extension == "jar" && it.classifier.isNullOrEmpty() }) {
+            project.logger.debug("Publication '{}' has no pre-configured classifier-less jar", name)
+            artifact(jarTasks.findJarTaskWithClassifier("", "jar", name))
+        }
+        if (artifacts.none { it.classifier == "sources" }) {
+            project.logger.debug("Publication '{}' has no pre-configured source jar", name)
+            artifact(jarTasks.findJarTaskWithClassifier("sources", "sourcesJar", name))
+        }
+        if (artifacts.none { it.classifier == "javadoc" }) {
+            project.logger.debug("Publication '{}' has no pre-configured javadoc jar", name)
+            artifact(jarTasks.findJarTaskWithClassifier("javadoc", "javadocJar", name))
+        }
     }
     // Signing
     project.configure<SigningExtension> {
@@ -75,7 +77,7 @@ private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
         |        }
     """.trimMargin()
     check(withClassifier.isNotEmpty()) {
-        val classifierString = if (classifier.isEmpty()) "no  classifier" else "classifier '$classifier'"
+        val classifierString = if (classifier.isEmpty()) "no classifier" else "classifier '$classifier'"
         """
         |Publication $publicationName has no jar with $classifierString, which is required for Maven Central.
         |${instructions()}
