@@ -71,8 +71,8 @@ class PublishOnCentral : Plugin<Project> {
                 project.configureRepository(extension.mavenCentral)
             }
         }
-        project.plugins.withType(JavaPlugin::class.java).configureEach { _ ->
-            project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
+        project.plugins.withType<JavaPlugin>().configureEach { _ ->
+            project.tasks.withType<JavadocJar>().configureEach { javadocJar ->
                 val javadocTask = project.tasks.findByName("javadoc") as? Javadoc
                     ?: throw IllegalStateException("Java plugin applied but no Javadoc task existing!")
                 javadocJar.dependsOn(javadocTask)
