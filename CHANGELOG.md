@@ -1,3 +1,11 @@
+## [0.8.2](https://github.com/DanySK/publish-on-central/compare/0.8.1...0.8.2) (2022-06-09)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.7.0 ([1818d03](https://github.com/DanySK/publish-on-central/commit/1818d036be6a83e428df578ce1696d9a4d08fafb))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.12 ([bc281b7](https://github.com/DanySK/publish-on-central/commit/bc281b7ec3320032c5148973bde49a06603a02c7))
+
 ## [0.8.1](https://github.com/DanySK/publish-on-central/compare/0.8.0...0.8.1) (2022-06-09)
 
 
