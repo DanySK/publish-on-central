@@ -36,15 +36,15 @@ fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtensi
         // Required artifacts
         if (artifacts.none { it.extension == "jar" && it.classifier.isNullOrEmpty() }) {
             project.logger.debug("Publication '{}' has no pre-configured classifier-less jar", name)
-            artifact(jarTasks.findJarTaskWithClassifier("", "jar", name))
+            artifact(jarTasks.findJarTaskWithClassifier("", "jar", this))
         }
         if (artifacts.none { it.classifier == "sources" }) {
             project.logger.debug("Publication '{}' has no pre-configured source jar", name)
-            artifact(jarTasks.findJarTaskWithClassifier("sources", "sourcesJar", name))
+            artifact(jarTasks.findJarTaskWithClassifier("sources", "sourcesJar", this))
         }
         if (artifacts.none { it.classifier == "javadoc" }) {
             project.logger.debug("Publication '{}' has no pre-configured javadoc jar", name)
-            artifact(jarTasks.findJarTaskWithClassifier("javadoc", "javadocJar", name))
+            artifact(jarTasks.findJarTaskWithClassifier("javadoc", "javadocJar", this))
         }
     }
     // Signing
@@ -56,7 +56,7 @@ fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtensi
 private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
     classifier: String,
     preferredName: String,
-    publicationName: String = "",
+    publication: MavenPublication,
 ): Jar {
     val withClassifier = filter {
         with(it.archiveClassifier.orNull) {
@@ -65,7 +65,7 @@ private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
     }
     fun instructions() = """
         |You can either:
-        |    - create a task that generates a jar without the correct classifier for publish-on-central to bind, or
+        |    - create a task that generates a jar without the correct classifier for publish-on-central to bind to, or
         |    - bind yourself a jar with the right classifier as artifact for the publication, or
         |    - disable the automatic configuration of all Maven publications for Maven Central with:
         |        publishOnCentral {
@@ -77,9 +77,14 @@ private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
         |        }
     """.trimMargin()
     check(withClassifier.isNotEmpty()) {
-        val classifierString = if (classifier.isEmpty()) "no classifier" else "classifier '$classifier'"
         """
-        |Publication $publicationName has no jar with $classifierString, which is required for Maven Central.
+        |Publication '${
+        publication.name
+        }' with packaging type '${
+        publication.pom.packaging
+        }' has no jar with ${
+        if (classifier.isEmpty()) "no classifier" else "classifier '$classifier'"
+        }, which is required for Maven Central.
         |${instructions()}
         """.trimMargin()
     }
@@ -89,7 +94,7 @@ private fun DomainObjectCollection<Jar>.findJarTaskWithClassifier(
             val best = withClassifier.find { it.name == preferredName }
             check(best != null) {
                 """
-                |Publication $publicationName needs a jar with classifier '', and these tasks are available:
+                |Publication $publication needs a jar with classifier '$classifier', and these tasks are available:
                 |${withClassifier.map { it.name }}
                 |Publish-on-central tried to find one named '$preferredName' among them, but there was none.
                 |${instructions()}
