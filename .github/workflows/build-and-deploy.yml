@@ -32,6 +32,8 @@ jobs:
       - Build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
+    permissions:
+      contents: write
     steps:
       - name: Checkout
         uses: actions/checkout@v3.0.2
