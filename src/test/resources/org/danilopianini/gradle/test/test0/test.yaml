@@ -7,9 +7,9 @@ tests:
       file_exists:
         name: build/publications/javaMaven/pom-default.xml
         findRegex:
-          - '\s*<artifactId>\w+</artifactId>'
+          - '\s*<artifactId>test-publish-on-central</artifactId>'
           - '\s*<groupId>io.github.danysk</groupId>'
-          - '\s*<name>\w+</name>'
+          - '\s*<name>test-publish-on-central</name>'
           - '\s*<description>\w+</description>'
           - '\s*<url>https?://.+</url>'
           - '\s*<license>'
@@ -30,3 +30,26 @@ tests:
         - releaseJavaMavenOnMavenCentralNexus
       output_doesnt_contain:
         - releaseJavaMavenOnGitHubNexus
+  - description: "sources and javadoc tasks get greated"
+    configuration:
+      tasks: tasks
+    expectation:
+      success: tasks
+      output_contains:
+        - sourcesJar
+        - javadocJar
+  - description: "sources and javadoc jars get greated"
+    configuration:
+      tasks:
+        - jar
+        - sourcesJar
+        - javadocJar
+    expectation:
+      success:
+        - jar
+        - sourcesJar
+        - javadocJar
+      file_exists:
+        - name: build/libs/test-publish-on-central-0.1.0-javadoc.jar
+        - name: build/libs/test-publish-on-central-0.1.0-sources.jar
+        - name: build/libs/test-publish-on-central-0.1.0.jar
