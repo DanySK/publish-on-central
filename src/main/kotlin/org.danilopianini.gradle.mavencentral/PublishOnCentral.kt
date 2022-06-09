@@ -3,7 +3,6 @@ package org.danilopianini.gradle.mavencentral
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
-import org.gradle.api.component.SoftwareComponent
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -43,7 +42,7 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }
-            fun createPublications(component: SoftwareComponent) {
+            project.components.configureEach { component ->
                 project.logger.debug("Reacting to the creation of component ${component.name}")
                 publications { publications ->
                     val name = "${component.name}$publicationName"
@@ -56,8 +55,6 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
-            project.components.configureEach(::createPublications)
-            project.components.whenObjectAdded(::createPublications)
         }
         project.afterEvaluate {
             if (extension.autoConfigureAllPublications.orNull == true) {
