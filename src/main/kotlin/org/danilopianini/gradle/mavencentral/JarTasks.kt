@@ -14,19 +14,25 @@ open class JarWithClassifier(classifier: String) : Jar() {
     init {
         archiveClassifier.set(classifier)
         duplicatesStrategy = org.gradle.api.file.DuplicatesStrategy.WARN
+        group = "Build"
     }
 }
 
 /**
  * A task generating a Jar file with the Javadoc.
  */
-open class JavadocJar : JarWithClassifier("javadoc")
+open class JavadocJar : JarWithClassifier("javadoc") {
+    init {
+        description = "Assembles a jar archive containing the javadoc documentation"
+    }
+}
 
 /**
  * A task generating a Jar file with the project source code.
  */
 open class JarTasks : JarWithClassifier("sources") {
     init {
+        description = "Assembles a jar archive containing the sources"
         sourceSet("main", false)
     }
 
