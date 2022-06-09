@@ -1,3 +1,28 @@
+## [0.8.1](https://github.com/DanySK/publish-on-central/compare/0.8.0...0.8.1) (2022-06-09)
+
+
+### Bug Fixes
+
+* configure the jar publications only on jar packaging, fixes [#287](https://github.com/DanySK/publish-on-central/issues/287) ([ac121af](https://github.com/DanySK/publish-on-central/commit/ac121afdb7ce11d27e347d32c4dfffdf7c7d453b))
+* improve instructions in case of missing jars with classifier ([92a991b](https://github.com/DanySK/publish-on-central/commit/92a991b8ef96c8d8a4baf4a959b98fe9dc0853d9))
+
+
+### Dependency updates
+
+* **deps:** bump semver-regex from 3.1.3 to 3.1.4 ([ca12ea0](https://github.com/DanySK/publish-on-central/commit/ca12ea05e00503e4da44c0572967b67a39768fe3))
+* **deps:** update plugin multijvmtesting to v0.4.1 ([2a6ba83](https://github.com/DanySK/publish-on-central/commit/2a6ba83d88930fba30593d44b9555c5d4f420abf))
+* **deps:** update plugin publishoncentral to v0.8.0 ([913242a](https://github.com/DanySK/publish-on-central/commit/913242ad3ef1a774d9243109422583a9e6fb13b6))
+
+
+### Build and continuous integration
+
+* add a ci-complete verification job ([828c453](https://github.com/DanySK/publish-on-central/commit/828c4538de38b6130d81ad38d47bc0172905a007))
+* add content write permissions for GITHUB_TOKEN when releasing ([2335c6d](https://github.com/DanySK/publish-on-central/commit/2335c6d4040b125358880d85e5d6aab1bbdbe53b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.0.1 ([3070889](https://github.com/DanySK/publish-on-central/commit/30708891ad237e18c9d3189ccd248f8f212984e0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.0.2 ([f5384d2](https://github.com/DanySK/publish-on-central/commit/f5384d28ae90e2847f79650a649337df011bca7f))
+* rename ci-complete to ci-success ([cb1ee5a](https://github.com/DanySK/publish-on-central/commit/cb1ee5a0c274132e5a44246d57c652f6c38c393a))
+* use a custom deployment token ([15a2f20](https://github.com/DanySK/publish-on-central/commit/15a2f20c334d26d4436e2a3d34176522f855af87))
+
 ## [0.8.0](https://github.com/DanySK/publish-on-central/compare/0.7.19...0.8.0) (2022-06-02)
 
 
