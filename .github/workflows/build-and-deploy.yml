@@ -15,7 +15,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  Build:
+  build:
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
@@ -27,9 +27,9 @@ jobs:
         with:
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: false
-  Release:
+  release:
     needs:
-      - Build
+      - build
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
     steps:
@@ -53,3 +53,16 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
+  ci-complete:
+    runs-on: ubuntu-latest
+    needs:
+      - release
+      - build
+    if: >-
+      always() && (
+        contains(join(needs.*.result, ','), 'failure')
+        || !contains(join(needs.*.result, ','), 'cancelled')
+      )
+    steps:
+      - name: Verify that there were no failures
+        run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
