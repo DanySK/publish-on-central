@@ -56,7 +56,7 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
-            project.components.forEach(::createPublications)
+            project.components.configureEach(::createPublications)
             project.components.whenObjectAdded(::createPublications)
         }
         project.afterEvaluate {
