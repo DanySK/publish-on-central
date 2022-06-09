@@ -1,0 +1,32 @@
+tests:
+  - description: "pom files get generated"
+    configuration:
+      tasks: generatePomFileForJavaMavenPublication
+    expectation:
+      success: generatePomFileForJavaMavenPublication
+      file_exists:
+        name: build/publications/javaMaven/pom-default.xml
+        findRegex:
+          - '\s*<artifactId>\w+</artifactId>'
+          - '\s*<groupId>io.github.danysk</groupId>'
+          - '\s*<name>\w+</name>'
+          - '\s*<description>\w+</description>'
+          - '\s*<url>https?://.+</url>'
+          - '\s*<license>'
+          - '\s*</license>'
+          - '\s*<scm>'
+          - '\s*<connection>.+</connection>'
+          - '\s*<developerConnection>.+</developerConnection>'
+          - '\s*</scm>'
+  - description: "release tasks get generated"
+    configuration:
+      tasks: tasks
+    expectation:
+      success: tasks
+      output_contains:
+        - publishJavaMavenPublication
+        - publishPluginMavenPublicationToGithubRepository
+        - publishPluginMavenPublicationToMavenCentralRepository
+        - releaseJavaMavenOnMavenCentralNexus
+      output_doesnt_contain:
+        - releaseJavaMavenOnGitHubNexus
