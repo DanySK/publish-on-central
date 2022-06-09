@@ -79,7 +79,7 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.tasks.withType(JarTasks::class.java).configureEach { it.sourceSet("main", true) }
         }
-        val dokkaPluginClass = kotlin.runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
+        val dokkaPluginClass = runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
             @Suppress("UNCHECKED_CAST")
             project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>).configureEach {
