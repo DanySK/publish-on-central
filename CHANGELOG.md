@@ -1,3 +1,46 @@
+## [0.8.3](https://github.com/DanySK/publish-on-central/compare/0.8.2...0.8.3) (2022-06-11)
+
+
+### Bug Fixes
+
+* prefer the task avoidance API, see [#286](https://github.com/DanySK/publish-on-central/issues/286) ([39ffe05](https://github.com/DanySK/publish-on-central/commit/39ffe05d3c1d82540c2f967dbe4ee1ed8628a56d))
+* replace findByName with the lazy configuration ([a2cfac7](https://github.com/DanySK/publish-on-central/commit/a2cfac78da7f15436fe0ccaf2562384f020c55ec))
+
+
+### Dependency updates
+
+* **deps:** bump semantic-release from 19.0.2 to 19.0.3 ([7ef4f49](https://github.com/DanySK/publish-on-central/commit/7ef4f493e81f1469a870c1449a9d1a25ed641ec0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.8 ([a5fe1b3](https://github.com/DanySK/publish-on-central/commit/a5fe1b351fd31cf6bfaa5c0b53f6e0bcabb9699f))
+* **deps:** update plugin com.gradle.enterprise to v3.10.2 ([055824e](https://github.com/DanySK/publish-on-central/commit/055824e0bc30aad83bd33ce83e8cf111db747fa1))
+* **deps:** update plugin kotlin-qa to v0.19.1 ([dae88c7](https://github.com/DanySK/publish-on-central/commit/dae88c7acc62202f225b4a44924f53d6d77fc693))
+* **deps:** update plugin multijvmtesting to v0.4.2 ([ab3bd9e](https://github.com/DanySK/publish-on-central/commit/ab3bd9e3c3bc4379822bf5b2c2adfc677026d646))
+* **deps:** update plugin multijvmtesting to v0.4.3 ([076a282](https://github.com/DanySK/publish-on-central/commit/076a282255a19ffb984f2b364932037aa70892a9))
+* **deps:** update plugin publishoncentral to v0.8.2 ([1dddaee](https://github.com/DanySK/publish-on-central/commit/1dddaeec4183d71b7d9ba3bc5410114d6cb4f545))
+
+
+### Performance improvements
+
+* replace forEach with configureEach (lazy configuration) ([d615bab](https://github.com/DanySK/publish-on-central/commit/d615babb26ce89cd1893dd17e0eb09e3aa34216f))
+* replace whenObjectAdded with configureEach (lazy configuration) ([c5c0cb1](https://github.com/DanySK/publish-on-central/commit/c5c0cb18551a9b83ee768f9ef9e6b1ceb92136f9))
+
+
+### General maintenance
+
+* fix the source package structure ([1fa9ffb](https://github.com/DanySK/publish-on-central/commit/1fa9ffb655c12406e9a13d6adb76b71ca091ab57))
+
+
+### Style improvements
+
+* remove unnecessary qualified name ([3859c99](https://github.com/DanySK/publish-on-central/commit/3859c992c26048579788fe6255698ed00bcc7b53))
+* switch to org.gradle.kotlin.dsl.withType ([1a291a7](https://github.com/DanySK/publish-on-central/commit/1a291a76ee5adb3beb7ea446e763400bfd87ba0e))
+
+
+### Tests
+
+* add verification for sources and javadoc jar generation ([02355c4](https://github.com/DanySK/publish-on-central/commit/02355c477b56a82b8c82d581f778f492037f5f02))
+* improve the testing framework ([2e73c80](https://github.com/DanySK/publish-on-central/commit/2e73c80b99b1fce31b7abb138b4e2a06a8f45932))
+* set a test project name ([c34b6d1](https://github.com/DanySK/publish-on-central/commit/c34b6d1a61315b07a05545bc3da35d8b39b146c5))
+
 ## [0.8.2](https://github.com/DanySK/publish-on-central/compare/0.8.1...0.8.2) (2022-06-09)
 
 
