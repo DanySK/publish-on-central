@@ -1,3 +1,24 @@
+## [1.0.0](https://github.com/DanySK/publish-on-central/compare/0.8.3...1.0.0) (2022-06-17)
+
+
+### ⚠ BREAKING CHANGES
+
+* rework the Nexus interaction, now multiple publications can be uploaded to the same staging repository before closing and releasing
+
+### Features
+
+* rework the Nexus interaction, now multiple publications can be uploaded to the same staging repository before closing and releasing ([fe725b7](https://github.com/DanySK/publish-on-central/commit/fe725b74f3dc499db417945efc5b266eda21284a))
+
+
+### Dependency updates
+
+* **deps:** update plugin publishoncentral to v0.8.3 ([b0c6117](https://github.com/DanySK/publish-on-central/commit/b0c6117b9f01c50e729f3d72250e49a1efa5d7e9))
+
+
+### Tests
+
+* add a test for kotlin multiplatform ([b7c2f2e](https://github.com/DanySK/publish-on-central/commit/b7c2f2ed176c38c0b121c2fa36f8e39e78d87aa9))
+
 ## [0.8.3](https://github.com/DanySK/publish-on-central/compare/0.8.2...0.8.3) (2022-06-11)
 
 
