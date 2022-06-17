@@ -20,61 +20,54 @@ and preparing tasks to upload, close, and release the artifact.
 This plugin supports both targets that use Sonatype Nexus (such as Maven Central)
 and targets that do not, such as GitHub Packages.
 
-### Provided tasks
+## Configuration
 
-* `sourcesJar`: a `Jar` task preconfigured to collect and pack `allSource` from the `main` source set
-* `javadocJar`: a `Jar` task preconfigured to
-    1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
-    2. Detect if a dokkaJavadoc tasks exists, and to the same as above
-* One task for each combination of `SoftwareComponent` and repository,
-  unless manually deactivated, a `MavenCentral` repository is created by default.
-* One task for publishing `All` software components to any target repository
-* For every repository with an associated Sonatype Nexus instance, additional tasks are generated to control the
-  upload into a new staging repository, its closure, and its release.
+### Minimal
 
-In short, if you have (for instance) a mixed Java-Kotlin project,
-you should find the following tasks:
+Add `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` to your environment
 
-* `closeJavaMavenOnMavenCentralNexus`
-* `closeKotlinMavenOnMavenCentralNexus`
-* `publishJavaMavenPublicationToMavenCentralRepository`
-* `publishKotlinMavenPublicationToMavenCentralRepository`
-* `publishAllPublicationsToMavenCentralRepository`
-* `publishJavaMavenPublicationToMavenLocalRepository`
-* `publishKotlinMavenPublicationToMavenLocalRepository`
-* `publishAllPublicationsToMavenLocalRepository`
-* `releaseJavaMavenOnMavenCentralNexus`
-* `releaseKotlinMavenOnMavenCentralNexus`
-* `uploadJavaMavenToMavenCentralNexus`
-* `uploadKotlinMavenToMavenCentralNexus`
+```kotlin
+plugins {
+    id ("org.danilopianini.publish-on-central") version "<pick the latest>"
+}
+group = "your.group.id" // This must be configured for the generated pom.xml to work correctly
+publishOnCentral {
+  projectUrl.set("https://github.com/DanySK/${project.name}")
+  scmConnection.set("git:git@github.com:DanySK/${project.name}")
+}
+publishing {
+  publications {
+    withType<MavenPublication> {
+      pom {
+        developers {
+          developer {
+            name.set("Danilo Pianini")
+            email.set("danilo.pianini@gmail.com")
+            url.set("http://www.danilopianini.org/")
+          }
+        }
+      }
+    }
+  }
+}
+signing {
+  val signingKey: String? by project
+  val signingPassword: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassword)
+}
+```
 
-If you add a custom repository, say `myRepo`, you would also find the following tasks:
+### Complete
 
-* `publishJavaMavenPublicationToMyRepoRepository`
-* `publishKotlinMavenPublicationToMyRepoRepository`
-* `publishAllPublicationsToMyRepoRepository`
-
-and if `myRepo` has configured an URL for an associated Nexus instance, the following ones:
-
-* `closeJavaMavenOnMyRepoNexus`
-* `closeKotlinMavenOnMyRepoNexus`
-* `releaseJavaMavenOnMyRepoNexus`
-* `releaseKotlinMavenOnMyRepoNexus`
-* `uploadJavaMavenToMyRepoNexus`
-* `uploadKotlinMavenToMyRepoNexus`
-
-which is what needs to get called to have your artifacts uploaded on OSSRH Nexus instance.
-
-### Importing the plugin
 
 ```kotlin
 plugins {
     id ("org.danilopianini.publish-on-central") version "<pick the latest>"
 }
 ```
-The plugin is configured to react to the application of the `java` plugin, and to apply the `maven-publish` and `signing` plugin if they are not applied.
 
-### Configuring the plugin
+The plugin is configured to react to the application of the `java` plugin,
+and to apply the `maven-publish` and `signing` plugin if they are not applied.
 
 ```kotlin
 // The package name is equal to the project name
@@ -83,11 +76,6 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
-    /*
-     * By default, this plugin aggressively configures all Maven Publications to be compatible with Central.
-     * If it is not the desired behavior, turn this setting to false.
-     */
-    autoConfigureAllPublications.set(true)
     // Set to false if you do not want the MavenCentral repository to be automatically configured
     configureMavenCentral.set(true)
     // The following values are the default, if they are ok with you, just omit them
@@ -132,9 +120,9 @@ publishOnCentral {
      */
     if (project.version.endsWith("-SNAPSHOT")) { // Avoid stable versions being pushed there...
       mavenCentralSnapshotsRepository() // Imports user and password from the configuration for Maven Central
-        // mavenCentralSnapshotsRepository() {
-        //     ...but they can be customized as per any other repository
-        // }
+      // mavenCentralSnapshotsRepository() {
+      //     ...but they can be customized as per any other repository
+      // }
     }
 }
 
@@ -169,6 +157,57 @@ signing {
     useInMemoryPgpKeys(signingKey, signingPassword)
 }
 ```
+
+## Tasks
+
+* `sourcesJar`: a `Jar` task preconfigured to collect and pack `allSource` from the `main` source set
+* `javadocJar`: a `Jar` task preconfigured to
+    1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
+    2. Detect if a dokkaJavadoc tasks exists, and to the same as above
+* One publishing task for each combination of `SoftwareComponent` and repository,
+  unless manually deactivated, a `MavenCentral` repository is created by default.
+* One publishing task for publishing `All` software components to any target repository
+* For every repository with an associated Sonatype Nexus instance, additional tasks are generated to control the
+  creation, upload, closure, and release of staging repositories.
+
+### Non-Nexus publishing
+
+Launching the `publish[PublicationName]PublicationTo[RepositoryName]Repository` triggers the creation of the required components,
+their signing, and the upload on the target repository.
+
+```mermaid
+flowchart LR
+    jar --o signPublicationNamePublication
+    sourcesJar --o signPublicationNamePublication
+    javadocJar --o signPublicationNamePublication
+    signPublicationNamePublication --o publishPublicationNamePublicationToRepositoryNameRepository
+    generatePomFileForPublicationNamePublication --o signPublicationNamePublication
+```
+
+### Nexus publishing
+
+Nexus publishing is a bit more elaborate.
+It requires to select:
+1. the operation that must be performed (among simple upload, repository closure, and repository release), and
+2. the packages that will be uploaded
+
+Typical invocations could be:
+
+* `./gradlew uploadAllPublicationsToMavenCentralNexus`
+  * Simply uploads all publications on a single staging repository
+* `./gradlew uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral`
+  * Uploads all artifacts and closes the repository
+* `./gradlew uploadAllPublicationsToMavenCentralNexus releaseStagingRepositoryOnMavenCentral`
+  * Uploads all artifacts, closes, and releases the repository
+
+The idea is that the packages to be uploaded must be selected by picking the right set of
+`upload[Publication]To[Repo]Nexus` tasks,
+and then if further operations are required, either `closeStagingRepositoryOnMavenCentral` or
+`releaseStagingRepositoryOnMavenCentral` can be used to close/release.
+
+## Usage examples
+
+T.B.D.
 
 ## Contributing to the project
 

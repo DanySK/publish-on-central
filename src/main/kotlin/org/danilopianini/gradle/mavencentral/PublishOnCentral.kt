@@ -49,20 +49,18 @@ class PublishOnCentral : Plugin<Project> {
                     if (publications.none { it.name == name }) {
                         publications.create(name, MavenPublication::class.java) { publication ->
                             publication.from(component)
+                            publication.configureForMavenCentral(extension)
                             createdPublications += publication
                         }
                         project.logger.debug("Created new publication $name")
+                        println("Created new publication $name")
                     }
                 }
             }
         }
-        project.afterEvaluate {
-            if (extension.autoConfigureAllPublications.orNull == true) {
-                project.the<PublishingExtension>().publications.withType<MavenPublication>().configureEach {
-                    it.configureForMavenCentral(extension)
-                }
-            } else {
-                createdPublications.forEach { it.configureForMavenCentral(extension) }
+        project.the<PublishingExtension>().publications.withType<MavenPublication> {
+            if (extension.autoConfigureAllPublications.getOrElse(true)) {
+                configureForMavenCentral(extension)
             }
         }
         project.afterEvaluate {

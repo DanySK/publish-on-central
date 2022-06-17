@@ -10,3 +10,14 @@ tests:
         - 'generateMetadataFileForWasm32Publication'
     expectation:
       success: *tasks
+  - description: "gradle should generate metadata files in kotlin-multiplatform projects"
+    configuration:
+      tasks:
+        - tasks
+    expectation:
+      success: tasks
+      output_contains:
+        - releaseStagingRepositoryOnMavenCentral
+        - createStagingRepositoryOnMavenCentral
+        - closeStagingRepositoryOnMavenCentral
+        - uploadAllPublicationsToMavenCentralNexus
