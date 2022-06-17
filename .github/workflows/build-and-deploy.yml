@@ -6,6 +6,7 @@ on:
       - 'autodelivery**'
       - 'bump-**'
       - 'renovate/**'
+      - 'dependabot/**'
     paths-ignore:
       - 'CHANGELOG.md'
       - 'LICENSE'
@@ -25,13 +26,22 @@ jobs:
         uses: DanySK/action-checkout@0.2.1
       - uses: DanySK/build-check-deploy-gradle-action@2.0.2
         with:
+          deploy-command: ./gradlew closeKotlinMavenOnMavenCentralNexus
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: false
+          should-deploy: >-
+            ${{
+            runner.os == 'Linux'
+            && contains('push workflow_dispatch', github.event_name)
+            && contains(github.repository, 'DanySK/')
+            }}
   release:
     needs:
       - build
     runs-on: ubuntu-latest
-    if: github.event_name == 'push'
+    if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
+    concurrency:
+      # Only one release job at a time. Strictly sequential.
+      group: release
     steps:
       - name: Checkout
         uses: actions/checkout@v3.0.2
