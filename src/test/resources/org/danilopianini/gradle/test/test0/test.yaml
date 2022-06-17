@@ -24,12 +24,12 @@ tests:
     expectation:
       success: tasks
       output_contains:
-        - publishJavaMavenPublication
         - publishPluginMavenPublicationToGithubRepository
-        - publishPluginMavenPublicationToMavenCentralRepository
-        - releaseJavaMavenOnMavenCentralNexus
+        - uploadJavaMavenToMavenCentralNexus
+        - uploadPluginMavenToMavenCentralNexus
+        - releaseStagingRepositoryOnMavenCentral
       output_doesnt_contain:
-        - releaseJavaMavenOnGitHubNexus
+        - uploadJavaMavenToGithubNexus
   - description: "sources and javadoc tasks get greated"
     configuration:
       tasks: tasks
