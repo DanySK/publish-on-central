@@ -92,9 +92,6 @@ fun Project.configureRepository(repoToConfigure: Repository) {
 }
 
 private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusUrl: String) {
-    the<PublishingExtension>().publications.configureEach {
-        println("Publication ${it.name}: ${it::class}")
-    }
     val nexus = NexusStatefulOperation(
         project = project,
         nexusUrl = nexusUrl,
