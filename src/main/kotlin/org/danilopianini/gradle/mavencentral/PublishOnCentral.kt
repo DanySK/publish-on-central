@@ -53,7 +53,6 @@ class PublishOnCentral : Plugin<Project> {
                             createdPublications += publication
                         }
                         project.logger.debug("Created new publication $name")
-                        println("Created new publication $name")
                     }
                 }
             }
