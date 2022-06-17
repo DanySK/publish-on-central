@@ -1,3 +1,16 @@
+## [1.0.2](https://github.com/DanySK/publish-on-central/compare/1.0.1...1.0.2) (2022-06-17)
+
+
+### Bug Fixes
+
+* the upload task explicitly depends on the signing task ([c510415](https://github.com/DanySK/publish-on-central/commit/c510415a1da0cce818fb1b4ece1483c3eb959a29))
+
+
+### Build and continuous integration
+
+* add missing secrets ([868513e](https://github.com/DanySK/publish-on-central/commit/868513e6b7d2b465fb55f0bdfdca580068e82fb9))
+* test a dry deployment on branch builds ([2c14d5a](https://github.com/DanySK/publish-on-central/commit/2c14d5a2565cbc82ab0451ed6ad3deebe5c906ec))
+
 ## [1.0.1](https://github.com/DanySK/publish-on-central/compare/1.0.0...1.0.1) (2022-06-17)
 
 
