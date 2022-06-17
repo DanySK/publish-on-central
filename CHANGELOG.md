@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/DanySK/publish-on-central/compare/1.0.0...1.0.1) (2022-06-17)
+
+
+### Bug Fixes
+
+* remove printlns ([426f5d6](https://github.com/DanySK/publish-on-central/commit/426f5d6f4c395302545832da44a16a2588deab35))
+
 ## [1.0.0](https://github.com/DanySK/publish-on-central/compare/0.8.3...1.0.0) (2022-06-17)
 
 
