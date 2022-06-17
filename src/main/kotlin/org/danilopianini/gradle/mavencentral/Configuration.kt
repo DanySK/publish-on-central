@@ -32,10 +32,9 @@ fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtensi
     configurePomForMavenCentral(extension)
     val project = extension.project
     // Signing
-    project.tasks.findByName("sign${name.capitalized()}Publication")
-        ?: project.configure<SigningExtension> {
-            sign(this@configureForMavenCentral)
-        }
+    findSigningTaskIn(project) ?: project.configure<SigningExtension> {
+        sign(this@configureForMavenCentral)
+    }
 }
 
 /**
@@ -132,8 +131,8 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         val publicationName = publication.name.replaceFirstChar(Char::titlecase)
         project.tasks.register<PublishToMavenRepository>(
             "upload${publicationName}To${repoToConfigure.name}Nexus",
-        ).configure { publishTask ->
-            publishTask.repository = project.repositories.maven { repo ->
+        ).configure { uploadTask ->
+            uploadTask.repository = project.repositories.maven { repo ->
                 repo.name = repoToConfigure.name
                 repo.url = project.uri(repoToConfigure.url)
                 repo.credentials {
@@ -141,18 +140,19 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
                     it.password = repoToConfigure.password.orNull
                 }
             }
-            publishTask.dependsOn(createStagingRepository)
-            uploadAllPublications.get().dependsOn(publishTask)
-            closeStagingRepository.get().mustRunAfter(publishTask)
-            publishTask.publication = publication
-            publishTask.doFirst {
+            publication.findSigningTaskIn(project)?.let { uploadTask.dependsOn(it) }
+            uploadTask.dependsOn(createStagingRepository)
+            uploadAllPublications.get().dependsOn(uploadTask)
+            closeStagingRepository.get().mustRunAfter(uploadTask)
+            uploadTask.publication = publication
+            uploadTask.doFirst {
                 warnIfCredentialsAreMissing(repoToConfigure)
             }
-            publishTask.doLast {
-                publishTask.repository.url = nexusUploadUrl.get()
+            uploadTask.doLast {
+                uploadTask.repository.url = nexusUploadUrl.get()
             }
-            publishTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
-            publishTask.description = "Uploads the $publicationName publication " +
+            uploadTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            uploadTask.description = "Uploads the $publicationName publication " +
                 "to a staging repository on ${repoToConfigure.name}."
         }
     }
@@ -175,3 +175,6 @@ private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
         )
     }
 }
+
+private fun MavenPublication.findSigningTaskIn(project: Project) =
+    project.tasks.findByName("sign${name.capitalized()}Publication")
