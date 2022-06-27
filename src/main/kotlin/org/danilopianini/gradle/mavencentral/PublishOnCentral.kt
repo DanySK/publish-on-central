@@ -1,8 +1,10 @@
 package org.danilopianini.gradle.mavencentral
 
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureExtension
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.createExtension
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -21,22 +23,14 @@ class PublishOnCentral : Plugin<Project> {
          * The name of the publication to be created.
          */
         private const val publicationName = "Maven"
-        private inline fun <reified T> Project.createExtension(name: String, vararg args: Any?): T =
-            project.extensions.create(name, T::class.java, *args)
-
-        private inline fun <reified T : Any> Project.configure(crossinline body: T.() -> Unit): Unit =
-            project.extensions.configure(T::class.java) { it.body() }
     }
-
-    private inline fun <reified T : Task> Project.registerTaskIfNeeded(name: String): Task =
-        tasks.findByName(name) ?: project.tasks.register(name, T::class.java).get()
 
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
         var createdPublications = emptySet<MavenPublication>()
-        project.configure<PublishingExtension> {
+        project.configureExtension<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             project.tasks.matching { it.name == "assemble" }.configureEach {
