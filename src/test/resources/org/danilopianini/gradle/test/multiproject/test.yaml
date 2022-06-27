@@ -1,0 +1,19 @@
+tests:
+  - description: "multiprojects should have a single creation, close, and release task"
+    configuration:
+      tasks: &tasks
+        - tasks
+      options:
+        - '--all'
+        - '--stacktrace'
+    expectation:
+      success: *tasks
+      output_contains:
+        - releaseStagingRepositoryOnMavenCentral
+        - createStagingRepositoryOnMavenCentral
+        - closeStagingRepositoryOnMavenCentral
+        - uploadAllPublicationsToMavenCentralNexus
+      output_doesnt_contain:
+        - :releaseStagingRepositoryOnMavenCentral
+        - :createStagingRepositoryOnMavenCentral
+        - :closeStagingRepositoryOnMavenCentral
