@@ -8,6 +8,8 @@ tests:
         - 'generateMetadataFileForKotlinMultiplatformPublication'
         - 'generateMetadataFileForNativePublication'
         - 'generateMetadataFileForWasm32Publication'
+      options:
+        - '--stacktrace'
     expectation:
       success: *tasks
   - description: "gradle should generate nexus lifecycle management tasks in multiplatform projects"
