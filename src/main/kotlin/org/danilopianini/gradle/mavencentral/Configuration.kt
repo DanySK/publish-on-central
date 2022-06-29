@@ -178,5 +178,8 @@ private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
     }
 }
 
-private fun MavenPublication.findSigningTaskIn(project: Project) =
+/**
+ * Returns the signign tasks registered for the [MavenPublication] in the current [project].
+ */
+fun MavenPublication.findSigningTaskIn(project: Project) =
     project.tasks.withType<Sign>().matching { it.name.endsWith("sign${name.capitalized()}Publication") }
