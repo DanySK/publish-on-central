@@ -30,6 +30,7 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
+        val createdPublications = mutableListOf<MavenPublication>()
         project.configureExtension<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
@@ -41,15 +42,27 @@ class PublishOnCentral : Plugin<Project> {
                     val name = "${component.name}$publicationName"
                     if (publications.none { it.name == name }) {
                         publications.create(name, MavenPublication::class.java) { publication ->
+                            createdPublications += publication
                             publication.from(component)
                             publication.artifact(sourcesJarTask)
                             publication.artifact(javadocJarTask)
                             publication.configurePomForMavenCentral(extension)
+                            publication.pom.packaging = "jar"
                             project.configure<SigningExtension> {
                                 sign(publication)
                             }
                         }
                         project.logger.debug("Created new publication $name")
+                    }
+                }
+            }
+            publications.withType<MavenPublication>().configureEach { publication ->
+                if (extension.autoConfigureAllPublications.getOrElse(true) && publication !in createdPublications) {
+                    publication.configurePomForMavenCentral(extension)
+                    if (publication.findSigningTaskIn(project).isEmpty()) {
+                        project.configure<SigningExtension> {
+                            sign(publication)
+                        }
                     }
                 }
             }
