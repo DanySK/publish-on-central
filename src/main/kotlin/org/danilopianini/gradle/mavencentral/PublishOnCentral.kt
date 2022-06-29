@@ -10,8 +10,9 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
-import org.gradle.kotlin.dsl.the
+import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
 /**
@@ -29,31 +30,28 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
-        var createdPublications = emptySet<MavenPublication>()
         project.configureExtension<PublishingExtension> {
-            val sourcesJarTask = project.registerTaskIfNeeded<JarTasks>("sourcesJar")
+            val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }
             project.components.configureEach { component ->
-                project.logger.debug("Reacting to the creation of component ${component.name}")
                 publications { publications ->
                     val name = "${component.name}$publicationName"
                     if (publications.none { it.name == name }) {
                         publications.create(name, MavenPublication::class.java) { publication ->
                             publication.from(component)
-                            publication.configureForMavenCentral(extension)
-                            createdPublications += publication
+                            publication.artifact(sourcesJarTask)
+                            publication.artifact(javadocJarTask)
+                            publication.configurePomForMavenCentral(extension)
+                            project.configure<SigningExtension> {
+                                sign(publication)
+                            }
                         }
                         project.logger.debug("Created new publication $name")
                     }
                 }
-            }
-        }
-        project.the<PublishingExtension>().publications.withType<MavenPublication> {
-            if (extension.autoConfigureAllPublications.getOrElse(true)) {
-                configureForMavenCentral(extension)
             }
         }
         project.afterEvaluate {
@@ -68,7 +66,7 @@ class PublishOnCentral : Plugin<Project> {
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
-            project.tasks.withType(JarTasks::class.java).configureEach { it.sourceSet("main", true) }
+            project.tasks.withType(SourceJar::class.java).configureEach { it.sourceSet("main", true) }
         }
         val dokkaPluginClass = runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
