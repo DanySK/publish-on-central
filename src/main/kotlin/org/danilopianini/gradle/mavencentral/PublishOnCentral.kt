@@ -23,7 +23,7 @@ class PublishOnCentral : Plugin<Project> {
         /**
          * The name of the publication to be created.
          */
-        private const val publicationName = "Maven"
+        private const val publicationName = "OSSRH"
     }
 
     override fun apply(project: Project) {
