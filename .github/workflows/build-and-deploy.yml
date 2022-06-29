@@ -1,7 +1,8 @@
 name: CI
 on:
   push:
-    tags: '*'
+    tags:
+      - '*'
     branches-ignore:
       - 'autodelivery**'
       - 'bump-**'
@@ -37,9 +38,51 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
+  test-alchemist-deployment:
+    runs-on: ubuntu-latest
+    if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
+    steps:
+      - name: Compute the version of Alchemist
+        id: alchemist
+        shell: bash
+        run: |
+          # Idea: the regex matcher of Renovate keeps this string up to date automatically
+          # The version is extracted and used to access the correct version of the scripts
+          USES=$(cat <<TRICK_RENOVATE
+          - uses: AlchemistSimulator/Alchemist@21.0.8
+          TRICK_RENOVATE
+          )
+          echo "Scripts update line: \"$USES\""
+          echo "Computed version: \"${USES#*@}\""
+          echo "::set-output name=version::${USES#*@}"
+      - name: Checkout Alchemist ${{ steps.alchemist.outputs.version }}
+        uses: actions/checkout@v3.0.2
+        with:
+          fetch-depth: '0'
+          path: 'alchemist'
+          ref: "${{ steps.alchemist.outputs.version }}"
+          repository: 'AlchemistSimulator/Alchemist'
+          submodules: 'recursive'
+      - name: Checkout publish-on-central
+        uses: actions/checkout@v3.0.2
+        with:
+          path: 'publish-on-central'
+      - name: Dry-deploy
+        uses: DanySK/build-check-deploy-gradle-action@2.0.2
+        with:
+          build-command: true
+          check-command: true
+          deploy-command: ./gradlew --include-build ../publish-on-central uploadKotlinToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel
+          working-directory: alchemist
+          should-run-codecov: false
+          should-deploy: true
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          signing-key: ${{ secrets.SIGNING_KEY }}
+          signing-password: ${{ secrets.SIGNING_PASSWORD }}
   release:
     needs:
       - build
+      - test-alchemist-deployment
     runs-on: ubuntu-latest
     if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
     concurrency:
@@ -69,8 +112,9 @@ jobs:
   ci-success:
     runs-on: ubuntu-latest
     needs:
-      - release
       - build
+      - release
+      - test-alchemist-deployment
     if: >-
       always() && (
         contains(join(needs.*.result, ','), 'failure')
