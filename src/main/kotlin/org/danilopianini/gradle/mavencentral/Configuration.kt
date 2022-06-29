@@ -47,7 +47,6 @@ fun MavenPublication.configurePomForMavenCentral(extension: PublishOnCentralExte
         with(pom) {
             name.set(extension.projectLongName)
             description.set(extension.projectDescription)
-            packaging = "jar"
             url.set(extension.projectUrl)
             licenses {
                 it.license { license ->
