@@ -158,6 +158,41 @@ signing {
 }
 ```
 
+## Kotlin Multiplatform
+
+This plugin can configure Kotlin Multiplatform projects, too, but it needs further configuration.
+The reason is that the Kotlin Multiplatform plugin creates custom publications under the hood,
+and simply creating additional publications based on the `SoftwareComponent`s
+(as this plugin does)
+does not collect all the required artifacts.
+
+Since version 2.0.0, this plugin marks its publications as `[SoftwareComponentName]OSSRH`,
+making it easy to distinguish them by name.
+
+To configure a Kotlin multiplatform project for execution with publish-on-central, use:
+
+```kotlin
+publishOnCentral {
+    // Same as any other publication, see the previous sections.
+}
+
+publishing {
+  publications {
+    publications.withType<MavenPublication>().configureEach {
+      if ("OSSRH" !in name) {
+        artifact(tasks.javadocJar)
+      }
+    }
+  }
+}
+```
+
+Unfortunatly, the Kotlin Multiplatform pre-initializes a sources jar, but not a javadoc jar,
+and Gradle does not allow to inspect the pom packaging or the artifact list without finalizing the publication
+(thus, preventing metadata to get generated).
+
+Consequently, at the moment, the plugin only preconfigures the POM file and the signing.
+
 ## Tasks
 
 * `sourcesJar`: a `Jar` task preconfigured to collect and pack `allSource` from the `main` source set
