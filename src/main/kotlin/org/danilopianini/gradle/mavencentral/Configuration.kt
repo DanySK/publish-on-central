@@ -144,7 +144,6 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
             }
             uploadTask.publication = publication
             publication.findSigningTaskIn(project).forEach {
-                println("TASK ${uploadTask.name} depends on ${it.name }")
                 uploadTask.dependsOn(it)
             }
             uploadTask.dependsOn(createStagingRepository)
