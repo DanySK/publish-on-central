@@ -49,6 +49,7 @@ fun MavenPublication.configurePomForMavenCentral(extension: PublishOnCentralExte
             description.set(extension.projectDescription)
             url.set(extension.projectUrl)
             licenses {
+                println("ciao")
                 it.license { license ->
                     license.name.set(extension.licenseName)
                     license.url.set(extension.licenseUrl)
