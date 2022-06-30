@@ -103,6 +103,7 @@ publishOnCentral {
 }
 
 if (System.getenv("CI") == true.toString()) {
+    println()
     signing {
         val signingKey: String? by project
         val signingPassword: String? by project
