@@ -1,7 +1,12 @@
 name: CI
 on:
   push:
+    tags:
+      - '*'
     branches-ignore:
+      - 'autodelivery**'
+      - 'bump-**'
+      - 'renovate/**'
       - 'dependabot/**'
     paths-ignore:
       - 'CHANGELOG.md'
@@ -12,17 +17,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  local-pr-guard:
-    runs-on: ubuntu-latest
-    if: >-
-      github.event_name != 'pull_request'
-      || github.event.pull_request.head.repo.full_name != github.repository
-      || startsWith(github.head_ref, 'refs/heads/dependabot/')
-    steps:
-      - run: 'true'
   build:
-    needs:
-      - local-pr-guard
     strategy:
       matrix:
         os: [windows, macos, ubuntu]
