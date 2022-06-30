@@ -1,3 +1,21 @@
+## [2.0.2](https://github.com/DanySK/publish-on-central/compare/2.0.1...2.0.2) (2022-06-30)
+
+
+### Bug Fixes
+
+* **nexus:** default to a longer timeout for Maven Central Nexus (5 minutes) ([f541c3f](https://github.com/DanySK/publish-on-central/commit/f541c3fd1784d1f77c03792caf8255c1c10af63e))
+
+
+### Refactoring
+
+* extract MavenRepositoryDescriptor to its own source file ([c602328](https://github.com/DanySK/publish-on-central/commit/c6023283f642fb67a50422e609f867e2394ab3af))
+
+
+### Build and continuous integration
+
+* don't run the CI pipeline on updates to the Git ignore files ([657fc01](https://github.com/DanySK/publish-on-central/commit/657fc013155e87f04000b0ef053bc88cd9746a2f))
+* improve the detection of credentials existence ([117f752](https://github.com/DanySK/publish-on-central/commit/117f752943ca4f361117e01c07a0b1422b0cc600))
+
 ## [2.0.1](https://github.com/DanySK/publish-on-central/compare/2.0.0...2.0.1) (2022-06-30)
 
 
