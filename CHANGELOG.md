@@ -1,3 +1,16 @@
+## [2.0.1](https://github.com/DanySK/publish-on-central/compare/2.0.0...2.0.1) (2022-06-30)
+
+
+### Documentation
+
+* **readme:** add some reference examples ([e6a6091](https://github.com/DanySK/publish-on-central/commit/e6a60919400b69f987e9a6af82002fce6dea5cba))
+
+
+### Build and continuous integration
+
+* add a PR guard filter to run PR builds only on external and dependabot's branches ([1dadd77](https://github.com/DanySK/publish-on-central/commit/1dadd77cb80071d58b39957a95bb5873cea76b4f))
+* improve robustness by re-trying the dry-deployment three times (deals with network problems) ([30d625e](https://github.com/DanySK/publish-on-central/commit/30d625eead473bad76acf4633082f6140ffb51d8))
+
 ## [2.0.0](https://github.com/DanySK/publish-on-central/compare/1.0.2...2.0.0) (2022-06-30)
 
 
