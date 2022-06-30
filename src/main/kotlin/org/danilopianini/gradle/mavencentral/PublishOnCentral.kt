@@ -48,7 +48,7 @@ class PublishOnCentral : Plugin<Project> {
                             publication.artifact(javadocJarTask)
                             publication.configurePomForMavenCentral(extension)
                             publication.pom.packaging = "jar"
-                            publication.findSigningTaskIn(project) ?: project.configure<SigningExtension> {
+                            project.configure<SigningExtension> {
                                 sign(publication)
                             }
                         }
