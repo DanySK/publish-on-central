@@ -1,4 +1,3 @@
-import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 @Suppress("DSL_SCOPE_VIOLATION")
@@ -110,8 +109,6 @@ if (System.getenv("CI") == true.toString()) {
         useInMemoryPgpKeys(signingKey, signingPassword)
     }
 }
-
-tasks.publishJavaMavenPublicationToMavenLocal
 
 val registerCredentials = tasks.register("registerGradlePluginPortalCredentials") {
     doLast {

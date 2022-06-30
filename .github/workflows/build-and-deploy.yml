@@ -27,7 +27,13 @@ jobs:
         uses: DanySK/action-checkout@0.2.1
       - uses: DanySK/build-check-deploy-gradle-action@2.0.2
         with:
-          deploy-command: ./gradlew uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel
+          deploy-command: >-
+            ./gradlew
+            uploadKotlin
+            uploadPluginMavenToMavenCentralNexus
+            uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
+            close
+            --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: >-
             ${{
