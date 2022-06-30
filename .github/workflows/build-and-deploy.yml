@@ -65,7 +65,9 @@ jobs:
         with:
           build-command: true
           check-command: true
-          deploy-command: ./gradlew --include-build ../publish-on-central uploadKotlinToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel
+          deploy-command: |
+            COMMAND='./gradlew --include-build ../publish-on-central uploadKotlinToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel'
+            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
           working-directory: alchemist
           should-run-codecov: false
           should-deploy: true
@@ -106,7 +108,9 @@ jobs:
         with:
           build-command: true
           check-command: true
-          deploy-command: ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel
+          deploy-command: |
+            COMMAND='./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel'
+            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
           working-directory: kt-mp
           should-run-codecov: false
           should-deploy: true
