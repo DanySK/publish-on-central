@@ -25,8 +25,7 @@ jobs:
           should-deploy: >-
             ${{
             runner.os == 'Linux'
-            && contains('push workflow_dispatch', github.event_name)
-            && contains(github.repository, 'DanySK/')
+            && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
             }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
