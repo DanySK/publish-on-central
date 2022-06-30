@@ -240,6 +240,29 @@ The idea is that the packages to be uploaded must be selected by picking the rig
 and then if further operations are required, either `closeStagingRepositoryOnMavenCentral` or
 `releaseStagingRepositoryOnMavenCentral` can be used to close/release.
 
+The following schema shows the dependencies among tasks in case of upload on Nexus of a project with two publications
+(e.g., a Kotlin-multiplatform project)
+
+```mermaid
+flowchart LR
+    generatePomFileForPublicationName1Publication --o signPublicationName1Publication
+    jar --o signPublicationName1Publication
+    sourcesJar --o signPublicationName1Publication
+    javadocJar --o signPublicationName1Publication
+    signPublicationName1Publication --o uploadPublicationName1ToRepositoryNameNexus
+    jar --o signPublicationName2Publication
+    sourcesJar --o signPublicationName2Publication
+    javadocJar --o signPublicationName2Publication
+    signPublicationName2Publication --o uploadPublicationName2ToRepositoryNameNexus
+    generatePomFileForPublicationName2Publication --o signPublicationName2Publication
+    uploadPublicationName1ToRepositoryNameNexus --o closeStagingRepositoryOnRepositoryName
+    uploadPublicationName2ToRepositoryNameNexus --o closeStagingRepositoryOnRepositoryName
+    closeStagingRepositoryOnRepositoryName --o releaseStagingRepositoryOnRepositoryName
+    createNexusClientForRepositoryName --o createStagingRepositoryOnRepositoryName
+    createStagingRepositoryOnRepositoryName --o uploadPublicationName1ToRepositoryNameNexus
+    createStagingRepositoryOnRepositoryName --o uploadPublicationName2ToRepositoryNameNexus
+```
+
 ## Usage examples
 
 T.B.D.
