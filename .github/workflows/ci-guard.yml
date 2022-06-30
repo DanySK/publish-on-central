@@ -4,6 +4,7 @@ on:
     branches-ignore:
       - 'dependabot/**'
     paths-ignore:
+      - '.gitignore'
       - 'CHANGELOG.md'
       - 'LICENSE'
       - 'README.md'
