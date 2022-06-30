@@ -1,3 +1,60 @@
+## [2.0.0](https://github.com/DanySK/publish-on-central/compare/1.0.2...2.0.0) (2022-06-30)
+
+
+### ⚠ BREAKING CHANGES
+
+* enable automatic configuration of POM and signing for all MavenPublications (can be disabled via autoConfigureAllPublications)
+* switch the default publication name to [SoftwareComponentName]OSSRH, as it is easier to distinguish by name (accessing other properties finalizes the publications)
+* do not force jar packaging when configuring a pom
+* **nexus:** multiprojects are now uploaded correctly and stored in a single Nexus repository
+
+### Features
+
+* enable automatic configuration of POM and signing for all MavenPublications (can be disabled via autoConfigureAllPublications) ([c65838c](https://github.com/DanySK/publish-on-central/commit/c65838c2aef6e742fdd1cd7d3242b18c6d0a0d8c))
+
+
+### Bug Fixes
+
+* always generate signign task for generated publications ([d27ccca](https://github.com/DanySK/publish-on-central/commit/d27ccca91b6d300536f442c44b62295301ffa91f))
+* do not force jar packaging when configuring a pom ([6ec8392](https://github.com/DanySK/publish-on-central/commit/6ec839281edbe2166ec6967af1a0a02bc2d96684))
+* **nexus:** multiprojects are now uploaded correctly and stored in a single Nexus repository ([16edbb9](https://github.com/DanySK/publish-on-central/commit/16edbb98cff15bff24ac8f1f9cb6099bb40f5244))
+* **release:** use a fixed beta version of the plugin for publishing the fixed version of the plugin (will be replaced by the new stable version as soon as the release happens) ([1fe706b](https://github.com/DanySK/publish-on-central/commit/1fe706bb66a91b53084a29ae24ea0b1419d2878c))
+* remove debug println ([dea29e9](https://github.com/DanySK/publish-on-central/commit/dea29e94f3e8e50ed4c5e7d9ff08969e634831a8))
+* restore multiproject support for Nexus ([f1c3f5b](https://github.com/DanySK/publish-on-central/commit/f1c3f5bbddded0f07daa711daaace4ba0271ef4a))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.7.0 ([3e4eea0](https://github.com/DanySK/publish-on-central/commit/3e4eea0b9345d4bcef33521363aff833ea190f0f))
+* **deps:** update plugin gradlepluginpublish to v1 ([2cb057c](https://github.com/DanySK/publish-on-central/commit/2cb057c86316146393e28a75a2ccf5f723f1ce39))
+* **deps:** update plugin publishoncentral to v1 ([0561454](https://github.com/DanySK/publish-on-central/commit/05614544a20c51f1a94fdf3b661634bbc88e1d41))
+
+
+### Refactoring
+
+* allow access to findSigningTaskIn from the external world ([6928dee](https://github.com/DanySK/publish-on-central/commit/6928deeccfdaf90d0e9ec7ba5dd414b18bd80e18))
+* switch the default publication name to [SoftwareComponentName]OSSRH, as it is easier to distinguish by name (accessing other properties finalizes the publications) ([7447e44](https://github.com/DanySK/publish-on-central/commit/7447e442422bd2fdafc4c6ce1f7ec4095724b014))
+
+
+### Build and continuous integration
+
+* add a test with a dry-deployment of a Kotlin-multiplatform project ([a7e0918](https://github.com/DanySK/publish-on-central/commit/a7e0918a2389dfd0824e6d2537a9f721cedb23f0))
+* add external test with an Alchemist dry-deployment ([93d1fe4](https://github.com/DanySK/publish-on-central/commit/93d1fe4da1f5d6aa5fe4d049fe1dbe11cb524928))
+* fix the deployment task names ([0d51486](https://github.com/DanySK/publish-on-central/commit/0d51486c5d5acb13a033e287f1488b2cf6646623))
+* refer to the latest multiplatform template ([5aebfd1](https://github.com/DanySK/publish-on-central/commit/5aebfd1ed92d460c6df644e8bdf78868e8c89a49))
+
+
+### Tests
+
+* print the stacktrace on failure ([e48fa3e](https://github.com/DanySK/publish-on-central/commit/e48fa3ea6f7110cbda1cbe57f0ccc46627bc8ba0))
+* update tests to use the new publication naming ([50bbe50](https://github.com/DanySK/publish-on-central/commit/50bbe5026c24d05ede2a8709d9f7510960433094))
+
+
+### Documentation
+
+* add a task dependency graph for a Nexus publication ([4ac98cf](https://github.com/DanySK/publish-on-central/commit/4ac98cfdea69a94f82ab6c0affa9b65bcfa08a71))
+* **readme:** document how to use this plugin with Kotlin multiplatform ([49ce8e5](https://github.com/DanySK/publish-on-central/commit/49ce8e5eebf65bd979556922e08cc94099439d3c))
+
 ## [1.0.2](https://github.com/DanySK/publish-on-central/compare/1.0.1...1.0.2) (2022-06-17)
 
 
