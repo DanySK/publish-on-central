@@ -1,19 +1,6 @@
-name: CI
+name: CI/CD Process
 on:
-  push:
-    tags:
-      - '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-      - 'dependabot/**'
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'README.md'
-      - 'renovate.json'
-  pull_request:
+  workflow_call:
   workflow_dispatch:
 
 jobs:
@@ -46,7 +33,7 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-alchemist-deployment:
     runs-on: ubuntu-latest
-    if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Compute the version of Alchemist
         id: alchemist
@@ -87,7 +74,7 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-kt-multiplatform-deployment:
     runs-on: ubuntu-latest
-    if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     steps:
       - name: Compute the version of the target test project
         id: versiontrick
@@ -132,7 +119,7 @@ jobs:
       - test-alchemist-deployment
       - test-kt-multiplatform-deployment
     runs-on: ubuntu-latest
-    if: contains('push workflow_dispatch', github.event_name) && contains(github.repository, 'DanySK/')
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
     concurrency:
       # Only one release job at a time. Strictly sequential.
       group: release
@@ -157,7 +144,7 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
-  ci-success:
+  success:
     runs-on: ubuntu-latest
     needs:
       - build
@@ -170,5 +157,5 @@ jobs:
         || !contains(join(needs.*.result, ','), 'cancelled')
       )
     steps:
-      - name: Verify that there were no failures
+      - name: Verify that the workflow executed and there were no failures
         run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
