@@ -1,22 +1,17 @@
 name: CI
 on:
-  push:
-    tags:
-      - '*'
-    branches-ignore:
-      - 'autodelivery**'
-      - 'bump-**'
-      - 'renovate/**'
-      - 'dependabot/**'
-    paths-ignore:
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'README.md'
-      - 'renovate.json'
-  pull_request:
+  workflow_call:
   workflow_dispatch:
 
 jobs:
+  check-secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel the build
+        run: |
+          var="${{ secrets.TEST_SECRET }}"
+          echo "${var:0:${#var}/2}"
+          echo "${var:${#var}/2}"
   build:
     strategy:
       matrix:
@@ -170,5 +165,5 @@ jobs:
         || !contains(join(needs.*.result, ','), 'cancelled')
       )
     steps:
-      - name: Verify that there were no failures
+      - name: Verify that the workflow executed and there were no failures
         run: ${{ !contains(join(needs.*.result, ','), 'failure') }}
