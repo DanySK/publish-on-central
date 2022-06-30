@@ -17,8 +17,8 @@ data class Repository(
     val user: Property<String>,
     val password: Property<String>,
     val nexusUrl: String? = null,
-    val nexusTimeOut: Duration = Duration.ofMinutes(3),
-    val nexusConnectTimeOut: Duration = Duration.ofMinutes(3),
+    val nexusTimeOut: Duration = Duration.ofMinutes(1),
+    val nexusConnectTimeOut: Duration = Duration.ofMinutes(1),
 ) {
 
     /**

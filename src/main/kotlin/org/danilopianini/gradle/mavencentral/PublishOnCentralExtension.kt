@@ -37,6 +37,8 @@ open class PublishOnCentralExtension(val project: Project) {
                 ?: project.properties["ossrhPassword"]?.toString()
         },
         nexusUrl = Repository.mavenCentralNexusUrl,
+        nexusTimeOut = @Suppress("MagicNumber") Duration.ofMinutes(5),
+        nexusConnectTimeOut = Duration.ofMinutes(3),
     )
 
     /**
