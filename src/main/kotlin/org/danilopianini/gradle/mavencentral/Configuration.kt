@@ -93,7 +93,7 @@ fun Project.configureRepository(repoToConfigure: Repository) {
 
 private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusUrl: String) {
     val nexusClient = rootProject.registerTaskIfNeeded<InitializeNexusClient>(
-        "createNexusClient",
+        "createNexusClientFor${repoToConfigure.name}",
         repoToConfigure,
         nexusUrl,
     ) as InitializeNexusClient
