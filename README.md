@@ -265,7 +265,32 @@ flowchart LR
 
 ## Usage examples
 
-T.B.D.
+If you use publish-on-central in your project, please consider providing a pull request with a link to your project:
+it will provide useful use cases for newcomers to look at.
+
+
+
+### Java, simple project, kts build file
+* [**gson-extras**](https://github.com/DanySK/gson-extras): extra goodies for Google Gson
+* [**JIRF**](https://github.com/DanySK/jirf/): an implicit reflective factory
+* [**java-quadtree**](https://github.com/DanySK/java-quadtree/): a quadtree written in Java
+
+### Java, multiproject, kts build file
+* [**Protelis**](https://github.com/Protelis/Protelis): an aggregate programming language
+
+### Java + Kotlin-jvm + Scala, multiproject, kts build file
+* [**Alchemist Simulator**](https://github.com/AlchemistSimulator/Alchemist): a simulator for computational ecosystems
+
+### Kotlin-jvm, simple project, kts build file
+* [**khttp**](https://github.com/DanySK/khttp): Kotlin HTTP requests library
+
+### Kotlin-jvm, Gradle plugin, simple project, kts build file
+* [**multi-jvm-test-plugin**](https://github.com/DanySK/multi-jvm-test-plugin): Automatic configuration of Gradle's toolchains for multi-JVM testing
+* [**ProtelisDoc**](https://github.com/Protelis/ProtelisDoc): Dokka-based documentation engine for Protelis
+* **publish-on-central** (yes, this plugin uses itself for publishing)
+
+### Kotlin-multiplatform
+* [**Template for Kotlin Multiplatform projects**](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects): a project template for quickly spawning new Kotlin-multiplatform projects
 
 ## Contributing to the project
 
