@@ -84,7 +84,7 @@ jobs:
           # Idea: the regex matcher of Renovate keeps this string up to date automatically
           # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: danySK/template-for-kotlin-multiplatform-projects@5542646c2038778e88e2acfa1b61eb6c405c39fa
+          - uses: danySK/template-for-kotlin-multiplatform-projects@9f28f6fac6fce6b64b2d59bbfa72b4b0cd89a865
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
