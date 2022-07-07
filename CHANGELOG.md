@@ -1,3 +1,31 @@
+## [2.0.3](https://github.com/DanySK/publish-on-central/compare/2.0.2...2.0.3) (2022-07-07)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v22 ([c45bbad](https://github.com/DanySK/publish-on-central/commit/c45bbad05a57c7e2b4c75d95e04bc28f4b3d0bc3))
+* **deps:** update alchemistsimulator/alchemist action to v23 ([ae8f3da](https://github.com/DanySK/publish-on-central/commit/ae8f3daffc11951624b5a97026a701527fdc0d3f))
+* **deps:** update alchemistsimulator/alchemist action to v24 ([9f211ed](https://github.com/DanySK/publish-on-central/commit/9f211edfce64bd39f91449c17b80cc68264cfd84))
+* **deps:** update alchemistsimulator/alchemist action to v24.0.3 ([6292789](https://github.com/DanySK/publish-on-central/commit/62927894e7cb4140905d7ed4306fc750f0c02917))
+* **deps:** update alchemistsimulator/alchemist action to v24.0.4 ([f491d45](https://github.com/DanySK/publish-on-central/commit/f491d45660c5d999678b986e9514433f91201bdd))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.0.3 ([be49115](https://github.com/DanySK/publish-on-central/commit/be4911568c502d66f3e8e565c6577df30781b798))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.0 ([b2cd028](https://github.com/DanySK/publish-on-central/commit/b2cd0281d8d3769e978b6f60946e7ca9527374dd))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects digest to 19a9884 ([6eb1281](https://github.com/DanySK/publish-on-central/commit/6eb1281537e85ae12af7b23e987b8e8c06d5ab27))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects digest to 9f28f6f ([0c2ffe5](https://github.com/DanySK/publish-on-central/commit/0c2ffe5625cf7be186e70bafe80eed5ccd2dde78))
+* **release:** publish the plugin on GitHub packages ([6017ee4](https://github.com/DanySK/publish-on-central/commit/6017ee40a9637ec72708fab3e5a3d4e0e9f4e28c))
+* rename ci-guard.yml into dispatcher.yml ([b5b8739](https://github.com/DanySK/publish-on-central/commit/b5b8739732c6e7221b99bef66010cf88a044917b))
+* use lowercase references for actions ([dac9153](https://github.com/DanySK/publish-on-central/commit/dac9153b0cf689a8f137205cc796cc1569df2aa1))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.7.10 ([42992f6](https://github.com/DanySK/publish-on-central/commit/42992f6a5768cb7116888d181b25f36a7ba87791))
+* **deps:** update alchemist to 20.0.9 ([44c43ea](https://github.com/DanySK/publish-on-central/commit/44c43eae8314d4778a24fd1c2f882e1416df8894))
+* **deps:** update plugin multijvmtesting to v0.4.4 ([3952ca4](https://github.com/DanySK/publish-on-central/commit/3952ca4bc44b0004c87a3bc1a35325f5426aadf4))
+* **deps:** update plugin multijvmtesting to v0.4.5 ([005657d](https://github.com/DanySK/publish-on-central/commit/005657d9fcf776ea14dd039a8b6f0d0ca95efff5))
+* **deps:** update plugin publishoncentral to v1.0.2 ([b8e20ad](https://github.com/DanySK/publish-on-central/commit/b8e20adc11136ff8153f7aa8ab0fb28906b484ee))
+* **deps:** update plugin publishoncentral to v2 ([d5d94e5](https://github.com/DanySK/publish-on-central/commit/d5d94e5eb21c171c169b7e445b150b85b087bedb))
+
 ## [2.0.2](https://github.com/DanySK/publish-on-central/compare/2.0.1...2.0.2) (2022-06-30)
 
 
