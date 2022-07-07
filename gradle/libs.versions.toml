@@ -1,7 +1,7 @@
 [versions]
 dokka = "1.7.0"
 kotest = "5.3.0"
-kotlin = "1.7.0"
+kotlin = "1.7.10"
 nexus-publish = "1.1.0"
 
 [libraries]
