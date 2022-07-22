@@ -21,14 +21,13 @@ open class SourceJar : JarWithClassifier("sources") {
     @JvmOverloads
     fun sourceSet(name: String, failOnMissingName: Boolean = true) {
         val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
-        if (sourceSets == null && failOnMissingName) {
-            throw IllegalStateException("Project has no property 'sourceSets' of type 'SourceSetContainer'")
-        }
-        val sourceSet = sourceSets?.getByName(name)
-        if (sourceSet != null) {
+        if (sourceSets != null) {
+            val sourceSet = sourceSets.getByName(name)
             sourceSet(sourceSet)
-        } else if (failOnMissingName) {
-            throw IllegalStateException("Project has no source set named $name")
+        } else {
+            check(!failOnMissingName) {
+                "Project has no property 'sourceSets' of type 'SourceSetContainer'"
+            }
         }
     }
 

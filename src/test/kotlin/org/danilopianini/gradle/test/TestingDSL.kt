@@ -1,4 +1,4 @@
-package org.danilopianini.gradle.git.hooks.test
+package org.danilopianini.gradle.test
 
 import com.uchuhimo.konf.ConfigSpec
 import org.gradle.internal.impldep.org.apache.commons.lang.StringUtils
