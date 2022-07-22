@@ -74,8 +74,9 @@ class PublishOnCentral : Plugin<Project> {
         }
         project.plugins.withType<JavaPlugin>().configureEach { _ ->
             project.tasks.withType<JavadocJar>().configureEach { javadocJar ->
-                val javadocTask = project.tasks.findByName("javadoc") as? Javadoc
-                    ?: throw IllegalStateException("Java plugin applied but no Javadoc task existing!")
+                val javadocTask = checkNotNull(project.tasks.findByName("javadoc") as? Javadoc) {
+                    "Java plugin applied but no Javadoc task existing!"
+                }
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
@@ -86,8 +87,9 @@ class PublishOnCentral : Plugin<Project> {
             @Suppress("UNCHECKED_CAST")
             project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>).configureEach {
                 project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
-                    val dokkaJavadoc = project.tasks.findByName("dokkaJavadoc")
-                        ?: throw IllegalStateException("Dokka plugin applied but no dokkaJavadoc task existing!")
+                    val dokkaJavadoc = checkNotNull(project.tasks.findByName("dokkaJavadoc")) {
+                        "Dokka plugin applied but no dokkaJavadoc task existing!"
+                    }
                     val outputDirectory = dokkaJavadoc.property("outputDirectory")
                         ?: throw IllegalStateException(
                             "dokkaJavadoc has no property 'outputDirectory' - " +
