@@ -1,3 +1,37 @@
+## [2.0.6](https://github.com/DanySK/publish-on-central/compare/2.0.5...2.0.6) (2022-08-05)
+
+
+### Style improvements
+
+* prefer calls to check over throwing exceptions ([5cc2f1a](https://github.com/DanySK/publish-on-central/commit/5cc2f1acbaeda9f04f9aba70d04ba3b7c4019dca))
+
+
+### Build and continuous integration
+
+* configure Mergify ([a0b8a4a](https://github.com/DanySK/publish-on-central/commit/a0b8a4a3f5acff14487f5a92f47762ad0a292ca1))
+* **deps:** update alchemistsimulator/alchemist action to v24.1.1 ([be25f6d](https://github.com/DanySK/publish-on-central/commit/be25f6d8981e4bc453b382f39149bc2c0636f598))
+* **deps:** update alchemistsimulator/alchemist action to v24.1.6 ([8f3b683](https://github.com/DanySK/publish-on-central/commit/8f3b683a76841e76cb9981b2a7de1f229c1ae345))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.4 ([463ced9](https://github.com/DanySK/publish-on-central/commit/463ced95ea695138c174b8bd5f188cefdef4a56b))
+* do not run on mergify updates ([ca8bd29](https://github.com/DanySK/publish-on-central/commit/ca8bd29dd27b74375dbe105a71797d9c77478857))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.5.1 ([d0b6967](https://github.com/DanySK/publish-on-central/commit/d0b6967d5116639090ae2e69f8e0ca7d245bac91))
+* **deps:** update kotest to v5.3.2 ([3ba674d](https://github.com/DanySK/publish-on-central/commit/3ba674d03139d1f2a5ba1369ad550a8cc32f0d13))
+* **deps:** update kotest to v5.4.0 ([b22c147](https://github.com/DanySK/publish-on-central/commit/b22c147d56cafa121c9ac12391bce329c93b0f0d))
+* **deps:** update kotest to v5.4.1 ([42f61eb](https://github.com/DanySK/publish-on-central/commit/42f61eb88d1e083ba01e3aeeb6d5c19340196e3c))
+* **deps:** update plugin kotlin-qa to v0.20.4 ([72982e7](https://github.com/DanySK/publish-on-central/commit/72982e79b18fe6c7800cc28d5605feae7f9e8ef7))
+* **deps:** update plugin kotlin-qa to v0.21.0 ([41fa8b2](https://github.com/DanySK/publish-on-central/commit/41fa8b22285fd9f36ee0c32967e7d1c2be3d15b0))
+* **deps:** update plugin kotlin-qa to v0.22.0 ([2dc7a94](https://github.com/DanySK/publish-on-central/commit/2dc7a94547a2c1a856c87cee9bf2c5ba500d5d60))
+* **deps:** update plugin kotlin-qa to v0.22.2 ([29433eb](https://github.com/DanySK/publish-on-central/commit/29433ebfe69ce711f71e42df744147f7382e3686))
+* **deps:** update plugin kotlin-qa to v0.23.1 ([ce8ee51](https://github.com/DanySK/publish-on-central/commit/ce8ee516e3ff8f5a29ff950289e627eec4791650))
+* **deps:** update plugin multijvmtesting to v0.4.9 ([e69db43](https://github.com/DanySK/publish-on-central/commit/e69db4362244e84963d1b13348968afba11b6987))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.16 ([c12ac44](https://github.com/DanySK/publish-on-central/commit/c12ac44715a4d56018b302357f1a9572bd1b1189))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.17 ([2ea8501](https://github.com/DanySK/publish-on-central/commit/2ea8501274b04f1b25462eec683badd06bfb7ccc))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.18 ([18b354d](https://github.com/DanySK/publish-on-central/commit/18b354d635aa2f61b6129291013d78c38d97af8d))
+* **deps:** update plugin publishoncentral to v2.0.5 ([ae15b9b](https://github.com/DanySK/publish-on-central/commit/ae15b9b657e410a5336caaab627ff391a62ffd8e))
+
 ## [2.0.5](https://github.com/DanySK/publish-on-central/compare/2.0.4...2.0.5) (2022-07-14)
 
 
