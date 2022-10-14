@@ -1,3 +1,22 @@
+## [2.0.8](https://github.com/DanySK/publish-on-central/compare/2.0.7...2.0.8) (2022-10-14)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.1.0 ([aa2f2a3](https://github.com/DanySK/publish-on-central/commit/aa2f2a383edd65ed75a65f9efaa9a02ebef894f4))
+* **deps:** update alchemistsimulator/alchemist action to v24.1.10 ([6080c5e](https://github.com/DanySK/publish-on-central/commit/6080c5e0c9960555dc60b6dfea285ca0ee64c5d8))
+* **deps:** update danysk/action-checkout action to v0.2.3 ([f37ba15](https://github.com/DanySK/publish-on-central/commit/f37ba1562430adcc268b58e5639d229644f15756))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.10 ([55d7fb4](https://github.com/DanySK/publish-on-central/commit/55d7fb480e5c74fe01609f32408aa395b50b1bdc))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.7.20 ([29be678](https://github.com/DanySK/publish-on-central/commit/29be678881bb57148431cf5a62d8b786de53da1f))
+* **deps:** update kotest to v5.5.1 ([5d84a4c](https://github.com/DanySK/publish-on-central/commit/5d84a4c39562a7fd42e00182d33f17fa8693cac1))
+* **deps:** update plugin kotlin-qa to v0.25.1 ([426756f](https://github.com/DanySK/publish-on-central/commit/426756f5691991e55f009ad5c6116a26f7f93538))
+* **deps:** update plugin kotlin-qa to v0.26.0 ([d4ae521](https://github.com/DanySK/publish-on-central/commit/d4ae5213ebd137fd7cced8b2b9c702d84ac2bf51))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.21 ([5473a13](https://github.com/DanySK/publish-on-central/commit/5473a137d710856d1ff883d3e3bf5f3fe71ba7f4))
+
 ## [2.0.7](https://github.com/DanySK/publish-on-central/compare/2.0.6...2.0.7) (2022-10-13)
 
 
