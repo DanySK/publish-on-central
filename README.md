@@ -291,6 +291,7 @@ it will provide useful use cases for newcomers to look at.
 
 ### Kotlin-multiplatform
 * [**Template for Kotlin Multiplatform projects**](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects): a project template for quickly spawning new Kotlin-multiplatform projects
+* [**yoki**](https://github.com/DevNatan/yoki): Kotlin Docker Remote API client
 
 ## Contributing to the project
 
