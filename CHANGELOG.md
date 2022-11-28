@@ -1,3 +1,20 @@
+## [2.0.10](https://github.com/DanySK/publish-on-central/compare/2.0.9...2.0.10) (2022-11-28)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v24.1.15 ([2933d6d](https://github.com/DanySK/publish-on-central/commit/2933d6d9246064327eec9b386e32aefd45d08f1b))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v7.6 ([0df2dc3](https://github.com/DanySK/publish-on-central/commit/0df2dc33b396c161a4578cb8d7d183bccdaf62b9))
+* **deps:** update plugin kotlin-qa to v0.27.1 ([00f3746](https://github.com/DanySK/publish-on-central/commit/00f374610c3e08e7853a77d6c03eafa4a4d8d701))
+* **deps:** update plugin kotlin-qa to v0.28.0 ([3db37b2](https://github.com/DanySK/publish-on-central/commit/3db37b26851dc87acd852f6c4fba09743a947db6))
+* **deps:** update plugin multijvmtesting to v0.4.13 ([b1f7057](https://github.com/DanySK/publish-on-central/commit/b1f70576891324e4409e8d0520bfc6a9551a8dc9))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.0.23 ([c24ea97](https://github.com/DanySK/publish-on-central/commit/c24ea978c719baafa818b098a98d4cbee219a815))
+* **deps:** update plugin publishoncentral to v2.0.9 ([8b07b71](https://github.com/DanySK/publish-on-central/commit/8b07b714a3fe3a455a8d2e1bff38ded91ec43bfc))
+
 ## [2.0.9](https://github.com/DanySK/publish-on-central/compare/2.0.8...2.0.9) (2022-11-11)
 
 
