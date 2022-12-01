@@ -1,3 +1,11 @@
+## [2.0.11](https://github.com/DanySK/publish-on-central/compare/2.0.10...2.0.11) (2022-12-01)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.7.22 ([cebfe96](https://github.com/DanySK/publish-on-central/commit/cebfe96740c1ef7cb461932389eef62ff5fbf0e6))
+* **deps:** update plugin kotlin-qa to v0.29.0 ([b30048e](https://github.com/DanySK/publish-on-central/commit/b30048ebd17cd089de946293518bb67528e32fa4))
+
 ## [2.0.10](https://github.com/DanySK/publish-on-central/compare/2.0.9...2.0.10) (2022-11-28)
 
 
