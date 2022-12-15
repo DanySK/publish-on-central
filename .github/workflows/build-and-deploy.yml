@@ -51,7 +51,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "::set-output name=version::${USES#*@}"
       - name: Checkout Alchemist ${{ steps.alchemist.outputs.version }}
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: '0'
           path: 'alchemist'
@@ -59,7 +59,7 @@ jobs:
           repository: 'AlchemistSimulator/Alchemist'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -96,7 +96,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "::set-output name=version::${USES#*@}"
       - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           fetch-depth: '0'
           path: 'kt-mp'
@@ -104,7 +104,7 @@ jobs:
           repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -135,7 +135,7 @@ jobs:
       group: release
     steps:
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v3.2.0
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
       - uses: DanySK/build-check-deploy-gradle-action@2.1.17
