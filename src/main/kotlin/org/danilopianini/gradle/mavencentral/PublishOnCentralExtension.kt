@@ -55,29 +55,29 @@ open class PublishOnCentralExtension(val project: Project) {
     /**
      * A description of the project.
      */
-    var projectDescription: Property<String> = project.propertyWithDefault("No description provided")
+    val projectDescription: Property<String> = project.propertyWithDefault("No description provided")
 
     /**
      * The project's license name.
      */
-    var licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0")
+    val licenseName: Property<String> = project.propertyWithDefault("Apache License, Version 2.0")
 
     /**
      * The license URL connection of the project.
      */
-    var licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0")
+    val licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0")
 
     /**
      * The SCM connection of the project.
      */
-    var scmConnection: Property<String> = project.propertyWithDefault(
+    val scmConnection: Property<String> = project.propertyWithDefault(
         "scm:git:https://github.com/DanySK/${project.name}"
     )
 
     /**
      * The URL of the project.
      */
-    var projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
+    val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
 
     /**
      * Utility to configure a new Maven repository as target.
