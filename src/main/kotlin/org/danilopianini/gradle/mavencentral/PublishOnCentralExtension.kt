@@ -70,7 +70,9 @@ open class PublishOnCentralExtension(val project: Project) {
     /**
      * The SCM connection of the project.
      */
-    var scmConnection: Property<String> = project.propertyWithDefault("git:git@github.com:DanySK/${project.name}")
+    var scmConnection: Property<String> = project.propertyWithDefault(
+        "scm:git:https://github.com/DanySK/${project.name}"
+    )
 
     /**
      * The URL of the project.
