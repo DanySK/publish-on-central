@@ -1,3 +1,19 @@
+## [3.0.0](https://github.com/DanySK/publish-on-central/compare/2.0.13...3.0.0) (2023-01-05)
+
+
+### ⚠ BREAKING CHANGES
+
+* expose the configuration properties as `val`s
+
+### Features
+
+* provide a simple way to change the owner ([36ec7d5](https://github.com/DanySK/publish-on-central/commit/36ec7d556e1da57bab9b3fe8ecda403276902d3b))
+
+
+### General maintenance
+
+* expose the configuration properties as `val`s ([5b641fe](https://github.com/DanySK/publish-on-central/commit/5b641fe77585c2f6ea1e654bd3c278f70a61af37))
+
 ## [2.0.13](https://github.com/DanySK/publish-on-central/compare/2.0.12...2.0.13) (2023-01-05)
 
 
