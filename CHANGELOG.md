@@ -1,3 +1,25 @@
+## [2.0.13](https://github.com/DanySK/publish-on-central/compare/2.0.12...2.0.13) (2023-01-05)
+
+
+### Bug Fixes
+
+* default to a valid Maven SCM connection ([1d45fe9](https://github.com/DanySK/publish-on-central/commit/1d45fe97e040d3de931f23c11004d89e2f470cca))
+
+
+### Dependency updates
+
+* **deps:** update plugin kotlin-qa to v0.29.2 ([4e09e5e](https://github.com/DanySK/publish-on-central/commit/4e09e5ede6862632e658ca7bd12419c01544c80c))
+* **deps:** update plugin multijvmtesting to v0.4.15 ([d2f44a4](https://github.com/DanySK/publish-on-central/commit/d2f44a48e3278b86ccad8221297f093ef72a320d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.1 ([93dd265](https://github.com/DanySK/publish-on-central/commit/93dd26563f057f46b31390c7bd2381bd5016544c))
+* **deps:** update plugin publishoncentral to v2.0.12 ([87bbf92](https://github.com/DanySK/publish-on-central/commit/87bbf92b95f225be2f71b514bfc83b1d052d8f8b))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.3.0 ([c6c2ea9](https://github.com/DanySK/publish-on-central/commit/c6c2ea9a7ec75fd6179bac8039bc3ceadd5bc5a6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.20 ([7989fb8](https://github.com/DanySK/publish-on-central/commit/7989fb824b3646214476208f2a7469125b5c1f14))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.5 ([54a09ab](https://github.com/DanySK/publish-on-central/commit/54a09ab9dde73a83bfc03a1ddbee7b9d7ad1e4c7))
+
 ## [2.0.12](https://github.com/DanySK/publish-on-central/compare/2.0.11...2.0.12) (2022-12-31)
 
 
