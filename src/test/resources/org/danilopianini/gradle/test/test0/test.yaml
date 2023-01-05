@@ -15,8 +15,8 @@ tests:
           - '\s*<license>'
           - '\s*</license>'
           - '\s*<scm>'
-          - '\s*<connection>.+</connection>'
-          - '\s*<developerConnection>.+</developerConnection>'
+          - '\s*<connection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</connection>'
+          - '\s*<developerConnection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</developerConnection>'
           - '\s*</scm>'
   - description: "release tasks get generated"
     configuration:

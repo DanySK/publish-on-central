@@ -83,8 +83,9 @@ publishOnCentral {
     projectLongName.set(project.name)
     licenseName.set("Apache License, Version 2.0")
     licenseUrl.set("http://www.apache.org/licenses/LICENSE-2.0")
-    projectUrl.set("https://github.com/DanySK/${project.name}")
-    scmConnection.set("scm:git:https://github.com/DanySK/${project.name}")
+    repoOwner.set("DanySK") // Used to populate the default value for projectUrl and scmConnection
+    projectUrl.set("https://github.com/${repoOwner}/${project.name}")
+    scmConnection.set("scm:git:https://github.com/${repoOwner}/${project.name}")
     /*
      * The plugin is pre-configured to fetch credentials for Maven Central from the context in the following order:
      * 1. Environment variables MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD
