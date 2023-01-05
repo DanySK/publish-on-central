@@ -3,6 +3,7 @@ package org.danilopianini.gradle.mavencentral
 import MavenRepositoryDescriptor
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.gradle.kotlin.dsl.property
 import java.time.Duration
 
 /**
@@ -68,16 +69,23 @@ open class PublishOnCentralExtension(val project: Project) {
     val licenseUrl: Property<String> = project.propertyWithDefault("http://www.apache.org/licenses/LICENSE-2.0")
 
     /**
+     * For GitHub projects, the owner of the repo. Used for the default values of [projectUrl] and [scmConnection]
+     */
+    val repoOwner: Property<String> = project.propertyWithDefault("DanySK")
+
+    /**
      * The SCM connection of the project.
      */
-    val scmConnection: Property<String> = project.propertyWithDefault(
-        "scm:git:https://github.com/DanySK/${project.name}"
+    val scmConnection: Property<String> = project.objects.property<String>().convention(
+        repoOwner.map { "scm:git:https://github.com/$it/${project.name}" }
     )
 
     /**
      * The URL of the project.
      */
-    val projectUrl: Property<String> = project.propertyWithDefault("https://github.com/DanySK/${project.name}")
+    val projectUrl: Property<String> = project.objects.property<String>().convention(
+        repoOwner.map { "https://github.com/$it/${project.name}" }
+    )
 
     /**
      * Utility to configure a new Maven repository as target.

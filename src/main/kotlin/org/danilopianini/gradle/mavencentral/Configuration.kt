@@ -10,6 +10,7 @@ import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
@@ -18,10 +19,10 @@ import org.gradle.plugins.signing.SigningExtension
 import java.net.URI
 
 internal inline fun <reified T> Project.propertyWithDefault(default: T?): Property<T> =
-    objects.property(T::class.java).apply { convention(default) }
+    objects.property<T>().apply { convention(default) }
 
 internal inline fun <reified T> Project.propertyWithDefaultProvider(noinline default: () -> T?): Property<T> =
-    objects.property(T::class.java).apply { convention(provider(default)) }
+    objects.property<T>().apply { convention(provider(default)) }
 
 /**
  * Configures a [MavenPublication] for publication on Maven Central, adding the following.
