@@ -1,3 +1,28 @@
+## [3.1.0](https://github.com/DanySK/publish-on-central/compare/3.0.0...3.1.0) (2023-01-07)
+
+
+### Features
+
+* allow dropping open repositories ([514df2e](https://github.com/DanySK/publish-on-central/commit/514df2e933c340ff5e572cba50b139dac5910abe))
+* if there are packages to upload, always upload before dropping ([c6ba656](https://github.com/DanySK/publish-on-central/commit/c6ba6566fa9425d32ba1ca82c16e45cd314af492))
+* implement repository drop (experimental) ([ac0b239](https://github.com/DanySK/publish-on-central/commit/ac0b239d3da554a06770ef232c4bf96768068dff))
+
+
+### Bug Fixes
+
+* replace khttp with fuel ([c71fa45](https://github.com/DanySK/publish-on-central/commit/c71fa4572b72f2bd58192469c00fbe113c49ec9f))
+
+
+### Documentation
+
+* **readme:** document the existence of the drop task ([0fbf218](https://github.com/DanySK/publish-on-central/commit/0fbf21833849c9f7c02e24df6dfbc2b6e40648c7))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.6 ([fabd1ef](https://github.com/DanySK/publish-on-central/commit/fabd1ef0a08cd751837140e40633f0f27451661c))
+* perform a dry-deploy with drop in CI ([4c3bf46](https://github.com/DanySK/publish-on-central/commit/4c3bf46844ee09808ada790dcdd53f126c200f24))
+
 ## [3.0.0](https://github.com/DanySK/publish-on-central/compare/2.0.13...3.0.0) (2023-01-05)
 
 
