@@ -18,7 +18,7 @@ tests:
           - '\s*<connection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</connection>'
           - '\s*<developerConnection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</developerConnection>'
           - '\s*</scm>'
-  - description: "release tasks get generated"
+  - description: "release and drop tasks get generated"
     configuration:
       tasks: tasks
     expectation:
@@ -28,6 +28,7 @@ tests:
         - uploadJavaOSSRHToMavenCentralNexus
         - uploadPluginMavenToMavenCentralNexus
         - releaseStagingRepositoryOnMavenCentral
+        - dropStagingRepositoryOnMavenCentral
       output_doesnt_contain:
         - uploadJavaMavenToGithubNexus
   - description: "sources and javadoc tasks get greated"
@@ -38,7 +39,7 @@ tests:
       output_contains:
         - sourcesJar
         - javadocJar
-  - description: "sources and javadoc jars get greated"
+  - description: "sources and javadoc jars get created"
     configuration:
       tasks:
         - jar

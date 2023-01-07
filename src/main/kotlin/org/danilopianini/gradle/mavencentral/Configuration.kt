@@ -123,11 +123,25 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Closes the Nexus repository on ${repoToConfigure.name}."
     }
-    rootProject.registerTaskIfNeeded<DefaultTask>("releaseStagingRepositoryOn${repoToConfigure.name}") {
+    val release = rootProject.registerTaskIfNeeded<DefaultTask>("releaseStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.release() }
         dependsOn(closeStagingRepository)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
-        description = "Releases the Nexus repo on ${repoToConfigure.name}."
+        description = "Releases the Nexus repo on ${repoToConfigure.name}. Incompatible with dropping the same repo."
+    }
+    val drop = rootProject.registerTaskIfNeeded<DefaultTask>("dropStagingRepositoryOn${repoToConfigure.name}") {
+        doLast { nexusClient.nexusClient.drop() }
+        dependsOn(closeStagingRepository)
+        group = PublishingPlugin.PUBLISH_TASK_GROUP
+        description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
+    }
+    gradle.taskGraph.whenReady {
+        if (it.hasTask(release) && it.hasTask(drop)) {
+            error(
+                "Tasks ${release.name} and ${drop.name} have both been selected for execution, " +
+                    "but they are mutually exclusive"
+            )
+        }
     }
     the<PublishingExtension>().publications.withType<MavenPublication>().configureEach { publication ->
         val publicationName = publication.name.replaceFirstChar(Char::titlecase)

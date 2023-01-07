@@ -5,6 +5,7 @@ import io.github.gradlenexus.publishplugin.internal.NexusClient
 import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryDescriptor
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitioner
+import khttp.structures.authorization.BasicAuthorization
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import java.net.URI
@@ -95,6 +96,23 @@ data class NexusStatefulOperation(
         project.logger.lifecycle("Releasing repository {} on Nexus at {}", repoId, repoUrl)
         transitioner.effectivelyRelease(repoId, description)
         project.logger.lifecycle("Repository {} released", repoId)
+    }
+
+    /**
+     * Drops the repository. Must be called after close().
+     */
+    fun drop() {
+        project.logger.lifecycle("Dropping repository {} on Nexus at {}", repoId, repoUrl)
+        khttp.post(
+            url = "${nexusUrl.removeSuffix("/")}/staging/bulk/drop",
+            auth = BasicAuthorization(user.get(), password.get()),
+            headers = mapOf(
+                "Accept" to "application/json",
+                "Content-Type" to "application/json",
+            ),
+            data = """{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""".trimIndent(),
+        )
+        project.logger.lifecycle("Requested drop for repository {} ", repoId)
     }
 
     companion object {
