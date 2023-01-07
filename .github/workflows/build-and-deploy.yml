@@ -68,7 +68,7 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: |
-            COMMAND='./gradlew --include-build ../publish-on-central uploadKotlinOSSRHToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel'
+            COMMAND='./gradlew --include-build ../publish-on-central uploadKotlinOSSRHToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel'
             $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
           working-directory: alchemist
           should-run-codecov: false
