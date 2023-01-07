@@ -235,6 +235,8 @@ Typical invocations could be:
   * Uploads all artifacts and closes the repository
 * `./gradlew uploadAllPublicationsToMavenCentralNexus releaseStagingRepositoryOnMavenCentral`
   * Uploads all artifacts, closes, and releases the repository
+* `./gradlew uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral `
+  * Uploads all artifacts, closes the repository, then drops it (dry-deploy)
 
 The idea is that the packages to be uploaded must be selected by picking the right set of
 `upload[Publication]To[Repo]Nexus` tasks,
