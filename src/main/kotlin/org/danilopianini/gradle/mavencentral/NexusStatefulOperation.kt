@@ -115,7 +115,7 @@ data class NexusStatefulOperation(
                 )
                 .authentication().basic(user.get(), password.get())
                 .jsonBody("""{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""")
-                .response { request, response, _ ->
+                .response { _, response, _ ->
                     project.logger.lifecycle("Received response {} ", response)
                     check(response.statusCode == HttpStatusCodes.STATUS_CODE_OK)
                 }

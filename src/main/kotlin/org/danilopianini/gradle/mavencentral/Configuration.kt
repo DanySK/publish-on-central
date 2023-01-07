@@ -131,7 +131,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
     }
     val drop = rootProject.registerTaskIfNeeded<DefaultTask>("dropStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.drop() }
-        dependsOn(closeStagingRepository)
+        mustRunAfter(closeStagingRepository)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
     }
