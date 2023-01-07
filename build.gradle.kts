@@ -38,7 +38,8 @@ dependencies {
     api(gradleApi())
     api(gradleKotlinDsl())
     api(libs.nexus.publish)
-    implementation(libs.khttp)
+    implementation(libs.kotlinx.coroutines)
+    implementation(libs.fuel)
     testImplementation(gradleTestKit())
     testImplementation(libs.bundles.kotlin.testing)
 }

@@ -5,10 +5,11 @@ kotlin = "1.8.0"
 nexus-publish = "1.1.0"
 
 [libraries]
-khttp = "org.danilopianini:khttp:1.2.2"
+fuel = "com.github.kittinunf.fuel:fuel:2.3.1"
 konf-yaml = "com.uchuhimo:konf-yaml:1.1.2"
 kotest-junit5-jvm = { module = "io.kotest:kotest-runner-junit5-jvm", version.ref = "kotest" }
 kotest-assertions-core-jvm = { module = "io.kotest:kotest-assertions-core-jvm", version.ref = "kotest" }
+kotlinx-coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
 nexus-publish = { module = "io.github.gradle-nexus:publish-plugin", version.ref = "nexus-publish" }
 
 [bundles]
@@ -22,5 +23,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = { id = "org.danilopianini.gradle-kotlin-qa", version = "0.29.2" }
 multiJvmTesting = { id = "org.danilopianini.multi-jvm-test-plugin", version = "0.4.15" }
 nexus-publish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexus-publish" }
-publishOnCentral = { id = "org.danilopianini.publish-on-central", version = "2.0.12" }
+publishOnCentral = { id = "org.danilopianini.publish-on-central", version = "3.0.0-dev02-ac0b239" }
 taskTree = { id = "com.dorongold.task-tree", version = "2.1.0" }

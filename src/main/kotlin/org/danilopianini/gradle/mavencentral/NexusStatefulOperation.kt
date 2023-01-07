@@ -1,13 +1,17 @@
 package org.danilopianini.gradle.mavencentral
 
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.core.extensions.authentication
+import com.github.kittinunf.fuel.core.extensions.jsonBody
 import io.github.gradlenexus.publishplugin.internal.BasicActionRetrier
 import io.github.gradlenexus.publishplugin.internal.NexusClient
 import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryDescriptor
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitioner
-import khttp.structures.authorization.BasicAuthorization
+import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
+import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes
 import java.net.URI
 import java.time.Duration
 
@@ -103,15 +107,19 @@ data class NexusStatefulOperation(
      */
     fun drop() {
         project.logger.lifecycle("Dropping repository {} on Nexus at {}", repoId, repoUrl)
-        khttp.post(
-            url = "${nexusUrl.removeSuffix("/")}/staging/bulk/drop",
-            auth = BasicAuthorization(user.get(), password.get()),
-            headers = mapOf(
-                "Accept" to "application/json",
-                "Content-Type" to "application/json",
-            ),
-            data = """{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""".trimIndent(),
-        )
+        runBlocking {
+            Fuel.post("${nexusUrl.removeSuffix("/")}/staging/bulk/drop")
+                .header(
+                    "Accept" to "application/json",
+                    "Content-Type" to "application/json",
+                )
+                .authentication().basic(user.get(), password.get())
+                .jsonBody("""{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""")
+                .response { request, response, _ ->
+                    project.logger.lifecycle("Received response {} ", response)
+                    check(response.statusCode == HttpStatusCodes.STATUS_CODE_OK)
+                }
+        }
         project.logger.lifecycle("Requested drop for repository {} ", repoId)
     }
 
