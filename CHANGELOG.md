@@ -1,3 +1,22 @@
+## [3.1.1](https://github.com/DanySK/publish-on-central/compare/3.1.0...3.1.1) (2023-01-11)
+
+
+### Bug Fixes
+
+* allow status code 201 when dropping a repository ([bd87a1c](https://github.com/DanySK/publish-on-central/commit/bd87a1c5da24249d635bdc8e703304e7ce0b07d9))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.4.1 ([3edd445](https://github.com/DanySK/publish-on-central/commit/3edd44561f5ab970cc8896e0b96ab57e5694ea54))
+* **deps:** update danysk/action-checkout action to v0.2.5 ([cc9b69b](https://github.com/DanySK/publish-on-central/commit/cc9b69bc9c42fc5264d5e643fd207e8f454934f9))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.7 ([b505637](https://github.com/DanySK/publish-on-central/commit/b5056376d9d845099157fa43048577be212a0caa))
+
+
+### Dependency updates
+
+* **deps:** update node.js to 18.13 ([6a5154d](https://github.com/DanySK/publish-on-central/commit/6a5154d37281ea003c5193936fca38a7f4fdbc48))
+
 ## [3.1.0](https://github.com/DanySK/publish-on-central/compare/3.0.0...3.1.0) (2023-01-07)
 
 
