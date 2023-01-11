@@ -117,7 +117,12 @@ data class NexusStatefulOperation(
                 .jsonBody("""{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""")
                 .response { _, response, _ ->
                     project.logger.lifecycle("Received response {} ", response)
-                    check(response.statusCode == HttpStatusCodes.STATUS_CODE_OK)
+                    check(
+                        response.statusCode in listOf(
+                            HttpStatusCodes.STATUS_CODE_OK,
+                            HttpStatusCodes.STATUS_CODE_CREATED,
+                        )
+                    )
                 }
         }
         project.logger.lifecycle("Requested drop for repository {} ", repoId)
