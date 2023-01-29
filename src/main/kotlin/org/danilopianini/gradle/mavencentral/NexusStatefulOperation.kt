@@ -12,6 +12,7 @@ import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes
+import org.gradle.kotlin.dsl.provideDelegate
 import java.net.URI
 import java.time.Duration
 
@@ -60,11 +61,16 @@ data class NexusStatefulOperation(
      * Lazily computed staging repository descriptor.
      */
     val stagingRepository: StagingRepositoryDescriptor by lazy {
-        project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
-        client.createStagingRepository(
-            stagingProfile,
-            description,
-        )
+        project.properties["nexusStagingRepositoryId"]?.let {
+            project.logger.lifecycle("Using existing staging repository {}", it)
+            return@lazy StagingRepositoryDescriptor(project.uri(nexusUrl), it as String)
+        } ?: run {
+            project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
+            client.createStagingRepository(
+                stagingProfile,
+                description
+            )
+        }
     }
 
     /**
