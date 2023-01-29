@@ -266,6 +266,50 @@ flowchart LR
     createStagingRepositoryOnRepositoryName --o uploadPublicationName2ToRepositoryNameNexus
 ```
 
+## Multi-stage upload
+
+This plugin, during the execution of the `createStagingRepositoryOn[Repo]` task, exports the staging repository ID in
+the format `[Repo]StagingRepositoryId` as an output of the step.
+
+Using this output, it is possible, from other jobs, to upload artifacts to the same staging repository by using the
+`stagingRepositoryId` gradle property.
+
+An example below shows how to use this feature to upload artifacts to a staging repository from a different job.
+
+```yaml
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      repositoryId: ${{ steps.createStagingRepository.outputs.MavenCentralStagingRepositoryId }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Build with Gradle
+        run: ./gradlew build
+      - name: Create staging repository
+        id: createStagingRepository
+        # This step creates a staging repository on Maven Central and exports the staging repository ID as an output
+        run: ./gradlew createStagingRepositoryOnMavenCentral
+          
+  release:
+    needs: build
+    matrix:
+      os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Use staging repository
+        # Use the staging repository ID exported by the previous job to upload artifacts to the same staging repository
+        run: ./gradlew -PstagingRepositoryId=${{ needs.build.outputs.repositoryId }} uploadAllPublicationsToMavenCentralNexus
+
+```
+
 ## Usage examples
 
 If you use publish-on-central in your project, please consider providing a pull request with a link to your project:
