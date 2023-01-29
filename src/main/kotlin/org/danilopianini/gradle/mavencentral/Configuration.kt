@@ -105,6 +105,17 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         doLast {
             rootProject.warnIfCredentialsAreMissing(repoToConfigure)
             nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
+            // Write the staging repository ID to the Github env if on CI
+            if (System.getenv("CI") == true.toString()) {
+                exec {
+                    it.commandLine(
+                        "echo",
+                        "${repoToConfigure.name}StagingRepositoryId=${nexusClient.nexusClient.repoId}",
+                        ">>",
+                        "\$GITHUB_OUTPUT"
+                    )
+                }
+            }
         }
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Creates a new Nexus staging repository on ${repoToConfigure.name}."
