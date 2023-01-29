@@ -12,7 +12,6 @@ import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
 import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes
-import org.gradle.kotlin.dsl.provideDelegate
 import java.net.URI
 import java.time.Duration
 
