@@ -268,11 +268,10 @@ flowchart LR
 
 ## Multi-stage upload
 
-This plugin, during the execution of the `createStagingRepositoryOn[Repo]` task, exports the staging repository ID in
-the format `[Repo]StagingRepositoryId` as an output of the step.
+This plugin, during the execution of the `createStagingRepositoryOn[Repo]` task, exports a file in
+`build/staging-repo-ids.properties` containing the staging repository ID in the format `[Repo]=<repo-id>`.
 
-Using this output, it is possible, from other jobs, to upload artifacts to the same staging repository by using the
-`stagingRepositoryId` gradle property.
+This file can be used to export all the repository IDs to the environment, and then use them in other jobs.
 
 An example below shows how to use this feature to upload artifacts to a staging repository from a different job.
 
@@ -295,7 +294,7 @@ jobs:
         run: |
           ./gradlew createStagingRepositoryOnMavenCentral
           cat build/staging-repo-ids.properties >> $GITHUB_OUTPUT
-          
+
   release:
     needs: build
     matrix:
