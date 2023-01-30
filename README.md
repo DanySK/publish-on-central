@@ -292,7 +292,9 @@ jobs:
       - name: Create staging repository
         id: createStagingRepository
         # This step creates a staging repository on Maven Central and exports the staging repository ID as an output
-        run: ./gradlew createStagingRepositoryOnMavenCentral
+        run: |
+          ./gradlew createStagingRepositoryOnMavenCentral
+          cat build/staging-repo-ids.properties >> $GITHUB_OUTPUT
           
   release:
     needs: build
@@ -306,7 +308,7 @@ jobs:
           java-version: 11
       - name: Use staging repository
         # Use the staging repository ID exported by the previous job to upload artifacts to the same staging repository
-        run: ./gradlew -PstagingRepositoryId=${{ needs.build.outputs.repositoryId }} uploadAllPublicationsToMavenCentralNexus
+        run: ./gradlew -PstagingRepositoryId=${{ needs.build.outputs.MavenCentral }} uploadAllPublicationsToMavenCentralNexus
 
 ```
 
