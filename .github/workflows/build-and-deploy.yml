@@ -162,7 +162,7 @@ jobs:
             $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
             [[ -e build/staging-repo-ids.properties ]]
             [[ "$(wc -l build/staging-repo-ids.properties)" =~ "^1 .*" ]]
-            [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=\w+-\d+$' ]]
+            [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=[a-zA-Z]+-[0-9]+$' ]]
           working-directory: kt-mp-multi-stage
           should-run-codecov: false
           should-deploy: true
