@@ -101,12 +101,14 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
     val createStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
         "createStagingRepositoryOn${repoToConfigure.name}"
     ) {
+        val stagingRepoIdsFileName = "staging-repo-ids.properties"
+        outputs.file(buildDir.resolve(stagingRepoIdsFileName))
         dependsOn(nexusClient)
         doLast {
             rootProject.warnIfCredentialsAreMissing(repoToConfigure)
             nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
             // Write the staging repository ID to build/staging-repo-ids.properties file
-            project.buildDir.resolve("staging-repo-ids.properties").appendText(
+            buildDir.resolve(stagingRepoIdsFileName).appendText(
                 "${repoToConfigure.name}=${nexusClient.nexusClient.repoId}" + System.lineSeparator()
             )
         }
