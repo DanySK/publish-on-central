@@ -49,7 +49,7 @@ jobs:
           )
           echo "Scripts update line: \"$USES\""
           echo "Computed version: \"${USES#*@}\""
-          echo "::set-output name=version::${USES#*@}"
+          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Alchemist ${{ steps.alchemist.outputs.version }}
         uses: actions/checkout@v3.3.0
         with:
@@ -94,7 +94,7 @@ jobs:
           )
           echo "Scripts update line: \"$USES\""
           echo "Computed version: \"${USES#*@}\""
-          echo "::set-output name=version::${USES#*@}"
+          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
         uses: actions/checkout@v3.3.0
         with:
@@ -116,6 +116,54 @@ jobs:
             COMMAND='./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral --parallel'
             $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
           working-directory: kt-mp
+          should-run-codecov: false
+          should-deploy: true
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          signing-key: ${{ secrets.SIGNING_KEY }}
+          signing-password: ${{ secrets.SIGNING_PASSWORD }}
+  test-multi-stage-deployment:
+    runs-on: ubuntu-latest
+    if: >-
+      !github.event.repository.fork
+      && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+    steps:
+      - name: Compute the version of the target test project
+        id: versiontrick
+        shell: bash
+        run: |
+          # Idea: the regex matcher of Renovate keeps this string up to date automatically
+          # The version is extracted and used to access the correct version of the scripts
+          USES=$(cat <<TRICK_RENOVATE
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.1.7
+          TRICK_RENOVATE
+          )
+          echo "Scripts update line: \"$USES\""
+          echo "Computed version: \"${USES#*@}\""
+          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
+      - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
+        uses: actions/checkout@v3.3.0
+        with:
+          fetch-depth: '0'
+          path: 'kt-mp-multi-stage'
+          ref: "${{ steps.versiontrick.outputs.version }}"
+          repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
+          submodules: 'recursive'
+      - name: Checkout publish-on-central
+        uses: actions/checkout@v3.3.0
+        with:
+          path: 'publish-on-central'
+      - name: Dry-deploy
+        uses: DanySK/build-check-deploy-gradle-action@2.1.21
+        with:
+          build-command: true
+          check-command: true
+          deploy-command: |
+            COMMAND='./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel'
+            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
+            [[ -e build/staging-repo-ids.properties ]]
+            [[ "$(wc -l build/staging-repo-ids.properties)" =~ "^1 .*" ]]
+            [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=\w+-\d+$' ]]
+          working-directory: kt-mp-multi-stage
           should-run-codecov: false
           should-deploy: true
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}

@@ -105,6 +105,10 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         doLast {
             rootProject.warnIfCredentialsAreMissing(repoToConfigure)
             nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
+            // Write the staging repository ID to build/staging-repo-ids.properties file
+            project.buildDir.resolve("staging-repo-ids.properties").appendText(
+                "${repoToConfigure.name}=${nexusClient.nexusClient.repoId}" + System.lineSeparator()
+            )
         }
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Creates a new Nexus staging repository on ${repoToConfigure.name}."

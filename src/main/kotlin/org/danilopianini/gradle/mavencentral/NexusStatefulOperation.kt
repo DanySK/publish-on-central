@@ -60,11 +60,17 @@ data class NexusStatefulOperation(
      * Lazily computed staging repository descriptor.
      */
     val stagingRepository: StagingRepositoryDescriptor by lazy {
-        project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
-        client.createStagingRepository(
-            stagingProfile,
-            description,
-        )
+        project.properties["stagingRepositoryId"]?.let {
+            project.logger.lifecycle("Using existing staging repository {}", it)
+            val stagingRepo = client.getStagingRepositoryStateById(it as String)
+            return@lazy StagingRepositoryDescriptor(project.uri(nexusUrl), stagingRepo.id)
+        } ?: run {
+            project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
+            client.createStagingRepository(
+                stagingProfile,
+                description
+            )
+        }
     }
 
     /**
