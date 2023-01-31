@@ -1,3 +1,32 @@
+## [3.2.0](https://github.com/DanySK/publish-on-central/compare/3.1.1...3.2.0) (2023-01-31)
+
+
+### Features
+
+* allow exporting Nexus repository IDs and publishing artifacts to an open Nexus staging repository ([#471](https://github.com/DanySK/publish-on-central/issues/471)) ([5faaaf8](https://github.com/DanySK/publish-on-central/commit/5faaaf8d9820c5846c69e8d044adcbac01686023))
+
+
+### Bug Fixes
+
+* solve a problem where the task fail if the build folder is not previously created ([#473](https://github.com/DanySK/publish-on-central/issues/473)) ([8d8a9a3](https://github.com/DanySK/publish-on-central/commit/8d8a9a3c87e30813a5d7ef8308efde14d435f40f))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.16 ([9764050](https://github.com/DanySK/publish-on-central/commit/9764050b6a7e7009df85f7badc3b6fda3949fadf))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.4.2 ([240670b](https://github.com/DanySK/publish-on-central/commit/240670b15840e6290c230669781ac82d35542143))
+* **deps:** update alchemistsimulator/alchemist action to v25.5.0 ([0333630](https://github.com/DanySK/publish-on-central/commit/0333630b4582d169a5fddb6cc5bd9ba02cdef03d))
+* **deps:** update alchemistsimulator/alchemist action to v25.6.0 ([1a7dee5](https://github.com/DanySK/publish-on-central/commit/1a7dee519dd2ebdf8873036a03a8c7d0526ff45a))
+* **deps:** update alchemistsimulator/alchemist action to v25.7.0 ([ef52476](https://github.com/DanySK/publish-on-central/commit/ef52476c0200395e56d1b2be28fc18191e951fca))
+* **deps:** update alchemistsimulator/alchemist action to v25.7.1 ([2576f48](https://github.com/DanySK/publish-on-central/commit/2576f488c989111f9a6f9c58a979d5be42dd0b04))
+* **deps:** update alchemistsimulator/alchemist action to v25.7.2 ([fbbe71c](https://github.com/DanySK/publish-on-central/commit/fbbe71c302b1e427edc965501734b6718705aaa0))
+* **deps:** update alchemistsimulator/alchemist action to v25.8.0 ([8aac450](https://github.com/DanySK/publish-on-central/commit/8aac4501de746598a2c514cb769797bbe2edd461))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.21 ([71de72b](https://github.com/DanySK/publish-on-central/commit/71de72b13694094f0655de6a2a8698ee717afc3d))
+
 ## [3.1.1](https://github.com/DanySK/publish-on-central/compare/3.1.0...3.1.1) (2023-01-11)
 
 
