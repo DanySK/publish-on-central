@@ -165,11 +165,15 @@ jobs:
             [[ -e "$IDS" ]] || (
               echo "No $IDS" && exit 2
             )
-            [[ "$(wc -l build/staging-repo-ids.properties)" =~ "^1 .*" ]] || (
-              echo "$IDS has too many lines (1 expected):\n$(cat "$IDS")" && exit 3
+            [[ "$(wc -l "$IDS")" =~ "^1 .*" ]] || (
+              echo "$IDS has too many lines (1 expected): $(wc -l "$IDS")" &&
+              cat "$IDS" &&
+              exit 3
             )
             [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=[a-zA-Z]+-[0-9]+$' ]] || (
-              echo "$IDS has not the expected content:\n$(cat "$IDS")" && exit 4
+              echo "$IDS has not the expected content" &&
+              cat "$IDS" &&
+              exit 4
             )
           working-directory: kt-mp-multi-stage
           should-run-codecov: false
