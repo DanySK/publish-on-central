@@ -165,12 +165,12 @@ jobs:
             [[ -e "$IDS" ]] || (
               echo "No $IDS" && exit 2
             )
-            [[ "$(wc -l "$IDS")" =~ "^1 .*" ]] || (
+            [[ "$(wc -l "$IDS")" =~ ^1' '.*$ ]] || (
               echo "$IDS has too many lines (1 expected): $(wc -l "$IDS")" &&
               cat "$IDS" &&
               exit 3
             )
-            [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=[a-zA-Z]+-[0-9]+$' ]] || (
+            [[ "$(cat build/staging-repo-ids.properties)" =~ ^MavenCentral=[a-zA-Z0-9]+-[0-9]+$ ]] || (
               echo "$IDS has not the expected content" &&
               cat "$IDS" &&
               exit 4
