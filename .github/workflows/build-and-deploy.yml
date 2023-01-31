@@ -161,7 +161,8 @@ jobs:
             COMMAND='./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel'
             $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
             [[ -e build/staging-repo-ids.properties ]]
-            [[ $(cat build/staging-repo-ids.properties) =~ "^MavenCentral=(.*)$" ]]
+            [[ "$(wc -l build/staging-repo-ids.properties)" =~ "^1 .*" ]]
+            [[ "$(cat build/staging-repo-ids.properties)" =~ '^MavenCentral=\w+-\d+$' ]]
           working-directory: kt-mp-multi-stage
           should-run-codecov: false
           should-deploy: true
