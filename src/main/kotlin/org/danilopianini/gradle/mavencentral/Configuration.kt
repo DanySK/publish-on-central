@@ -126,7 +126,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
     ) {
         doLast {
             with(nexusClient.nexusClient) {
-                when(client.getStagingRepositoryStateById(repoId)) {
+                when (client.getStagingRepositoryStateById(repoId).state) {
                     StagingRepository.State.CLOSED ->
                         logger.warn("The staging repository is already closed. Skipping.")
                     else -> close()
