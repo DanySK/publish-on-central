@@ -125,12 +125,12 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         "closeStagingRepositoryOn${repoToConfigure.name}"
     ) {
         doLast {
-            val currentStagingRepoState =
-                nexusClient.nexusClient.client.getStagingRepositoryStateById(nexusClient.nexusClient.repoId)
-            if (currentStagingRepoState.state == StagingRepository.State.CLOSED) {
-                logger.warn("The staging repository is already closed. Skipping.")
-            } else {
-                nexusClient.nexusClient.close()
+            with(nexusClient.nexusClient) {
+                when(client.getStagingRepositoryStateById(repoId)) {
+                    StagingRepository.State.CLOSED ->
+                        logger.warn("The staging repository is already closed. Skipping.")
+                    else -> close()
+                }
             }
         }
         dependsOn(createStagingRepository)
