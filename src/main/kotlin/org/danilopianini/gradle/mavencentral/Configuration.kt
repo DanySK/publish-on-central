@@ -1,5 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
+import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -123,7 +124,15 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
     val closeStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
         "closeStagingRepositoryOn${repoToConfigure.name}"
     ) {
-        doLast { nexusClient.nexusClient.close() }
+        doLast {
+            with(nexusClient.nexusClient) {
+                when (client.getStagingRepositoryStateById(repoId).state) {
+                    StagingRepository.State.CLOSED ->
+                        logger.warn("The staging repository is already closed. Skipping.")
+                    else -> close()
+                }
+            }
+        }
         dependsOn(createStagingRepository)
         mustRunAfter(uploadAllPublications)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
