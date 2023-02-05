@@ -1,3 +1,19 @@
+## [3.2.1](https://github.com/DanySK/publish-on-central/compare/3.2.0...3.2.1) (2023-02-05)
+
+
+### Bug Fixes
+
+* prevent the closing of a staging repository already closed ([#477](https://github.com/DanySK/publish-on-central/issues/477)) ([8c1311c](https://github.com/DanySK/publish-on-central/commit/8c1311ccd293a4b8c35190e415da127d9af88bf0))
+
+
+### Build and continuous integration
+
+* change regex to be bash-compliant ([#474](https://github.com/DanySK/publish-on-central/issues/474)) ([5454a6f](https://github.com/DanySK/publish-on-central/commit/5454a6fa5e16226e3ecca516490e17e03a7a8a59))
+* fail more clearly ([1e4b851](https://github.com/DanySK/publish-on-central/commit/1e4b8511a79889ecd7b6009260bec4c3192b6a76))
+* fix pure bash regex matchers ([d1fe58f](https://github.com/DanySK/publish-on-central/commit/d1fe58fc2f78423d221e28b558928b7c551e4b07))
+* improve failure reporting ([1c4822d](https://github.com/DanySK/publish-on-central/commit/1c4822dca5c53f46d5a37300f78e4ad62f1b3595))
+* never release unless all tests pass ([c47a755](https://github.com/DanySK/publish-on-central/commit/c47a7557b55d391acccd126c025247689ca95b94))
+
 ## [3.2.0](https://github.com/DanySK/publish-on-central/compare/3.1.1...3.2.0) (2023-01-31)
 
 
