@@ -1,6 +1,6 @@
 [versions]
 dokka = "1.7.20"
-kotest = "5.5.4"
+kotest = "5.5.5"
 kotlin = "1.8.0"
 nexus-publish = "1.1.0"
 
