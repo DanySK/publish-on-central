@@ -1,3 +1,38 @@
+## [3.2.2](https://github.com/DanySK/publish-on-central/compare/3.2.1...3.2.2) (2023-02-17)
+
+
+### Bug Fixes
+
+* force all signing tasks to run before the uploads ([b1458ed](https://github.com/DanySK/publish-on-central/commit/b1458ed87e1d88fb99ba189e47b2a0201e7074c7))
+
+
+### Dependency updates
+
+* **deps:** update kotest to v5.5.5 ([619aeec](https://github.com/DanySK/publish-on-central/commit/619aeec4ad5736cfca43d445fc6589720786f997))
+* **deps:** update node.js to 18.14 ([18f1b09](https://github.com/DanySK/publish-on-central/commit/18f1b09c5619c31713e43ddc71de10ff052054a3))
+
+
+### Build and continuous integration
+
+* apply the foojay-resolver-convention ([4afc614](https://github.com/DanySK/publish-on-central/commit/4afc614f4b57463e2a74e8d0c40a580b567c5cd7))
+* **deps:** update alchemistsimulator/alchemist action to v25.10.0 ([7125dc4](https://github.com/DanySK/publish-on-central/commit/7125dc4fab51d30315380ff7ee72b672aab3941e))
+* **deps:** update alchemistsimulator/alchemist action to v25.11.0 ([c09c988](https://github.com/DanySK/publish-on-central/commit/c09c98853af7074a235fe84fd9d85966bbce8657))
+* **deps:** update alchemistsimulator/alchemist action to v25.12.0 ([264f10f](https://github.com/DanySK/publish-on-central/commit/264f10f0b99e5ec0f9a6f3f9d4c0bbdc32252050))
+* **deps:** update alchemistsimulator/alchemist action to v25.9.0 ([1222803](https://github.com/DanySK/publish-on-central/commit/12228034b5b377b5d197119098fb426cf2b0f6ad))
+* **deps:** update alchemistsimulator/alchemist action to v25.9.1 ([c9c0bb0](https://github.com/DanySK/publish-on-central/commit/c9c0bb0bcf5d2c5469b83cc08e2ba8d41a165c5b))
+* **deps:** update alchemistsimulator/alchemist action to v25.9.2 ([94c49d6](https://github.com/DanySK/publish-on-central/commit/94c49d645c96234448665c4391d4ed68419392ed))
+* **deps:** update alchemistsimulator/alchemist action to v25.9.3 ([609c0bc](https://github.com/DanySK/publish-on-central/commit/609c0bc030d14d0758e21a64e4f4549051b5ee0d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.22 ([e31acd1](https://github.com/DanySK/publish-on-central/commit/e31acd1af0184329dc30aef6d418c2f6b7142ef6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.23 ([4c21d4a](https://github.com/DanySK/publish-on-central/commit/4c21d4ac899656bad96797db48cee4f51b9d7be3))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.24 ([bf26136](https://github.com/DanySK/publish-on-central/commit/bf261367bf3978a70a9248ed5440de89137b1859))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.8 ([ba5c8ab](https://github.com/DanySK/publish-on-central/commit/ba5c8aba4f6dd0c52d31b68a069f86fc251403f2))
+* remove outdated feature preview VERSION_CATALOGS ([3fbd14b](https://github.com/DanySK/publish-on-central/commit/3fbd14b5b41abfa0f6def7be00c88e51b4e5c8a6))
+
+
+### Refactoring
+
+* rename `findSigningTaskIn` into `signingTasks` ([0ea08c6](https://github.com/DanySK/publish-on-central/commit/0ea08c669eae836132c479d8bb7f75b99e72d162))
+
 ## [3.2.1](https://github.com/DanySK/publish-on-central/compare/3.2.0...3.2.1) (2023-02-05)
 
 
