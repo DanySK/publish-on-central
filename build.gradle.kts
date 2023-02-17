@@ -18,11 +18,16 @@ gitSemVer {
 }
 
 group = "org.danilopianini"
-val projectId = "$group.$name"
-val fullName = "Gradle Publish On Maven Central Plugin"
-val websiteUrl = "https://github.com/DanySK/$name"
-val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
-val pluginImplementationClass = "org.danilopianini.gradle.mavencentral.PublishOnCentral"
+inner class ProjectInfo {
+    val longName = "Gradle Publish On Maven Central Plugin"
+    val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
+    val website = "https://github.com/DanySK/$name"
+    val vcsUrl = "$website.git"
+    val scm = "scm:git:$website.git"
+    val pluginImplementationClass = "$group.gradle.mavencentral.PublishOnCentral"
+    val tags = listOf("template", "kickstart", "example")
+}
+val info = ProjectInfo()
 
 repositories {
     mavenCentral()
@@ -61,28 +66,26 @@ tasks.withType<Test> {
     }
 }
 
-pluginBundle {
-    website = websiteUrl
-    vcsUrl = websiteUrl
-    tags = listOf("maven", "maven central", "ossrh", "central", "publish")
-}
-
 gradlePlugin {
     plugins {
+        website.set(info.website)
+        vcsUrl.set(info.vcsUrl)
         create("PublishOnCentralPlugin") {
-            id = projectId
-            displayName = fullName
-            description = projectDetails
-            implementationClass = pluginImplementationClass
+            id = "$group.${project.name}"
+            displayName = info.longName
+            description = project.description
+            implementationClass = info.pluginImplementationClass
+            tags.set(info.tags)
+            description = info.projectDetails
         }
     }
 }
 
 publishOnCentral {
-    projectDescription.set(projectDetails)
-    projectLongName.set(fullName)
-    projectUrl.set(websiteUrl)
-    scmConnection.set("git:git@github.com:DanySK/$name")
+    projectDescription.set(info.projectDetails)
+    projectLongName.set(info.longName)
+    projectUrl.set(info.website)
+    scmConnection.set(info.scm)
     repository("https://maven.pkg.github.com/DanySK/$name".toLowerCase()) {
         user.set("danysk")
         password.set(System.getenv("GITHUB_TOKEN"))
