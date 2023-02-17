@@ -36,8 +36,10 @@ fun MavenPublication.configureForMavenCentral(extension: PublishOnCentralExtensi
     configurePomForMavenCentral(extension)
     val project = extension.project
     // Signing
-    findSigningTaskIn(project) ?: project.configure<SigningExtension> {
-        sign(this@configureForMavenCentral)
+    if (signingTasks(project).isEmpty()) {
+        project.configure<SigningExtension> {
+            sign(this@configureForMavenCentral)
+        }
     }
 }
 
@@ -173,7 +175,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
                 }
             }
             uploadTask.publication = publication
-            publication.findSigningTaskIn(project).forEach {
+            publication.signingTasks(project).forEach {
                 uploadTask.dependsOn(it)
             }
             tasks.withType<Sign>().forEach {
@@ -214,5 +216,5 @@ private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
 /**
  * Returns the signign tasks registered for the [MavenPublication] in the current [project].
  */
-fun MavenPublication.findSigningTaskIn(project: Project) =
+fun MavenPublication.signingTasks(project: Project): Collection<Sign> =
     project.tasks.withType<Sign>().matching { it.name.endsWith("sign${name.capitalized()}Publication") }
