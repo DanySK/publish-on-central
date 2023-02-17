@@ -59,7 +59,7 @@ class PublishOnCentral : Plugin<Project> {
             publications.withType<MavenPublication>().configureEach { publication ->
                 if (extension.autoConfigureAllPublications.getOrElse(true) && publication !in createdPublications) {
                     publication.configurePomForMavenCentral(extension)
-                    if (publication.findSigningTaskIn(project).isEmpty()) {
+                    if (publication.signingTasks(project).isEmpty()) {
                         project.configure<SigningExtension> {
                             sign(publication)
                         }
