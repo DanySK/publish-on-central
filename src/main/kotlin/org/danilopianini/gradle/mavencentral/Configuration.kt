@@ -176,6 +176,9 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
             publication.findSigningTaskIn(project).forEach {
                 uploadTask.dependsOn(it)
             }
+            tasks.withType<Sign>().forEach {
+                uploadTask.mustRunAfter(it)
+            }
             uploadTask.dependsOn(createStagingRepository)
             uploadAllPublications.get().dependsOn(uploadTask)
             closeStagingRepository.mustRunAfter(uploadTask)
