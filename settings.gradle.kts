@@ -20,4 +20,3 @@ gitHooks {
 }
 
 rootProject.name = "publish-on-central"
-enableFeaturePreview("VERSION_CATALOGS")
