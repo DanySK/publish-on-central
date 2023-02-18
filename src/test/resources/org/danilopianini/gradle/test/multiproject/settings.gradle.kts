@@ -7,6 +7,8 @@
  * in the user manual at https://docs.gradle.org/7.4.2/userguide/multi_project_builds.html
  * This project uses @Incubating APIs which are subject to change.
  */
-
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.4.0"
+}
 rootProject.name = "multiproject"
 include("app", "list", "utilities")
