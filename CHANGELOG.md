@@ -1,3 +1,29 @@
+## [3.2.4](https://github.com/DanySK/publish-on-central/compare/3.2.3...3.2.4) (2023-02-19)
+
+
+### Tests
+
+* apply org.gradle.toolchains.foojay-resolver-convention to a test ([3065d89](https://github.com/DanySK/publish-on-central/commit/3065d89b9429dfdd36bb3e94644b7916378e1fa9))
+* apply org.gradle.toolchains.foojay-resolver-convention to the kotlin multiplatform test ([84880db](https://github.com/DanySK/publish-on-central/commit/84880db2b1564912ed94ea2769987515aa5f3ab3))
+* apply org.gradle.toolchains.foojay-resolver-convention to the multiproject test ([868cacf](https://github.com/DanySK/publish-on-central/commit/868cacf7561dd85e3ca0535cb2160ec03c2b027b))
+
+
+### Build and continuous integration
+
+* cancel obsolete jobs ([#504](https://github.com/DanySK/publish-on-central/issues/504)) ([01ebfd0](https://github.com/DanySK/publish-on-central/commit/01ebfd08d06050fd6f862c726cdabd487d0a180a))
+* **deps:** update alchemistsimulator/alchemist action to v25.13.0 ([94bc595](https://github.com/DanySK/publish-on-central/commit/94bc595ac2c182629d34bbafd83911ecd9a99b98))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.25 ([3ccd232](https://github.com/DanySK/publish-on-central/commit/3ccd2320e3611f43dd760f34809e488dddec1470))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8 ([bc924eb](https://github.com/DanySK/publish-on-central/commit/bc924eb129cfe48b7d5a114c5774201997b47584))
+* **deps:** update plugin gitsemver to v1.0.2 ([4007a2e](https://github.com/DanySK/publish-on-central/commit/4007a2ed4e7d334bc81c32538773a69a9938233d))
+* **deps:** update plugin gradlepluginpublish to v1.1.0 ([d884058](https://github.com/DanySK/publish-on-central/commit/d8840584129ade7bc756e8f793eb97b3c7a9a263))
+* **deps:** update plugin multijvmtesting to v0.4.16 ([0d1b36f](https://github.com/DanySK/publish-on-central/commit/0d1b36f460c71051fef93cd1ba944a3fb77c3b07))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.2 ([3524634](https://github.com/DanySK/publish-on-central/commit/352463492327ab351c590b8d813bdf912aa0e37c))
+* **deps:** update plugin publishoncentral to v3.2.3 ([964da5b](https://github.com/DanySK/publish-on-central/commit/964da5bc41d267e580a76a9666b592a887c1e240))
+
 ## [3.2.3](https://github.com/DanySK/publish-on-central/compare/3.2.2...3.2.3) (2023-02-19)
 
 
