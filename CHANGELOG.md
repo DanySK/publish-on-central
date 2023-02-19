@@ -1,3 +1,20 @@
+## [3.2.3](https://github.com/DanySK/publish-on-central/compare/3.2.2...3.2.3) (2023-02-19)
+
+
+### Build and continuous integration
+
+* fix the project links ([9a2af8e](https://github.com/DanySK/publish-on-central/commit/9a2af8ea48b7bd11ac3fa9db4f0a01ee8ba2192a))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.8.10 ([e0e4ac3](https://github.com/DanySK/publish-on-central/commit/e0e4ac3770d47c1bdd8754f760f42c0b757f694d))
+* **deps:** update plugin com.gradle.enterprise to v3.11.4 ([bf390da](https://github.com/DanySK/publish-on-central/commit/bf390da5d1f8f3eabfc83758f7cb96192ea46abf))
+* **deps:** update plugin com.gradle.enterprise to v3.12.3 ([adc34ad](https://github.com/DanySK/publish-on-central/commit/adc34ad5a8b85c2749594edd69e62e2c48ede600))
+* **deps:** update plugin gitsemver to v1 ([22653c7](https://github.com/DanySK/publish-on-central/commit/22653c77b5898ccdc5c4e67f6c9f4a293603e20a))
+* **deps:** update plugin publishoncentral to v3.2.2 ([dcaf36c](https://github.com/DanySK/publish-on-central/commit/dcaf36caa985ba5a33d2feb41aac00b14e6e37e9))
+* **deps:** update plugin tasktree to v2.1.1 ([d8d29a0](https://github.com/DanySK/publish-on-central/commit/d8d29a002a39cb71a6fdd8bc5774b1e4e95a1ec1))
+
 ## [3.2.2](https://github.com/DanySK/publish-on-central/compare/3.2.1...3.2.2) (2023-02-17)
 
 
