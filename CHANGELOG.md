@@ -1,3 +1,20 @@
+## [3.3.0](https://github.com/DanySK/publish-on-central/compare/3.2.4...3.3.0) (2023-02-22)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.13.1 ([7f9a51e](https://github.com/DanySK/publish-on-central/commit/7f9a51e9815a87f10a728eed2489abcdd0a075c2))
+* **deps:** update alchemistsimulator/alchemist action to v25.14.0 ([52b2c0d](https://github.com/DanySK/publish-on-central/commit/52b2c0d2fd33290558a9537aee3e976700ccd873))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.1.26 ([4f047f8](https://github.com/DanySK/publish-on-central/commit/4f047f837c45fc4f14735d7571549d3434773f17))
+
+
+### Dependency updates
+
+* **api-deps:** update nexus-publish to v1.2.0 ([27327bb](https://github.com/DanySK/publish-on-central/commit/27327bbc27aa7f4ab1ac902497512c3e858326b4))
+* **deps:** update plugin multijvmtesting to v0.4.17 ([ee879e9](https://github.com/DanySK/publish-on-central/commit/ee879e9870be9f1f0dd4ed24e2f9a8d009c0cb5e))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.3 ([be5c63a](https://github.com/DanySK/publish-on-central/commit/be5c63af90eeea0cf11981190061640d7c24f199))
+* **deps:** update plugin publishoncentral to v3.2.4 ([9fc0e82](https://github.com/DanySK/publish-on-central/commit/9fc0e82b2488ea01bc79d58dec4eeb618844d901))
+
 ## [3.2.4](https://github.com/DanySK/publish-on-central/compare/3.2.3...3.2.4) (2023-02-19)
 
 
