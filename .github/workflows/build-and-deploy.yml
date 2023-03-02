@@ -193,12 +193,63 @@ jobs:
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
+    test-drop-repo-task-regression:
+      runs-on: ubuntu-latest
+      concurrency:
+        group: test-drop-task-${{ github.workflow }}-${{ github.event.number || github.ref }}
+        cancel-in-progress: true
+      if: >-
+        !github.event.repository.fork
+        && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
+      steps:
+        - name: Compute the version of the target test project
+          id: versiontrick
+          shell: bash
+          run: |
+            # Idea: the regex matcher of Renovate keeps this string up to date automatically
+            # The version is extracted and used to access the correct version of the scripts
+            USES=$(cat <<TRICK_RENOVATE
+            - uses: DanySK/template-for-kotlin-multiplatform-projects@0.1.8
+            TRICK_RENOVATE
+            )
+            echo "Scripts update line: \"$USES\""
+            echo "Computed version: \"${USES#*@}\""
+            echo "version=${USES#*@}" >> $GITHUB_OUTPUT
+        - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
+          uses: actions/checkout@v3.3.0
+          with:
+            fetch-depth: '0'
+            path: 'kt-mp-drop-task'
+            ref: "${{ steps.versiontrick.outputs.version }}"
+            repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
+            submodules: 'recursive'
+        - name: Checkout publish-on-central
+          uses: actions/checkout@v3.3.0
+          with:
+            path: 'publish-on-central'
+        - name: Dry-deploy
+          uses: DanySK/build-check-deploy-gradle-action@2.1.26
+          with:
+            build-command: true
+            check-command: true
+            deploy-command: |
+              ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel
+              [[ -e "build/staging-repo-ids.properties" ]] || (echo "No staging repo ID found" && exit 1)
+              REPO_ID="$(cat build/staging-repo-ids.properties)"
+              ./gradlew --include-build ../publish-on-central -PstagingRepoId="$REPO_ID" dropStagingRepositoryOnMavenCentral --parallel
+            working-directory: kt-mp-drop-task
+            should-run-codecov: false
+            should-deploy: true
+            maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+            signing-key: ${{ secrets.SIGNING_KEY }}
+            signing-password: ${{ secrets.SIGNING_PASSWORD }}
   release:
     needs:
       - build
       - test-alchemist-deployment
       - test-kt-multiplatform-deployment
       - test-multi-stage-deployment
+      - test-drop-repo-task-regression
     runs-on: ubuntu-latest
     if: >-
       !github.event.repository.fork
