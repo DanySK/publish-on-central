@@ -101,6 +101,9 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         repoToConfigure,
         nexusUrl,
     ) as InitializeNexusClient
+    /*
+     * Creates a new staging repository on the Nexus server, or fetches an existing one if the repoId is known.
+     */
     val createStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
         "createStagingRepositoryOn${repoToConfigure.name}"
     ) {
@@ -118,11 +121,19 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Creates a new Nexus staging repository on ${repoToConfigure.name}."
     }
+    /*
+     * Collector of all upload tasks. Actual uploads are defined at the bottom.
+     * Requires the creation of the staging repository.
+     */
     val uploadAllPublications = tasks.register("uploadAllPublicationsTo${repoToConfigure.name}Nexus") {
         it.dependsOn(createStagingRepository)
         it.group = PublishingPlugin.PUBLISH_TASK_GROUP
         it.description = "Uploads all publications to a staging repository on ${repoToConfigure.name}."
     }
+    /*
+     * Closes the staging repository. If it's closed already, skips the operation.
+     * Runs after all uploads. Requires the creation of the staging repository.
+     */
     val closeStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
         "closeStagingRepositoryOn${repoToConfigure.name}"
     ) {
@@ -140,19 +151,32 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Closes the Nexus repository on ${repoToConfigure.name}."
     }
+    /*
+     * Releases the staging repository. Requires closing.
+     */
     val release = rootProject.registerTaskIfNeeded<DefaultTask>("releaseStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.release() }
         dependsOn(closeStagingRepository)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Releases the Nexus repo on ${repoToConfigure.name}. Incompatible with dropping the same repo."
     }
+    /*
+     * Drops the staging repository.
+     * Requires the creation of the staging repository.
+     * It must run after all uploads.
+     * If closing is requested as well, drop must run after it.
+     */
     val drop = rootProject.registerTaskIfNeeded<DefaultTask>("dropStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.drop() }
+        dependsOn(createStagingRepository)
         mustRunAfter(uploadAllPublications)
         mustRunAfter(closeStagingRepository)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
     }
+    /*
+     * Checks that only release or drop are selected for execution, as they are mutually exclusive.
+     */
     gradle.taskGraph.whenReady {
         if (it.hasTask(release) && it.hasTask(drop)) {
             error(
@@ -181,9 +205,16 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
             tasks.withType<Sign>().forEach {
                 uploadTask.mustRunAfter(it)
             }
+            /*
+             * We need to make sure that the staging repository is created before we upload anything.
+             * We also need to make sure that the staging repository is closed *after* we upload
+             * We also need to make sure that the staging repository is dropped *after* we upload
+             * Releasing does not need to be explicitly ordered, as it will be performed after closing
+             */
             uploadTask.dependsOn(createStagingRepository)
             uploadAllPublications.get().dependsOn(uploadTask)
             closeStagingRepository.mustRunAfter(uploadTask)
+            drop.mustRunAfter(uploadTask)
             uploadTask.doFirst {
                 warnIfCredentialsAreMissing(repoToConfigure)
                 uploadTask.repository.url = nexusClient.nexusClient.repoUrl
