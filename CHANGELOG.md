@@ -1,3 +1,21 @@
+## [3.3.3](https://github.com/DanySK/publish-on-central/compare/3.3.2...3.3.3) (2023-03-04)
+
+
+### Bug Fixes
+
+* **drop:** drop now depends on staging repository creation, and runs after all uploads. Fixes [#524](https://github.com/DanySK/publish-on-central/issues/524) ([41d00ba](https://github.com/DanySK/publish-on-central/commit/41d00ba496a8b3a62c7616c2c37b488e0310ed6c))
+
+
+### Build and continuous integration
+
+* fix indentation ([8a1a7bc](https://github.com/DanySK/publish-on-central/commit/8a1a7bc9540d46b3702f023652265a151a1ad91b))
+* **test:** add regression test on drop gradle task ([a147f2b](https://github.com/DanySK/publish-on-central/commit/a147f2b5f5fbfcb350d95af0bc4fba5ecf5d27dd))
+
+
+### Dependency updates
+
+* **deps:** update plugin publishoncentral to v3.3.2 ([74ba25d](https://github.com/DanySK/publish-on-central/commit/74ba25db1b9ec58805f2a819cdce32ec9943460b))
+
 ## [3.3.2](https://github.com/DanySK/publish-on-central/compare/3.3.1...3.3.2) (2023-03-04)
 
 
