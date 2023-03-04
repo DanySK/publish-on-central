@@ -1,3 +1,24 @@
+## [3.3.1](https://github.com/DanySK/publish-on-central/compare/3.3.0...3.3.1) (2023-03-04)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.14.1 ([0077aba](https://github.com/DanySK/publish-on-central/commit/0077aba4a04fae3a0ad8148c0ec3afec3c2750d9))
+* **deps:** update alchemistsimulator/alchemist action to v25.14.2 ([eb3103e](https://github.com/DanySK/publish-on-central/commit/eb3103eb09412c01561b76686f5d624b3df0e149))
+* **deps:** update alchemistsimulator/alchemist action to v25.14.3 ([bd85bd7](https://github.com/DanySK/publish-on-central/commit/bd85bd77ece47a1cfd20d497048284d69d3f7aad))
+* **deps:** update alchemistsimulator/alchemist action to v25.14.4 ([07922b9](https://github.com/DanySK/publish-on-central/commit/07922b99d235ff6070fdf5f9730680cbcb58de52))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.0 ([d09e881](https://github.com/DanySK/publish-on-central/commit/d09e8818c267111be8d24bc464777b2bb015b5aa))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.0.2 ([04c4d61](https://github.com/DanySK/publish-on-central/commit/04c4d61f5b502ba01000f5f492afdb750d10f841))
+* **deps:** update plugin com.gradle.enterprise to v3.12.4 ([ae9146d](https://github.com/DanySK/publish-on-central/commit/ae9146de52733840a642d5f11a45451b21f80c06))
+* **deps:** update plugin gitsemver to v1.1.1 ([04c7636](https://github.com/DanySK/publish-on-central/commit/04c76366b6533d60bda2ccce384e1740a48c315f))
+* **deps:** update plugin gitsemver to v1.1.2 ([5b5d6dc](https://github.com/DanySK/publish-on-central/commit/5b5d6dc62ef14bebf9f93253c3f202000fc0eafd))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.5 ([fea64eb](https://github.com/DanySK/publish-on-central/commit/fea64ebfe6ae444a3bf50f5fb321a566b39d3cb0))
+* **deps:** update plugin publishoncentral to v3.3.0 ([adc6feb](https://github.com/DanySK/publish-on-central/commit/adc6febe8995ef4fe9fff3770a045d212067724c))
+
 ## [3.3.0](https://github.com/DanySK/publish-on-central/compare/3.2.4...3.3.0) (2023-02-22)
 
 
