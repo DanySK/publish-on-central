@@ -1,3 +1,13 @@
+## [3.3.2](https://github.com/DanySK/publish-on-central/compare/3.3.1...3.3.2) (2023-03-04)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.8.10 ([e02e674](https://github.com/DanySK/publish-on-central/commit/e02e674655742f3292859800eee7de1e0ef7d857))
+* **deps:** update plugin gitsemver to v1.1.4 ([475090b](https://github.com/DanySK/publish-on-central/commit/475090bbb90b444b91f3b4233f32b8ef8502f0f7))
+* **deps:** update plugin multijvmtesting to v0.4.19 ([8039f2a](https://github.com/DanySK/publish-on-central/commit/8039f2a49991de49eb099af305683d532be0a222))
+* **deps:** update plugin publishoncentral to v3.3.1 ([c8dc5d9](https://github.com/DanySK/publish-on-central/commit/c8dc5d97405c5e2b5e96f813d8bbd8615f7bc28f))
+
 ## [3.3.1](https://github.com/DanySK/publish-on-central/compare/3.3.0...3.3.1) (2023-03-04)
 
 
