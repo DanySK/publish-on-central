@@ -236,7 +236,8 @@ jobs:
             ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel
             [[ -e "build/staging-repo-ids.properties" ]] || (echo "No staging repo ID found" && exit 1)
             REPO_ID="$(cat build/staging-repo-ids.properties)"
-            ./gradlew --include-build ../publish-on-central -PstagingRepoId="$REPO_ID" dropStagingRepositoryOnMavenCentral --parallel
+            echo "Staging repo ID to be closed: $REPO_ID"
+            ./gradlew --include-build ../publish-on-central -PstagingRepositoryId="$REPO_ID" dropStagingRepositoryOnMavenCentral --parallel
           working-directory: kt-mp-drop-task
           should-run-codecov: false
           should-deploy: true
