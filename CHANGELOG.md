@@ -1,3 +1,24 @@
+## [3.4.0](https://github.com/DanySK/publish-on-central/compare/3.3.3...3.4.0) (2023-03-07)
+
+
+### General maintenance
+
+* **npm:** update package.json engines ([8221242](https://github.com/DanySK/publish-on-central/commit/822124210cb41e36f514111f99fe51ddff23e650))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.14.5 ([90d55c3](https://github.com/DanySK/publish-on-central/commit/90d55c3d26474a5de8a03cc28c52bc7c4f927167))
+* **deps:** update alchemistsimulator/alchemist action to v25.14.6 ([c3dd2b5](https://github.com/DanySK/publish-on-central/commit/c3dd2b5b0ffbe3c3aa7b3c616fede8cb99abb52d))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.9 ([3b6fe33](https://github.com/DanySK/publish-on-central/commit/3b6fe3319d7b67c9508924b2ed962374e89b1bbb))
+* fix gradle property name ([5d4c27e](https://github.com/DanySK/publish-on-central/commit/5d4c27e1988ac36d5663c73e1935a016d0345e81))
+
+
+### Dependency updates
+
+* **api-deps:** update nexus-publish to v1.3.0 ([4c61ea9](https://github.com/DanySK/publish-on-central/commit/4c61ea92d4e6915c5e66423ee9079337447b17be))
+* **deps:** update plugin publishoncentral to v3.3.3 ([f360d9d](https://github.com/DanySK/publish-on-central/commit/f360d9d3c5402c548fc667f8ef001e023613c0d5))
+
 ## [3.3.3](https://github.com/DanySK/publish-on-central/compare/3.3.2...3.3.3) (2023-03-04)
 
 
