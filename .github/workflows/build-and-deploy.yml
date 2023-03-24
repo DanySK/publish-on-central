@@ -228,7 +228,7 @@ jobs:
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@2.1.26
+        uses: DanySK/build-check-deploy-gradle-action@2.2.1
         with:
           build-command: true
           check-command: true
