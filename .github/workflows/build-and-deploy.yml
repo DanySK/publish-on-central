@@ -14,7 +14,7 @@ jobs:
       cancel-in-progress: true
     steps:
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.6
+        uses: DanySK/action-checkout@0.2.7
       - uses: DanySK/build-check-deploy-gradle-action@2.2.1
         with:
           deploy-command: >-
