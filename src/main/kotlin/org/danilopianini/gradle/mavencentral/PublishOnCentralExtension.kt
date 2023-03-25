@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import MavenRepositoryDescriptor
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
@@ -24,7 +23,7 @@ open class PublishOnCentralExtension(val project: Project) {
      */
     val mavenCentral: Repository = Repository(
         Repository.mavenCentralName,
-        url = Repository.mavenCentralURL,
+        url = project.propertyWithDefaultProvider { Repository.mavenCentralURL },
         user = project.propertyWithDefaultProvider {
             System.getenv("MAVEN_CENTRAL_USERNAME")
                 ?: project.properties["mavenCentralUsername"]?.toString()
@@ -93,18 +92,11 @@ open class PublishOnCentralExtension(val project: Project) {
     @JvmOverloads fun repository(
         url: String,
         name: String = repositoryNameFromURL(url),
-        configurator: MavenRepositoryDescriptor.() -> Unit = { }
+        configurator: Repository.() -> Unit = { }
     ) {
-        val repoDescriptor = MavenRepositoryDescriptor(project, name).apply(configurator)
-        val repo = Repository(
-            repoDescriptor.name,
-            url,
-            repoDescriptor.user,
-            repoDescriptor.password,
-            repoDescriptor.nexusUrl,
-            repoDescriptor.nexusTimeOut,
-            repoDescriptor.nexusConnectionTimeout,
-        )
+        val repo = Repository.fromProject(project, name)
+        repo.url.set(url)
+        repo.apply(configurator)
         project.afterEvaluate { it.configureRepository(repo) }
     }
 
@@ -113,7 +105,7 @@ open class PublishOnCentralExtension(val project: Project) {
      */
     @JvmOverloads fun mavenCentralSnapshotsRepository(
         name: String = "MavenCentralSnapshots",
-        configurator: MavenRepositoryDescriptor.() -> Unit = { },
+        configurator: Repository.() -> Unit = { },
     ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
         user.set(mavenCentral.user)
         password.set(mavenCentral.password)

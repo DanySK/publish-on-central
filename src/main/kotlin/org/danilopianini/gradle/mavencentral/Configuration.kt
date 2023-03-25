@@ -75,7 +75,7 @@ fun Project.configureRepository(repoToConfigure: Repository) {
         publishing.repositories { repository ->
             repository.maven { mavenArtifactRepository ->
                 mavenArtifactRepository.name = repoToConfigure.name
-                mavenArtifactRepository.url = URI(repoToConfigure.url)
+                mavenArtifactRepository.url = repoToConfigure.url.map { URI(it) }.get()
                 mavenArtifactRepository.credentials { credentials ->
                     credentials.username = repoToConfigure.user.orNull
                     credentials.password = repoToConfigure.password.orNull
