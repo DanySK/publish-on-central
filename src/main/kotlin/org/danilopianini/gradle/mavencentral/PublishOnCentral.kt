@@ -87,15 +87,15 @@ class PublishOnCentral : Plugin<Project> {
             @Suppress("UNCHECKED_CAST")
             project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>).configureEach {
                 project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
-                    val dokkaJavadoc = checkNotNull(project.tasks.findByName("dokkaJavadoc")) {
-                        "Dokka plugin applied but no dokkaJavadoc task existing!"
+                    val dokkaTask = checkNotNull(extension.dokkaTasks.firstOrNull()) {
+                        "Dokka plugin applied but no task exists for style ${extension.docStyle.get()}!"
                     }
-                    val outputDirectory = dokkaJavadoc.property("outputDirectory")
+                    val outputDirectory = dokkaTask.property("outputDirectory")
                         ?: throw IllegalStateException(
                             "dokkaJavadoc has no property 'outputDirectory' - " +
                                 "maybe this version is incompatible with publish-on-central?"
                         )
-                    javadocJar.dependsOn(dokkaJavadoc)
+                    javadocJar.dependsOn(dokkaTask)
                     javadocJar.from(outputDirectory)
                 }
             }

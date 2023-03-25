@@ -1,7 +1,9 @@
 package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.TaskCollection
 import org.gradle.kotlin.dsl.property
 import java.time.Duration
 
@@ -85,6 +87,21 @@ open class PublishOnCentralExtension(val project: Project) {
     val projectUrl: Property<String> = project.objects.property<String>().convention(
         repoOwner.map { "https://github.com/$it/${project.name}" }
     )
+
+    /**
+     * The style of `javadoc` artifacts being published on Maven repositories.
+     */
+    val docStyle: Property<DocStyle> = project.objects.property<DocStyle>().convention(
+        DocStyle.JAVADOC
+    )
+
+    /**
+     * Selects all Dokka tasks aimed at generating documentation compliant with the style declared by [docStyle].
+     */
+    internal val dokkaTasks: TaskCollection<Task>
+        get() = project.tasks.matching { task ->
+            task.name.let { it.startsWith("dokka") && it.endsWith(docStyle.get().name, ignoreCase = true) }
+        }
 
     /**
      * Utility to configure a new Maven repository as target.
