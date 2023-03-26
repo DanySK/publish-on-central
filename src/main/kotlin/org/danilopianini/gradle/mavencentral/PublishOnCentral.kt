@@ -82,12 +82,10 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.tasks.withType(SourceJar::class.java).configureEach { it.sourceSet("main", true) }
         }
-        val dokkaPluginClass = runCatching { Class.forName("org.jetbrains.dokka.gradle.DokkaPlugin") }
         if (dokkaPluginClass.isSuccess) {
-            @Suppress("UNCHECKED_CAST")
-            project.plugins.withType(dokkaPluginClass.getOrThrow() as Class<Plugin<*>>).configureEach {
+            project.plugins.withType(dokkaPluginClass.getOrThrow()).configureEach {
                 project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
-                    val dokkaTask = checkNotNull(extension.dokkaTasks.firstOrNull()) {
+                    val dokkaTask = checkNotNull(project.dokkaTasksFor(extension.docStyle).firstOrNull()) {
                         "Dokka plugin applied but no task exists for style ${extension.docStyle.get()}!"
                     }
                     val outputDirectory = dokkaTask.property("outputDirectory")
