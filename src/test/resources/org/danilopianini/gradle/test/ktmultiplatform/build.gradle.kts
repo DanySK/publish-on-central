@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.danilopianini.gradle.mavencentral.DocStyle
 import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
@@ -122,6 +123,7 @@ signing {
 }
 
 publishOnCentral {
+    docStyle.set(DocStyle.HTML)
     projectLongName.set("Template for Kotlin Multiplatform Project")
     projectDescription.set("A template repository for Kotlin Multiplatform projects")
     repository("https://maven.pkg.github.com/danysk/${rootProject.name}".toLowerCase()) {
