@@ -61,6 +61,8 @@ signing {
 
 
 ```kotlin
+import org.danilopianini.gradle.mavencentral.DocStyle
+
 plugins {
     id ("org.danilopianini.publish-on-central") version "<pick the latest>"
 }
@@ -76,6 +78,9 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
+    // Select the Dokka task adopted for generating the javadoc Jar to upload to Central
+    // (dokkaJavadoc currently fails on multi-platform projects: we suggest using HTML in that case)
+    docStyle.set(DocStyle.JAVADOC) // alternatives are GFM, HTML, and JEKYLL 
     // Set to false if you do not want the MavenCentral repository to be automatically configured
     configureMavenCentral.set(true)
     // The following values are the default, if they are ok with you, just omit them
