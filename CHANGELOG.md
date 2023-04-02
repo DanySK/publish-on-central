@@ -1,3 +1,46 @@
+## [4.0.0](https://github.com/DanySK/publish-on-central/compare/3.4.0...4.0.0) (2023-04-02)
+
+
+### ⚠ BREAKING CHANGES
+
+* add support for selecting the Dokka type to be included in the publication (#567)
+
+### Features
+
+* add support for selecting the Dokka type to be included in the publication ([#567](https://github.com/DanySK/publish-on-central/issues/567)) ([4382aae](https://github.com/DanySK/publish-on-central/commit/4382aae51e8c17605270c80c1c11c5aaea2d3db9))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.4.0 ([7c2d1b5](https://github.com/DanySK/publish-on-central/commit/7c2d1b544005ea292d7d606cfda92ca074a3f51e))
+* **deps:** update actions/checkout action to v3.5.0 ([43bb2d8](https://github.com/DanySK/publish-on-central/commit/43bb2d8ae550d03e4c5be34c447dc79026fc446b))
+* **deps:** update alchemistsimulator/alchemist action to v25.15.0 ([63d297b](https://github.com/DanySK/publish-on-central/commit/63d297b957cd1fbf4af2669e47a50b8313862bc9))
+* **deps:** update alchemistsimulator/alchemist action to v25.15.1 ([32e066a](https://github.com/DanySK/publish-on-central/commit/32e066a9fa20e862af55847ffdea9ee749852c6a))
+* **deps:** update danysk/action-checkout action to v0.2.6 ([7df2dfb](https://github.com/DanySK/publish-on-central/commit/7df2dfbf5acdd3d38297ade764d3f8b3a3cb243d))
+* **deps:** update danysk/action-checkout action to v0.2.7 ([c8f5f36](https://github.com/DanySK/publish-on-central/commit/c8f5f36b74a08f52a7485634bc62470c9039ae72))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.1 ([a97b0c0](https://github.com/DanySK/publish-on-central/commit/a97b0c01d7a67bc3207c389425e983165fc57ecc))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.1 ([c587caa](https://github.com/DanySK/publish-on-central/commit/c587caab2a54eab74cb19b7e7e4b2dad5221432b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.2 ([e892542](https://github.com/DanySK/publish-on-central/commit/e8925424659398f2b0b88c7d9667659f8be236f0))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.10 ([3b60f03](https://github.com/DanySK/publish-on-central/commit/3b60f038036a03eb5ed167f721ae2a5cc1e85752))
+* **mergify:** disable auto-rebasing due to Mergifyio/mergify[#5074](https://github.com/DanySK/publish-on-central/issues/5074) ([40d09c5](https://github.com/DanySK/publish-on-central/commit/40d09c5805efac5b6bab719f404435b717a2613c))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.17 ([c3abe11](https://github.com/DanySK/publish-on-central/commit/c3abe1150071f0e23682a1a4989ffe3d9cdf0d5f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.19 ([4896b55](https://github.com/DanySK/publish-on-central/commit/4896b554400530c5ea4ee099aa289ba7f0b8bb4a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.20 ([3a6a52c](https://github.com/DanySK/publish-on-central/commit/3a6a52c608214da14964e1f5aa0f5511c25a24af))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.21 ([5d90e20](https://github.com/DanySK/publish-on-central/commit/5d90e205fddb068497e683e591a64219a9c59bc2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.22 ([4dcb292](https://github.com/DanySK/publish-on-central/commit/4dcb2923a4f1503ddd2ab43fae75553503fa1ee0))
+* **deps:** update node.js to 18.15 ([9752b4a](https://github.com/DanySK/publish-on-central/commit/9752b4a99bec9fca1bb10cdbbec5d81c691307e2))
+* **deps:** update npm to v8.12.2 ([0293ce6](https://github.com/DanySK/publish-on-central/commit/0293ce649f2206dff0d46b94a09ae8f5480fef1f))
+* **deps:** update npm to v8.19.4 ([5d4af1d](https://github.com/DanySK/publish-on-central/commit/5d4af1dc561e5cb764da74bbd6d30d1c8c591dff))
+* **deps:** update npm to v9 ([a95c8a9](https://github.com/DanySK/publish-on-central/commit/a95c8a95264b2820dc02975a733912ae73d623ad))
+* **deps:** update npm to v9.6.2 ([84b1f71](https://github.com/DanySK/publish-on-central/commit/84b1f71ea4385c4b8340e17cfdaa35e2105dc4df))
+* **deps:** update plugin com.gradle.enterprise to v3.12.5 ([051ed86](https://github.com/DanySK/publish-on-central/commit/051ed86b8b42c219384d6cbf517ce959999ab9e9))
+* **deps:** update plugin com.gradle.enterprise to v3.12.6 ([f02bf4e](https://github.com/DanySK/publish-on-central/commit/f02bf4ef8c1017d3e613d339796e6f920f1e7cda))
+* **deps:** update plugin publishoncentral to v3.4.0 ([42c42ae](https://github.com/DanySK/publish-on-central/commit/42c42ae04327fe0995b77143995b0a68d335a4d1))
+
 ## [3.4.0](https://github.com/DanySK/publish-on-central/compare/3.3.3...3.4.0) (2023-03-07)
 
 
