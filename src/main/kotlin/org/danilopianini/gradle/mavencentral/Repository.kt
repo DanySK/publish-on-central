@@ -2,6 +2,7 @@ package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.gradle.kotlin.dsl.property
 import java.time.Duration
 
 /**
@@ -12,8 +13,8 @@ import java.time.Duration
  * Time outs can be set with [nexusTimeOut] and [nexusConnectTimeOut].
  */
 data class Repository(
-    val name: String,
-    val url: String,
+    var name: String,
+    val url: Property<String>,
     val user: Property<String>,
     val password: Property<String>,
     val nexusUrl: String? = null,
@@ -44,5 +45,16 @@ data class Repository(
          * The Sonatype Nexus instance URL of Maven Central.
          */
         const val mavenCentralNexusUrl = "https://s01.oss.sonatype.org/service/local/"
+
+        /**
+         * Creates a named [Repository] from a [project] and a [name].
+         */
+        fun fromProject(project: Project, name: String): Repository =
+            Repository(
+                name = name,
+                url = project.objects.property(),
+                user = project.objects.property(),
+                password = project.objects.property()
+            )
     }
 }
