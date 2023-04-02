@@ -1,3 +1,13 @@
+## [4.0.1](https://github.com/DanySK/publish-on-central/compare/4.0.0...4.0.1) (2023-04-02)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.8.20 ([daf33d9](https://github.com/DanySK/publish-on-central/commit/daf33d94626f4b6672fd7875e894399d0579b0fa))
+* **deps:** update plugin gitsemver to v1.1.5 ([684499f](https://github.com/DanySK/publish-on-central/commit/684499f47be6879e0f08ee5bfd8208f17d434a5b))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.6 ([c6b076f](https://github.com/DanySK/publish-on-central/commit/c6b076f90416e8050bf05906afd187458ce1007f))
+* **deps:** update plugin publishoncentral to v4 ([a7cd9b5](https://github.com/DanySK/publish-on-central/commit/a7cd9b580ae03e84fe8e2c561c1061c4eda60712))
+
 ## [4.0.0](https://github.com/DanySK/publish-on-central/compare/3.4.0...4.0.0) (2023-04-02)
 
 
