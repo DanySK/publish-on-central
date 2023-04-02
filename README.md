@@ -87,6 +87,15 @@ publishOnCentral {
     projectUrl.set("https://github.com/${repoOwner}/${project.name}")
     scmConnection.set("scm:git:https://github.com/${repoOwner}/${project.name}")
     /*
+     * If the project is a Kotlin multiplatform project, Dokka can not generate the Javadocs correctly.
+     * In these cases, the plugin by default may fail.
+     * This option can be used to select a different documentation format for the Dokka engine,
+     * in case you want to publish on Central a jar with a reasonable (altough not Javadoc-compatible content)
+     * we recommend DocStyle.HTML.
+     */
+    docStyle.set(org.danilopianini.gradle.mavencentral.DocStyle.JAVADOC) // alternatives are GFM, HTML, and JEKYLL 
+
+    /*
      * The plugin is pre-configured to fetch credentials for Maven Central from the context in the following order:
      * 1. Environment variables MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD
      * 2. Project properties mavenCentralUsername and mavenCentralPassword
@@ -116,6 +125,7 @@ publishOnCentral {
         nexusUrl = "https://some/valid/nexus/instance"
         // nexusTimeOut and nexusConnectionTimeOut can be configured, too.
     }
+
     /*
      * A simplified handler is available for publishing on the Snapshots repository of Maven Central
      */
