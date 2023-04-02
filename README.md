@@ -61,8 +61,6 @@ signing {
 
 
 ```kotlin
-import org.danilopianini.gradle.mavencentral.DocStyle
-
 plugins {
     id ("org.danilopianini.publish-on-central") version "<pick the latest>"
 }
@@ -78,9 +76,6 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
-    // Select the Dokka task adopted for generating the javadoc Jar to upload to Central
-    // (dokkaJavadoc currently fails on multi-platform projects: we suggest using HTML in that case)
-    docStyle.set(DocStyle.JAVADOC) // alternatives are GFM, HTML, and JEKYLL 
     // Set to false if you do not want the MavenCentral repository to be automatically configured
     configureMavenCentral.set(true)
     // The following values are the default, if they are ok with you, just omit them
@@ -91,6 +86,15 @@ publishOnCentral {
     repoOwner.set("DanySK") // Used to populate the default value for projectUrl and scmConnection
     projectUrl.set("https://github.com/${repoOwner}/${project.name}")
     scmConnection.set("scm:git:https://github.com/${repoOwner}/${project.name}")
+    /*
+     * If the project is a Kotlin multiplatform project, Dokka can not generate the Javadocs correctly.
+     * In these cases, the plugin by default may fail.
+     * This option can be used to select a different documentation format for the Dokka engine,
+     * in case you want to publish on Central a jar with a reasonable (altough not Javadoc-compatible content)
+     * we recommend DocStyle.HTML.
+     */
+    docStyle.set(org.danilopianini.gradle.mavencentral.DocStyle.JAVADOC) // alternatives are GFM, HTML, and JEKYLL 
+
     /*
      * The plugin is pre-configured to fetch credentials for Maven Central from the context in the following order:
      * 1. Environment variables MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD
@@ -121,6 +125,7 @@ publishOnCentral {
         nexusUrl = "https://some/valid/nexus/instance"
         // nexusTimeOut and nexusConnectionTimeOut can be configured, too.
     }
+
     /*
      * A simplified handler is available for publishing on the Snapshots repository of Maven Central
      */
