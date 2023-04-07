@@ -4,7 +4,7 @@ import org.danilopianini.gradle.mavencentral.DocStyle
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.kotlin.js)
+    kotlin("js")
     id("org.danilopianini.publish-on-central")
 }
 

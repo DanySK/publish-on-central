@@ -7,12 +7,7 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    alias(libs.plugins.kotlin.multiplatform)
-    alias(libs.plugins.dokka)
-    alias(libs.plugins.gitSemVer)
-    alias(libs.plugins.kotlin.qa)
-    alias(libs.plugins.multiJvmTesting)
-    alias(libs.plugins.taskTree)
+    kotlin("multiplatform")
     id("org.danilopianini.publish-on-central")
 }
 
@@ -75,17 +70,17 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
-                implementation(libs.kotlin.stdlib)
+                implementation(kotlin("stdlib-common"))
             }
         }
         val commonTest by getting {
             dependencies {
-                implementation(libs.bundles.kotlin.testing.common)
+                implementation(kotlin("test-common"))
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation(libs.bundles.kotlin.testing.jvm)
+                implementation(kotlin("test-junit"))
             }
         }
         val nativeMain by getting {
@@ -102,16 +97,6 @@ kotlin {
             }
         }
     }
-}
-
-tasks.dokkaJavadoc {
-    enabled = false
-}
-
-tasks.withType<JavadocJar>().configureEach {
-    val dokka = tasks.dokkaHtml.get()
-    dependsOn(dokka)
-    from(dokka.outputDirectory)
 }
 
 signing {
