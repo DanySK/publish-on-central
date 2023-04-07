@@ -245,7 +245,7 @@ private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
 }
 
 /**
- * Returns the signign tasks registered for the [MavenPublication] in the current [project].
+ * Returns the signing tasks registered for the [MavenPublication] in the current [project].
  */
 fun MavenPublication.signingTasks(project: Project): Collection<Sign> =
     project.tasks.withType<Sign>().matching { it.name.endsWith("sign${name.capitalized()}Publication") }
