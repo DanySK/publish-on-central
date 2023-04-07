@@ -5,6 +5,7 @@ import org.danilopianini.gradle.mavencentral.ProjectExtensions.createExtension
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -14,6 +15,7 @@ import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
@@ -26,6 +28,19 @@ class PublishOnCentral : Plugin<Project> {
         private const val publicationName = "OSSRH"
     }
 
+    private fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
+        plugins.withId("org.jetbrains.kotlin.js") { _ ->
+            configureExtension<KotlinJsProjectExtension> {
+                js {
+                    sourceSets.getByName("main") {
+                        (sourcesJarTask as SourceJar).sourceSet(it.kotlin)
+                        sourcesJarTask.sourceSet(it.resources)
+                    }
+                }
+            }
+        }
+    }
+
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
@@ -34,6 +49,7 @@ class PublishOnCentral : Plugin<Project> {
         project.configureExtension<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
+            project.configureJavadocJarTaskForKtJs(sourcesJarTask)
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }

@@ -42,6 +42,7 @@ dependencies {
     api(kotlin("stdlib"))
     api(gradleApi())
     api(gradleKotlinDsl())
+    api(libs.kotlin.gradlePlugin)
     api(libs.nexus.publish)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.fuel)
