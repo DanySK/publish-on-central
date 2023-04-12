@@ -27,7 +27,7 @@ open class SourceJar : JarWithClassifier("sources") {
                 sourceSet(sourceSet)
             } else {
                 check(!failOnMissingName) {
-                    "Project has property 'sourceSets' of type 'SourceSetContainer', but it contains no 'main' entry"
+                    "Project has property 'sourceSets' of type 'SourceSetContainer', but it contains no '$name' entry"
                 }
             }
         } else {
