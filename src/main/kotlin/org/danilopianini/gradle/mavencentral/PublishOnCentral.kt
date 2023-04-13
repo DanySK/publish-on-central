@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureExtension
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.createExtension
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
@@ -31,7 +30,7 @@ class PublishOnCentral : Plugin<Project> {
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
         val createdPublications = mutableListOf<MavenPublication>()
-        project.configureExtension<PublishingExtension> {
+        project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
             val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
             project.tasks.matching { it.name == "assemble" }.configureEach {
