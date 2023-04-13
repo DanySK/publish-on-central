@@ -13,6 +13,7 @@ import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -69,7 +70,7 @@ class Tests : StringSpec(
     },
 ) {
     companion object {
-        val log = LoggerFactory.getLogger(Tests::class.java)
+        val log: Logger = LoggerFactory.getLogger(Tests::class.java)
 
         private fun BuildResult.outcomeOf(name: String) = checkNotNull(task(":$name")?.outcome) {
             "Task $name was not present among the executed tasks"
