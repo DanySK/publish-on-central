@@ -75,23 +75,19 @@ open class PublishOnCentralExtension(val project: Project) {
     /**
      * The SCM connection of the project.
      */
-    val scmConnection: Property<String> = project.objects.property<String>().convention(
-        repoOwner.map { "scm:git:https://github.com/$it/${project.name}" }
-    )
+    val scmConnection: Property<String> = project.objects.property<String>()
+        .convention(repoOwner.map { "scm:git:https://github.com/$it/${project.name}" })
 
     /**
      * The URL of the project.
      */
-    val projectUrl: Property<String> = project.objects.property<String>().convention(
-        repoOwner.map { "https://github.com/$it/${project.name}" }
-    )
+    val projectUrl: Property<String> = project.objects.property<String>()
+        .convention(repoOwner.map { "https://github.com/$it/${project.name}" })
 
     /**
      * The style of `javadoc` artifacts being published on Maven repositories.
      */
-    val docStyle: Property<DocStyle> = project.objects.property<DocStyle>().convention(
-        DocStyle.JAVADOC
-    )
+    val docStyle: Property<DocStyle> = project.objects.property<DocStyle>().convention(DocStyle.JAVADOC)
 
     /**
      * Utility to configure a new Maven repository as target.
@@ -121,9 +117,7 @@ open class PublishOnCentralExtension(val project: Project) {
 
     companion object {
 
-        private val extractName = Regex(
-            """.*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?"""
-        )
+        private val extractName = Regex(""".*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?""")
 
         private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
     }
