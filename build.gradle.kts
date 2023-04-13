@@ -122,9 +122,8 @@ val registerCredentials = tasks.register("registerGradlePluginPortalCredentials"
                 val bashName = it.uppercase().replace(".", "_")
                 System.getProperties().setProperty(
                     it,
-                    System.getenv(bashName) ?: throw IllegalStateException(
-                        "Property $it is unset and environment variable $bashName unavailable"
-                    )
+                    System.getenv(bashName)
+                        ?: error("Property $it is unset and environment variable $bashName unavailable"),
                 )
             }
         }
