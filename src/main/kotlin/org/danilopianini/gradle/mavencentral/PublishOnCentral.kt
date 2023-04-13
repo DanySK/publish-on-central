@@ -89,7 +89,7 @@ class PublishOnCentral : Plugin<Project> {
                         "Dokka plugin applied but no task exists for style ${extension.docStyle.get()}!"
                     }
                     val outputDirectory = dokkaTask.property("outputDirectory")
-                        ?: throw IllegalStateException(
+                        ?: error(
                             "dokkaJavadoc has no property 'outputDirectory' - " +
                                 "maybe this version is incompatible with publish-on-central?"
                         )
