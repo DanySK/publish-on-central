@@ -24,12 +24,12 @@ class Tests : StringSpec(
             .acceptPackages(Tests::class.java.`package`.name)
             .scan()
         scan.getResourcesWithLeafName("test.yaml")
-            .flatMap {
-                log.debug("Found test list in {}", it)
-                val yamlFile = File(it.classpathElementFile.absolutePath + "/" + it.path)
+            .flatMap { resource ->
+                log.debug("Found test list in {}", resource)
+                val yamlFile = File(resource.classpathElementFile.absolutePath + "/" + resource.path)
                 val testConfiguration = Config {
                     addSpec(Root)
-                }.from.yaml.inputStream(it.open())
+                }.from.yaml.inputStream(resource.open())
                 testConfiguration[Root.tests].map { it to yamlFile.parentFile }
             }
             .forEach { (test, location) ->
