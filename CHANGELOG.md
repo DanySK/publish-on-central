@@ -1,3 +1,15 @@
+## [4.1.1](https://github.com/DanySK/publish-on-central/compare/4.1.0...4.1.1) (2023-04-13)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.1 ([dafca04](https://github.com/DanySK/publish-on-central/commit/dafca040b5e14c8880aad28352c7f23880117d30))
+
+
+### Performance improvements
+
+* replace `inline` functions preventing compile avoidance ([7f9a5c3](https://github.com/DanySK/publish-on-central/commit/7f9a5c3b34f89d3ea1b4218afe3b938b2e522dc0))
+
 ## [4.1.0](https://github.com/DanySK/publish-on-central/compare/4.0.1...4.1.0) (2023-04-13)
 
 
