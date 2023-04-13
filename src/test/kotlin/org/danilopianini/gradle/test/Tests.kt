@@ -66,7 +66,7 @@ class Tests : StringSpec(
                     }
                 }
             }
-    }
+    },
 ) {
     companion object {
         val log = LoggerFactory.getLogger(Tests::class.java)
