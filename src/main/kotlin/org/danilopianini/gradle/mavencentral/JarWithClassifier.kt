@@ -1,6 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.gradle.jvm.tasks.Jar
+import org.gradle.api.tasks.bundling.Jar
 
 /**
  * A [Jar] task with the specified classifier, and adopting the duplicate strategy
