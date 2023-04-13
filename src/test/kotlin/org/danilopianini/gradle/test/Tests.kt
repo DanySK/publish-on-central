@@ -24,7 +24,7 @@ class Tests : StringSpec(
             .scan()
         scan.getResourcesWithLeafName("test.yaml")
             .flatMap {
-                log.debug("Found test list in $it")
+                log.debug("Found test list in {}", it)
                 val yamlFile = File(it.classpathElementFile.absolutePath + "/" + it.path)
                 val testConfiguration = Config {
                     addSpec(Root)
@@ -32,11 +32,11 @@ class Tests : StringSpec(
                 testConfiguration[Root.tests].map { it to yamlFile.parentFile }
             }
             .forEach { (test, location) ->
-                log.debug("Test to be executed: $test from $location")
+                log.debug("Test to be executed: {} from {}", test, location)
                 val testFolder = folder {
                     location.copyRecursively(this.root)
                 }
-                log.debug("Test has been copied into $testFolder and is ready to get executed")
+                log.debug("Test has been copied into {} and is ready to get executed", testFolder)
                 test.description {
                     val result = GradleRunner.create()
                         .withProjectDir(testFolder.root)
