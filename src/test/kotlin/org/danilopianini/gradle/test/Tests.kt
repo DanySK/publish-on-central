@@ -27,9 +27,7 @@ class Tests : StringSpec(
             .flatMap { resource ->
                 log.debug("Found test list in {}", resource)
                 val yamlFile = File(resource.classpathElementFile.absolutePath + "/" + resource.path)
-                val testConfiguration = Config {
-                    addSpec(Root)
-                }.from.yaml.inputStream(resource.open())
+                val testConfiguration = Config { addSpec(Root) }.from.yaml.inputStream(resource.open())
                 testConfiguration[Root.tests].map { it to yamlFile.parentFile }
             }
             .forEach { (test, location) ->
