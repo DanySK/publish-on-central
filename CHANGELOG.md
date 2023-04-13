@@ -1,3 +1,62 @@
+## [4.1.0](https://github.com/DanySK/publish-on-central/compare/4.0.1...4.1.0) (2023-04-13)
+
+
+### Features
+
+* replace `org.gradle.jvm.tasks.Jar` with `org.gradle.api.tasks.bundling.Jar` as the superclass of `JavadocJar` and `SourceJar` ([8e73f79](https://github.com/DanySK/publish-on-central/commit/8e73f79eeb640458226f5871cef4f21e9631939e))
+
+
+### Bug Fixes
+
+* use a beta version of the plugin itself to prepare for Gradle 8.1 ([07a0ceb](https://github.com/DanySK/publish-on-central/commit/07a0ceb3fdcbe9dd6406df959e61244cfd1e8b14))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.5.1 ([748f853](https://github.com/DanySK/publish-on-central/commit/748f8532b68307482fbbfb30b79db057636b6cbe))
+* **deps:** update actions/checkout action to v3.5.2 ([a42f1b8](https://github.com/DanySK/publish-on-central/commit/a42f1b8b9c4557b930efee334e6a30d465df3e60))
+* **deps:** update alchemistsimulator/alchemist action to v25.15.2 ([bfeb34f](https://github.com/DanySK/publish-on-central/commit/bfeb34f4beb75842ed5ec67ef2146e03b8464418))
+* **deps:** update danysk/action-checkout action to v0.2.8 ([b7b7620](https://github.com/DanySK/publish-on-central/commit/b7b762025ee2b7b09e695e552ca65341df9bbfec))
+* **deps:** update danysk/action-checkout action to v0.2.9 ([bb387cb](https://github.com/DanySK/publish-on-central/commit/bb387cbf74f48fac256deb40446d33701033eb5e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.3 ([a299fcf](https://github.com/DanySK/publish-on-central/commit/a299fcf299b515eee2f5021ca1f7921bf6df1646))
+* replace deprecated methods `to`[`Low`|`Upp`]`erCase` with [`low`|`upp`]`ercase` ([58e692d](https://github.com/DanySK/publish-on-central/commit/58e692dac286e1cff346ecfdde28f0477c8115a7))
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.23 ([f81c710](https://github.com/DanySK/publish-on-central/commit/f81c71079591a38585dbb8d134248943b96f58aa))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.24 ([dba636e](https://github.com/DanySK/publish-on-central/commit/dba636e46f893166c913e1bba049b668cac52a6b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.25 ([cd18a8c](https://github.com/DanySK/publish-on-central/commit/cd18a8c451b00461f4ff27b65454148237c811d6))
+* **deps:** update node.js to 18.16 ([2e0e233](https://github.com/DanySK/publish-on-central/commit/2e0e2339cbb9b5acc72979f39990e9a1ff6965e8))
+* **deps:** update npm to v9.6.3 ([f08c03f](https://github.com/DanySK/publish-on-central/commit/f08c03f1a037b834fceceb28fcddcb105cdd321b))
+* **deps:** update npm to v9.6.4 ([5114a1e](https://github.com/DanySK/publish-on-central/commit/5114a1e429253820cc987991def6ce64a1dfe656))
+* **deps:** update plugin com.gradle.enterprise to v3.13 ([a885233](https://github.com/DanySK/publish-on-central/commit/a885233a4cda330113086e68adaca6b7c8e3439f))
+* **deps:** update plugin gitsemver to v1.1.6 ([77484fa](https://github.com/DanySK/publish-on-central/commit/77484fa169b293657b31f078bea583659bca33fa))
+* **deps:** update plugin gradlepluginpublish to v1.2.0 ([0e25b6a](https://github.com/DanySK/publish-on-central/commit/0e25b6a7d01d504bb57f8d0b2d09e809927ddd39))
+* **deps:** update plugin multijvmtesting to v0.4.20 ([42ea778](https://github.com/DanySK/publish-on-central/commit/42ea7782949e38e7640da2d8210e100a60aecf68))
+* **deps:** update plugin publishoncentral to v4.0.1 ([4351b18](https://github.com/DanySK/publish-on-central/commit/4351b18a7ba73fdffea7e5cbd5f00b0560a0f837))
+
+
+### Tests
+
+* annotate platform type ([0d7dd39](https://github.com/DanySK/publish-on-central/commit/0d7dd3908a7aeb811c3cbe3b6e552d19e5b29aae))
+* avoid string templates as parameters in logger calls ([9bc1105](https://github.com/DanySK/publish-on-central/commit/9bc11053e50dd954de66ae64959de90658be73b4))
+
+
+### Style improvements
+
+* avoid shadowing `it` ([0db0bca](https://github.com/DanySK/publish-on-central/commit/0db0bcaf872a36469da95b60737afd75b79b3fad))
+* **build:** prefer `error` over throwing IllegalStateException ([025ce44](https://github.com/DanySK/publish-on-central/commit/025ce44429f225ebfafd02bb03fe00e2dd2c85d9))
+* format more compactly ([2343c8f](https://github.com/DanySK/publish-on-central/commit/2343c8f4172e7137b289b51a66e51d1e5f2a55ec))
+* prefer `error` over throwing IllegalStateException ([76e71d9](https://github.com/DanySK/publish-on-central/commit/76e71d96c96b908b18e3a3cad80357fa852a61bf))
+* use a more compact formatting style ([4427c0e](https://github.com/DanySK/publish-on-central/commit/4427c0e82b11abc5bc060c80b776ca81838cbc63))
+* use trailing commas appropriately ([bb9ad82](https://github.com/DanySK/publish-on-central/commit/bb9ad82bb2a32756adab319511061c952b53ed07))
+
+
+### Performance improvements
+
+* drop `inline` function preventing compile avoidance ([b96ed73](https://github.com/DanySK/publish-on-central/commit/b96ed73fb2987f0c228a045a1d8b26045a6b5a3e))
+
 ## [4.0.1](https://github.com/DanySK/publish-on-central/compare/4.0.0...4.0.1) (2023-04-02)
 
 
