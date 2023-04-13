@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.createExtension
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -10,6 +9,7 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
@@ -28,11 +28,11 @@ class PublishOnCentral : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
-        val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
+        val extension = project.extensions.create<PublishOnCentralExtension>("publishOnCentral", project)
         val createdPublications = mutableListOf<MavenPublication>()
         project.configure<PublishingExtension> {
-            val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
-            val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
+            val sourcesJarTask = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
+            val javadocJarTask = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }
