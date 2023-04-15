@@ -54,7 +54,7 @@ data class Repository(
                 name = name,
                 url = project.objects.property(),
                 user = project.objects.property(),
-                password = project.objects.property()
+                password = project.objects.property(),
             )
     }
 }

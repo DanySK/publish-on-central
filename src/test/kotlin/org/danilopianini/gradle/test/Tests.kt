@@ -13,6 +13,7 @@ import org.gradle.internal.impldep.org.junit.rules.TemporaryFolder
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
+import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.io.File
 
@@ -23,20 +24,18 @@ class Tests : StringSpec(
             .acceptPackages(Tests::class.java.`package`.name)
             .scan()
         scan.getResourcesWithLeafName("test.yaml")
-            .flatMap {
-                log.debug("Found test list in $it")
-                val yamlFile = File(it.classpathElementFile.absolutePath + "/" + it.path)
-                val testConfiguration = Config {
-                    addSpec(Root)
-                }.from.yaml.inputStream(it.open())
+            .flatMap { resource ->
+                log.debug("Found test list in {}", resource)
+                val yamlFile = File(resource.classpathElementFile.absolutePath + "/" + resource.path)
+                val testConfiguration = Config { addSpec(Root) }.from.yaml.inputStream(resource.open())
                 testConfiguration[Root.tests].map { it to yamlFile.parentFile }
             }
             .forEach { (test, location) ->
-                log.debug("Test to be executed: $test from $location")
+                log.debug("Test to be executed: {} from {}", test, location)
                 val testFolder = folder {
                     location.copyRecursively(this.root)
                 }
-                log.debug("Test has been copied into $testFolder and is ready to get executed")
+                log.debug("Test has been copied into {} and is ready to get executed", testFolder)
                 test.description {
                     val result = GradleRunner.create()
                         .withProjectDir(testFolder.root)
@@ -66,10 +65,10 @@ class Tests : StringSpec(
                     }
                 }
             }
-    }
+    },
 ) {
     companion object {
-        val log = LoggerFactory.getLogger(Tests::class.java)
+        val log: Logger = LoggerFactory.getLogger(Tests::class.java)
 
         private fun BuildResult.outcomeOf(name: String) = checkNotNull(task(":$name")?.outcome) {
             "Task $name was not present among the executed tasks"

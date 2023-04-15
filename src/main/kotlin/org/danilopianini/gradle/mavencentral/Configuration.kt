@@ -2,7 +2,6 @@ package org.danilopianini.gradle.mavencentral
 
 import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
-import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
@@ -96,15 +95,16 @@ fun Project.configureRepository(repoToConfigure: Repository) {
 }
 
 private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusUrl: String) {
-    val nexusClient = rootProject.registerTaskIfNeeded<InitializeNexusClient>(
+    val nexusClient = rootProject.registerTaskIfNeeded(
         "createNexusClientFor${repoToConfigure.name}",
+        InitializeNexusClient::class,
         repoToConfigure,
         nexusUrl,
     ) as InitializeNexusClient
     /*
      * Creates a new staging repository on the Nexus server, or fetches an existing one if the repoId is known.
      */
-    val createStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
+    val createStagingRepository = rootProject.registerTaskIfNeeded(
         "createStagingRepositoryOn${repoToConfigure.name}"
     ) {
         val stagingRepoIdsFileName = "staging-repo-ids.properties"
@@ -134,7 +134,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
      * Closes the staging repository. If it's closed already, skips the operation.
      * Runs after all uploads. Requires the creation of the staging repository.
      */
-    val closeStagingRepository = rootProject.registerTaskIfNeeded<DefaultTask>(
+    val closeStagingRepository = rootProject.registerTaskIfNeeded(
         "closeStagingRepositoryOn${repoToConfigure.name}"
     ) {
         doLast {
@@ -154,7 +154,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
     /*
      * Releases the staging repository. Requires closing.
      */
-    val release = rootProject.registerTaskIfNeeded<DefaultTask>("releaseStagingRepositoryOn${repoToConfigure.name}") {
+    val release = rootProject.registerTaskIfNeeded("releaseStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.release() }
         dependsOn(closeStagingRepository)
         group = PublishingPlugin.PUBLISH_TASK_GROUP
@@ -166,7 +166,7 @@ private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusU
      * It must run after all uploads.
      * If closing is requested as well, drop must run after it.
      */
-    val drop = rootProject.registerTaskIfNeeded<DefaultTask>("dropStagingRepositoryOn${repoToConfigure.name}") {
+    val drop = rootProject.registerTaskIfNeeded("dropStagingRepositoryOn${repoToConfigure.name}") {
         doLast { nexusClient.nexusClient.drop() }
         dependsOn(createStagingRepository)
         mustRunAfter(uploadAllPublications)

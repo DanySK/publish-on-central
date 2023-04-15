@@ -87,7 +87,7 @@ publishOnCentral {
     projectLongName.set(info.longName)
     projectUrl.set(info.website)
     scmConnection.set(info.scm)
-    repository("https://maven.pkg.github.com/DanySK/$name".toLowerCase()) {
+    repository("https://maven.pkg.github.com/DanySK/$name".lowercase()) {
         user.set("danysk")
         password.set(System.getenv("GITHUB_TOKEN"))
     }
@@ -120,12 +120,11 @@ val registerCredentials = tasks.register("registerGradlePluginPortalCredentials"
     doLast {
         listOf("gradle.publish.key", "gradle.publish.secret").forEach {
             if (!(project.hasProperty(it) or System.getenv().containsKey(it))) {
-                val bashName = it.toUpperCase().replace(".", "_")
+                val bashName = it.uppercase().replace(".", "_")
                 System.getProperties().setProperty(
                     it,
-                    System.getenv(bashName) ?: throw IllegalStateException(
-                        "Property $it is unset and environment variable $bashName unavailable"
-                    )
+                    System.getenv(bashName)
+                        ?: error("Property $it is unset and environment variable $bashName unavailable"),
                 )
             }
         }

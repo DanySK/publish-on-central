@@ -1,7 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureExtension
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.createExtension
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -12,6 +10,7 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.kotlin.dsl.configure
+import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
@@ -30,7 +29,7 @@ class PublishOnCentral : Plugin<Project> {
 
     private fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
         plugins.withId("org.jetbrains.kotlin.js") { _ ->
-            configureExtension<KotlinJsProjectExtension> {
+            configure<KotlinJsProjectExtension> {
                 js {
                     sourceSets.getByName("main") {
                         (sourcesJarTask as SourceJar).sourceSet(it.kotlin)
@@ -44,11 +43,11 @@ class PublishOnCentral : Plugin<Project> {
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
-        val extension = project.createExtension<PublishOnCentralExtension>("publishOnCentral", project)
+        val extension = project.extensions.create<PublishOnCentralExtension>("publishOnCentral", project)
         val createdPublications = mutableListOf<MavenPublication>()
-        project.configureExtension<PublishingExtension> {
-            val sourcesJarTask = project.registerTaskIfNeeded<SourceJar>("sourcesJar")
-            val javadocJarTask = project.registerTaskIfNeeded<JavadocJar>("javadocJar")
+        project.configure<PublishingExtension> {
+            val sourcesJarTask = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
+            val javadocJarTask = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
             project.configureJavadocJarTaskForKtJs(sourcesJarTask)
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
@@ -105,7 +104,7 @@ class PublishOnCentral : Plugin<Project> {
                         "Dokka plugin applied but no task exists for style ${extension.docStyle.get()}!"
                     }
                     val outputDirectory = dokkaTask.property("outputDirectory")
-                        ?: throw IllegalStateException(
+                        ?: error(
                             "dokkaJavadoc has no property 'outputDirectory' - " +
                                 "maybe this version is incompatible with publish-on-central?"
                         )
