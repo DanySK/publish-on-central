@@ -1,9 +1,12 @@
 package org.danilopianini.gradle.mavencentral
 
+import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.configurePomForMavenCentral
+import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureJavadocJarTaskForKtJs
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -14,7 +17,6 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
@@ -25,19 +27,6 @@ class PublishOnCentral : Plugin<Project> {
          * The name of the publication to be created.
          */
         private const val publicationName = "OSSRH"
-    }
-
-    private fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
-        plugins.withId("org.jetbrains.kotlin.js") { _ ->
-            configure<KotlinJsProjectExtension> {
-                js {
-                    sourceSets.getByName("main") {
-                        (sourcesJarTask as SourceJar).sourceSet(it.kotlin)
-                        sourcesJarTask.sourceSet(it.resources)
-                    }
-                }
-            }
-        }
     }
 
     override fun apply(project: Project) {
