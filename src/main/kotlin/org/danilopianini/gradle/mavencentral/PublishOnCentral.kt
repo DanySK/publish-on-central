@@ -48,8 +48,13 @@ class PublishOnCentral : Plugin<Project> {
                         publications.create(name, MavenPublication::class.java) { publication ->
                             createdPublications += publication
                             publication.from(component)
-                            publication.artifact(sourcesJarTask)
-                            publication.artifact(javadocJarTask)
+                            // Add artifacts selectively, only if this plugin created the publication
+                            if (sourcesJarTask is SourceJar) {
+                                publication.artifact(sourcesJarTask)
+                            }
+                            if (javadocJarTask is JavadocJar) {
+                                publication.artifact(javadocJarTask)
+                            }
                             publication.configurePomForMavenCentral(extension)
                             publication.pom.packaging = "jar"
                             project.configure<SigningExtension> {
