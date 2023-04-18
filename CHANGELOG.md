@@ -1,3 +1,30 @@
+## [5.0.0](https://github.com/DanySK/publish-on-central/compare/4.1.1...5.0.0) (2023-04-18)
+
+
+### ⚠ BREAKING CHANGES
+
+* move extension methods into container objects
+
+### Features
+
+* add support for Kotlin JS-only projects ([#597](https://github.com/DanySK/publish-on-central/issues/597)) ([ac89097](https://github.com/DanySK/publish-on-central/commit/ac890976df662c6f2d24a09be3267f85e1527b34))
+
+
+### Bug Fixes
+
+* add sourceJar and javadocJar artifacts only to self-produced publications ([2d6b1ba](https://github.com/DanySK/publish-on-central/commit/2d6b1baec7f172080102cafc5ce701961713e8ba))
+
+
+### Dependency updates
+
+* **deps:** update plugin gitsemver to v1.1.7 ([7b6ef40](https://github.com/DanySK/publish-on-central/commit/7b6ef400b56fbf1868044feaa52e017ba7ee9647))
+* **deps:** update plugin publishoncentral to v4.1.1 ([f47d6a2](https://github.com/DanySK/publish-on-central/commit/f47d6a2fafd60388a5f4b470f437a3dc83013c41))
+
+
+### Refactoring
+
+* move extension methods into container objects ([5bc2e10](https://github.com/DanySK/publish-on-central/commit/5bc2e109a051f4b7c5da6edc490ac307d95876ec))
+
 ## [4.1.1](https://github.com/DanySK/publish-on-central/compare/4.1.0...4.1.1) (2023-04-13)
 
 
