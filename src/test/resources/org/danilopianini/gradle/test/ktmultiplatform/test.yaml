@@ -2,7 +2,6 @@ tests:
   - description: "gradle should generate metadata files in kotlin-multiplatform projects"
     configuration:
       tasks: &tasks
-        - 'generateMetadataFileForJavaOSSRHPublication'
         - 'generateMetadataFileForJvmPublication'
         - 'generateMetadataFileForKotlinOSSRHPublication'
         - 'generateMetadataFileForKotlinMultiplatformPublication'
