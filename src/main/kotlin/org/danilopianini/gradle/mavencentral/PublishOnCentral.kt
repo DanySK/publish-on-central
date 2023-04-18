@@ -3,6 +3,7 @@ package org.danilopianini.gradle.mavencentral
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.Task
 import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -13,6 +14,7 @@ import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
@@ -25,6 +27,19 @@ class PublishOnCentral : Plugin<Project> {
         private const val publicationName = "OSSRH"
     }
 
+    private fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
+        plugins.withId("org.jetbrains.kotlin.js") { _ ->
+            configure<KotlinJsProjectExtension> {
+                js {
+                    sourceSets.getByName("main") {
+                        (sourcesJarTask as SourceJar).sourceSet(it.kotlin)
+                        sourcesJarTask.sourceSet(it.resources)
+                    }
+                }
+            }
+        }
+    }
+
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
@@ -33,6 +48,7 @@ class PublishOnCentral : Plugin<Project> {
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
             val javadocJarTask = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
+            project.configureJavadocJarTaskForKtJs(sourcesJarTask)
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }

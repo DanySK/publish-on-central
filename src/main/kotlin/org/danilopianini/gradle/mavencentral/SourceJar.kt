@@ -22,8 +22,14 @@ open class SourceJar : JarWithClassifier("sources") {
     fun sourceSet(name: String, failOnMissingName: Boolean = true) {
         val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
         if (sourceSets != null) {
-            val sourceSet = sourceSets.getByName(name)
-            sourceSet(sourceSet)
+            val sourceSet = sourceSets.findByName(name)
+            if (sourceSet != null) {
+                sourceSet(sourceSet)
+            } else {
+                check(!failOnMissingName) {
+                    "Project has property 'sourceSets' of type 'SourceSetContainer', but it contains no '$name' entry"
+                }
+            }
         } else {
             check(!failOnMissingName) {
                 "Project has no property 'sourceSets' of type 'SourceSetContainer'"
