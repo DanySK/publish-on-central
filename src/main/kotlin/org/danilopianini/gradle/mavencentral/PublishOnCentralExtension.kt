@@ -1,5 +1,9 @@
 package org.danilopianini.gradle.mavencentral
 
+import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.configurePomForMavenCentral
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureRepository
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefault
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefaultProvider
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
@@ -14,7 +18,7 @@ open class PublishOnCentralExtension(val project: Project) {
      * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
      * and should thus configure them appropriately.
      * If disabled, the publications to be sent on Central must be configured manually by calling
-     * [configureForMavenCentral] on them in the buildscript.
+     * [configurePomForMavenCentral] on them in the buildscript.
      */
     val autoConfigureAllPublications: Property<Boolean> = project.propertyWithDefault(true)
 
