@@ -46,6 +46,8 @@ kotlin {
             "mac os x" to "amd64", "mac os x" to "x86_64" -> ::macosX64
             "windows" to "amd64", "windows server 2022" to "amd64" -> ::mingwX64
             "windows" to "x86" -> ::mingwX86
+            "windows 11" to "amd64", "windows server 2022" to "amd64" -> ::mingwX64
+            "windows 11" to "x86" -> ::mingwX86
             else -> throw GradleException("Host OS '$hostOs' with arch '$hostArch' is not supported in Kotlin/Native.")
         }
     nativeTarget("native") {
