@@ -91,20 +91,18 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.tasks.withType(SourceJar::class.java).configureEach { it.sourceSet("main", true) }
         }
-        if (dokkaPluginClass.isSuccess) {
-            project.plugins.withType(dokkaPluginClass.getOrThrow()).configureEach {
-                project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
-                    val dokkaTask = checkNotNull(project.dokkaTasksFor(extension.docStyle).firstOrNull()) {
-                        "Dokka plugin applied but no task exists for style ${extension.docStyle.get()}!"
-                    }
-                    val outputDirectory = dokkaTask.property("outputDirectory")
-                        ?: error(
-                            "dokkaJavadoc has no property 'outputDirectory' - " +
-                                "maybe this version is incompatible with publish-on-central?"
-                        )
-                    javadocJar.dependsOn(dokkaTask)
-                    javadocJar.from(outputDirectory)
+        project.plugins.withId(DOKKA_PLUGIN_ID) { _ ->
+            project.logger.info("Dokka plugin found, hence javadocJar will be configured")
+            project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
+                val message = "configure ${javadocJar.name} task to depend on Dokka task"
+                project.logger.info("Lazily $message")
+                val dokkaTask = extension.docStyle.map { docStyle ->
+                    project.dokkaTasksFor(docStyle).firstOrNull()
+                        ?.also { project.logger.info("Actually $message ${it.name}") }
+                        ?: error("Dokka plugin applied but no task exists for style $docStyle!")
                 }
+                javadocJar.dependsOn(dokkaTask)
+                javadocJar.from(dokkaTask.map { it.outputDirectory })
             }
         }
     }

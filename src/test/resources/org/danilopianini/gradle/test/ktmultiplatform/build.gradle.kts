@@ -9,6 +9,7 @@ import org.jetbrains.kotlin.util.capitalizeDecapitalize.toLowerCaseAsciiOnly
 plugins {
     kotlin("multiplatform")
     id("org.danilopianini.publish-on-central")
+    id("org.jetbrains.dokka") version "1.8.10"
 }
 
 group = "org.danilopianini"
