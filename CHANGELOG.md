@@ -1,3 +1,23 @@
+## [5.0.1](https://github.com/DanySK/publish-on-central/compare/5.0.0...5.0.1) (2023-04-20)
+
+
+### Bug Fixes
+
+* **kotlin-multiplatform:** fix broken dokka style support ([#605](https://github.com/DanySK/publish-on-central/issues/605)) ([26f6dcf](https://github.com/DanySK/publish-on-central/commit/26f6dcf84018fb89c887b4a1a220392e95772c06))
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.11 ([d23329c](https://github.com/DanySK/publish-on-central/commit/d23329c6cbd0d6d25eba8dc9deb885d00daffe04))
+
+
+### Dependency updates
+
+* **deps:** update kotest to v5.6.0 ([e62b827](https://github.com/DanySK/publish-on-central/commit/e62b82741f30014e49a8ad4b31f6351abc52e497))
+* **deps:** update kotest to v5.6.1 ([3ec8cf4](https://github.com/DanySK/publish-on-central/commit/3ec8cf4e229dce3c88eb5c9cf1c2582535b47bc1))
+* **deps:** update plugin multijvmtesting to v0.4.21 ([828f565](https://github.com/DanySK/publish-on-central/commit/828f5652abf7c16f4dc3f740e650767f25e94e59))
+* **deps:** update plugin publishoncentral to v5 ([1ec66a5](https://github.com/DanySK/publish-on-central/commit/1ec66a51d112099805ee3838ec201475235203f7))
+
 ## [5.0.0](https://github.com/DanySK/publish-on-central/compare/4.1.1...5.0.0) (2023-04-18)
 
 
