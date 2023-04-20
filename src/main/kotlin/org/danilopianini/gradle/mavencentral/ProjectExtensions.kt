@@ -150,10 +150,7 @@ internal object ProjectExtensions {
          */
         gradle.taskGraph.whenReady {
             if (it.hasTask(release) && it.hasTask(drop)) {
-                error(
-                    "Tasks ${release.name} and ${drop.name} have both been selected for execution, " +
-                        "but they are mutually exclusive"
-                )
+                error("Mutually exclusive tasks '${release.name}' and '${drop.name}' both selected for execution")
             }
         }
         the<PublishingExtension>().publications.withType<MavenPublication>().configureEach { publication ->
