@@ -11,9 +11,10 @@ import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitione
 import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
-import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes
 import java.net.URI
 import java.time.Duration
+import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes.STATUS_CODE_CREATED as HTTP_201_CREATED
+import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes.STATUS_CODE_OK as HTTP_200_OK
 
 /**
  * Lazy class acting as a container for stateful operations on Nexus.
@@ -123,12 +124,9 @@ data class NexusStatefulOperation(
                 .jsonBody("""{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""")
                 .response { _, response, _ ->
                     project.logger.lifecycle("Received response {} ", response)
-                    check(
-                        response.statusCode in listOf(
-                            HttpStatusCodes.STATUS_CODE_OK,
-                            HttpStatusCodes.STATUS_CODE_CREATED,
-                        )
-                    )
+                    check(response.statusCode in HTTP_200_OK..HTTP_201_CREATED) {
+                        "Could not drop repository $repoId: HTTP ${response.statusCode} ${response.responseMessage}"
+                    }
                 }
         }
         project.logger.lifecycle("Requested drop for repository {} ", repoId)
