@@ -22,3 +22,25 @@ tests:
         - createStagingRepositoryOnMavenCentral
         - closeStagingRepositoryOnMavenCentral
         - uploadAllPublicationsToMavenCentralNexus
+  - description: "dokkaHtml works"
+    configuration:
+      tasks:
+        - dokkaHtml
+      options:
+        - '--stacktrace'
+    expectation:
+      success: dokkaHtml
+  - description: "javadocJar should rely on dokkaHtml instead of dokkaJavadoc"
+    configuration:
+      tasks:
+        - javadocJar
+      options:
+        - '--info'
+        - '--stacktrace'
+    expectation:
+      success: dokkaHtml
+      not_executed: dokkaJavadoc
+      output_contains:
+        - "Dokka plugin found, hence javadocJar will be configured"
+        - "Lazily configure javadocJar task to depend on Dokka task"
+        - "Actually configure javadocJar task to depend on Dokka task dokkaHtml"
