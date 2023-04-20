@@ -18,12 +18,9 @@ internal const val DOKKA_PLUGIN_ID = "org.jetbrains.dokka"
  * Checks whether a [Task] is actually an instance of the type `DokkaTask`, i.e., an instance of the type
  * named after [DOKKA_TASK_CLASS_NAME].
  */
-internal val Task.isDokkaTask: Boolean
-    get() = try {
-        Class.forName(DOKKA_TASK_CLASS_NAME).isAssignableFrom(this::class.java)
-    } catch (_: ClassNotFoundException) {
-        this::class.java.name.startsWith(DOKKA_TASK_CLASS_NAME)
-    }
+internal val Task.isDokkaTask: Boolean get() =
+    runCatching { Class.forName(DOKKA_TASK_CLASS_NAME).isAssignableFrom(this::class.java) }
+        .getOrElse { this::class.java.name.startsWith(DOKKA_TASK_CLASS_NAME) }
 
 /**
  * Selects the available Dokka tasks supporting the generation of [docStyle]-style documentation.
