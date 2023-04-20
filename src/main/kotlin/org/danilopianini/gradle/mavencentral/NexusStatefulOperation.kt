@@ -67,10 +67,7 @@ data class NexusStatefulOperation(
             return@lazy StagingRepositoryDescriptor(project.uri(nexusUrl), stagingRepo.id)
         } ?: run {
             project.logger.lifecycle("Creating repository for profile id {} on Nexus at {}", stagingProfile, nexusUrl)
-            client.createStagingRepository(
-                stagingProfile,
-                description
-            )
+            client.createStagingRepository(stagingProfile, description)
         }
     }
 

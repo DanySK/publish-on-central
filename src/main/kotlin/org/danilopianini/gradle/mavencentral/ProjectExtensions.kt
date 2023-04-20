@@ -1,6 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
-import io.github.gradlenexus.publishplugin.internal.StagingRepository
+import io.github.gradlenexus.publishplugin.internal.StagingRepository.State.CLOSED
 import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
@@ -65,8 +65,9 @@ internal object ProjectExtensions {
     }
 
     private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusUrl: String) {
+        val repoName = repoToConfigure.name
         val nexusClient = rootProject.registerTaskIfNeeded(
-            "createNexusClientFor${repoToConfigure.name}",
+            "createNexusClientFor$repoName",
             InitializeNexusClient::class,
             repoToConfigure,
             nexusUrl,
@@ -75,7 +76,7 @@ internal object ProjectExtensions {
          * Creates a new staging repository on the Nexus server, or fetches an existing one if the repoId is known.
          */
         val createStagingRepository = rootProject.registerTaskIfNeeded(
-            "createStagingRepositoryOn${repoToConfigure.name}"
+            "createStagingRepositoryOn$repoName",
         ) {
             val stagingRepoIdsFileName = "staging-repo-ids.properties"
             outputs.file(buildDir.resolve(stagingRepoIdsFileName))
@@ -85,33 +86,30 @@ internal object ProjectExtensions {
                 nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
                 // Write the staging repository ID to build/staging-repo-ids.properties file
                 buildDir.resolve(stagingRepoIdsFileName).appendText(
-                    "${repoToConfigure.name}=${nexusClient.nexusClient.repoId}" + System.lineSeparator()
+                    "$repoName=${nexusClient.nexusClient.repoId}" + System.lineSeparator(),
                 )
             }
             group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Creates a new Nexus staging repository on ${repoToConfigure.name}."
+            description = "Creates a new Nexus staging repository on $repoName."
         }
         /*
          * Collector of all upload tasks. Actual uploads are defined at the bottom.
          * Requires the creation of the staging repository.
          */
-        val uploadAllPublications = tasks.register("uploadAllPublicationsTo${repoToConfigure.name}Nexus") {
+        val uploadAllPublications = tasks.register("uploadAllPublicationsTo${repoName}Nexus") {
             it.dependsOn(createStagingRepository)
             it.group = PublishingPlugin.PUBLISH_TASK_GROUP
-            it.description = "Uploads all publications to a staging repository on ${repoToConfigure.name}."
+            it.description = "Uploads all publications to a staging repository on $repoName."
         }
         /*
          * Closes the staging repository. If it's closed already, skips the operation.
          * Runs after all uploads. Requires the creation of the staging repository.
          */
-        val closeStagingRepository = rootProject.registerTaskIfNeeded(
-            "closeStagingRepositoryOn${repoToConfigure.name}"
-        ) {
+        val closeStagingRepository = rootProject.registerTaskIfNeeded("closeStagingRepositoryOn$repoName") {
             doLast {
                 with(nexusClient.nexusClient) {
                     when (client.getStagingRepositoryStateById(repoId).state) {
-                        StagingRepository.State.CLOSED ->
-                            logger.warn("The staging repository is already closed. Skipping.")
+                        CLOSED -> logger.warn("The staging repository is already closed. Skipping.")
                         else -> close()
                     }
                 }
@@ -119,7 +117,7 @@ internal object ProjectExtensions {
             dependsOn(createStagingRepository)
             mustRunAfter(uploadAllPublications)
             group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Closes the Nexus repository on ${repoToConfigure.name}."
+            description = "Closes the Nexus repository on $repoName."
         }
         /*
          * Releases the staging repository. Requires closing.
@@ -167,12 +165,8 @@ internal object ProjectExtensions {
                     }
                 }
                 uploadTask.publication = publication
-                publication.signingTasks(project).forEach {
-                    uploadTask.dependsOn(it)
-                }
-                tasks.withType<Sign>().forEach {
-                    uploadTask.mustRunAfter(it)
-                }
+                publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
+                tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
                 /*
                  * We need to make sure that the staging repository is created before we upload anything.
                  * We also need to make sure that the staging repository is closed *after* we upload
