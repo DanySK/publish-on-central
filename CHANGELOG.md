@@ -1,3 +1,34 @@
+## [5.0.2](https://github.com/DanySK/publish-on-central/compare/5.0.1...5.0.2) (2023-04-20)
+
+
+### Bug Fixes
+
+* improve error message when mutually exclusive tasks are selected for execution ([48396c8](https://github.com/DanySK/publish-on-central/commit/48396c8553b8ac957698c1ac894e4ff6fdbbe27b))
+* **nexus:** provide a cleaner error message in case of drop refusal ([5c2d38d](https://github.com/DanySK/publish-on-central/commit/5c2d38dec1ba5e5e0c1b80df44aed5c199245a25))
+
+
+### Dependency updates
+
+* **deps:** update plugin gitsemver to v1.1.8 ([691d8e9](https://github.com/DanySK/publish-on-central/commit/691d8e9f588ac80c287f39fc8ea73e9b88050120))
+* **deps:** update plugin kotlin-qa to v0.38.1 ([8ac5304](https://github.com/DanySK/publish-on-central/commit/8ac53040c401f29a4c3bacf4f966d498bf509592))
+* **deps:** update plugin publishoncentral to v5.0.1 ([9db5abd](https://github.com/DanySK/publish-on-central/commit/9db5abd4b09d195d0be765285c151e7ac75dbd18))
+
+
+### Refactoring
+
+* **dokka:** rename extension property and make code more idiomatic ([118017e](https://github.com/DanySK/publish-on-central/commit/118017ee1fbf48c920edb20bdbacdae9a22c0809))
+
+
+### Style improvements
+
+* **dokka:** prefer `runCatching` over try/catch ([0026e1b](https://github.com/DanySK/publish-on-central/commit/0026e1bcb726c56d484337b5cecc8e28fbac823f))
+* improve conciseness and code style ([e85b3f8](https://github.com/DanySK/publish-on-central/commit/e85b3f8aa9fd088c4794c6f5a66135a002a367b0))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.15.4 ([ff2a8f6](https://github.com/DanySK/publish-on-central/commit/ff2a8f61c0498e7df1396ce98baece09d7e2e86f))
+
 ## [5.0.1](https://github.com/DanySK/publish-on-central/compare/5.0.0...5.0.1) (2023-04-20)
 
 
