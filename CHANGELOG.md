@@ -1,3 +1,13 @@
+## [5.0.3](https://github.com/DanySK/publish-on-central/compare/5.0.2...5.0.3) (2023-04-21)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.1.1 ([4871e12](https://github.com/DanySK/publish-on-central/commit/4871e1228473aba57c507c7901e665e7c72efa18))
+* **deps:** update plugin gitsemver to v1.1.9 ([5b25af5](https://github.com/DanySK/publish-on-central/commit/5b25af53b83ce95cac7176be4b3cb1fa4d4b1934))
+* **deps:** update plugin multijvmtesting to v0.4.22 ([625db26](https://github.com/DanySK/publish-on-central/commit/625db260103accebe367887ac4cc5f78ff40c4ac))
+* **deps:** update plugin publishoncentral to v5.0.2 ([5ab5d46](https://github.com/DanySK/publish-on-central/commit/5ab5d469b1a175795238d435903b581fc29e13b3))
+
 ## [5.0.2](https://github.com/DanySK/publish-on-central/compare/5.0.1...5.0.2) (2023-04-20)
 
 
