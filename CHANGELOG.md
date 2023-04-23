@@ -1,3 +1,24 @@
+## [5.0.4](https://github.com/DanySK/publish-on-central/compare/5.0.3...5.0.4) (2023-04-23)
+
+
+### Bug Fixes
+
+* fix bugged source jar management in kotlin-js projects ([#619](https://github.com/DanySK/publish-on-central/issues/619)) ([db3278c](https://github.com/DanySK/publish-on-central/commit/db3278c088d8c90c9373e9f44f563700a8eea553))
+
+
+### Dependency updates
+
+* **deps:** update npm to v9.6.5 ([ef0f5a1](https://github.com/DanySK/publish-on-central/commit/ef0f5a1c6e09a93bcd4ec8f52f2bcf6575f71c67))
+* **deps:** update plugin kotlin-qa to v0.38.2 ([0762468](https://github.com/DanySK/publish-on-central/commit/07624684aabf3663f7567b8ebf7955e9620d93db))
+* **deps:** update plugin multijvmtesting to v0.4.23 ([65bed2d](https://github.com/DanySK/publish-on-central/commit/65bed2d1d101a0b4642c676f400229e1479c9e2e))
+* **deps:** update plugin publishoncentral to v5.0.3 ([e1c9fdf](https://github.com/DanySK/publish-on-central/commit/e1c9fdf706dc81972c403428933f24373507690a))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v25.15.5 ([e640fb0](https://github.com/DanySK/publish-on-central/commit/e640fb001bcb8724c54875ce1546e4078d149d75))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.4 ([e68623f](https://github.com/DanySK/publish-on-central/commit/e68623fb4838ca193550bd083cd30c7ab0fd2863))
+
 ## [5.0.3](https://github.com/DanySK/publish-on-central/compare/5.0.2...5.0.3) (2023-04-21)
 
 
