@@ -1,6 +1,7 @@
 @file:Suppress("UnstableApiUsage")
 
 import org.danilopianini.gradle.mavencentral.DocStyle
+import org.gradle.kotlin.dsl.repositories
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
@@ -10,6 +11,10 @@ plugins {
 
 group = "org.danilopianini"
 version = "1.0.0"
+
+repositories {
+    mavenCentral()
+}
 
 kotlin {
     js {

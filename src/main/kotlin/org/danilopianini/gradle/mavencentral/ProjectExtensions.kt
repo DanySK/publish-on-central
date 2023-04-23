@@ -2,7 +2,9 @@ package org.danilopianini.gradle.mavencentral
 
 import io.github.gradlenexus.publishplugin.internal.StagingRepository.State.CLOSED
 import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
+import org.gradle.api.Action
 import org.gradle.api.DefaultTask
+import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.provider.Property
@@ -10,6 +12,7 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.property
@@ -23,13 +26,51 @@ import kotlin.reflect.KClass
 
 internal object ProjectExtensions {
 
+    /**
+     * The id of the Kotlin/JS plugin.
+     */
+    private const val KOTLIN_JS_PLUGIN = "org.jetbrains.kotlin.js"
+
+    /**
+     * The `jsSourcesJar` [Task] of a Kotlin/JS project.
+     */
+    internal val Project.jsSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("jsSourcesJar")
+
+    /**
+     * The `kotlinSourcesJar` [Task] of a Kotlin/JS or Kotlin/JVM project.
+     */
+    private val Project.kotlinSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("kotlinSourcesJar")
+
+    /**
+     * The list of default sources Jar [Task]s: it may include [kotlinSourcesJar] and [jsSourcesJar],
+     * if they are non-null.
+     */
+    internal val Project.sourcesJarTasks: List<Jar> get() = listOfNotNull(jsSourcesJar, kotlinSourcesJar)
+
+    /**
+     * Executes an action on Kotlin/JS projects only.
+     */
+    internal fun Project.ifKotlinJsProject(action: Action<Plugin<*>>) {
+        plugins.withId(KOTLIN_JS_PLUGIN, action)
+    }
+
+    /**
+     * Configures the provided task to include the `main` source set of a Kotlin/JS project.
+     * The configuration does nothing if the provided task not of type [SourceJar].
+     */
     fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
-        plugins.withId("org.jetbrains.kotlin.js") { _ ->
+        ifKotlinJsProject { _ ->
             configure<KotlinJsProjectExtension> {
                 js {
                     sourceSets.getByName("main") {
-                        (sourcesJarTask as SourceJar).sourceSet(it.kotlin)
-                        sourcesJarTask.sourceSet(it.resources)
+                        (sourcesJarTask as? SourceJar)?.run {
+                            sourceSet(it.kotlin)
+                            sourceSet(it.resources)
+                        } ?: logger.warn(
+                            "source sets of task {} not configured because it is not of type {}",
+                            sourcesJarTask.name,
+                            SourceJar::class.java.name,
+                        )
                     }
                 }
             }
