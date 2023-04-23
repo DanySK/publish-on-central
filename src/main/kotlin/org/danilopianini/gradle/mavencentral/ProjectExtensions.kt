@@ -10,6 +10,7 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.property
@@ -22,6 +23,12 @@ import java.net.URI
 import kotlin.reflect.KClass
 
 internal object ProjectExtensions {
+
+    private val Project.jsSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("jsSourcesJar")
+
+    private val Project.kotlinSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("kotlinSourcesJar")
+
+    internal val Project.sourcesJarTasks: List<Jar> get() = listOfNotNull(jsSourcesJar, kotlinSourcesJar)
 
     fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
         plugins.withId("org.jetbrains.kotlin.js") { _ ->
