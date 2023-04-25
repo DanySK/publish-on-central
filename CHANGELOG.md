@@ -1,3 +1,12 @@
+## [5.0.5](https://github.com/DanySK/publish-on-central/compare/5.0.4...5.0.5) (2023-04-25)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.8.21 ([accd139](https://github.com/DanySK/publish-on-central/commit/accd139dd6acd92e1013d8084023de3e52bc989f))
+* **deps:** update plugin kotlin-qa to v0.39.0 ([5b9dfa2](https://github.com/DanySK/publish-on-central/commit/5b9dfa2fa7790c7835eca9f68f544a556d47e61f))
+* **deps:** update plugin publishoncentral to v5.0.4 ([251af73](https://github.com/DanySK/publish-on-central/commit/251af73e1888172316fc49ed7f675d0c554f4cdc))
+
 ## [5.0.4](https://github.com/DanySK/publish-on-central/compare/5.0.3...5.0.4) (2023-04-23)
 
 
