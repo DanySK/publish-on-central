@@ -1,3 +1,16 @@
+## [5.0.7](https://github.com/DanySK/publish-on-central/compare/5.0.6...5.0.7) (2023-06-10)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v26.0.5 ([905a989](https://github.com/DanySK/publish-on-central/commit/905a989b98d9f7348027b3cd1c697e2aeed45e88))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.8.20 ([6e53a78](https://github.com/DanySK/publish-on-central/commit/6e53a78757068d36f1e53e623f626db03da4085a))
+* **deps:** update plugin gitsemver to v1.1.10 ([c9b1369](https://github.com/DanySK/publish-on-central/commit/c9b1369242ba158551d7f2e750033229756c82a8))
+
 ## [5.0.6](https://github.com/DanySK/publish-on-central/compare/5.0.5...5.0.6) (2023-06-10)
 
 
