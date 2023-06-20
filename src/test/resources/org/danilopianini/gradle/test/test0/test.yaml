@@ -1,44 +1,56 @@
 tests:
   - description: "pom files get generated"
     configuration:
-      tasks: generatePomFileForJavaOSSRHPublication
+      tasks:
+        - generatePomFileForJavaOSSRHPublication
     expectation:
-      success: generatePomFileForJavaOSSRHPublication
-      file_exists:
-        name: build/publications/javaOSSRH/pom-default.xml
-        findRegex:
-          - '\s*<artifactId>test-publish-on-central</artifactId>'
-          - '\s*<groupId>io.github.danysk</groupId>'
-          - '\s*<name>test-publish-on-central</name>'
-          - '\s*<description>\w+</description>'
-          - '\s*<url>https?://.+</url>'
-          - '\s*<license>'
-          - '\s*</license>'
-          - '\s*<scm>'
-          - '\s*<connection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</connection>'
-          - '\s*<developerConnection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</developerConnection>'
-          - '\s*</scm>'
+      outcomes:
+        success:
+          - generatePomFileForJavaOSSRHPublication
+      files:
+        existing:
+          - name: build/publications/javaOSSRH/pom-default.xml
+            contentRegex:
+              - '\s*<artifactId>test-publish-on-central</artifactId>'
+              - '\s*<groupId>io.github.danysk</groupId>'
+              - '\s*<name>test-publish-on-central</name>'
+              - '\s*<description>\w+</description>'
+              - '\s*<url>https?://.+</url>'
+              - '\s*<license>'
+              - '\s*</license>'
+              - '\s*<scm>'
+              - '\s*<connection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</connection>'
+              - '\s*<developerConnection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</developerConnection>'
+              - '\s*</scm>'
   - description: "release and drop tasks get generated"
     configuration:
-      tasks: tasks
+      tasks:
+        - tasks
     expectation:
-      success: tasks
-      output_contains:
-        - publishPluginMavenPublicationToGithubRepository
-        - uploadJavaOSSRHToMavenCentralNexus
-        - uploadPluginMavenToMavenCentralNexus
-        - releaseStagingRepositoryOnMavenCentral
-        - dropStagingRepositoryOnMavenCentral
-      output_doesnt_contain:
-        - uploadJavaMavenToGithubNexus
+      outcomes:
+        success:
+          - tasks
+      output:
+        contains:
+          - publishPluginMavenPublicationToGithubRepository
+          - uploadJavaOSSRHToMavenCentralNexus
+          - uploadPluginMavenToMavenCentralNexus
+          - releaseStagingRepositoryOnMavenCentral
+          - dropStagingRepositoryOnMavenCentral
+        doesntContain:
+          - uploadJavaMavenToGithubNexus
   - description: "sources and javadoc tasks get greated"
     configuration:
-      tasks: tasks
+      tasks:
+        - tasks
     expectation:
-      success: tasks
-      output_contains:
-        - sourcesJar
-        - javadocJar
+      outcomes:
+        success:
+         - tasks
+      output:
+        contains:
+          - sourcesJar
+          - javadocJar
   - description: "sources and javadoc jars get created"
     configuration:
       tasks:
@@ -46,11 +58,13 @@ tests:
         - sourcesJar
         - javadocJar
     expectation:
-      success:
-        - jar
-        - sourcesJar
-        - javadocJar
-      file_exists:
-        - name: build/libs/test-publish-on-central-0.1.0-javadoc.jar
-        - name: build/libs/test-publish-on-central-0.1.0-sources.jar
-        - name: build/libs/test-publish-on-central-0.1.0.jar
+      outcomes:
+        success:
+          - jar
+          - sourcesJar
+          - javadocJar
+      files:
+        existing:
+          - name: build/libs/test-publish-on-central-0.1.0-javadoc.jar
+          - name: build/libs/test-publish-on-central-0.1.0-sources.jar
+          - name: build/libs/test-publish-on-central-0.1.0.jar

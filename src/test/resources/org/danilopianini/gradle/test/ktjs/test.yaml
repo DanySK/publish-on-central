@@ -6,9 +6,11 @@ tests:
       options:
         - '--stacktrace'
     expectation:
-      success: *tasks1
-      file_exists: &exists
-        - name: /build/libs/ktjs-1.0.0-sources.jar
+      outcomes:
+        success: *tasks1
+      files:
+        existing: &exists
+          - name: /build/libs/ktjs-1.0.0-sources.jar
   - description: "Task :jsSourcesJar should generate sources Jar with for Kotlin Js projects"
     configuration:
       tasks: &tasks2
@@ -16,8 +18,10 @@ tests:
       options:
         - '--stacktrace'
     expectation:
-      success: *tasks2
-      file_exists: *exists
+      outcomes:
+        success: *tasks2
+      files:
+        existing: *exists
   - description: "Task :kotlinSourcesJar should generate sources Jar with for Kotlin Js projects"
     configuration:
       tasks: &tasks3
@@ -25,8 +29,10 @@ tests:
       options:
         - '--stacktrace'
     expectation:
-      success: *tasks3
-      file_exists: *exists
+      outcomes:
+        success: *tasks3
+      files:
+        existing: *exists
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
       tasks:
@@ -35,8 +41,9 @@ tests:
         - '--dry-run'
         - '--stacktrace'
     expectation:
-      output_contains:
-        - ":kotlinSourcesJar SKIPPED"
-      output_doesnt_contain:
-        - ":sourcesJar"
-        - ":jsSourcesJar"
+      output:
+        contains:
+          - ":kotlinSourcesJar SKIPPED"
+        doesntContain:
+          - ":sourcesJar"
+          - ":jsSourcesJar"
