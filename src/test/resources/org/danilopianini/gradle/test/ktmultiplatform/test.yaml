@@ -10,18 +10,22 @@ tests:
       options:
         - '--stacktrace'
     expectation:
-      success: *tasks
+      outcomes:
+        success: *tasks
   - description: "gradle should generate nexus lifecycle management tasks in multiplatform projects"
     configuration:
       tasks:
         - tasks
     expectation:
-      success: tasks
-      output_contains:
-        - releaseStagingRepositoryOnMavenCentral
-        - createStagingRepositoryOnMavenCentral
-        - closeStagingRepositoryOnMavenCentral
-        - uploadAllPublicationsToMavenCentralNexus
+      outcomes:
+        success:
+          - tasks
+      output:
+        contains:
+          - releaseStagingRepositoryOnMavenCentral
+          - createStagingRepositoryOnMavenCentral
+          - closeStagingRepositoryOnMavenCentral
+          - uploadAllPublicationsToMavenCentralNexus
   - description: "dokkaHtml works"
     configuration:
       tasks:
@@ -29,7 +33,9 @@ tests:
       options:
         - '--stacktrace'
     expectation:
-      success: dokkaHtml
+      outcomes:
+        success:
+          - dokkaHtml
   - description: "javadocJar should rely on dokkaHtml instead of dokkaJavadoc"
     configuration:
       tasks:
@@ -38,9 +44,13 @@ tests:
         - '--info'
         - '--stacktrace'
     expectation:
-      success: dokkaHtml
-      not_executed: dokkaJavadoc
-      output_contains:
-        - "Dokka plugin found, hence javadocJar will be configured"
-        - "Lazily configure javadocJar task to depend on Dokka task"
-        - "Actually configure javadocJar task to depend on Dokka task dokkaHtml"
+      outcomes:
+        success:
+          - dokkaHtml
+        notExecuted:
+          - dokkaJavadoc
+      output:
+        contains:
+          - "Dokka plugin found, hence javadocJar will be configured"
+          - "Lazily configure javadocJar task to depend on Dokka task"
+          - "Actually configure javadocJar task to depend on Dokka task dokkaHtml"

@@ -7,13 +7,15 @@ tests:
         - '--all'
         - '--stacktrace'
     expectation:
-      success: *tasks
-      output_contains:
-        - releaseStagingRepositoryOnMavenCentral
-        - createStagingRepositoryOnMavenCentral
-        - closeStagingRepositoryOnMavenCentral
-        - uploadAllPublicationsToMavenCentralNexus
-      output_doesnt_contain:
-        - :releaseStagingRepositoryOnMavenCentral
-        - :createStagingRepositoryOnMavenCentral
-        - :closeStagingRepositoryOnMavenCentral
+      outcomes:
+        success: *tasks
+      output:
+        contains:
+          - releaseStagingRepositoryOnMavenCentral
+          - createStagingRepositoryOnMavenCentral
+          - closeStagingRepositoryOnMavenCentral
+          - uploadAllPublicationsToMavenCentralNexus
+        doesntContain:
+          - :releaseStagingRepositoryOnMavenCentral
+          - :createStagingRepositoryOnMavenCentral
+          - :closeStagingRepositoryOnMavenCentral
