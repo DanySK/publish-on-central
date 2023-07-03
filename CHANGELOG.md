@@ -1,3 +1,15 @@
+## [5.0.9](https://github.com/DanySK/publish-on-central/compare/5.0.8...5.0.9) (2023-07-03)
+
+
+### Bug Fixes
+
+* createStagingRepository should always create staging-repo-ids.properties into rootProject's build dir ([56aeb21](https://github.com/DanySK/publish-on-central/commit/56aeb21efa9b761078d328e1ce111be8d7c4f9d0))
+
+
+### Dependency updates
+
+* **deps:** update plugin publishoncentral to v5.0.8 ([ac5bffd](https://github.com/DanySK/publish-on-central/commit/ac5bffd82759e40046fd2ae1b2ec0af32556e371))
+
 ## [5.0.8](https://github.com/DanySK/publish-on-central/compare/5.0.7...5.0.8) (2023-07-02)
 
 
