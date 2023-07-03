@@ -120,15 +120,16 @@ internal object ProjectExtensions {
             "createStagingRepositoryOn$repoName",
         ) {
             val stagingRepoIdsFileName = "staging-repo-ids.properties"
-            outputs.file(buildDir.resolve(stagingRepoIdsFileName))
+            val stagingRepoIdsFile = rootProject.buildDir.resolve(stagingRepoIdsFileName)
+            outputs.file(rootProject.buildDir.resolve(stagingRepoIdsFileName))
             dependsOn(nexusClient)
             doLast {
                 rootProject.warnIfCredentialsAreMissing(repoToConfigure)
                 nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
+                val repoId = nexusClient.nexusClient.repoId
                 // Write the staging repository ID to build/staging-repo-ids.properties file
-                buildDir.resolve(stagingRepoIdsFileName).appendText(
-                    "$repoName=${nexusClient.nexusClient.repoId}" + System.lineSeparator(),
-                )
+                stagingRepoIdsFile.appendText("$repoName=$repoId" + System.lineSeparator())
+                logger.lifecycle("Append repo name {} to file {}", repoId, stagingRepoIdsFile.path)
             }
             group = PublishingPlugin.PUBLISH_TASK_GROUP
             description = "Creates a new Nexus staging repository on $repoName."
