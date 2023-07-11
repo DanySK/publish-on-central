@@ -1,3 +1,19 @@
+## [5.0.10](https://github.com/DanySK/publish-on-central/compare/5.0.9...5.0.10) (2023-07-11)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.15 ([8be206c](https://github.com/DanySK/publish-on-central/commit/8be206c513e7567662a74b6d650f34975c389f0d))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.2.1 ([0bc84d5](https://github.com/DanySK/publish-on-central/commit/0bc84d5dfc84b904b83139bf30d9a6e6de7c2a27))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.39 ([c06e9b5](https://github.com/DanySK/publish-on-central/commit/c06e9b5221059b64877fd87706db57ebc8c61938))
+* **deps:** update npm to v9.8.0 ([1345367](https://github.com/DanySK/publish-on-central/commit/1345367a3880f22844bd6eba3a0571868a23a81a))
+* **deps:** update plugin kotlin-qa to v0.47.0 ([3412304](https://github.com/DanySK/publish-on-central/commit/3412304fa44439e30daa15b4db50557c31e37e45))
+* **deps:** update plugin publishoncentral to v5.0.9 ([8f4c1aa](https://github.com/DanySK/publish-on-central/commit/8f4c1aa6c7509f1e08ada4103dc2564166032b40))
+
 ## [5.0.9](https://github.com/DanySK/publish-on-central/compare/5.0.8...5.0.9) (2023-07-03)
 
 
