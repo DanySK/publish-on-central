@@ -1,3 +1,33 @@
+## [5.0.11](https://github.com/DanySK/publish-on-central/compare/5.0.10...5.0.11) (2023-08-11)
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v26.0.10 ([f7ef52a](https://github.com/DanySK/publish-on-central/commit/f7ef52a0abff0a145991d593325a15331d2c299d))
+* **deps:** update alchemistsimulator/alchemist action to v26.0.11 ([0499af5](https://github.com/DanySK/publish-on-central/commit/0499af5c52563847ae0b42cfea5206429b6247b1))
+* **deps:** update alchemistsimulator/alchemist action to v26.0.12 ([e2b7ea4](https://github.com/DanySK/publish-on-central/commit/e2b7ea422d04b87ce87cb24c22ce97f985e475d9))
+* **deps:** update alchemistsimulator/alchemist action to v26.0.8 ([693177d](https://github.com/DanySK/publish-on-central/commit/693177dc06f9bafb06e2c1448215f1ed9bd38c01))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.7 ([6052f83](https://github.com/DanySK/publish-on-central/commit/6052f8329c8d51801421de9e4a417e7139d931cb))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.8 ([01c8c40](https://github.com/DanySK/publish-on-central/commit/01c8c401e0021038067bd441ca2594f27846f3ab))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.9.0 ([d5b6c83](https://github.com/DanySK/publish-on-central/commit/d5b6c836159bdecde570196e5d9a5001cb820cba))
+* **deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.7.3 ([51962b6](https://github.com/DanySK/publish-on-central/commit/51962b638ce8fab17d7c5193dfeb8e8ac75a6be2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.41 ([235f450](https://github.com/DanySK/publish-on-central/commit/235f4504dd89458c7ada6ead6c29e1d0cdfbd631))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.42 ([46a2313](https://github.com/DanySK/publish-on-central/commit/46a2313827a29bcd257a8d08e7e8f89bbe30c9f1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.43 ([e6f0880](https://github.com/DanySK/publish-on-central/commit/e6f0880e9d466731f364533e0e3bb7749bafd3d6))
+* **deps:** update node.js to 18.17 ([e75f36b](https://github.com/DanySK/publish-on-central/commit/e75f36b6098a9c06080cf07cb289cc48a6e33a9a))
+* **deps:** update npm to v9.8.1 ([d46454c](https://github.com/DanySK/publish-on-central/commit/d46454cd5d215f10512bcfc42f6705fa13c937e4))
+* **deps:** update plugin com.gradle.enterprise to v3.14 ([20bbdab](https://github.com/DanySK/publish-on-central/commit/20bbdab18db1806387c4e450534e7fd7c3c7129e))
+* **deps:** update plugin com.gradle.enterprise to v3.14.1 ([58a8077](https://github.com/DanySK/publish-on-central/commit/58a80773a5658320471efff43150e2c6cb1cd141))
+* **deps:** update plugin kotlin-qa to v0.47.1 ([6113b86](https://github.com/DanySK/publish-on-central/commit/6113b863e4351f5fe4143952406f6f45d929b4c9))
+* **deps:** update plugin kotlin-qa to v0.48.0 ([6614956](https://github.com/DanySK/publish-on-central/commit/6614956e395162086879bcbb302b309182c097cc))
+* **deps:** update plugin kotlin-qa to v0.49.0 ([9a50955](https://github.com/DanySK/publish-on-central/commit/9a509550cbd0541d2aac2c5cd0d50f61fdd1f63f))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.6.0 ([39f1a2b](https://github.com/DanySK/publish-on-central/commit/39f1a2b6b9c745745f7cc344eb54196d18071aca))
+* **deps:** update plugin publishoncentral to v5.0.10 ([64dab23](https://github.com/DanySK/publish-on-central/commit/64dab23418c9d852848d3fd7b88f74a06acd6364))
+
 ## [5.0.10](https://github.com/DanySK/publish-on-central/compare/5.0.9...5.0.10) (2023-07-11)
 
 
