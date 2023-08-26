@@ -1,3 +1,19 @@
+## [5.0.12](https://github.com/DanySK/publish-on-central/compare/5.0.11...5.0.12) (2023-08-26)
+
+
+### Build and continuous integration
+
+* **deps:** update danysk/action-checkout action to v0.2.11 ([74dec95](https://github.com/DanySK/publish-on-central/commit/74dec95a2e28d2927fc626388fd75dff14b7cf4f))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.9.10 ([f1367b8](https://github.com/DanySK/publish-on-central/commit/f1367b8818d2b27b1fbe979f129da411057a20ac))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.46 ([637224b](https://github.com/DanySK/publish-on-central/commit/637224bbe9898cd81c9cb88c7dfbe7d9960b8ae3))
+* **deps:** update plugin gradlepluginpublish to v1.2.1 ([99f8c57](https://github.com/DanySK/publish-on-central/commit/99f8c577c6a8817338853aa378ac3784bf32f5b5))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.7.0 ([85c64a5](https://github.com/DanySK/publish-on-central/commit/85c64a552b01ade912906e925169ead5ecdce462))
+* **deps:** update plugin publishoncentral to v5.0.11 ([b63b655](https://github.com/DanySK/publish-on-central/commit/b63b65516beadf0d658e10cc8c96144770ee412e))
+
 ## [5.0.11](https://github.com/DanySK/publish-on-central/compare/5.0.10...5.0.11) (2023-08-11)
 
 
