@@ -1,3 +1,18 @@
+## [5.0.13](https://github.com/DanySK/publish-on-central/compare/5.0.12...5.0.13) (2023-09-01)
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v3.6.0 ([30ba574](https://github.com/DanySK/publish-on-central/commit/30ba5749e8a06453c714838327101ed2245c4ce5))
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.9.0 ([aeefd50](https://github.com/DanySK/publish-on-central/commit/aeefd50682462825f410af5f6fba0bf9ac36da3f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.48 ([23b29b7](https://github.com/DanySK/publish-on-central/commit/23b29b73053a37d30c621ffc6ed2bb0f59b5885d))
+* **deps:** update plugin kotlin-qa to v0.49.1 ([2be3d79](https://github.com/DanySK/publish-on-central/commit/2be3d794de221f4161092e1d360efb2037df62ed))
+* **deps:** update plugin publishoncentral to v5.0.12 ([3d929ec](https://github.com/DanySK/publish-on-central/commit/3d929ecb52360cb42b5295295ef8f516ceed1849))
+
 ## [5.0.12](https://github.com/DanySK/publish-on-central/compare/5.0.11...5.0.12) (2023-08-26)
 
 
