@@ -1,3 +1,34 @@
+## [5.0.14](https://github.com/DanySK/publish-on-central/compare/5.0.13...5.0.14) (2023-09-15)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.3 ([65650fb](https://github.com/DanySK/publish-on-central/commit/65650fbfbe1f879f65893917ab52e88b6804c934))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.49 ([8f30863](https://github.com/DanySK/publish-on-central/commit/8f30863d63cf64ec8ce9e0f19c8e958df6bd8d26))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.50 ([ddcdce8](https://github.com/DanySK/publish-on-central/commit/ddcdce8252900a8c276b300546eb3949c8ba5d86))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.51 ([58342b1](https://github.com/DanySK/publish-on-central/commit/58342b102a0bf59223f61271bb08b2d21fdc8f47))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.52 ([690807b](https://github.com/DanySK/publish-on-central/commit/690807b9f310f9f3ee925645485de9d0e34a2e82))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.53 ([3c844e8](https://github.com/DanySK/publish-on-central/commit/3c844e84bdb822bc8af4c3e11092d66339f76a66))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.54 ([2aa00a0](https://github.com/DanySK/publish-on-central/commit/2aa00a094222d13a2c8284897d3de05119f7fbe9))
+* **deps:** update kotest to v5.7.2 ([58fc645](https://github.com/DanySK/publish-on-central/commit/58fc645dc79f3dfb74590f5491d0bcf8b179c421))
+* **deps:** update npm to v10 ([156d0df](https://github.com/DanySK/publish-on-central/commit/156d0df0e12a40049e196882eec383b83ce3d04f))
+* **deps:** update plugin com.gradle.enterprise to v3.15 ([b0e5c33](https://github.com/DanySK/publish-on-central/commit/b0e5c331cf9fec0ecdcdc4f534b0157564b0cd2d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.10 ([0b76de7](https://github.com/DanySK/publish-on-central/commit/0b76de72dd7f3055ead1ea577e3a29cc94bab383))
+* **deps:** update plugin publishoncentral to v5.0.13 ([b07f601](https://github.com/DanySK/publish-on-central/commit/b07f6013744ff454988c8eb0596d788a2cf161b8))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4 ([3a2ea6d](https://github.com/DanySK/publish-on-central/commit/3a2ea6dc82bba7acb6e26fdb238a6a724d72a10b))
+* **deps:** update danysk/action-checkout action to v0.2.12 ([c7aa855](https://github.com/DanySK/publish-on-central/commit/c7aa8559192a2986956ce90128871d9ed39a067d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.9 ([c5516ce](https://github.com/DanySK/publish-on-central/commit/c5516ce6f5f9ae63793c6ea0828c2ac07aba615c))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.17 ([2d20f57](https://github.com/DanySK/publish-on-central/commit/2d20f57e7f67a7d6632b801a146b139bb545ae17))
+
+
+### Style improvements
+
+* remove call to deprecated `layout.buildDirectory` ([0a26c4e](https://github.com/DanySK/publish-on-central/commit/0a26c4e8ad371cdb42d99fd3b79d88875f05a88e))
+
 ## [5.0.13](https://github.com/DanySK/publish-on-central/compare/5.0.12...5.0.13) (2023-09-01)
 
 
