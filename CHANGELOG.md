@@ -1,3 +1,34 @@
+## [5.0.15](https://github.com/DanySK/publish-on-central/compare/5.0.14...5.0.15) (2023-10-05)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.4 ([c1524e6](https://github.com/DanySK/publish-on-central/commit/c1524e6fdfa77be73dfa0ff5563298aa2ea21d93))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.55 ([39bb790](https://github.com/DanySK/publish-on-central/commit/39bb790fcef08f60c7d65c2f84e28af0d1486478))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.56 ([73f4916](https://github.com/DanySK/publish-on-central/commit/73f49161088b4a3061e6759a710f19063f470458))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.60 ([45f38bb](https://github.com/DanySK/publish-on-central/commit/45f38bb6563d6d7ee7cd07065475d5b365b5b04b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.61 ([f4fd897](https://github.com/DanySK/publish-on-central/commit/f4fd897816f83de2db33089e317cc68d444418e4))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.62 ([15f2d10](https://github.com/DanySK/publish-on-central/commit/15f2d10834d260e08657c6d2ac079eb1f12e79dd))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.64 ([12d6b5f](https://github.com/DanySK/publish-on-central/commit/12d6b5f09c28921f51c5ce9ae372d14e7158f0a9))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.65 ([0f4ccf4](https://github.com/DanySK/publish-on-central/commit/0f4ccf4343cfb658b67ab882e8dd8b555776b8e5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.66 ([4d35675](https://github.com/DanySK/publish-on-central/commit/4d35675a759144750b32c1599ca6b9483f1ddea0))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.67 ([e5275ce](https://github.com/DanySK/publish-on-central/commit/e5275ceae98ec5c38b89e4a8027ece106ca7fbaf))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.68 ([accbdd1](https://github.com/DanySK/publish-on-central/commit/accbdd1293e1b98c047cc57a62e7b3c3a269ba7c))
+* **deps:** update node.js to 18.18 ([fc07158](https://github.com/DanySK/publish-on-central/commit/fc07158c720b049cb68ba8b0189f0c70cc7a2dd4))
+* **deps:** update plugin kotlin-qa to v0.50.0 ([aec75c8](https://github.com/DanySK/publish-on-central/commit/aec75c871b11296e62fdd8add606d4b11325257d))
+* **deps:** update plugin multijvmtesting to v0.5.5 ([850ad14](https://github.com/DanySK/publish-on-central/commit/850ad14a9a72d0e20f5003239ad42b3fcdc211d4))
+* **deps:** update plugin publishoncentral to v5.0.14 ([49a4085](https://github.com/DanySK/publish-on-central/commit/49a40851e1e62794f8182230c78b57ecbb7df96d))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.0 ([316c0a6](https://github.com/DanySK/publish-on-central/commit/316c0a6db0f11d524ad078eebaa7b7b62a436b06))
+* **deps:** update alchemistsimulator/alchemist action to v28 ([b9ef446](https://github.com/DanySK/publish-on-central/commit/b9ef446f21be0c3fd8da617c8dce63c4dd77c475))
+* **deps:** update alchemistsimulator/alchemist action to v28.1.0 ([c0ff5cc](https://github.com/DanySK/publish-on-central/commit/c0ff5cc4fe8fa9bbb187941396c605147effb1a5))
+* **deps:** update alchemistsimulator/alchemist action to v28.2.0 ([44c826a](https://github.com/DanySK/publish-on-central/commit/44c826ac4d862a0052e3d69c666eaa4797860879))
+* **deps:** update danysk/action-checkout action to v0.2.13 ([6e7d0c8](https://github.com/DanySK/publish-on-central/commit/6e7d0c89e52b64505cfe4ccbb4ee289d40f0bd91))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.10 ([a47a781](https://github.com/DanySK/publish-on-central/commit/a47a7810b1005041dfc6dab80bb15bbfc9922430))
+
 ## [5.0.14](https://github.com/DanySK/publish-on-central/compare/5.0.13...5.0.14) (2023-09-15)
 
 
