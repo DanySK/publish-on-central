@@ -1,3 +1,22 @@
+## [5.0.16](https://github.com/DanySK/publish-on-central/compare/5.0.15...5.0.16) (2023-10-17)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.dokka to v1.9.10 ([6aa45e5](https://github.com/DanySK/publish-on-central/commit/6aa45e5f58360607f93cc76206cdd0a99b514b2d))
+* **deps:** update npm to v10.2.0 ([bc5b662](https://github.com/DanySK/publish-on-central/commit/bc5b662cf366975bb3f17a102dfe56bbceeb43b6))
+* **deps:** update plugin com.gradle.enterprise to v3.15.1 ([ffaf44d](https://github.com/DanySK/publish-on-central/commit/ffaf44d9c28092050697b4e4353efd06488ceb89))
+* **deps:** update plugin gitsemver to v1.1.11 ([4f8bb6c](https://github.com/DanySK/publish-on-central/commit/4f8bb6c15eeae6ce5fb6edf3d40aebf48b658d8c))
+* **deps:** update plugin kotlin-qa to v0.51.0 ([b8f8bad](https://github.com/DanySK/publish-on-central/commit/b8f8bad817376855ac60459038e2b3e200d0c014))
+* **deps:** update plugin publishoncentral to v5.0.15 ([a0918b1](https://github.com/DanySK/publish-on-central/commit/a0918b1c75cb2f6bc4fe05ffc0ef6da017e2f7fb))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v28.2.1 ([90fa884](https://github.com/DanySK/publish-on-central/commit/90fa884f3b55afcebfd007ca79ee87baf4a8e447))
+* **deps:** update alchemistsimulator/alchemist action to v28.3.0 ([bfc6993](https://github.com/DanySK/publish-on-central/commit/bfc69937ed3bd1a10434a3f25aee509dacd2010f))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.18 ([e62eb96](https://github.com/DanySK/publish-on-central/commit/e62eb9695a9da54afc7a16cd39fe914853404cb3))
+
 ## [5.0.15](https://github.com/DanySK/publish-on-central/compare/5.0.14...5.0.15) (2023-10-05)
 
 
