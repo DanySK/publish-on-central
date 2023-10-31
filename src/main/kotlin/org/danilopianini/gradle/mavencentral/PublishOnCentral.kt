@@ -15,10 +15,12 @@ import org.gradle.api.plugins.JavaPlugin
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
+import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
 
@@ -116,6 +118,9 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
+        }
+        project.tasks.withType<PublishToMavenRepository>().configureEach { publish ->
+            publish.mustRunAfter(project.tasks.withType<Sign>())
         }
         project.afterEvaluate {
             if (extension.configureMavenCentral.getOrElse(true)) {
