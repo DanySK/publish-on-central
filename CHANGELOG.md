@@ -1,3 +1,42 @@
+## [5.0.17](https://github.com/DanySK/publish-on-central/compare/5.0.16...5.0.17) (2023-10-31)
+
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.69 ([b2cfcef](https://github.com/DanySK/publish-on-central/commit/b2cfcef8d8c5072b002ae5b820a4313851f60882))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.70 ([4f73ff1](https://github.com/DanySK/publish-on-central/commit/4f73ff1e7062d02f6e58e59acaa93389167ff032))
+* **deps:** update node.js to 20.9 ([26db63d](https://github.com/DanySK/publish-on-central/commit/26db63dc5984bdddce38c5d93aa0eb6223f68883))
+* **deps:** update node.js to v20 ([9a75879](https://github.com/DanySK/publish-on-central/commit/9a75879363163a06888ec68f9c174123d02c7898))
+* **deps:** update npm to v10.2.1 ([38f8879](https://github.com/DanySK/publish-on-central/commit/38f8879c3a942325d304e5562e27721ff70497b5))
+* **deps:** update plugin gitsemver to v1.1.14 ([7d6a98e](https://github.com/DanySK/publish-on-central/commit/7d6a98efa365d56adb5da6099f546923b9305e72))
+* **deps:** update plugin gitsemver to v1.1.15 ([4b19601](https://github.com/DanySK/publish-on-central/commit/4b196013b906c142504b5f5a1e820b9b10e9675f))
+* **deps:** update plugin gitsemver to v2 ([307eda9](https://github.com/DanySK/publish-on-central/commit/307eda920e070dd647e343d9a703ce3c58abf583))
+* **deps:** update plugin gitsemver to v2.0.1 ([9c635e4](https://github.com/DanySK/publish-on-central/commit/9c635e43b7a6a646a5a183e7ebc804ae30ba283e))
+* **deps:** update plugin kotlin-qa to v0.51.1 ([eb18549](https://github.com/DanySK/publish-on-central/commit/eb1854948d6726efa3176eead009b5d85d8ddc13))
+* **deps:** update plugin kotlin-qa to v0.52.0 ([eb09e33](https://github.com/DanySK/publish-on-central/commit/eb09e33ab2dcf85fb2dfaa24ea0dfdb8fb77c5d7))
+* **deps:** update plugin kotlin-qa to v0.53.0 ([e456def](https://github.com/DanySK/publish-on-central/commit/e456def4971604058a25078b177db1b97f5e2ee1))
+* **deps:** update plugin kotlin-qa to v0.54.0 ([6c7832c](https://github.com/DanySK/publish-on-central/commit/6c7832c773c46137b467a26042abd024a0246490))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.11 ([4385816](https://github.com/DanySK/publish-on-central/commit/4385816d6461f0395ab5c2cd5afa171b104f2f12))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.13 ([7ee2624](https://github.com/DanySK/publish-on-central/commit/7ee2624f6ce6123a178e732e3e5ec73f94929851))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.14 ([4412bf3](https://github.com/DanySK/publish-on-central/commit/4412bf3cf0145960c1d935dd409e31fbe63b7b38))
+* **deps:** update plugin publishoncentral to v5.0.16 ([7b31bcd](https://github.com/DanySK/publish-on-central/commit/7b31bcda4470f640b118fa346ffd6e4422dd60bf))
+
+
+### Bug Fixes
+
+* make all publish task run after signing tasks ([0cc9a90](https://github.com/DanySK/publish-on-central/commit/0cc9a90cb1b3cdf4efe506af48576de219225ba7))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.1 ([f701829](https://github.com/DanySK/publish-on-central/commit/f70182933bd024b1362e2a40bc9d4902c2bd8b17))
+* **deps:** update alchemistsimulator/alchemist action to v28.3.1 ([ace7ed0](https://github.com/DanySK/publish-on-central/commit/ace7ed04552bd1ccd89439b156ddae2049c851b0))
+* **deps:** update alchemistsimulator/alchemist action to v28.3.2 ([4919459](https://github.com/DanySK/publish-on-central/commit/49194593059238dd139d57b16f47e63ca83221fc))
+* **deps:** update alchemistsimulator/alchemist action to v28.4.1 ([704289c](https://github.com/DanySK/publish-on-central/commit/704289c0d7f51622b4a728685ad3250b12f2f6fe))
+* **deps:** update alchemistsimulator/alchemist action to v28.4.2 ([a4ac65e](https://github.com/DanySK/publish-on-central/commit/a4ac65eb4d442008f01ecdea26b9068e3f2d8b3f))
+* **deps:** update alchemistsimulator/alchemist action to v28.4.3 ([a0da0b5](https://github.com/DanySK/publish-on-central/commit/a0da0b5e581d89adc941f28b60afbddee06a463c))
+* **deps:** update danysk/action-checkout action to v0.2.14 ([c86b4c9](https://github.com/DanySK/publish-on-central/commit/c86b4c99e280fa67162e53922c2a227ce0e63801))
+
 ## [5.0.16](https://github.com/DanySK/publish-on-central/compare/5.0.15...5.0.16) (2023-10-17)
 
 
