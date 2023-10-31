@@ -338,7 +338,10 @@ it will provide useful use cases for newcomers to look at.
 
 ### Java + Kotlin-jvm + Scala, multiproject, kts build file
 * [**Alchemist Simulator**](https://github.com/AlchemistSimulator/Alchemist): a simulator for computational ecosystems
-
+* 
+### Java + Kotlin-jvm, multiproject, kts build file
+* [**JaKtA**](https://github.com/jakta-bdi/jakta): JaKtA is a Kotlin internal DSL for the definition of BDI agents.
+  
 ### Kotlin-jvm, simple project, kts build file
 * [**khttp**](https://github.com/DanySK/khttp): Kotlin HTTP requests library
 
