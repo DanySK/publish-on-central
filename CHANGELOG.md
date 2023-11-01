@@ -1,3 +1,15 @@
+## [5.0.18](https://github.com/DanySK/publish-on-central/compare/5.0.17...5.0.18) (2023-11-01)
+
+
+### Dependency updates
+
+* **deps:** update plugin publishoncentral to v5.0.17 ([907b216](https://github.com/DanySK/publish-on-central/commit/907b2169ee33a3f19f2fc0533e5824d9b4300ccd))
+
+
+### Documentation
+
+* add Jakta to the readme ([#797](https://github.com/DanySK/publish-on-central/issues/797)) ([17db79f](https://github.com/DanySK/publish-on-central/commit/17db79f122631fee64ddade934a9d1299ab1ae5f))
+
 ## [5.0.17](https://github.com/DanySK/publish-on-central/compare/5.0.16...5.0.17) (2023-10-31)
 
 
