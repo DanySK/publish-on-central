@@ -349,10 +349,13 @@ it will provide useful use cases for newcomers to look at.
 * [**multi-jvm-test-plugin**](https://github.com/DanySK/multi-jvm-test-plugin): Automatic configuration of Gradle's toolchains for multi-JVM testing
 * [**ProtelisDoc**](https://github.com/Protelis/ProtelisDoc): Dokka-based documentation engine for Protelis
 * **publish-on-central** (yes, this plugin uses itself for publishing)
+* [**conventional-commits**](https://github.com/nicolasfara/conventional-commits): Gradle plugin to check if commits are Conventional Commits compliant
 
 ### Kotlin-multiplatform
 * [**Template for Kotlin Multiplatform projects**](https://github.com/DanySK/Template-for-Kotlin-Multiplatform-Projects): a project template for quickly spawning new Kotlin-multiplatform projects
 * [**yoki**](https://github.com/DevNatan/yoki): Kotlin Docker Remote API client
+* [**collektive**](https://github.com/Collektive/collektive): Aggregate Computing in Kotlin Multiplatform
+* [**pulvreakt**](https://github.com/pulvreakt/pulvreakt): Pulverization framework in Kotlin Multiplatform 
 
 ## Contributing to the project
 
