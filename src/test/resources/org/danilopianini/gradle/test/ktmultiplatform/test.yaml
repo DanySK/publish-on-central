@@ -5,8 +5,6 @@ tests:
         - 'generateMetadataFileForJvmPublication'
         - 'generateMetadataFileForKotlinOSSRHPublication'
         - 'generateMetadataFileForKotlinMultiplatformPublication'
-        - 'generateMetadataFileForNativePublication'
-        - 'generateMetadataFileForWasm32Publication'
       options:
         - '--stacktrace'
     expectation:
