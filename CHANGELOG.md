@@ -1,3 +1,38 @@
+## [5.0.19](https://github.com/DanySK/publish-on-central/compare/5.0.18...5.0.19) (2023-11-09)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v1.9.20 ([e3af6ea](https://github.com/DanySK/publish-on-central/commit/e3af6eadc04ee527490e45d3b832dc2ab4cfb12d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.71 ([1297361](https://github.com/DanySK/publish-on-central/commit/12973611b904f46e3817202508103e7334611bdc))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.72 ([437937b](https://github.com/DanySK/publish-on-central/commit/437937b02d0a1cc4c98353db2f188188fbeb614c))
+* **deps:** update kotest to v5.8.0 ([b3708a4](https://github.com/DanySK/publish-on-central/commit/b3708a43520104d91d09f80fbc520708bf256ad5))
+* **deps:** update npm to v10.2.2 ([8c22943](https://github.com/DanySK/publish-on-central/commit/8c229431963fa3d0ae158ce20aabb6f69fee9de8))
+* **deps:** update npm to v10.2.3 ([2ba7453](https://github.com/DanySK/publish-on-central/commit/2ba745328508b513ee22ab20ba63cfe430125637))
+* **deps:** update plugin publishoncentral to v5.0.18 ([d754cc2](https://github.com/DanySK/publish-on-central/commit/d754cc2a258a9fba0cbea0594a5830a191f552a4))
+
+
+### Tests
+
+* fix test multiplatform for ktlin 1.9.20 ([a625c52](https://github.com/DanySK/publish-on-central/commit/a625c5217b4573fa27b8aa8c19d5aea8899e39a4))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v28.4.4 ([eb07386](https://github.com/DanySK/publish-on-central/commit/eb0738628d44b201494ddc213fef42fa6360371f))
+* **deps:** update alchemistsimulator/alchemist action to v28.5.0 ([016e034](https://github.com/DanySK/publish-on-central/commit/016e0347ccf2389bf6e1fdb99361a810ffe5954e))
+* **deps:** update alchemistsimulator/alchemist action to v28.5.1 ([7703931](https://github.com/DanySK/publish-on-central/commit/77039313faa524e1765388b156042b1ce7504cba))
+* **deps:** update alchemistsimulator/alchemist action to v28.5.2 ([23b8781](https://github.com/DanySK/publish-on-central/commit/23b8781b6e563e8c0d83b6d042e2132180d8b667))
+* **deps:** update alchemistsimulator/alchemist action to v28.5.3 ([76b6a6a](https://github.com/DanySK/publish-on-central/commit/76b6a6abd971d4d77a95417b303633c32acc7c2d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.11 ([645e840](https://github.com/DanySK/publish-on-central/commit/645e8401bc2e41e53a65d04e4c7f72f9a17d3d29))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.19 ([4aa66e2](https://github.com/DanySK/publish-on-central/commit/4aa66e2fb8c731efd04ad235e99b943982a335d3))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.20 ([7bc379f](https://github.com/DanySK/publish-on-central/commit/7bc379f904f825e4a0bb61485339e46b8e63437a))
+
+
+### General maintenance
+
+* **readme:** add [@nicolasfara](https://github.com/nicolasfara) projects using this plugin ([67e2a16](https://github.com/DanySK/publish-on-central/commit/67e2a16d2da84b6f2c5685b34338ca2ef0671496))
+
 ## [5.0.18](https://github.com/DanySK/publish-on-central/compare/5.0.17...5.0.18) (2023-11-01)
 
 
