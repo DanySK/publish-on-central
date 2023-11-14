@@ -6,6 +6,7 @@
 
 plugins {
     id("multiproject.kotlin-library-conventions")
+    id("org.danilopianini.multi-jvm-test-plugin")
 }
 
 dependencies {
