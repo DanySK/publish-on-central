@@ -16,3 +16,4 @@ publishOnCentral {
         password.set("pwd")
     }
 }
+
