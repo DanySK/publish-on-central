@@ -1,3 +1,27 @@
+## [5.0.20](https://github.com/DanySK/publish-on-central/compare/5.0.19...5.0.20) (2023-11-23)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v1.9.21 ([4a1d85e](https://github.com/DanySK/publish-on-central/commit/4a1d85e619144a38a768d863819655f664219f3b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.73 ([be63603](https://github.com/DanySK/publish-on-central/commit/be636032c2265a475eef3df987000e75eaf4df2c))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.74 ([529b11b](https://github.com/DanySK/publish-on-central/commit/529b11b777266e06b04c8fbc9b5ae7324023e549))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.75 ([4a59819](https://github.com/DanySK/publish-on-central/commit/4a598196b751480b4c8876b9d11c9bf0a9524d50))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.76 ([a7ee755](https://github.com/DanySK/publish-on-central/commit/a7ee7552473635db2f2c9ba6469c01b7babfcd45))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.77 ([fe4f796](https://github.com/DanySK/publish-on-central/commit/fe4f796a3b5cf4b59bc9a8e956bed81c0ecb0425))
+* **deps:** update node.js to 20.10 ([0a093cb](https://github.com/DanySK/publish-on-central/commit/0a093cb2ef72b703675f9145638ed6d99b7870ce))
+* **deps:** update npm to v10.2.4 ([dfeb639](https://github.com/DanySK/publish-on-central/commit/dfeb639b3765743e450bcfecd0835d8263745a5b))
+* **deps:** update plugin gitsemver to v2.0.2 ([d026bab](https://github.com/DanySK/publish-on-central/commit/d026bab0a039b647e2e3624af4e09e747be93ad4))
+* **deps:** update plugin multijvmtesting to v0.5.6 ([f1e674d](https://github.com/DanySK/publish-on-central/commit/f1e674dcec5f9e830cf3746483fa9dd3b063acda))
+* **deps:** update plugin publishoncentral to v5.0.19 ([9d9c2c3](https://github.com/DanySK/publish-on-central/commit/9d9c2c3e7a40253025f0d94412ba44abc65fd14d))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v28.5.4 ([bb7c79c](https://github.com/DanySK/publish-on-central/commit/bb7c79cc4e0799de3dcab0086b049d41ebb46042))
+* **deps:** update alchemistsimulator/alchemist action to v29 ([cfb8900](https://github.com/DanySK/publish-on-central/commit/cfb89002653ceb5b091ffb071185fc0384817a5d))
+* **deps:** update alchemistsimulator/alchemist action to v29.0.1 ([4e44648](https://github.com/DanySK/publish-on-central/commit/4e4464869909e4030ffe9d69c4b0552dc4310e17))
+
 ## [5.0.19](https://github.com/DanySK/publish-on-central/compare/5.0.18...5.0.19) (2023-11-09)
 
 
