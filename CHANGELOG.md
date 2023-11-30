@@ -1,3 +1,28 @@
+## [5.0.21](https://github.com/DanySK/publish-on-central/compare/5.0.20...5.0.21) (2023-11-30)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.5 ([7883489](https://github.com/DanySK/publish-on-central/commit/788348909f453362be10e79f14970c29cd8599f5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.78 ([58a218d](https://github.com/DanySK/publish-on-central/commit/58a218de7073081d58c507cfc812e106e8ca5433))
+* **deps:** update plugin gitsemver to v2.0.3 ([712d2cc](https://github.com/DanySK/publish-on-central/commit/712d2cc5ac4bd69dfae10591461fecbd2a4e239f))
+* **deps:** update plugin gitsemver to v2.0.4 ([b556c13](https://github.com/DanySK/publish-on-central/commit/b556c13152e06a89f5435ac2d579d37419d874d4))
+* **deps:** update plugin kotlin-qa to v0.54.1 ([0687e50](https://github.com/DanySK/publish-on-central/commit/0687e5048cca8347024a03b86059f9f541167199))
+* **deps:** update plugin kotlin-qa to v0.55.1 ([fa34723](https://github.com/DanySK/publish-on-central/commit/fa34723d13e2a722693e4f49a87383463d673ac4))
+* **deps:** update plugin multijvmtesting to v0.5.7 ([82e2bdb](https://github.com/DanySK/publish-on-central/commit/82e2bdb2c3ab2df73f22f7ce45b5c60640ec9a43))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.15 ([a2ae5fe](https://github.com/DanySK/publish-on-central/commit/a2ae5fe3148289a9934a02aa6295f91e32b8a3e1))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.16 ([a422121](https://github.com/DanySK/publish-on-central/commit/a422121c0b578676777d8fa33484b3bbb6647880))
+* **deps:** update plugin publishoncentral to v5.0.20 ([496f6eb](https://github.com/DanySK/publish-on-central/commit/496f6eb9f2902bcfeb9e1267da88dfcd8c0759bc))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v29.0.2 ([1f1a544](https://github.com/DanySK/publish-on-central/commit/1f1a5441d4c5c15d75a3ca03de02ea03b77b1933))
+* **deps:** update alchemistsimulator/alchemist action to v29.0.3 ([6496d80](https://github.com/DanySK/publish-on-central/commit/6496d80022a73363d4efcb107a57abda1cd9db5b))
+* **deps:** update alchemistsimulator/alchemist action to v29.0.4 ([e12afc8](https://github.com/DanySK/publish-on-central/commit/e12afc8888b65ce7bb04985aa5a87190bd0876b9))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.12 ([cd67425](https://github.com/DanySK/publish-on-central/commit/cd67425a61e1a667bd3d6e2e707ffec85d59f887))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.21 ([b778c3d](https://github.com/DanySK/publish-on-central/commit/b778c3dc4b923af3d6fc9e2e1d87f494e826be3a))
+
 ## [5.0.20](https://github.com/DanySK/publish-on-central/compare/5.0.19...5.0.20) (2023-11-23)
 
 
