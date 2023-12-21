@@ -1,3 +1,36 @@
+## [5.0.22](https://github.com/DanySK/publish-on-central/compare/5.0.21...5.0.22) (2023-12-21)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v1.9.22 ([0dd9415](https://github.com/DanySK/publish-on-central/commit/0dd9415a15818ef8b60cd21e689044eb3c9ce23b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.79 ([47512d3](https://github.com/DanySK/publish-on-central/commit/47512d3d509be06198dbeed018cecd5033322a52))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.80 ([109397a](https://github.com/DanySK/publish-on-central/commit/109397a9d7d1e6d6cf1a0ccedee2fd7ff739e598))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.81 ([1e164f2](https://github.com/DanySK/publish-on-central/commit/1e164f2a0ae3f75b8f5ff6453091086f6ab7a37d))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.82 ([3a82d5e](https://github.com/DanySK/publish-on-central/commit/3a82d5e2fb6e5837617902e3189c1d8c6f6a495f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.83 ([f42359a](https://github.com/DanySK/publish-on-central/commit/f42359a2acfdf27d99712fc6753ea3788dcdf93a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.84 ([6ee26c3](https://github.com/DanySK/publish-on-central/commit/6ee26c31446ce5ea03c3d1b69300112fb48ab1ef))
+* **deps:** update npm to v10.2.5 ([3ed8899](https://github.com/DanySK/publish-on-central/commit/3ed889955972529768c8fce7cffd56906a5741cb))
+* **deps:** update plugin com.gradle.enterprise to v3.16 ([c59c857](https://github.com/DanySK/publish-on-central/commit/c59c8578bda206728da811fcdcb6bc2a0ba9f5f2))
+* **deps:** update plugin com.gradle.enterprise to v3.16.1 ([4043b97](https://github.com/DanySK/publish-on-central/commit/4043b970731f7e3ff59d421680c3490a0d4aca07))
+* **deps:** update plugin gitsemver to v2.0.5 ([aa77376](https://github.com/DanySK/publish-on-central/commit/aa77376462eaa7008595e027c5cf9b3a270212ca))
+* **deps:** update plugin kotlin-qa to v0.56.0 ([4ba384a](https://github.com/DanySK/publish-on-central/commit/4ba384adece1d910ab703a95edde8aa83794a294))
+* **deps:** update plugin kotlin-qa to v0.57.0 ([d37f232](https://github.com/DanySK/publish-on-central/commit/d37f2320243612c25b41543d2cfd789bc545fe3d))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v29.0.5 ([5ee9030](https://github.com/DanySK/publish-on-central/commit/5ee9030bcb3a9b4356867b2dc8e57913dbc21a80))
+* **deps:** update alchemistsimulator/alchemist action to v29.0.6 ([0cc4736](https://github.com/DanySK/publish-on-central/commit/0cc47366827030ee2a74362b9c1916076cd439a8))
+* **deps:** update alchemistsimulator/alchemist action to v29.0.7 ([924b235](https://github.com/DanySK/publish-on-central/commit/924b2359746803b566ab071459d82ad2b43e60dd))
+* **deps:** update alchemistsimulator/alchemist action to v29.1.1 ([e6ec29b](https://github.com/DanySK/publish-on-central/commit/e6ec29b0bdf034515d3a589dacd8874c600caf82))
+* **deps:** update alchemistsimulator/alchemist action to v29.2.0 ([005ff6b](https://github.com/DanySK/publish-on-central/commit/005ff6bc093353525aa6b5bbdb0993663235236d))
+* **deps:** update alchemistsimulator/alchemist action to v29.3.0 ([2fecd00](https://github.com/DanySK/publish-on-central/commit/2fecd001840f926cf46c1aa35133e2ef841a4c68))
+* **deps:** update alchemistsimulator/alchemist action to v29.3.1 ([0de5e54](https://github.com/DanySK/publish-on-central/commit/0de5e544e303c055cb71054e8a44dd922e838ffa))
+* **deps:** update alchemistsimulator/alchemist action to v29.3.2 ([6e50741](https://github.com/DanySK/publish-on-central/commit/6e50741c84778734223b342fdac54398d084e5ff))
+* **deps:** update alchemistsimulator/alchemist action to v29.3.3 ([d39d0ee](https://github.com/DanySK/publish-on-central/commit/d39d0ee3b7a4d8a9424bd8b3f859cdcbf30a7692))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.22 ([88802a3](https://github.com/DanySK/publish-on-central/commit/88802a3e91aa6cd4a12228ace5c547facc19ce7f))
+
 ## [5.0.21](https://github.com/DanySK/publish-on-central/compare/5.0.20...5.0.21) (2023-11-30)
 
 
