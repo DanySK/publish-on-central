@@ -1,3 +1,43 @@
+## [5.0.23](https://github.com/DanySK/publish-on-central/compare/5.0.22...5.0.23) (2024-02-02)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.6 ([7b2104b](https://github.com/DanySK/publish-on-central/commit/7b2104baf0d7ab0bc492b30c0af5f2fe0c3dc666))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.85 ([f8d90e5](https://github.com/DanySK/publish-on-central/commit/f8d90e5e5e9491ed6c09b424f110dad2cb36acc9))
+* **deps:** update node.js to 20.11 ([da3f747](https://github.com/DanySK/publish-on-central/commit/da3f747c5b9cb0339a64ef5d9fddc030d6a812e6))
+* **deps:** update npm to v10.3.0 ([e72d18a](https://github.com/DanySK/publish-on-central/commit/e72d18af216855c05bdacc5e5639414c22a73ef2))
+* **deps:** update npm to v10.4.0 ([7df9053](https://github.com/DanySK/publish-on-central/commit/7df9053a8040d5c5e364c98095ce4a3e90a0639b))
+* **deps:** update plugin com.gradle.enterprise to v3.16.2 ([a96387e](https://github.com/DanySK/publish-on-central/commit/a96387e8767a038136eba726ae9c8344312cbaef))
+* **deps:** update plugin gitsemver to v3 ([d1863c8](https://github.com/DanySK/publish-on-central/commit/d1863c849e0fb2c20f0b6cfe5e6a8c8b3aa2860f))
+* **deps:** update plugin gitsemver to v3.1.0 ([54ee370](https://github.com/DanySK/publish-on-central/commit/54ee3704201372eaf15d3db7c6efac2114a3c5e8))
+* **deps:** update plugin kotlin-qa to v0.57.1 ([51296f9](https://github.com/DanySK/publish-on-central/commit/51296f94d4cc7efed837c2ba357e5394eb9c901c))
+* **deps:** update plugin kotlin-qa to v0.58.0 ([b073a44](https://github.com/DanySK/publish-on-central/commit/b073a4427e8dce914d270779cc626d56c0e9a012))
+* **deps:** update plugin kotlin-qa to v0.59.0 ([cdbe923](https://github.com/DanySK/publish-on-central/commit/cdbe923dd7c645f53e169b04966ba8a87e806766))
+* **deps:** update plugin multijvmtesting to v0.5.8 ([bb72907](https://github.com/DanySK/publish-on-central/commit/bb729077885f0f69f468ef8b67e379e411252d90))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v1.1.17 ([32a91d8](https://github.com/DanySK/publish-on-central/commit/32a91d86557e9ac8f42857cbdf69f19ee58466b5))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2 ([dffd324](https://github.com/DanySK/publish-on-central/commit/dffd324c3f52a29e1af4b58e6a229bac4e9b42f5))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.8.0 ([d78b4ac](https://github.com/DanySK/publish-on-central/commit/d78b4ac442e5556bcfc9403e9de6bf9cf23ae80f))
+* **deps:** update plugin publishoncentral to v5.0.22 ([471ae8e](https://github.com/DanySK/publish-on-central/commit/471ae8e7d713e7d3de7bcc27e68bab5be4e04674))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v29.3.4 ([7411abb](https://github.com/DanySK/publish-on-central/commit/7411abb8c559e04966dfc59f7a6ec30f0ad6adb9))
+* **deps:** update alchemistsimulator/alchemist action to v29.4.0 ([5cddb12](https://github.com/DanySK/publish-on-central/commit/5cddb12f30a7df9e60807df4738759223dd5ec48))
+* **deps:** update alchemistsimulator/alchemist action to v29.5.0 ([7493efd](https://github.com/DanySK/publish-on-central/commit/7493efdff4a011855a0064fef9e700d54208e745))
+* **deps:** update alchemistsimulator/alchemist action to v29.5.1 ([96913ed](https://github.com/DanySK/publish-on-central/commit/96913ed6617ad7ce25b4a77618215c164c68d09e))
+* **deps:** update alchemistsimulator/alchemist action to v30 ([742c42c](https://github.com/DanySK/publish-on-central/commit/742c42c1db34063dd5e25b59fedc031319eae97e))
+* **deps:** update alchemistsimulator/alchemist action to v30.0.2 ([8671edd](https://github.com/DanySK/publish-on-central/commit/8671eddfb9698fd6bc23c62b018ea254d2fc939e))
+* **deps:** update alchemistsimulator/alchemist action to v30.0.3 ([ea63975](https://github.com/DanySK/publish-on-central/commit/ea63975d8e2c42801c2671e83249ac882df84408))
+* **deps:** update alchemistsimulator/alchemist action to v30.0.4 ([218117f](https://github.com/DanySK/publish-on-central/commit/218117fe04459dcd5c6735d9e4ef81dd8f55de7a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.13 ([de59937](https://github.com/DanySK/publish-on-central/commit/de59937353641b09e9725c4021e79da664addbb8))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.14 ([da0c81c](https://github.com/DanySK/publish-on-central/commit/da0c81c30ebd84625a732a5510713b7b22433619))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.15 ([c174fd4](https://github.com/DanySK/publish-on-central/commit/c174fd4bfdc3675f514b91523bd48accc87f7d40))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.17 ([f10516a](https://github.com/DanySK/publish-on-central/commit/f10516aba6d2e3f20545bdd5d26a152f27a37016))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.18 ([40e4d68](https://github.com/DanySK/publish-on-central/commit/40e4d68c30dadb2911e8d5401afe91ba6d36f623))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.2.20 ([a7d9d3d](https://github.com/DanySK/publish-on-central/commit/a7d9d3dc6b7da3e94de117958fe61d301c275495))
+
 ## [5.0.22](https://github.com/DanySK/publish-on-central/compare/5.0.21...5.0.22) (2023-12-21)
 
 
