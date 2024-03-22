@@ -1,3 +1,28 @@
+## [5.0.26](https://github.com/DanySK/publish-on-central/compare/5.0.25...5.0.26) (2024-03-22)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.7 ([6cdbb59](https://github.com/DanySK/publish-on-central/commit/6cdbb59be555740a266df4c785269df13887825c))
+* **deps:** update kotest to v5.8.1 ([40e78aa](https://github.com/DanySK/publish-on-central/commit/40e78aac382eb307c1b6e7e9f332d8f5943d257f))
+* **deps:** update plugin gitsemver to v3.1.3 ([bb7443b](https://github.com/DanySK/publish-on-central/commit/bb7443b569718c5a9b2dd0500b8a805f96170961))
+* **deps:** update plugin kotlin-qa to v0.60.3 ([cb73295](https://github.com/DanySK/publish-on-central/commit/cb73295895e91495062113d43424a68fa7611921))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.3 ([8e588ff](https://github.com/DanySK/publish-on-central/commit/8e588ff08a484582d4cd9c784f28bba0cb75e42a))
+* **deps:** update plugin publishoncentral to v5.0.25 ([a4babae](https://github.com/DanySK/publish-on-central/commit/a4babae5a7a8b6057e3107bc3eab1c197a41fba9))
+
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.1.2 ([c91ca91](https://github.com/DanySK/publish-on-central/commit/c91ca9153c47089f78c41f2e66d3fa8ee3255154))
+* **deps:** update alchemistsimulator/alchemist action to v31.0.5 ([c05f6ab](https://github.com/DanySK/publish-on-central/commit/c05f6ab0e4484693ecde0e1d5ef0ffcd06cd6de3))
+* **deps:** update alchemistsimulator/alchemist action to v31.0.6 ([7810218](https://github.com/DanySK/publish-on-central/commit/7810218e4614e8e81eb98bda15ba321283d3766e))
+* **deps:** update alchemistsimulator/alchemist action to v32 ([11c4736](https://github.com/DanySK/publish-on-central/commit/11c473659d04cf11339efb19a23c7fbea968798e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.10 ([f3c8d7e](https://github.com/DanySK/publish-on-central/commit/f3c8d7e3b5cc2522dd4fdc618d15d96dfaf9cb71))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.7 ([3ac7be3](https://github.com/DanySK/publish-on-central/commit/3ac7be3925959cad40bc9cef457f90d4e8eb801c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.8 ([3f99ae1](https://github.com/DanySK/publish-on-central/commit/3f99ae15d2f8a85676694a2aa248c41960c62918))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.9 ([b25f969](https://github.com/DanySK/publish-on-central/commit/b25f96962b97458cd152efd899ef5f64152417e3))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.1.24 ([c34c4b5](https://github.com/DanySK/publish-on-central/commit/c34c4b5f4d051cfc6fff7c558281549f899d1ef8))
+
 ## [5.0.25](https://github.com/DanySK/publish-on-central/compare/5.0.24...5.0.25) (2024-03-07)
 
 
