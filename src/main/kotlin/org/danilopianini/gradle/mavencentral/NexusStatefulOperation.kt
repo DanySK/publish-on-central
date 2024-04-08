@@ -5,7 +5,6 @@ import com.github.kittinunf.fuel.core.extensions.authentication
 import com.github.kittinunf.fuel.core.extensions.jsonBody
 import io.github.gradlenexus.publishplugin.internal.BasicActionRetrier
 import io.github.gradlenexus.publishplugin.internal.NexusClient
-import io.github.gradlenexus.publishplugin.internal.StagingRepository
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryDescriptor
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitioner
 import kotlinx.coroutines.runBlocking
@@ -84,7 +83,7 @@ data class NexusStatefulOperation(
     private val transitioner by lazy {
         StagingRepositoryTransitioner(
             client,
-            BasicActionRetrier(Int.MAX_VALUE, Duration.ofSeconds(retryInterval), StagingRepository::transitioning),
+            BasicActionRetrier(Int.MAX_VALUE, Duration.ofSeconds(retryInterval)) { it.transitioning },
         )
     }
 
