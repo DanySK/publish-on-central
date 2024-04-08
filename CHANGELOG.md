@@ -1,3 +1,37 @@
+## [5.1.0](https://github.com/DanySK/publish-on-central/compare/5.0.26...5.1.0) (2024-04-08)
+
+
+### Dependency updates
+
+* **api-deps:** update nexus.publish to v2 ([500017e](https://github.com/DanySK/publish-on-central/commit/500017e350e6136ba1c4459f694bf144a955c0bc))
+* **deps:** update node.js to 20.12 ([b22987b](https://github.com/DanySK/publish-on-central/commit/b22987bf18fdbbd18e2e1a54606467ee6d1d5a87))
+* **deps:** update npm to v10.5.1 ([6f7faa4](https://github.com/DanySK/publish-on-central/commit/6f7faa477cd4f6f66665bc21195d0b289678f9f0))
+* **deps:** update plugin com.gradle.enterprise to v3.17 ([217d335](https://github.com/DanySK/publish-on-central/commit/217d335811b626d649e952b4117499def942ffe7))
+* **deps:** update plugin gitsemver to v3.1.4 ([1ce45b4](https://github.com/DanySK/publish-on-central/commit/1ce45b46894269c539944b76b88781be0da9bf6d))
+* **deps:** update plugin kotlin-qa to v0.60.4 ([8c727d5](https://github.com/DanySK/publish-on-central/commit/8c727d519d1af3beae8e7ae59c314805d0b1cf05))
+* **deps:** update plugin kotlin-qa to v0.61.0 ([ce2e1dd](https://github.com/DanySK/publish-on-central/commit/ce2e1ddc0d58301ba0a5e2fb1447b858d9298250))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.4 ([2e55781](https://github.com/DanySK/publish-on-central/commit/2e557814a69fc6d68e7dd053c89e81142a4bfc27))
+* **deps:** update plugin publishoncentral to v5.0.26 ([efde39b](https://github.com/DanySK/publish-on-central/commit/efde39b95c9cd67f3461448d87875c1634b95dcb))
+* **deps:** update plugin tasktree to v3 ([e8bf62b](https://github.com/DanySK/publish-on-central/commit/e8bf62b39e0ef36400309cca4ad6ae1cd04ede18))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v32.0.1 ([3cf811a](https://github.com/DanySK/publish-on-central/commit/3cf811adaa7452e90f41784af2a3092424ade017))
+* **deps:** update alchemistsimulator/alchemist action to v33 ([e723d2b](https://github.com/DanySK/publish-on-central/commit/e723d2b252755869b1e2515ab82c0e9dd75f9715))
+* **deps:** update alchemistsimulator/alchemist action to v33.0.1 ([68f70b2](https://github.com/DanySK/publish-on-central/commit/68f70b2495031dfa5ca4adf37699a010f6c72255))
+* **deps:** update alchemistsimulator/alchemist action to v33.0.2 ([5a12b9c](https://github.com/DanySK/publish-on-central/commit/5a12b9cdd9d8659bfa47321212718aaa862de27e))
+* **deps:** update alchemistsimulator/alchemist action to v33.0.3 ([53f0693](https://github.com/DanySK/publish-on-central/commit/53f069312e2618a61be02ed16d636e0fd1fa26fd))
+* **deps:** update alchemistsimulator/alchemist action to v33.0.4 ([40b74a3](https://github.com/DanySK/publish-on-central/commit/40b74a3b91bd3902639db79478f8a9134da5b183))
+* **deps:** update alchemistsimulator/alchemist action to v33.0.5 ([2a91cd3](https://github.com/DanySK/publish-on-central/commit/2a91cd364465a8530e4ea50745c617901e1c108d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.11 ([cf47fa8](https://github.com/DanySK/publish-on-central/commit/cf47fa890ef53c3c69c59a92302f770f42b11a91))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.12 ([19e5e60](https://github.com/DanySK/publish-on-central/commit/19e5e60835afea01ede160c76f9d808af45c4ac5))
+
+
+### Style improvements
+
+* fix Kotlin error `The feature "references to synthetic java properties" is only available since language version 2.1` ([7390549](https://github.com/DanySK/publish-on-central/commit/739054959d8ff6cf2aa53be0e98c5910a219b171))
+
 ## [5.0.26](https://github.com/DanySK/publish-on-central/compare/5.0.25...5.0.26) (2024-03-22)
 
 
