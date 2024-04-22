@@ -58,7 +58,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Alchemist ${{ steps.alchemist.outputs.version }}
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           fetch-depth: '0'
           path: 'alchemist'
@@ -66,7 +66,7 @@ jobs:
           repository: 'AlchemistSimulator/Alchemist'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -106,7 +106,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           fetch-depth: '0'
           path: 'kt-mp'
@@ -114,7 +114,7 @@ jobs:
           repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -154,7 +154,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           fetch-depth: '0'
           path: 'kt-mp-multi-stage'
@@ -162,7 +162,7 @@ jobs:
           repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -217,7 +217,7 @@ jobs:
           echo "Computed version: \"${USES#*@}\""
           echo "version=${USES#*@}" >> $GITHUB_OUTPUT
       - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           fetch-depth: '0'
           path: 'kt-mp-drop-task'
@@ -225,7 +225,7 @@ jobs:
           repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
           submodules: 'recursive'
       - name: Checkout publish-on-central
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
@@ -261,7 +261,7 @@ jobs:
       group: release-${{ github.workflow }}-${{ github.event.number || github.ref }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.1.2
+        uses: actions/checkout@v4.1.3
         with:
           token: ${{ secrets.DEPLOYMENT_TOKEN }}
       - uses: DanySK/build-check-deploy-gradle-action@2.4.16
