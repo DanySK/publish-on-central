@@ -1,9 +1,10 @@
-.idea/
-.kotlintest/
 .gradle/
+.idea/
+.kotlin/
+.kotlintest/
+
 build/
-out/
-prepare_environment.sh
-secrets.asc
-deleteme
 node_modules/
+out/
+
+deleteme
