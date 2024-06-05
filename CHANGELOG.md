@@ -1,3 +1,30 @@
+## [5.1.3](https://github.com/DanySK/publish-on-central/compare/5.1.2...5.1.3) (2024-06-05)
+
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2 ([1e7b98c](https://github.com/DanySK/publish-on-central/commit/1e7b98c22746d5d1485cce69345a7ab2a63863b7))
+* **deps:** update npm to v10.8.1 ([4da7f8b](https://github.com/DanySK/publish-on-central/commit/4da7f8b28da06e0fc47449ef2fcef2a4bf41711b))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.7 ([880a767](https://github.com/DanySK/publish-on-central/commit/880a767dccee31e5ac6b88b01c6147648204e7b4))
+* **deps:** update plugin publishoncentral to v5.1.2 ([b51211f](https://github.com/DanySK/publish-on-central/commit/b51211f05b672882892b50bef285a15a41fb38b4))
+
+
+### Bug Fixes
+
+* **kotlin-js:** configure `sourceSets` on the Kotlin extension level ([9cc590f](https://github.com/DanySK/publish-on-central/commit/9cc590f40f24c639768f333d9410612fa2000a2d))
+
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v34.0.8 ([4152fc9](https://github.com/DanySK/publish-on-central/commit/4152fc99113d43551a0f2fd4ba63e1388cdc8413))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.9 ([9903af6](https://github.com/DanySK/publish-on-central/commit/9903af60225e88c54cd7db925284e7ac54c4fa49))
+* migrate to the compilerOptions DSL ([9792d31](https://github.com/DanySK/publish-on-central/commit/9792d3123fd8c1808b71469d6a401107ac85e46c))
+
+
+### General maintenance
+
+* ignore `.kotlin` ([ecabeb1](https://github.com/DanySK/publish-on-central/commit/ecabeb15c93ba402ba309ca912f6e5826fb578a7))
+
 ## [5.1.2](https://github.com/DanySK/publish-on-central/compare/5.1.1...5.1.2) (2024-06-01)
 
 
