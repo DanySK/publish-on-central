@@ -61,17 +61,15 @@ internal object ProjectExtensions {
     fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
         ifKotlinJsProject { _ ->
             configure<KotlinJsProjectExtension> {
-                js {
-                    sourceSets.getByName("main") {
-                        (sourcesJarTask as? SourceJar)?.run {
-                            sourceSet(it.kotlin)
-                            sourceSet(it.resources)
-                        } ?: logger.warn(
-                            "source sets of task {} not configured because it is not of type {}",
-                            sourcesJarTask.name,
-                            SourceJar::class.java.name,
-                        )
-                    }
+                sourceSets.getByName("main") {
+                    (sourcesJarTask as? SourceJar)?.run {
+                        sourceSet(it.kotlin)
+                        sourceSet(it.resources)
+                    } ?: logger.warn(
+                        "source sets of task {} not configured because it is not of type {}",
+                        sourcesJarTask.name,
+                        SourceJar::class.java.name,
+                    )
                 }
             }
         }
