@@ -66,7 +66,7 @@ disableTrackState<Test>()
 disableTrackState<JacocoReport>()
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
+    compilerOptions {
         allWarningsAsErrors = true
     }
 }
