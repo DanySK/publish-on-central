@@ -1,3 +1,48 @@
+## [5.1.4](https://github.com/DanySK/publish-on-central/compare/5.1.3...5.1.4) (2024-07-17)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.9 ([cfce32d](https://github.com/DanySK/publish-on-central/commit/cfce32dbb4fef9fb958fd0f33b60262c41fd2d55))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.86 ([155c737](https://github.com/DanySK/publish-on-central/commit/155c73703066db1893e1ae622548d7f4e3b1f838))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.87 ([3b288b4](https://github.com/DanySK/publish-on-central/commit/3b288b46aeb733c31c89fe9dc0faba81de91dbf3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.91 ([4efaef9](https://github.com/DanySK/publish-on-central/commit/4efaef9c24ed3fecf9729a2ab176d9a12f4a6095))
+* **deps:** update kotest to v5.9.1 ([dd36b26](https://github.com/DanySK/publish-on-central/commit/dd36b264b4ce73c1503454f28d44ebbe69f49b65))
+* **deps:** update node.js to 20.15 ([1effb41](https://github.com/DanySK/publish-on-central/commit/1effb419f6d3622ac00c1fba7d0a3883dee2d9e1))
+* **deps:** update npm to v10.8.2 ([27a1501](https://github.com/DanySK/publish-on-central/commit/27a15018fc76727d7553b69a695515e11817deaa))
+* **deps:** update plugin com.gradle.develocity to v3.17.5 ([f19d514](https://github.com/DanySK/publish-on-central/commit/f19d514df68986cbe6a9ed159d804a27215d3d6e))
+* **deps:** update plugin kotlin-qa to v0.62.3 ([7b03f68](https://github.com/DanySK/publish-on-central/commit/7b03f68aaa3f0588d3334d6ddd3a1de183d43e6d))
+* **deps:** update plugin multijvmtesting to v1 ([175250a](https://github.com/DanySK/publish-on-central/commit/175250a299b2e931e521d198232897d48e080ab6))
+* **deps:** update plugin multijvmtesting to v1.0.1 ([d47a43c](https://github.com/DanySK/publish-on-central/commit/d47a43c54b731c09c31deff69b3e7a28d1ef3c80))
+* **deps:** update plugin multijvmtesting to v1.0.2 ([664c99d](https://github.com/DanySK/publish-on-central/commit/664c99d46a42c1c75b10fab23f52b2f2b6e8491a))
+* **deps:** update plugin multijvmtesting to v1.0.3 ([3655fc0](https://github.com/DanySK/publish-on-central/commit/3655fc0dc2b9310ad9f6e341bae071c6b25a05a7))
+* **deps:** update plugin multijvmtesting to v1.0.4 ([803cb86](https://github.com/DanySK/publish-on-central/commit/803cb86679f2f6e5ac023a2bc7ede42a3e958230))
+* **deps:** update plugin multijvmtesting to v1.1.0 ([49bb6f9](https://github.com/DanySK/publish-on-central/commit/49bb6f9cd489dc428c24622f0843b640c702ec52))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.8 ([feea2c0](https://github.com/DanySK/publish-on-central/commit/feea2c0c1e75b6c42309169aec69aef138d6ca3a))
+* **deps:** update plugin publishoncentral to v5.1.3 ([969f067](https://github.com/DanySK/publish-on-central/commit/969f06736d8ff45ad798f146ba84dc99377731db))
+* **deps:** update plugin tasktree to v4 ([5f8b770](https://github.com/DanySK/publish-on-central/commit/5f8b7701eec02ed92cb91cb3cf484652316d17ed))
+
+### Build and continuous integration
+
+* **deps-dev:** bump braces from 3.0.2 to 3.0.3 ([a42293e](https://github.com/DanySK/publish-on-central/commit/a42293e1c9b21e5e260cf4fc1e655b250864b671))
+* **deps:** update actions/checkout action to v4.1.7 ([4939b7a](https://github.com/DanySK/publish-on-central/commit/4939b7a105f5cee37a07a81d5c18ff48db225e4d))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.10 ([136ead7](https://github.com/DanySK/publish-on-central/commit/136ead78e4a702ee549989dbc9ea692297c7e1e0))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.11 ([cf2372d](https://github.com/DanySK/publish-on-central/commit/cf2372d109981a51f036fe665b7aec2fbcf5dd06))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.12 ([d72a714](https://github.com/DanySK/publish-on-central/commit/d72a714c67b3cd607ea2bae7578ceb739a6314f0))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.13 ([ff3c5ab](https://github.com/DanySK/publish-on-central/commit/ff3c5abdf9a8366aea02ed4b7911a6a52200fd40))
+* **deps:** update danysk/action-checkout action to v0.2.19 ([4570d02](https://github.com/DanySK/publish-on-central/commit/4570d02f7f2661eca78c7aae34ae4b9d62007e4a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.21 ([214147e](https://github.com/DanySK/publish-on-central/commit/214147e305c72860f6ea974de2a4813c2bb9759b))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.22 ([db6cb02](https://github.com/DanySK/publish-on-central/commit/db6cb02dcc5f5e83dd26946ba5cf183fd4eaa4be))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v2.4.24 ([a17ba15](https://github.com/DanySK/publish-on-central/commit/a17ba15155f9e9b122c25af6a5ebd7203da9052e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3 ([0f0b37f](https://github.com/DanySK/publish-on-central/commit/0f0b37f5894c28d83c4afe7074daba84568347cd))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.0 ([8ca9b8a](https://github.com/DanySK/publish-on-central/commit/8ca9b8adf08e24d55d81bc16bafc3d9a721d17e5))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.1.1 ([f8abccb](https://github.com/DanySK/publish-on-central/commit/f8abccb77694cc278fb69286d8ad301ccfa7301a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.2.0 ([89356a8](https://github.com/DanySK/publish-on-central/commit/89356a8e28b891b24bacd8276470f2ad25f259ef))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.3.0 ([bc010fc](https://github.com/DanySK/publish-on-central/commit/bc010fce3283f3fdf3629d20ac736dfab9ac4aa9))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.2.0 ([fca3932](https://github.com/DanySK/publish-on-central/commit/fca3932103a91207409517b1a18cb392b736eb84))
+* explicitly read the username from the repository secrets ([9c10586](https://github.com/DanySK/publish-on-central/commit/9c105861e0a5a2e5a4094fa3120f4430ee82dae6))
+* install the version of node from the package.json ([4dd91a0](https://github.com/DanySK/publish-on-central/commit/4dd91a0e009f544c2c3b409c3a269e6a8a92fe00))
+* **release:** switch to a ECMA6-compliant semantic release configuration ([df57199](https://github.com/DanySK/publish-on-central/commit/df571994a9f8b9c796b99ea147917a9f4ad9caec))
+
 ## [5.1.3](https://github.com/DanySK/publish-on-central/compare/5.1.2...5.1.3) (2024-06-05)
 
 
