@@ -2,7 +2,6 @@ package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
 import org.gradle.api.publish.maven.MavenPublication
-import org.gradle.configurationcache.extensions.capitalized
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
@@ -58,5 +57,7 @@ object MavenPublicationExtensions {
      * Returns the signing tasks registered for the [MavenPublication] in the current [project].
      */
     fun MavenPublication.signingTasks(project: Project): Collection<Sign> =
-        project.tasks.withType<Sign>().matching { it.name.endsWith("sign${name.capitalized()}Publication") }
+        project.tasks.withType<Sign>().matching { signingTask ->
+            signingTask.name.endsWith("sign${name.replaceFirstChar { it.uppercaseChar() }}Publication")
+        }
 }
