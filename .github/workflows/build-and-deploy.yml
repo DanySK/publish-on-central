@@ -101,7 +101,7 @@ jobs:
           # Idea: the regex matcher of Renovate keeps this string up to date automatically
           # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.0
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.1
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -150,7 +150,7 @@ jobs:
           # Idea: the regex matcher of Renovate keeps this string up to date automatically
           # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.0
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.1
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -214,7 +214,7 @@ jobs:
           # Idea: the regex matcher of Renovate keeps this string up to date automatically
           # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.0
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.1
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
