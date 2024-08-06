@@ -1,3 +1,41 @@
+## [5.1.5](https://github.com/DanySK/publish-on-central/compare/5.1.4...5.1.5) (2024-08-06)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.0.10 ([7cfe4c0](https://github.com/DanySK/publish-on-central/commit/7cfe4c04159f8df91ed3346d52881b446d13e09a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.92 ([c42b756](https://github.com/DanySK/publish-on-central/commit/c42b756e8d2d63561dab061eeed32aa4648eecd2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.93 ([b8a73d2](https://github.com/DanySK/publish-on-central/commit/b8a73d255e880d78e14a1aac05b50a739e967fee))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.94 ([d9eec14](https://github.com/DanySK/publish-on-central/commit/d9eec14060679ccf8d7d8893d42f31f72f02566a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.95 ([dbf8c25](https://github.com/DanySK/publish-on-central/commit/dbf8c25d578f9aaa406638331b28608fc3f1828c))
+* **deps:** update node.js to 20.16 ([4ceb21c](https://github.com/DanySK/publish-on-central/commit/4ceb21c419ed3c6fcb910a1b97bc482e31f69fe7))
+* **deps:** update plugin com.gradle.develocity to v3.17.6 ([069ddaf](https://github.com/DanySK/publish-on-central/commit/069ddaf0cf777d96a3d1dd972067674e107582b2))
+* **deps:** update plugin kotlin-qa to v0.62.4 ([1c3ec02](https://github.com/DanySK/publish-on-central/commit/1c3ec02037fbc406941d4bf9d78b3dbfb0a42e0e))
+* **deps:** update plugin kotlin-qa to v0.63.0 ([7e3686a](https://github.com/DanySK/publish-on-central/commit/7e3686a9cf899eed0240f2fc7659cfd67ec9b6eb))
+* **deps:** update plugin kotlin-qa to v0.64.0 ([1eca363](https://github.com/DanySK/publish-on-central/commit/1eca36311306995ea351da8739f26f954390a50c))
+* **deps:** update plugin kotlin-qa to v0.64.1 ([2fa4233](https://github.com/DanySK/publish-on-central/commit/2fa4233a8b5fcb2bc04eaaf5b6b67ffd8ec7b400))
+* **deps:** update plugin kotlin-qa to v0.64.2 ([b627a24](https://github.com/DanySK/publish-on-central/commit/b627a240ddff965615553820db30b211eeba6ea5))
+* **deps:** update plugin kotlin-qa to v0.64.3 ([abdb597](https://github.com/DanySK/publish-on-central/commit/abdb597479be90adcfa2adba6c2627d36e4f8a77))
+* **deps:** update plugin kotlin-qa to v0.65.0 ([8a6fbc3](https://github.com/DanySK/publish-on-central/commit/8a6fbc39fd13cb180007121b5f7c54f3f4ef9eb2))
+* **deps:** update plugin multijvmtesting to v1.1.1 ([92c0ff9](https://github.com/DanySK/publish-on-central/commit/92c0ff98f1efac2cb6f1fefa725616c2285c0ce6))
+* **deps:** update plugin multijvmtesting to v1.2.0 ([de37188](https://github.com/DanySK/publish-on-central/commit/de37188be91a87ef75352f2655eecf1a28ff333c))
+* **deps:** update plugin multijvmtesting to v1.2.1 ([4301c8f](https://github.com/DanySK/publish-on-central/commit/4301c8f3a2407b2a356f4ad65eed44bbe5954355))
+* **deps:** update plugin multijvmtesting to v1.2.2 ([b5ea9a4](https://github.com/DanySK/publish-on-central/commit/b5ea9a456a5ae6c72613c95b1a69c43e7f49b908))
+* **deps:** update plugin publishoncentral to v5.1.4 ([6b84b93](https://github.com/DanySK/publish-on-central/commit/6b84b933859dc383ea58f5bba96c2368f1e162ed))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v34.0.14 ([cf9e4ac](https://github.com/DanySK/publish-on-central/commit/cf9e4ac79167eba96b18aa20b498688a1448b287))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.15 ([03ef66a](https://github.com/DanySK/publish-on-central/commit/03ef66a0e868550701db6128be505e84ebaa7672))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.16 ([4bfa338](https://github.com/DanySK/publish-on-central/commit/4bfa338165d56b45fab7fa30ffbf8ed51e3aed36))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.17 ([2ad0298](https://github.com/DanySK/publish-on-central/commit/2ad029852e7ce2118b273b892c69bf4da687aa43))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.18 ([e285044](https://github.com/DanySK/publish-on-central/commit/e2850446ef1a64318d8d0de47983c25340341713))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.19 ([7caddb7](https://github.com/DanySK/publish-on-central/commit/7caddb7845c055064bf350c91fa44169d73acd4b))
+* **deps:** update alchemistsimulator/alchemist action to v34.0.20 ([4b00d0b](https://github.com/DanySK/publish-on-central/commit/4b00d0b330dbe413b16b0447f006145d564b583f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.4.0 ([b85575f](https://github.com/DanySK/publish-on-central/commit/b85575f947a4525ea0d621e258a2cd02002f8f72))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.0 ([459bd08](https://github.com/DanySK/publish-on-central/commit/459bd0893e94e1531712be0dd40302031341e174))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.1 ([a3b30a0](https://github.com/DanySK/publish-on-central/commit/a3b30a02aeb0734a60d85fe5f0a918fd53d51d83))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.2 ([f4c6a20](https://github.com/DanySK/publish-on-central/commit/f4c6a20ddfdd2a28f1071f4f95e876f43743a95f))
+
 ## [5.1.4](https://github.com/DanySK/publish-on-central/compare/5.1.3...5.1.4) (2024-07-17)
 
 ### Dependency updates
