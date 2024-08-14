@@ -1,3 +1,18 @@
+## [5.1.6](https://github.com/DanySK/publish-on-central/compare/5.1.5...5.1.6) (2024-08-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.10 ([d9010e3](https://github.com/DanySK/publish-on-central/commit/d9010e36b569dea66e2cee1eed2805befc2a4eb4))
+* **deps:** update plugin kotlin-qa to v0.65.1 ([eb6c660](https://github.com/DanySK/publish-on-central/commit/eb6c660c69278accff0c4b64cc0b28cedef9341c))
+* **deps:** update plugin kotlin-qa to v0.65.2 ([dd7bfb2](https://github.com/DanySK/publish-on-central/commit/dd7bfb29892fbaedb02a50bb454b39000c3e0c6f))
+* **deps:** update plugin multijvmtesting to v1.2.3 ([47414ba](https://github.com/DanySK/publish-on-central/commit/47414bafcff5fe9d076e6fd635692cba32630f0d))
+* **deps:** update plugin publishoncentral to v5.1.5 ([8ce3e28](https://github.com/DanySK/publish-on-central/commit/8ce3e280e434f7f63e866d46b6270dbe576b998b))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.3 ([1101996](https://github.com/DanySK/publish-on-central/commit/1101996e3bd8280ca56cacc76df3b84a0ccffe6d))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.2.1 ([3f19295](https://github.com/DanySK/publish-on-central/commit/3f19295bf5d274321b3f62787dcb7e2da19d2774))
+
 ## [5.1.5](https://github.com/DanySK/publish-on-central/compare/5.1.4...5.1.5) (2024-08-06)
 
 ### Dependency updates
