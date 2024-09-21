@@ -119,7 +119,7 @@ open class PublishOnCentralExtension(val project: Project) {
         apply(configurator)
     }
 
-    companion object {
+    private companion object {
 
         private val extractName = Regex(""".*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?""")
 

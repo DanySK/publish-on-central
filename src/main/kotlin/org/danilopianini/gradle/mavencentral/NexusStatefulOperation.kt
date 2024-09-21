@@ -128,7 +128,7 @@ data class NexusStatefulOperation(
         project.logger.lifecycle("Requested drop for repository {} ", repoId)
     }
 
-    companion object {
+    private companion object {
         private const val retryInterval: Long = 10
     }
 }

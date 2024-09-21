@@ -29,6 +29,9 @@ data class Repository(
 
     override fun toString() = "$name at $url"
 
+    /**
+     * Constants and utility functions.
+     */
     companion object {
 
         /**
