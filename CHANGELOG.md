@@ -1,3 +1,24 @@
+## [5.1.8](https://github.com/DanySK/publish-on-central/compare/5.1.7...5.1.8) (2024-09-24)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.10.2 ([6051f11](https://github.com/DanySK/publish-on-central/commit/6051f1149ca1b18e05153b14b947b404eef8403b))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.106 ([b3c1b93](https://github.com/DanySK/publish-on-central/commit/b3c1b93d23738c6eeb9269d416bdfd92ca2213a3))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.107 ([46d4b66](https://github.com/DanySK/publish-on-central/commit/46d4b661d4e2494d814b9fe3a812e5be9126e1e8))
+* **deps:** update plugin gradlepluginpublish to v1.3.0 ([d4f9a7e](https://github.com/DanySK/publish-on-central/commit/d4f9a7e156a50bb25e7db30c0942505386951268))
+* **deps:** update plugin multijvmtesting to v1.2.7 ([d203214](https://github.com/DanySK/publish-on-central/commit/d20321489309f00fa9b54b0f98812069384d74aa))
+* **deps:** update plugin publishoncentral to v5.1.7 ([7577d7a](https://github.com/DanySK/publish-on-central/commit/7577d7adb01bf6f245f19edd5eaf061df863cb81))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.0.4 ([ef9e9ea](https://github.com/DanySK/publish-on-central/commit/ef9e9eadcb16d3b2d5a0c18197596938a8d1c772))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.6 ([87b7eff](https://github.com/DanySK/publish-on-central/commit/87b7eff8d4ee5ebb817e28e33836c3af361047f7))
+* use a shorter syntax for the plugin dependencies ([21d24ff](https://github.com/DanySK/publish-on-central/commit/21d24ff659656d7c228a96a65c457a8342a548e5))
+
+### Style improvements
+
+* fix the documentation of enums and companions ([0875572](https://github.com/DanySK/publish-on-central/commit/0875572322670399f42129b04cb55a0a96f9d4bc))
+
 ## [5.1.7](https://github.com/DanySK/publish-on-central/compare/5.1.6...5.1.7) (2024-09-14)
 
 ### Dependency updates
