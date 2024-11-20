@@ -84,9 +84,11 @@ internal object ProjectExtensions {
                 repository.maven { mavenArtifactRepository ->
                     mavenArtifactRepository.name = repoToConfigure.name
                     mavenArtifactRepository.url = repoToConfigure.url.map { URI(it) }.get()
-                    mavenArtifactRepository.credentials { credentials ->
-                        credentials.username = repoToConfigure.user.orNull
-                        credentials.password = repoToConfigure.password.orNull
+                    if (mavenArtifactRepository.url.scheme != "file") {
+                        mavenArtifactRepository.credentials { credentials ->
+                            credentials.username = repoToConfigure.user.orNull
+                            credentials.password = repoToConfigure.password.orNull
+                        }
                     }
                     tasks.withType(PublishToMavenRepository::class) {
                         if (it.repository == mavenArtifactRepository) {
