@@ -1,3 +1,26 @@
+## [5.1.11](https://github.com/DanySK/publish-on-central/compare/5.1.10...5.1.11) (2024-11-21)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.11.1 ([#1202](https://github.com/DanySK/publish-on-central/issues/1202)) ([e9f015c](https://github.com/DanySK/publish-on-central/commit/e9f015c9280337c464e68362a385ceb7026b5066))
+* **deps:** update plugin kotlin-qa to v0.70.1 ([#1194](https://github.com/DanySK/publish-on-central/issues/1194)) ([4c8c74e](https://github.com/DanySK/publish-on-central/commit/4c8c74eb3e7b58e041547577fc2659a68e2d6ccf))
+* **deps:** update plugin multijvmtesting to v1.3.1 ([#1195](https://github.com/DanySK/publish-on-central/issues/1195)) ([351ab64](https://github.com/DanySK/publish-on-central/commit/351ab6495239dd7bd2573bdca539c71990db563f))
+* **deps:** update plugin multijvmtesting to v1.3.2 ([#1203](https://github.com/DanySK/publish-on-central/issues/1203)) ([078c8c8](https://github.com/DanySK/publish-on-central/commit/078c8c8eefb28425ca7ecfc40088a22c4f9640d1))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.14 ([#1197](https://github.com/DanySK/publish-on-central/issues/1197)) ([0101880](https://github.com/DanySK/publish-on-central/commit/0101880ab9707a30d7f2897cf811ef53de654c24))
+* **deps:** update plugin publishoncentral to v5.1.10 ([#1196](https://github.com/DanySK/publish-on-central/issues/1196)) ([fb14d5f](https://github.com/DanySK/publish-on-central/commit/fb14d5f493aa2138850fef03a5eb6466344af396))
+
+### Bug Fixes
+
+* do not set credentials on 'file' protocol ([6f1101f](https://github.com/DanySK/publish-on-central/commit/6f1101f5a65ce1de66312a8dead3709c4d8516ac))
+
+### Build and continuous integration
+
+* **deps:** bump cross-spawn from 7.0.3 to 7.0.6 ([f8b0ac2](https://github.com/DanySK/publish-on-central/commit/f8b0ac2ef9884bd805590186fc44455e6125d494))
+* **deps:** update alchemistsimulator/alchemist action to v35.0.1 ([#1198](https://github.com/DanySK/publish-on-central/issues/1198)) ([19589dc](https://github.com/DanySK/publish-on-central/commit/19589dc6194598e09cfb49fabea06171a4afcc1f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.18 ([#1199](https://github.com/DanySK/publish-on-central/issues/1199)) ([6f71fc0](https://github.com/DanySK/publish-on-central/commit/6f71fc035c3b61256d741a78254137dd839f6845))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.22 ([#1201](https://github.com/DanySK/publish-on-central/issues/1201)) ([6262244](https://github.com/DanySK/publish-on-central/commit/62622448d9fe451619e611548588359c81f52c37))
+* **release:** publish plugins before publishing on Central ([0f4321a](https://github.com/DanySK/publish-on-central/commit/0f4321a1386d9a97be9a2469f1ba6c0002627980))
+
 ## [5.1.10](https://github.com/DanySK/publish-on-central/compare/5.1.9...5.1.10) (2024-11-17)
 
 ### Dependency updates
