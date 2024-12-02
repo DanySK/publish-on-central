@@ -82,7 +82,7 @@ data class NexusStatefulOperation(
     private val transitioner by lazy {
         StagingRepositoryTransitioner(
             client,
-            BasicActionRetrier(Int.MAX_VALUE, Duration.ofSeconds(retryInterval)) { it.transitioning },
+            BasicActionRetrier(Int.MAX_VALUE, Duration.ofSeconds(RETRY_INTERVAL)) { it.transitioning },
         )
     }
 
@@ -128,6 +128,6 @@ data class NexusStatefulOperation(
     }
 
     private companion object {
-        private const val retryInterval: Long = 10
+        private const val RETRY_INTERVAL: Long = 10
     }
 }
