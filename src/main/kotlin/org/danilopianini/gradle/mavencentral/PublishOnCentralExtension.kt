@@ -26,8 +26,8 @@ open class PublishOnCentralExtension(val project: Project) {
      */
     val mavenCentral: Repository =
         Repository(
-            Repository.mavenCentralName,
-            url = project.propertyWithDefaultProvider { Repository.mavenCentralURL },
+            Repository.MAVEN_CENTRAL_NAME,
+            url = project.propertyWithDefaultProvider { Repository.MAVEN_CENTRAL_URL },
             user =
                 project.propertyWithDefaultProvider {
                     System.getenv("MAVEN_CENTRAL_USERNAME")
@@ -42,7 +42,7 @@ open class PublishOnCentralExtension(val project: Project) {
                         ?: project.properties["sonatypePassword"]?.toString()
                         ?: project.properties["ossrhPassword"]?.toString()
                 },
-            nexusUrl = Repository.mavenCentralNexusUrl,
+            nexusUrl = Repository.MAVEN_CENTRAL_NEXUS_URL,
             nexusTimeOut = @Suppress("MagicNumber") Duration.ofMinutes(5),
             nexusConnectTimeOut = Duration.ofMinutes(3),
         )
