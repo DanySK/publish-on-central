@@ -109,8 +109,7 @@ open class PublishOnCentralExtension(
         name: String = repositoryNameFromURL(url),
         configurator: Repository.() -> Unit = { },
     ) {
-        val repo = Repository.fromProject(project, name)
-        repo.url.set(url)
+        val repo = Repository.fromProject(project, name, url)
         repo.apply(configurator)
         project.afterEvaluate { it.configureRepository(repo) }
     }

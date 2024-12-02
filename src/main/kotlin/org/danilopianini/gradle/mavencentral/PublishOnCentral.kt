@@ -6,6 +6,7 @@ import org.danilopianini.gradle.mavencentral.ProjectExtensions.addSourcesArtifac
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureJavadocJarTaskForKtJs
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
+import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentralPortal
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
@@ -78,6 +79,9 @@ class PublishOnCentral : Plugin<Project> {
         project.tasks.withType<PublishToMavenRepository>().configureEach { publish ->
             publish.mustRunAfter(project.tasks.withType<Sign>())
         }
+        // Maven Central Portal
+        project.setupMavenCentralPortal()
+        // Initialize Central if needed
         project.afterEvaluate {
             if (extension.configureMavenCentral.getOrElse(true)) {
                 project.configureRepository(extension.mavenCentral)

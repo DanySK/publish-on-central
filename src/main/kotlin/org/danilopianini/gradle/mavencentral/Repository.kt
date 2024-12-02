@@ -2,7 +2,9 @@ package org.danilopianini.gradle.mavencentral
 
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.property
+import java.net.URI
 import java.time.Duration
 
 /**
@@ -14,13 +16,23 @@ import java.time.Duration
  */
 data class Repository(
     var name: String,
-    val url: Property<String>,
+    val url: Provider<URI>,
     val user: Property<String>,
     val password: Property<String>,
     val nexusUrl: String? = null,
     val nexusTimeOut: Duration = Duration.ofMinutes(1),
     val nexusConnectTimeOut: Duration = Duration.ofMinutes(1),
 ) {
+    constructor(
+        name: String,
+        url: Property<String>,
+        user: Property<String>,
+        password: Property<String>,
+        nexusUrl: String? = null,
+        nexusTimeOut: Duration = Duration.ofMinutes(1),
+        nexusConnectTimeOut: Duration = Duration.ofMinutes(1),
+    ) : this (name, url.map { URI.create(it) }, user, password, nexusUrl, nexusTimeOut, nexusConnectTimeOut)
+
     /**
      * Same as [name], but capitalized.
      */
@@ -53,10 +65,25 @@ data class Repository(
         fun fromProject(
             project: Project,
             name: String,
+            url: String,
         ): Repository =
             Repository(
                 name = name,
-                url = project.objects.property(),
+                url = project.objects.property<String>().value(url),
+                user = project.objects.property(),
+                password = project.objects.property(),
+            )
+
+        /**
+         * Creates a [Repository] local to the build folder.
+         */
+        fun projectLocalRepository(project: Project): Repository =
+            Repository(
+                name = "ProjectLocal",
+                url =
+                    project.layout.buildDirectory
+                        .dir("project-local-repository")
+                        .map { it.asFile.toURI() },
                 user = project.objects.property(),
                 password = project.objects.property(),
             )

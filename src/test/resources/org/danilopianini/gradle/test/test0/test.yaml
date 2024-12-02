@@ -32,14 +32,16 @@ tests:
           - tasks
       output:
         contains:
+          - zipMavenCentralPortalPublication
           - publishPluginMavenPublicationToGithubRepository
+          - publishPluginMavenPublicationToProjectLocalRepository
           - uploadJavaOSSRHToMavenCentralNexus
           - uploadPluginMavenToMavenCentralNexus
           - releaseStagingRepositoryOnMavenCentral
           - dropStagingRepositoryOnMavenCentral
         doesntContain:
           - uploadJavaMavenToGithubNexus
-  - description: "sources and javadoc tasks get greated"
+  - description: "sources and javadoc tasks get created"
     configuration:
       tasks:
         - tasks

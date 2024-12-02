@@ -44,6 +44,7 @@ dependencies {
     api(gradleKotlinDsl())
     api(libs.kotlin.gradlePlugin)
     api(libs.nexus.publish)
+    api(libs.maven.central.api)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.fuel)
     testImplementation(libs.testkit)
