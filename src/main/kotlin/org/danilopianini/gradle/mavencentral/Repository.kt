@@ -21,7 +21,6 @@ data class Repository(
     val nexusTimeOut: Duration = Duration.ofMinutes(1),
     val nexusConnectTimeOut: Duration = Duration.ofMinutes(1),
 ) {
-
     /**
      * Same as [name], but capitalized.
      */
@@ -33,26 +32,28 @@ data class Repository(
      * Constants and utility functions.
      */
     companion object {
-
         /**
          * The default name of the Maven Central repository.
          */
-        const val mavenCentralName = "MavenCentral"
+        const val MAVEN_CENTRAL_NAME = "MavenCentral"
 
         /**
          * The default URL of Maven Central.
          */
-        const val mavenCentralURL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+        const val MAVEN_CENTRAL_URL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
 
         /**
          * The Sonatype Nexus instance URL of Maven Central.
          */
-        const val mavenCentralNexusUrl = "https://s01.oss.sonatype.org/service/local/"
+        const val MAVEN_CENTRAL_NEXUS_URL = "https://s01.oss.sonatype.org/service/local/"
 
         /**
          * Creates a named [Repository] from a [project] and a [name].
          */
-        fun fromProject(project: Project, name: String): Repository =
+        fun fromProject(
+            project: Project,
+            name: String,
+        ): Repository =
             Repository(
                 name = name,
                 url = project.objects.property(),

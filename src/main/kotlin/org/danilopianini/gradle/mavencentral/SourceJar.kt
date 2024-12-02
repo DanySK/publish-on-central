@@ -19,7 +19,10 @@ open class SourceJar : JarWithClassifier("sources") {
      * In case the source set does not exist, if [failOnMissingName] is set, the task throws [IllegalStateException].
      */
     @JvmOverloads
-    fun sourceSet(name: String, failOnMissingName: Boolean = true) {
+    fun sourceSet(
+        name: String,
+        failOnMissingName: Boolean = true,
+    ) {
         val sourceSets = project.properties["sourceSets"] as? SourceSetContainer
         if (sourceSets != null) {
             val sourceSet = sourceSets.findByName(name)

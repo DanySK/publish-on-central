@@ -28,15 +28,18 @@ import org.gradle.plugins.signing.SigningPlugin
  * A Plugin configuring the project for publishing on Maven Central.
  */
 class PublishOnCentral : Plugin<Project> {
-
     private companion object {
         /**
          * The name of the publication to be created.
          */
-        private const val publicationName = "OSSRH"
+        private const val PUBLICATION_NAME = "OSSRH"
     }
 
-    private fun addSourcesArtifactIfNeeded(project: Project, publication: MavenPublication, sourcesJarTask: Task) {
+    private fun addSourcesArtifactIfNeeded(
+        project: Project,
+        publication: MavenPublication,
+        sourcesJarTask: Task,
+    ) {
         if (sourcesJarTask is SourceJar) {
             if (project.jsSourcesJar == null) {
                 publication.artifact(sourcesJarTask)
@@ -69,7 +72,11 @@ class PublishOnCentral : Plugin<Project> {
         }
     }
 
-    private fun addJavadocArtifactIfNeeded(project: Project, publication: MavenPublication, javadocJarTask: Task) {
+    private fun addJavadocArtifactIfNeeded(
+        project: Project,
+        publication: MavenPublication,
+        javadocJarTask: Task,
+    ) {
         if (javadocJarTask is JavadocJar) {
             publication.artifact(javadocJarTask)
             project.logger.info(
@@ -92,7 +99,7 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.components.configureEach { component ->
                 publications { publications ->
-                    val name = "${component.name}$publicationName"
+                    val name = "${component.name}$PUBLICATION_NAME"
                     if (publications.none { it.name == name }) {
                         publications.create(name, MavenPublication::class.java) { publication ->
                             createdPublications += publication
@@ -130,9 +137,10 @@ class PublishOnCentral : Plugin<Project> {
         }
         project.plugins.withType<JavaPlugin>().configureEach { _ ->
             project.tasks.withType<JavadocJar>().configureEach { javadocJar ->
-                val javadocTask = checkNotNull(project.tasks.findByName("javadoc") as? Javadoc) {
-                    "Java plugin applied but no Javadoc task existing!"
-                }
+                val javadocTask =
+                    checkNotNull(project.tasks.findByName("javadoc") as? Javadoc) {
+                        "Java plugin applied but no Javadoc task existing!"
+                    }
                 javadocJar.dependsOn(javadocTask)
                 javadocJar.from(javadocTask.destinationDir)
             }
@@ -143,11 +151,12 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
                 val message = "configure ${javadocJar.name} task to depend on Dokka task"
                 project.logger.info("Lazily $message")
-                val dokkaTask = extension.docStyle.map { docStyle ->
-                    project.dokkaTasksFor(docStyle).firstOrNull()
-                        ?.also { project.logger.info("Actually $message ${it.name}") }
-                        ?: error("Dokka plugin applied but no task exists for style $docStyle!")
-                }
+                val dokkaTask =
+                    extension.docStyle.map { docStyle ->
+                        project.dokkaTasksFor(docStyle).firstOrNull()
+                            ?.also { project.logger.info("Actually $message ${it.name}") }
+                            ?: error("Dokka plugin applied but no task exists for style $docStyle!")
+                    }
                 javadocJar.dependsOn(dokkaTask)
                 javadocJar.from(dokkaTask.map { it.dokkaOutputDirectory })
             }

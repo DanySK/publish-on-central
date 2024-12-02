@@ -35,8 +35,10 @@ internal fun Project.dokkaTasksFor(docStyle: DocStyle): TaskCollection<out Task>
  * If a task is of type `DokkaTask` (cf. [isDokkaTask]), then retrieves the value of its `outputDirectory`
  * property, if any.
  */
-internal val Task.dokkaOutputDirectory: Any get() = when {
-    isDokkaTask -> property("outputDirectory")
-        ?: error("$name has no property 'outputDirectory': Dokka version incompatible with publish-on-central?")
-    else -> error("$name is not of type $DOKKA_TASK_CLASS_NAME")
-}
+internal val Task.dokkaOutputDirectory: Any get() =
+    when {
+        isDokkaTask ->
+            property("outputDirectory")
+                ?: error("$name has no property 'outputDirectory': Dokka version incompatible with publish-on-central?")
+        else -> error("$name is not of type $DOKKA_TASK_CLASS_NAME")
+    }

@@ -13,7 +13,6 @@ import java.time.Duration
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
  */
 open class PublishOnCentralExtension(val project: Project) {
-
     /**
      * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
      * and should thus configure them appropriately.
@@ -25,25 +24,28 @@ open class PublishOnCentralExtension(val project: Project) {
     /**
      * Easier access to the default Maven Central configuration.
      */
-    val mavenCentral: Repository = Repository(
-        Repository.mavenCentralName,
-        url = project.propertyWithDefaultProvider { Repository.mavenCentralURL },
-        user = project.propertyWithDefaultProvider {
-            System.getenv("MAVEN_CENTRAL_USERNAME")
-                ?: project.properties["mavenCentralUsername"]?.toString()
-                ?: project.properties["sonatypeUsername"]?.toString()
-                ?: project.properties["ossrhUsername"]?.toString()
-        },
-        password = project.propertyWithDefaultProvider {
-            System.getenv("MAVEN_CENTRAL_PASSWORD")
-                ?: project.properties["mavenCentralPassword"]?.toString()
-                ?: project.properties["sonatypePassword"]?.toString()
-                ?: project.properties["ossrhPassword"]?.toString()
-        },
-        nexusUrl = Repository.mavenCentralNexusUrl,
-        nexusTimeOut = @Suppress("MagicNumber") Duration.ofMinutes(5),
-        nexusConnectTimeOut = Duration.ofMinutes(3),
-    )
+    val mavenCentral: Repository =
+        Repository(
+            Repository.MAVEN_CENTRAL_NAME,
+            url = project.propertyWithDefaultProvider { Repository.MAVEN_CENTRAL_URL },
+            user =
+                project.propertyWithDefaultProvider {
+                    System.getenv("MAVEN_CENTRAL_USERNAME")
+                        ?: project.properties["mavenCentralUsername"]?.toString()
+                        ?: project.properties["sonatypeUsername"]?.toString()
+                        ?: project.properties["ossrhUsername"]?.toString()
+                },
+            password =
+                project.propertyWithDefaultProvider {
+                    System.getenv("MAVEN_CENTRAL_PASSWORD")
+                        ?: project.properties["mavenCentralPassword"]?.toString()
+                        ?: project.properties["sonatypePassword"]?.toString()
+                        ?: project.properties["ossrhPassword"]?.toString()
+                },
+            nexusUrl = Repository.MAVEN_CENTRAL_NEXUS_URL,
+            nexusTimeOut = @Suppress("MagicNumber") Duration.ofMinutes(5),
+            nexusConnectTimeOut = Duration.ofMinutes(3),
+        )
 
     /**
      * The full project name.
@@ -79,14 +81,16 @@ open class PublishOnCentralExtension(val project: Project) {
     /**
      * The SCM connection of the project.
      */
-    val scmConnection: Property<String> = project.objects.property<String>()
-        .convention(repoOwner.map { "scm:git:https://github.com/$it/${project.name}" })
+    val scmConnection: Property<String> =
+        project.objects.property<String>()
+            .convention(repoOwner.map { "scm:git:https://github.com/$it/${project.name}" })
 
     /**
      * The URL of the project.
      */
-    val projectUrl: Property<String> = project.objects.property<String>()
-        .convention(repoOwner.map { "https://github.com/$it/${project.name}" })
+    val projectUrl: Property<String> =
+        project.objects.property<String>()
+            .convention(repoOwner.map { "https://github.com/$it/${project.name}" })
 
     /**
      * The style of `javadoc` artifacts being published on Maven repositories.
@@ -120,7 +124,6 @@ open class PublishOnCentralExtension(val project: Project) {
     }
 
     private companion object {
-
         private val extractName = Regex(""".*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?""")
 
         private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
