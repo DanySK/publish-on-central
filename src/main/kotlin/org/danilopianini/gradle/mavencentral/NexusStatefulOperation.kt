@@ -27,7 +27,6 @@ data class NexusStatefulOperation(
     private val connectionTimeOut: Duration,
     private val group: String,
 ) {
-
     /**
      * Repository description.
      */

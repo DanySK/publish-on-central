@@ -25,7 +25,6 @@ import java.net.URI
 import kotlin.reflect.KClass
 
 internal object ProjectExtensions {
-
     /**
      * The id of the Kotlin/JS plugin.
      */

@@ -28,7 +28,6 @@ import org.gradle.plugins.signing.SigningPlugin
  * A Plugin configuring the project for publishing on Maven Central.
  */
 class PublishOnCentral : Plugin<Project> {
-
     private companion object {
         /**
          * The name of the publication to be created.

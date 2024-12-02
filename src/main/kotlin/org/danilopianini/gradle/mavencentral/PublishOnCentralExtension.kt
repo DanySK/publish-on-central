@@ -13,7 +13,6 @@ import java.time.Duration
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
  */
 open class PublishOnCentralExtension(val project: Project) {
-
     /**
      * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
      * and should thus configure them appropriately.
@@ -120,7 +119,6 @@ open class PublishOnCentralExtension(val project: Project) {
     }
 
     private companion object {
-
         private val extractName = Regex(""".*://(?:\w+\.)*(\w+)\.\w+(?:/.*)?""")
 
         private fun repositoryNameFromURL(url: String) = extractName.find(url)?.destructured?.component1() ?: "unknown"
