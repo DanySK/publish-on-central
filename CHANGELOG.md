@@ -1,3 +1,34 @@
+## [6.0.0](https://github.com/DanySK/publish-on-central/compare/5.1.11...6.0.0) (2024-12-02)
+
+### ⚠ BREAKING CHANGES
+
+* **deps:** update plugin kotlin-qa to v0.75.0, use SCREAMING_SNAKE_CASE for `MAVEN_CENTRAL_NAME`, `MAVEN_CENTRAL_URL`, and `MAVEN_CENTRAL_NEXUS_URL`
+
+### Dependency updates
+
+* **deps:** update npm to v10.9.1 ([#1214](https://github.com/DanySK/publish-on-central/issues/1214)) ([77b8119](https://github.com/DanySK/publish-on-central/commit/77b8119ab7741bcb32410bf25828aa1ef0571ce1))
+* **deps:** update plugin kotlin-qa to v0.70.2 ([#1204](https://github.com/DanySK/publish-on-central/issues/1204)) ([34fd077](https://github.com/DanySK/publish-on-central/commit/34fd077c755346d0b42ddebe4b2b36eaa70d8087))
+* **deps:** update plugin kotlin-qa to v0.75.0, use SCREAMING_SNAKE_CASE for `MAVEN_CENTRAL_NAME`, `MAVEN_CENTRAL_URL`, and `MAVEN_CENTRAL_NEXUS_URL` ([1bdc5c4](https://github.com/DanySK/publish-on-central/commit/1bdc5c4b6241db55f75470ec94c6f64daa0dfb10))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.15 ([#1205](https://github.com/DanySK/publish-on-central/issues/1205)) ([50ec7ca](https://github.com/DanySK/publish-on-central/commit/50ec7caf8e853578e3b08e50a459b1a909a301e8))
+* **deps:** update plugin org.gradle.toolchains.foojay-resolver-convention to v0.9.0 ([#1223](https://github.com/DanySK/publish-on-central/issues/1223)) ([7c62dec](https://github.com/DanySK/publish-on-central/commit/7c62decc3e7778a523c02f60dc67b1198f083ea4))
+* **deps:** update plugin publishoncentral to v5.1.11 ([#1206](https://github.com/DanySK/publish-on-central/issues/1206)) ([0f1ac9c](https://github.com/DanySK/publish-on-central/commit/0f1ac9ca4289cb4b2c58d5f6b6186aeac37e8cae))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v35.0.2 ([#1210](https://github.com/DanySK/publish-on-central/issues/1210)) ([4b896fe](https://github.com/DanySK/publish-on-central/commit/4b896fea11e00994a72ad363eb02e8cc16d70f9d))
+* **deps:** update alchemistsimulator/alchemist action to v35.0.3 ([#1213](https://github.com/DanySK/publish-on-central/issues/1213)) ([419b89f](https://github.com/DanySK/publish-on-central/commit/419b89fe452da74d56c06ee1476e9550516c63b2))
+* **deps:** update alchemistsimulator/alchemist action to v36 ([#1216](https://github.com/DanySK/publish-on-central/issues/1216)) ([e326796](https://github.com/DanySK/publish-on-central/commit/e3267968d3a843de39457ab287f1c8b7b5bef246))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.1 ([#1217](https://github.com/DanySK/publish-on-central/issues/1217)) ([aaa3edf](https://github.com/DanySK/publish-on-central/commit/aaa3edf54f3804068878e28a4bcccd3ef31f41da))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.2 ([#1220](https://github.com/DanySK/publish-on-central/issues/1220)) ([9564067](https://github.com/DanySK/publish-on-central/commit/9564067df269b15808ab316aaa48d79bcf358989))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.3 ([#1222](https://github.com/DanySK/publish-on-central/issues/1222)) ([f0fbf51](https://github.com/DanySK/publish-on-central/commit/f0fbf5100cbd6b9d1942df6998c7009d7bd7ad33))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.23 ([#1207](https://github.com/DanySK/publish-on-central/issues/1207)) ([8626557](https://github.com/DanySK/publish-on-central/commit/862655756ab1f8449384d9f189c0ad8ca904b162))
+* do not cancel in-progress jobs ([42131ee](https://github.com/DanySK/publish-on-central/commit/42131ee2e18059fa3b917cf4410e98f7e9fa7dc2))
+* do not cancel in-progress matrix jobs ([ff4a602](https://github.com/DanySK/publish-on-central/commit/ff4a602e24ca90b845648efffd2faba68851a960))
+* do not repeat the same command, retries are built-in into build-check-deploy-gradle-action ([f0f5d72](https://github.com/DanySK/publish-on-central/commit/f0f5d72a8c05b0340022fe5808b5fd4efc2b4184))
+* drop repo after dry deploy ([ed20abc](https://github.com/DanySK/publish-on-central/commit/ed20abcd9995f8bdc6c7b06cbfbb69acf41483ab))
+* drop unreleased staging repos on OSSRH ([#1208](https://github.com/DanySK/publish-on-central/issues/1208)) ([c879732](https://github.com/DanySK/publish-on-central/commit/c87973203e781aae595a5721cda0d6753017f74d))
+* remove redundant suppression ([d368b83](https://github.com/DanySK/publish-on-central/commit/d368b832f325b637f26e9d69102ea246b67f93e3))
+
 ## [5.1.11](https://github.com/DanySK/publish-on-central/compare/5.1.10...5.1.11) (2024-11-21)
 
 ### Dependency updates
