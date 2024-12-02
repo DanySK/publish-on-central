@@ -41,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: test-alchemist-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -89,7 +89,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: test-kt-multiplatform-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -137,7 +137,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: test-multi-stage-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -201,7 +201,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
       group: test-drop-task-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: true
+      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
