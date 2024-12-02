@@ -21,7 +21,6 @@ data class Repository(
     val nexusTimeOut: Duration = Duration.ofMinutes(1),
     val nexusConnectTimeOut: Duration = Duration.ofMinutes(1),
 ) {
-
     /**
      * Same as [name], but capitalized.
      */
@@ -33,7 +32,6 @@ data class Repository(
      * Constants and utility functions.
      */
     companion object {
-
         /**
          * The default name of the Maven Central repository.
          */
