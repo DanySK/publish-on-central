@@ -9,32 +9,34 @@ import javax.inject.Inject
 /**
  * A task that creates a Nexus Client operating at the [Repository] [repoToConfigure] with URL [nexusUrl].
  */
-open class InitializeNexusClient @Inject constructor(
-    @Input
-    val repoToConfigure: Repository,
-    @Input
-    val nexusUrl: String,
-) : DefaultTask() {
+open class InitializeNexusClient
+    @Inject
+    constructor(
+        @Input
+        val repoToConfigure: Repository,
+        @Input
+        val nexusUrl: String,
+    ) : DefaultTask() {
+        /**
+         * The Nexus Client, accessible only **after** the execution of the task.
+         */
+        @Internal
+        lateinit var nexusClient: NexusStatefulOperation
 
-    /**
-     * The Nexus Client, accessible only **after** the execution of the task.
-     */
-    @Internal
-    lateinit var nexusClient: NexusStatefulOperation
-
-    /**
-     * Initializes the Nexus Client.
-     */
-    @TaskAction
-    fun initializeClient() {
-        nexusClient = NexusStatefulOperation(
-            project = project,
-            nexusUrl = nexusUrl,
-            group = project.group.toString(),
-            user = repoToConfigure.user,
-            password = repoToConfigure.password,
-            timeOut = repoToConfigure.nexusTimeOut,
-            connectionTimeOut = repoToConfigure.nexusConnectTimeOut,
-        )
+        /**
+         * Initializes the Nexus Client.
+         */
+        @TaskAction
+        fun initializeClient() {
+            nexusClient =
+                NexusStatefulOperation(
+                    project = project,
+                    nexusUrl = nexusUrl,
+                    group = project.group.toString(),
+                    user = repoToConfigure.user,
+                    password = repoToConfigure.password,
+                    timeOut = repoToConfigure.nexusTimeOut,
+                    connectionTimeOut = repoToConfigure.nexusConnectTimeOut,
+                )
+        }
     }
-}
