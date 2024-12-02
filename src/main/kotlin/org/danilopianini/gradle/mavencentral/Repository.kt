@@ -50,7 +50,10 @@ data class Repository(
         /**
          * Creates a named [Repository] from a [project] and a [name].
          */
-        fun fromProject(project: Project, name: String): Repository =
+        fun fromProject(
+            project: Project,
+            name: String,
+        ): Repository =
             Repository(
                 name = name,
                 url = project.objects.property(),
