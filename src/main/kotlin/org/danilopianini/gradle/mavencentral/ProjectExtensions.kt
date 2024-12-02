@@ -104,86 +104,95 @@ internal object ProjectExtensions {
         }
     }
 
-    private fun Project.configureNexusRepository(repoToConfigure: Repository, nexusUrl: String) {
+    private fun Project.configureNexusRepository(
+        repoToConfigure: Repository,
+        nexusUrl: String,
+    ) {
         val repoName = repoToConfigure.name
-        val nexusClient = rootProject.registerTaskIfNeeded(
-            "createNexusClientFor$repoName",
-            InitializeNexusClient::class,
-            repoToConfigure,
-            nexusUrl,
-        ) as InitializeNexusClient
+        val nexusClient =
+            rootProject.registerTaskIfNeeded(
+                "createNexusClientFor$repoName",
+                InitializeNexusClient::class,
+                repoToConfigure,
+                nexusUrl,
+            ) as InitializeNexusClient
         /*
          * Creates a new staging repository on the Nexus server, or fetches an existing one if the repoId is known.
          */
-        val createStagingRepository = rootProject.registerTaskIfNeeded(
-            "createStagingRepositoryOn$repoName",
-        ) {
-            val stagingRepoIdsFileName = "staging-repo-ids.properties"
-            val stagingRepoIdsFile = rootProject.layout.buildDirectory.map { it.asFile.resolve(stagingRepoIdsFileName) }
-            outputs.file(stagingRepoIdsFile)
-            dependsOn(nexusClient)
-            doLast {
-                rootProject.warnIfCredentialsAreMissing(repoToConfigure)
-                nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
-                val repoId = nexusClient.nexusClient.repoId
-                // Write the staging repository ID to build/staging-repo-ids.properties file
-                stagingRepoIdsFile.get().appendText("$repoName=$repoId" + System.lineSeparator())
-                logger.lifecycle("Append repo name {} to file {}", repoId, stagingRepoIdsFile.get().path)
+        val createStagingRepository =
+            rootProject.registerTaskIfNeeded(
+                "createStagingRepositoryOn$repoName",
+            ) {
+                val stagingRepoIdsFileName = "staging-repo-ids.properties"
+                val stagingRepoIdsFile = rootProject.layout.buildDirectory.map { it.asFile.resolve(stagingRepoIdsFileName) }
+                outputs.file(stagingRepoIdsFile)
+                dependsOn(nexusClient)
+                doLast {
+                    rootProject.warnIfCredentialsAreMissing(repoToConfigure)
+                    nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
+                    val repoId = nexusClient.nexusClient.repoId
+                    // Write the staging repository ID to build/staging-repo-ids.properties file
+                    stagingRepoIdsFile.get().appendText("$repoName=$repoId" + System.lineSeparator())
+                    logger.lifecycle("Append repo name {} to file {}", repoId, stagingRepoIdsFile.get().path)
+                }
+                group = PublishingPlugin.PUBLISH_TASK_GROUP
+                description = "Creates a new Nexus staging repository on $repoName."
             }
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Creates a new Nexus staging repository on $repoName."
-        }
         /*
          * Collector of all upload tasks. Actual uploads are defined at the bottom.
          * Requires the creation of the staging repository.
          */
-        val uploadAllPublications = tasks.register("uploadAllPublicationsTo${repoName}Nexus") {
-            it.dependsOn(createStagingRepository)
-            it.group = PublishingPlugin.PUBLISH_TASK_GROUP
-            it.description = "Uploads all publications to a staging repository on $repoName."
-        }
+        val uploadAllPublications =
+            tasks.register("uploadAllPublicationsTo${repoName}Nexus") {
+                it.dependsOn(createStagingRepository)
+                it.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                it.description = "Uploads all publications to a staging repository on $repoName."
+            }
         /*
          * Closes the staging repository. If it's closed already, skips the operation.
          * Runs after all uploads. Requires the creation of the staging repository.
          */
-        val closeStagingRepository = rootProject.registerTaskIfNeeded("closeStagingRepositoryOn$repoName") {
-            doLast {
-                with(nexusClient.nexusClient) {
-                    when (client.getStagingRepositoryStateById(repoId).state) {
-                        CLOSED -> logger.warn("The staging repository is already closed. Skipping.")
-                        else -> close()
+        val closeStagingRepository =
+            rootProject.registerTaskIfNeeded("closeStagingRepositoryOn$repoName") {
+                doLast {
+                    with(nexusClient.nexusClient) {
+                        when (client.getStagingRepositoryStateById(repoId).state) {
+                            CLOSED -> logger.warn("The staging repository is already closed. Skipping.")
+                            else -> close()
+                        }
                     }
                 }
+                dependsOn(createStagingRepository)
+                mustRunAfter(uploadAllPublications)
+                group = PublishingPlugin.PUBLISH_TASK_GROUP
+                description = "Closes the Nexus repository on $repoName."
             }
-            dependsOn(createStagingRepository)
-            mustRunAfter(uploadAllPublications)
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Closes the Nexus repository on $repoName."
-        }
         /*
          * Releases the staging repository. Requires closing.
          */
-        val release = rootProject.registerTaskIfNeeded("releaseStagingRepositoryOn${repoToConfigure.name}") {
-            doLast { nexusClient.nexusClient.release() }
-            dependsOn(closeStagingRepository)
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Releases the Nexus repo on ${repoToConfigure.name}. " +
-                "Mutually exclusive with dropStagingRepositoryOn${repoToConfigure.name}."
-        }
+        val release =
+            rootProject.registerTaskIfNeeded("releaseStagingRepositoryOn${repoToConfigure.name}") {
+                doLast { nexusClient.nexusClient.release() }
+                dependsOn(closeStagingRepository)
+                group = PublishingPlugin.PUBLISH_TASK_GROUP
+                description = "Releases the Nexus repo on ${repoToConfigure.name}. " +
+                    "Mutually exclusive with dropStagingRepositoryOn${repoToConfigure.name}."
+            }
         /*
          * Drops the staging repository.
          * Requires the creation of the staging repository.
          * It must run after all uploads.
          * If closing is requested as well, drop must run after it.
          */
-        val drop = rootProject.registerTaskIfNeeded("dropStagingRepositoryOn${repoToConfigure.name}") {
-            doLast { nexusClient.nexusClient.drop() }
-            dependsOn(createStagingRepository)
-            mustRunAfter(uploadAllPublications)
-            mustRunAfter(closeStagingRepository)
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
-        }
+        val drop =
+            rootProject.registerTaskIfNeeded("dropStagingRepositoryOn${repoToConfigure.name}") {
+                doLast { nexusClient.nexusClient.drop() }
+                dependsOn(createStagingRepository)
+                mustRunAfter(uploadAllPublications)
+                mustRunAfter(closeStagingRepository)
+                group = PublishingPlugin.PUBLISH_TASK_GROUP
+                description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
+            }
         /*
          * Checks that only release or drop are selected for execution, as they are mutually exclusive.
          */
@@ -197,14 +206,15 @@ internal object ProjectExtensions {
             project.tasks.register<PublishToMavenRepository>(
                 "upload${publicationName}To${repoToConfigure.name}Nexus",
             ).configure { uploadTask ->
-                uploadTask.repository = project.repositories.maven { repo ->
-                    repo.name = repoToConfigure.name
-                    repo.url = project.uri(repoToConfigure.url)
-                    repo.credentials {
-                        it.username = repoToConfigure.user.orNull
-                        it.password = repoToConfigure.password.orNull
+                uploadTask.repository =
+                    project.repositories.maven { repo ->
+                        repo.name = repoToConfigure.name
+                        repo.url = project.uri(repoToConfigure.url)
+                        repo.credentials {
+                            it.username = repoToConfigure.user.orNull
+                            it.password = repoToConfigure.password.orNull
+                        }
                     }
-                }
                 uploadTask.publication = publication
                 publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
                 tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
@@ -246,12 +256,13 @@ internal object ProjectExtensions {
         name: String,
         vararg parameters: Any = emptyArray(),
         configuration: DefaultTask.() -> Unit = { },
-    ): Task = registerTaskIfNeeded(
-        name = name,
-        type = DefaultTask::class,
-        parameters = parameters,
-        configuration = configuration,
-    )
+    ): Task =
+        registerTaskIfNeeded(
+            name = name,
+            type = DefaultTask::class,
+            parameters = parameters,
+            configuration = configuration,
+        )
 
     private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
         if (repository.user.orNull == null) {
