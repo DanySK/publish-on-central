@@ -124,7 +124,8 @@ internal object ProjectExtensions {
                 "createStagingRepositoryOn$repoName",
             ) {
                 val stagingRepoIdsFileName = "staging-repo-ids.properties"
-                val stagingRepoIdsFile = rootProject.layout.buildDirectory.map { it.asFile.resolve(stagingRepoIdsFileName) }
+                val stagingRepoIdsFile =
+                    rootProject.layout.buildDirectory.map { it.asFile.resolve(stagingRepoIdsFileName) }
                 outputs.file(stagingRepoIdsFile)
                 dependsOn(nexusClient)
                 doLast {
@@ -191,7 +192,8 @@ internal object ProjectExtensions {
                 mustRunAfter(uploadAllPublications)
                 mustRunAfter(closeStagingRepository)
                 group = PublishingPlugin.PUBLISH_TASK_GROUP
-                description = "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
+                description =
+                    "Drops the Nexus repo on ${repoToConfigure.name}. Incompatible with releasing the same repo."
             }
         /*
          * Checks that only release or drop are selected for execution, as they are mutually exclusive.
