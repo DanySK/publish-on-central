@@ -32,7 +32,7 @@ class PublishOnCentral : Plugin<Project> {
         /**
          * The name of the publication to be created.
          */
-        private const val publicationName = "OSSRH"
+        private const val PUBLICATION_NAME = "OSSRH"
     }
 
     private fun addSourcesArtifactIfNeeded(
@@ -99,7 +99,7 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.components.configureEach { component ->
                 publications { publications ->
-                    val name = "${component.name}$publicationName"
+                    val name = "${component.name}$PUBLICATION_NAME"
                     if (publications.none { it.name == name }) {
                         publications.create(name, MavenPublication::class.java) { publication ->
                             createdPublications += publication
