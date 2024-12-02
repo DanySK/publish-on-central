@@ -18,6 +18,7 @@ gitSemVer {
 }
 
 group = "org.danilopianini"
+
 inner class ProjectInfo {
     val longName = "Gradle Publish On Maven Central Plugin"
     val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
@@ -131,20 +132,21 @@ if (System.getenv("CI") == true.toString()) {
     }
 }
 
-val registerCredentials = tasks.register("registerGradlePluginPortalCredentials") {
-    doLast {
-        listOf("gradle.publish.key", "gradle.publish.secret").forEach {
-            if (!(project.hasProperty(it) or System.getenv().containsKey(it))) {
-                val bashName = it.uppercase().replace(".", "_")
-                System.getProperties().setProperty(
-                    it,
-                    System.getenv(bashName)
-                        ?: error("Property $it is unset and environment variable $bashName unavailable"),
-                )
+val registerCredentials =
+    tasks.register("registerGradlePluginPortalCredentials") {
+        doLast {
+            listOf("gradle.publish.key", "gradle.publish.secret").forEach {
+                if (!(project.hasProperty(it) or System.getenv().containsKey(it))) {
+                    val bashName = it.uppercase().replace(".", "_")
+                    System.getProperties().setProperty(
+                        it,
+                        System.getenv(bashName)
+                            ?: error("Property $it is unset and environment variable $bashName unavailable"),
+                    )
+                }
             }
         }
     }
-}
 
 tasks.publishPlugins {
     dependsOn(registerCredentials)
