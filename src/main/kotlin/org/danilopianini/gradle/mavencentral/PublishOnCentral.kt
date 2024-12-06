@@ -101,7 +101,9 @@ class PublishOnCentral : Plugin<Project> {
                 project.logger.info("Lazily $message")
                 val dokkaTask =
                     extension.docStyle.map { docStyle ->
-                        project.dokkaTasksFor(docStyle).firstOrNull()
+                        project
+                            .dokkaTasksFor(docStyle)
+                            .firstOrNull()
                             ?.also { project.logger.info("Actually $message ${it.name}") }
                             ?: error("Dokka plugin applied but no task exists for style $docStyle!")
                     }

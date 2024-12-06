@@ -110,12 +110,13 @@ data class NexusStatefulOperation(
     fun drop() {
         project.logger.lifecycle("Dropping repository {} on Nexus at {}", repoId, repoUrl)
         runBlocking {
-            Fuel.post("${nexusUrl.removeSuffix("/")}/staging/bulk/drop")
+            Fuel
+                .post("${nexusUrl.removeSuffix("/")}/staging/bulk/drop")
                 .header(
                     "Accept" to "application/json",
                     "Content-Type" to "application/json",
-                )
-                .authentication().basic(user.get(), password.get())
+                ).authentication()
+                .basic(user.get(), password.get())
                 .jsonBody("""{"data":{"stagedRepositoryIds":["$repoId"],"description":"$description"}}""")
                 .response { _, response, _ ->
                     project.logger.lifecycle("Received response {} ", response)

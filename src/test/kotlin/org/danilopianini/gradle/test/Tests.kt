@@ -4,27 +4,28 @@ import io.github.mirkofelice.api.Testkit
 import io.kotest.core.spec.style.StringSpec
 import java.io.File
 
-class Tests : StringSpec({
+class Tests :
+    StringSpec({
 
-    val projectName = "publish-on-central"
-    val sep = File.separator
-    val baseFolder = Testkit.DEFAULT_TEST_FOLDER + "org${sep}danilopianini${sep}gradle${sep}test$sep"
+        val projectName = "publish-on-central"
+        val sep = File.separator
+        val baseFolder = Testkit.DEFAULT_TEST_FOLDER + "org${sep}danilopianini${sep}gradle${sep}test$sep"
 
-    fun Testkit.projectTest(folder: String) = this.test(projectName, baseFolder + folder)
+        fun Testkit.projectTest(folder: String) = this.test(projectName, baseFolder + folder)
 
-    "Test ktjs" {
-        Testkit.projectTest("ktjs")
-    }
+        "Test ktjs" {
+            Testkit.projectTest("ktjs")
+        }
 
-    "Test ktmultiplatform" {
-        Testkit.projectTest("ktmultiplatform")
-    }
+        "Test ktmultiplatform" {
+            Testkit.projectTest("ktmultiplatform")
+        }
 
-    "Test multiproject" {
-        Testkit.projectTest("multiproject")
-    }
+        "Test multiproject" {
+            Testkit.projectTest("multiproject")
+        }
 
-    "Test test0" {
-        Testkit.projectTest("test0")
-    }
-})
+        "Test test0" {
+            Testkit.projectTest("test0")
+        }
+    })

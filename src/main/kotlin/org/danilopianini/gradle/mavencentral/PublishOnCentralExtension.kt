@@ -12,7 +12,9 @@ import java.time.Duration
 /**
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
  */
-open class PublishOnCentralExtension(val project: Project) {
+open class PublishOnCentralExtension(
+    val project: Project,
+) {
     /**
      * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
      * and should thus configure them appropriately.
@@ -82,14 +84,16 @@ open class PublishOnCentralExtension(val project: Project) {
      * The SCM connection of the project.
      */
     val scmConnection: Property<String> =
-        project.objects.property<String>()
+        project.objects
+            .property<String>()
             .convention(repoOwner.map { "scm:git:https://github.com/$it/${project.name}" })
 
     /**
      * The URL of the project.
      */
     val projectUrl: Property<String> =
-        project.objects.property<String>()
+        project.objects
+            .property<String>()
             .convention(repoOwner.map { "https://github.com/$it/${project.name}" })
 
     /**

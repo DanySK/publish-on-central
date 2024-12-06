@@ -205,39 +205,40 @@ internal object ProjectExtensions {
         }
         the<PublishingExtension>().publications.withType<MavenPublication>().configureEach { publication ->
             val publicationName = publication.name.replaceFirstChar(Char::titlecase)
-            project.tasks.register<PublishToMavenRepository>(
-                "upload${publicationName}To${repoToConfigure.name}Nexus",
-            ).configure { uploadTask ->
-                uploadTask.repository =
-                    project.repositories.maven { repo ->
-                        repo.name = repoToConfigure.name
-                        repo.url = project.uri(repoToConfigure.url)
-                        repo.credentials {
-                            it.username = repoToConfigure.user.orNull
-                            it.password = repoToConfigure.password.orNull
+            project.tasks
+                .register<PublishToMavenRepository>(
+                    "upload${publicationName}To${repoToConfigure.name}Nexus",
+                ).configure { uploadTask ->
+                    uploadTask.repository =
+                        project.repositories.maven { repo ->
+                            repo.name = repoToConfigure.name
+                            repo.url = project.uri(repoToConfigure.url)
+                            repo.credentials {
+                                it.username = repoToConfigure.user.orNull
+                                it.password = repoToConfigure.password.orNull
+                            }
                         }
-                    }
-                uploadTask.publication = publication
-                publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
-                tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
+                    uploadTask.publication = publication
+                    publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
+                    tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
                 /*
                  * We need to make sure that the staging repository is created before we upload anything.
                  * We also need to make sure that the staging repository is closed *after* we upload
                  * We also need to make sure that the staging repository is dropped *after* we upload
                  * Releasing does not need to be explicitly ordered, as it will be performed after closing
                  */
-                uploadTask.dependsOn(createStagingRepository)
-                uploadAllPublications.get().dependsOn(uploadTask)
-                closeStagingRepository.mustRunAfter(uploadTask)
-                drop.mustRunAfter(uploadTask)
-                uploadTask.doFirst {
-                    warnIfCredentialsAreMissing(repoToConfigure)
-                    uploadTask.repository.url = nexusClient.nexusClient.repoUrl
+                    uploadTask.dependsOn(createStagingRepository)
+                    uploadAllPublications.get().dependsOn(uploadTask)
+                    closeStagingRepository.mustRunAfter(uploadTask)
+                    drop.mustRunAfter(uploadTask)
+                    uploadTask.doFirst {
+                        warnIfCredentialsAreMissing(repoToConfigure)
+                        uploadTask.repository.url = nexusClient.nexusClient.repoUrl
+                    }
+                    uploadTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                    uploadTask.description = "Uploads the $publicationName publication " +
+                        "to a staging repository on ${repoToConfigure.name} (${repoToConfigure.url.orNull})."
                 }
-                uploadTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
-                uploadTask.description = "Uploads the $publicationName publication " +
-                    "to a staging repository on ${repoToConfigure.name} (${repoToConfigure.url.orNull})."
-            }
         }
     }
 

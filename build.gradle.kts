@@ -18,7 +18,7 @@ gitSemVer {
 
 group = "org.danilopianini"
 
-inner class ProjectInfo {
+class ProjectInfo {
     val longName = "Gradle Publish On Maven Central Plugin"
     val projectDetails = "A Plugin for easily publishing artifacts on Maven Central"
     val website = "https://github.com/DanySK/$name"
@@ -77,7 +77,10 @@ tasks.withType<Test> {
         showStandardStreams = true
         showCauses = true
         showStackTraces = true
-        events(*org.gradle.api.tasks.testing.logging.TestLogEvent.values())
+        events(
+            *org.gradle.api.tasks.testing.logging.TestLogEvent
+                .values(),
+        )
         exceptionFormat = org.gradle.api.tasks.testing.logging.TestExceptionFormat.FULL
     }
 }
