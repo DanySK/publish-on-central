@@ -48,14 +48,13 @@ class PublishOnCentral : Plugin<Project> {
                 publications { publications ->
                     val name = "${component.name}$PUBLICATION_NAME"
                     if (publications.none { it.name == name }) {
-                        publications.create(name, MavenPublication::class.java) { publication ->
+                        publications.register(name, MavenPublication::class.java) { publication ->
                             createdPublications += publication
                             publication.from(component)
                             project.addSourcesArtifactIfNeeded(publication, sourcesJarTask)
                             if (javadocJarTask is JavadocJar) {
                                 publication.artifact(javadocJarTask)
                             }
-                            publication.configurePomForMavenCentral(extension)
                             publication.pom.packaging = "jar"
                             project.configure<SigningExtension> {
                                 sign(publication)
@@ -65,16 +64,27 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
-            publications.withType<MavenPublication>().configureEach { publication ->
-                if (extension.autoConfigureAllPublications.getOrElse(true) && publication !in createdPublications) {
-                    publication.configurePomForMavenCentral(extension)
-                    if (publication.signingTasks(project).isEmpty()) {
-                        project.configure<SigningExtension> {
-                            sign(publication)
+            publications
+                .withType<MavenPublication>()
+                .configureEach { publication ->
+                    if (extension.autoConfigureAllPublications.getOrElse(true) || publication in createdPublications) {
+                        project.afterEvaluate {
+                            project.logger.info(
+                                "Populating data of publication {} in {}, group {}",
+                                publication.name,
+                                project,
+                                project.group,
+                            )
+                            publication.groupId = project.group.toString()
+                            publication.configurePomForMavenCentral(extension)
+                        }
+                        if (publication.signingTasks(project).isEmpty()) {
+                            project.configure<SigningExtension> {
+                                sign(publication)
+                            }
                         }
                     }
                 }
-            }
         }
         project.tasks.withType<PublishToMavenRepository>().configureEach { publish ->
             publish.mustRunAfter(project.tasks.withType<Sign>())

@@ -3,6 +3,8 @@ package org.danilopianini.gradle.mavencentral
 import io.github.gradlenexus.publishplugin.internal.StagingRepository.State.CLOSED
 import kotlinx.coroutines.runBlocking
 import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
+import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.DROP_TASK_NAME
+import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.RELEASE_TASK_NAME
 import org.gradle.api.Action
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -349,7 +351,7 @@ internal object ProjectExtensions {
                 zipTask = zipMavenCentralPortal,
             )
         val validate =
-            tasks.register("validateMavenCentralPortalPublication") { validate ->
+            tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
                 group = PublishingPlugin.PUBLISH_TASK_GROUP
                 description = "Validates the Maven Central Portal publication, uploading if needed"
                 validate.dependsOn(zipMavenCentralPortal)
@@ -359,33 +361,32 @@ internal object ProjectExtensions {
                     }
                 }
             }
-        val drop =
-            tasks.register("dropMavenCentralPortalPublication") { drop ->
-                group = PublishingPlugin.PUBLISH_TASK_GROUP
-                description = "Drops the Maven Central Portal publication"
-                drop.mustRunAfter(validate)
-                drop.mustRunAfter(zipMavenCentralPortal)
-                drop.doLast {
-                    runBlocking {
-                        portalDeployment.drop()
-                    }
+        tasks.register(DROP_TASK_NAME) { drop ->
+            group = PublishingPlugin.PUBLISH_TASK_GROUP
+            description = "Drops the Maven Central Portal publication"
+            drop.mustRunAfter(validate)
+            drop.mustRunAfter(zipMavenCentralPortal)
+            drop.doLast {
+                runBlocking {
+                    portalDeployment.drop()
                 }
             }
-        val release =
-            tasks.register("releaseMavenCentralPortalPublication") { release ->
-                group = PublishingPlugin.PUBLISH_TASK_GROUP
-                description = "Releases the Maven Central Portal publication"
-                release.mustRunAfter(validate)
-                release.mustRunAfter(zipMavenCentralPortal)
-                release.doLast {
-                    runBlocking {
-                        portalDeployment.release()
-                    }
+        }
+        tasks.register(RELEASE_TASK_NAME) { release ->
+            group = PublishingPlugin.PUBLISH_TASK_GROUP
+            description = "Releases the Maven Central Portal publication"
+            release.mustRunAfter(validate)
+            release.mustRunAfter(zipMavenCentralPortal)
+            release.doLast {
+                runBlocking {
+                    portalDeployment.release()
                 }
             }
+        }
         gradle.taskGraph.whenReady { taskGraph ->
-            check(!taskGraph.hasTask(release.get()) || !taskGraph.hasTask(drop.get())) {
-                "Task ${release.get().name} and ${drop.get().name} cannot be executed together"
+            val allTasks = taskGraph.allTasks.map { it.name }.toSet()
+            check(RELEASE_TASK_NAME !in allTasks || DROP_TASK_NAME !in allTasks) {
+                "Task $RELEASE_TASK_NAME and $DROP_TASK_NAME cannot be executed together"
             }
         }
     }

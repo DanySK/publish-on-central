@@ -175,8 +175,29 @@ data class PublishPortalDeployment(
             }
         }
 
-    private companion object {
+    /**
+     * Constants for the Central Portal Deployments.
+     */
+    companion object {
+        /**
+         * The property name for the deployment id.
+         */
         const val PUBLISH_DEPLOYMENT_ID_PROPERTY_NAME = "publishDeploymentId"
+
+        /**
+         * The bundle validation task name.
+         */
+        const val VALIDATE_TASK_NAME = "validateMavenCentralPortalPublication"
+
+        /**
+         * The bundle drop task name.
+         */
+        const val DROP_TASK_NAME = "dropMavenCentralPortalPublication"
+
+        /**
+         * The bundle release task name.
+         */
+        const val RELEASE_TASK_NAME = "releaseMavenCentralPortalPublication"
         private const val OK = 200
         private const val CREATED = 201
         private const val NO_CONTENT = 204
