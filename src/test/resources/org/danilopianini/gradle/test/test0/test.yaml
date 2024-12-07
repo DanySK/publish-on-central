@@ -70,3 +70,23 @@ tests:
           - name: build/libs/test-publish-on-central-0.1.0-javadoc.jar
           - name: build/libs/test-publish-on-central-0.1.0-sources.jar
           - name: build/libs/test-publish-on-central-0.1.0.jar
+  - description: "the portal publication is created"
+    configuration:
+      tasks:
+        - publishAllPublicationsToProjectLocalRepository
+        - zipMavenCentralPortalPublication
+    expectation:
+      outcomes:
+        success:
+          - publishAllPublicationsToProjectLocalRepository
+          - zipMavenCentralPortalPublication
+      files:
+        existing:
+          - name: build/maven-central-portal/test-publish-on-central-maven-central-portal-0.1.0.zip
+          - name: build/project-local-repository/io/github/danysk/test-publish-on-central/0.1.0/test-publish-on-central-0.1.0.jar
+          - name: build/project-local-repository/io/github/danysk/test-publish-on-central/0.1.0/test-publish-on-central-0.1.0-javadoc.jar
+          - name: build/project-local-repository/io/github/danysk/test-publish-on-central/0.1.0/test-publish-on-central-0.1.0-sources.jar
+          - name: build/project-local-repository/io/github/danysk/test-publish-on-central/maven-metadata.xml
+            contentRegex:
+              - '\s*<artifactId>test-publish-on-central</artifactId>'
+              - '\s*<groupId>io.github.danysk</groupId>'
