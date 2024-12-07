@@ -1,3 +1,31 @@
+## [6.0.1](https://github.com/DanySK/publish-on-central/compare/6.0.0...6.0.1) (2024-12-07)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.1.0 ([da9c44c](https://github.com/DanySK/publish-on-central/commit/da9c44cf444158b5bcd398c0ac5892887ecbbbe2))
+* **deps:** update node.js to 22.12 ([#1229](https://github.com/DanySK/publish-on-central/issues/1229)) ([2410d33](https://github.com/DanySK/publish-on-central/commit/2410d33f5df3b75110c7993c8cfc520e0d23c685))
+* **deps:** update plugin kotlin-qa to v0.77.1 ([5cc253e](https://github.com/DanySK/publish-on-central/commit/5cc253e960c7f105c412a384a158af87467605be))
+* **deps:** update plugin multijvmtesting to v2 ([#1230](https://github.com/DanySK/publish-on-central/issues/1230)) ([c5b7a46](https://github.com/DanySK/publish-on-central/commit/c5b7a46a24882ef01a5dc4051b76a147b0ef1c22))
+* **deps:** update plugin multijvmtesting to v2.0.1 ([#1235](https://github.com/DanySK/publish-on-central/issues/1235)) ([9d511de](https://github.com/DanySK/publish-on-central/commit/9d511de260e0d5a49ec2fcf01c91872075f388db))
+* **deps:** update plugin multijvmtesting to v3 ([#1236](https://github.com/DanySK/publish-on-central/issues/1236)) ([c5a26d5](https://github.com/DanySK/publish-on-central/commit/c5a26d511bca41143a8304db6f0ec6fb4ed35e8a))
+* **deps:** update plugin publishoncentral to v6 ([#1228](https://github.com/DanySK/publish-on-central/issues/1228)) ([2cd388e](https://github.com/DanySK/publish-on-central/commit/2cd388eeb2e2e2436b7f0aa3e8353b9e0a92851b))
+
+### Tests
+
+* remove unused import in kotlin-mp test ([79f0da8](https://github.com/DanySK/publish-on-central/commit/79f0da860df223aa05ece2850f6113270e8d4941))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.0.4 ([#1237](https://github.com/DanySK/publish-on-central/issues/1237)) ([bb089f8](https://github.com/DanySK/publish-on-central/commit/bb089f80c7956c9eeeb19808917df07dec3d4436))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.5 ([#1238](https://github.com/DanySK/publish-on-central/issues/1238)) ([85fb35c](https://github.com/DanySK/publish-on-central/commit/85fb35c8cd0ab122a887f53ec81d041789d02ce1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.24 ([#1231](https://github.com/DanySK/publish-on-central/issues/1231)) ([6f1b6bc](https://github.com/DanySK/publish-on-central/commit/6f1b6bcd3716bc8cda50a9138a4044de494066ec))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.25 ([#1234](https://github.com/DanySK/publish-on-central/issues/1234)) ([7f806c0](https://github.com/DanySK/publish-on-central/commit/7f806c0624b924363621dc8798e6ace34544d988))
+* use the full task name for `dropStagingRepositoryOnMavenCentral` ([1ea26c6](https://github.com/DanySK/publish-on-central/commit/1ea26c66df5da8fae80f6964b86876f3c4e38431))
+
+### Refactoring
+
+* rationalize the internal structure ([ec6a13b](https://github.com/DanySK/publish-on-central/commit/ec6a13bd8758381d2409efcdc5985c998b8193a7))
+
 ## [6.0.0](https://github.com/DanySK/publish-on-central/compare/5.1.11...6.0.0) (2024-12-02)
 
 ### ⚠ BREAKING CHANGES
