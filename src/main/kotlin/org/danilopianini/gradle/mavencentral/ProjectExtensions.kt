@@ -352,8 +352,8 @@ internal object ProjectExtensions {
             )
         val validate =
             tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
-                group = PublishingPlugin.PUBLISH_TASK_GROUP
-                description = "Validates the Maven Central Portal publication, uploading if needed"
+                validate.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                validate.description = "Validates the Maven Central Portal publication, uploading if needed"
                 validate.mustRunAfter(zipMavenCentralPortal)
                 validate.doLast {
                     runBlocking {
@@ -362,8 +362,8 @@ internal object ProjectExtensions {
                 }
             }
         tasks.register(DROP_TASK_NAME) { drop ->
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Drops the Maven Central Portal publication"
+            drop.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            drop.description = "Drops the Maven Central Portal publication"
             drop.mustRunAfter(validate)
             drop.mustRunAfter(zipMavenCentralPortal)
             drop.doLast {
@@ -373,8 +373,8 @@ internal object ProjectExtensions {
             }
         }
         tasks.register(RELEASE_TASK_NAME) { release ->
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Releases the Maven Central Portal publication"
+            release.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            release.description = "Releases the Maven Central Portal publication"
             release.mustRunAfter(validate)
             release.mustRunAfter(zipMavenCentralPortal)
             release.doLast {
