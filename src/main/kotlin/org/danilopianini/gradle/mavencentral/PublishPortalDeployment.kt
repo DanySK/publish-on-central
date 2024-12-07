@@ -45,6 +45,27 @@ data class PublishPortalDeployment(
     }
 
     /**
+     * THe zip file to upload.
+     */
+    val fileToUpload: File by lazy {
+        val outputFiles =
+            zipTask
+                .get()
+                .outputs.files
+                .toList()
+        check(outputFiles.size == 1) {
+            "Expected a single output file, found ${outputFiles.size}: ${outputFiles.map { it.absolutePath }}"
+        }
+        outputFiles
+            .first()
+            .apply {
+                check(exists() && isFile) {
+                    "File ${this.absolutePath} does not exist or is not a file, did task ${zipTask.name} run?"
+                }
+            }
+    }
+
+    /**
      * Uploads a bundle to the Central Portal, returning the upload id.
      */
     @JvmOverloads
@@ -75,19 +96,7 @@ data class PublishPortalDeployment(
     val deploymentId: String by lazy {
         when (val idFromProperty = project.properties[PUBLISH_DEPLOYMENT_ID_PROPERTY_NAME]) {
             null -> {
-                val outputFiles =
-                    zipTask
-                        .get()
-                        .outputs.files
-                        .toList()
-                check(outputFiles.size == 1) {
-                    "Expected a single output file, found ${outputFiles.size}: ${outputFiles.map { it.absolutePath }}"
-                }
-                val file = outputFiles.first()
-                check(file.exists() && file.isFile) {
-                    "File $file does not exist or is not a file, did task ${zipTask.name} run?"
-                }
-                runBlocking { upload(file) }
+                runBlocking { upload(fileToUpload) }
             }
             else ->
                 idFromProperty.toString().also {
