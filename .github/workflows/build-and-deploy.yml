@@ -10,9 +10,6 @@ jobs:
       matrix:
         os: [windows, macos, ubuntu]
     runs-on: ${{ matrix.os }}-latest
-    concurrency:
-      group: build-${{ github.workflow }}-${{ matrix.os }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: DanySK/action-checkout@0.2.22
@@ -39,9 +36,6 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-alchemist-deployment:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test-alchemist-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -87,9 +81,6 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-kt-multiplatform-deployment:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test-kt-multiplatform-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -135,9 +126,6 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-multi-stage-deployment:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test-multi-stage-deployment-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -199,9 +187,6 @@ jobs:
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
   test-drop-repo-task-regression:
     runs-on: ubuntu-latest
-    concurrency:
-      group: test-drop-task-${{ github.workflow }}-${{ github.event.number || github.ref }}
-      cancel-in-progress: false
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -260,9 +245,6 @@ jobs:
     if: >-
       !github.event.repository.fork
       && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    concurrency:
-      # Only one release job at a time. Strictly sequential.
-      group: release-${{ github.workflow }}-${{ github.event.number || github.ref }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
