@@ -354,7 +354,7 @@ internal object ProjectExtensions {
             tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
                 group = PublishingPlugin.PUBLISH_TASK_GROUP
                 description = "Validates the Maven Central Portal publication, uploading if needed"
-                validate.dependsOn(zipMavenCentralPortal)
+                validate.mustRunAfter(zipMavenCentralPortal)
                 validate.doLast {
                     runBlocking {
                         portalDeployment.validate()
