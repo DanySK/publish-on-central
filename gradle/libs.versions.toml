@@ -26,5 +26,5 @@ kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-qa = "org.danilopianini.gradle-kotlin-qa:0.77.1"
 multiJvmTesting = "org.danilopianini.multi-jvm-test-plugin:3.0.0"
 nexus-publish = { id = "io.github.gradle-nexus.publish-plugin", version.ref = "nexus-publish" }
-publishOnCentral = "org.danilopianini.publish-on-central:6.0.0"
+publishOnCentral = "org.danilopianini.publish-on-central:6.0.1"
 taskTree = "com.dorongold.task-tree:4.0.0"
