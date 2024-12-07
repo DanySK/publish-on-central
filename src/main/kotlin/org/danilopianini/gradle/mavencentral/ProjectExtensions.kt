@@ -1,7 +1,10 @@
 package org.danilopianini.gradle.mavencentral
 
 import io.github.gradlenexus.publishplugin.internal.StagingRepository.State.CLOSED
+import kotlinx.coroutines.runBlocking
 import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
+import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.DROP_TASK_NAME
+import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.RELEASE_TASK_NAME
 import org.gradle.api.Action
 import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
@@ -21,7 +24,6 @@ import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
-import java.net.URI
 import kotlin.reflect.KClass
 
 internal object ProjectExtensions {
@@ -82,7 +84,7 @@ internal object ProjectExtensions {
             publishing.repositories { repository ->
                 repository.maven { mavenArtifactRepository ->
                     mavenArtifactRepository.name = repoToConfigure.name
-                    mavenArtifactRepository.url = repoToConfigure.url.map { URI(it) }.get()
+                    mavenArtifactRepository.url = repoToConfigure.url.get()
                     if (mavenArtifactRepository.url.scheme != "file") {
                         mavenArtifactRepository.credentials { credentials ->
                             credentials.username = repoToConfigure.user.orNull
@@ -318,6 +320,85 @@ internal object ProjectExtensions {
                 repository.name,
                 repository.url,
             )
+        }
+    }
+
+    internal fun Project.setupMavenCentralPortal() {
+        configureRepository(Repository.projectLocalRepository(project))
+        val zipMavenCentralPortal =
+            tasks.register<ZipMavenCentralPortalPublication>(
+                checkNotNull(ZipMavenCentralPortalPublication::class.simpleName)
+                    .replaceFirstChar { it.lowercase() },
+            )
+        val portalDeployment =
+            PublishPortalDeployment(
+                project = project,
+                baseUrl = "https://central.sonatype.com/",
+                user =
+                    project.propertyWithDefaultProvider {
+                        System.getenv("MAVEN_CENTRAL_PORTAL_USERNAME")
+                            ?: project.properties["mavenCentralPortalUsername"]?.toString()
+                            ?: project.properties["centralPortalUsername"]?.toString()
+                            ?: project.properties["centralUsername"]?.toString()
+                    },
+                password =
+                    project.propertyWithDefaultProvider {
+                        System.getenv("MAVEN_CENTRAL_PORTAL_PASSWORD")
+                            ?: project.properties["mavenCentralPortalPassword"]?.toString()
+                            ?: project.properties["centralPortalPassword"]?.toString()
+                            ?: project.properties["centralPassword"]?.toString()
+                    },
+                zipTask = zipMavenCentralPortal,
+            )
+        tasks.register("saveMavenCentralPortalDeploymentId") { save ->
+            val fileName = "maven-central-portal-bundle-id"
+            val file = rootProject.layout.buildDirectory.map { it.asFile.resolve(fileName) }
+            save.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            save.description = "Saves the Maven Central Portal deployment ID locally in ${file.get().absolutePath}"
+            save.dependsOn(zipMavenCentralPortal)
+            save.outputs.file(file)
+            save.doLast {
+                file.get().writeText("${portalDeployment.fileToUpload}=${portalDeployment.deploymentId}\n")
+            }
+        }
+        val validate =
+            tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
+                validate.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                validate.description = "Validates the Maven Central Portal publication, uploading if needed"
+                validate.mustRunAfter(zipMavenCentralPortal)
+                validate.doLast {
+                    runBlocking {
+                        portalDeployment.validate()
+                    }
+                }
+            }
+        tasks.register(DROP_TASK_NAME) { drop ->
+            drop.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            drop.description = "Drops the Maven Central Portal publication"
+            drop.mustRunAfter(validate)
+            drop.mustRunAfter(zipMavenCentralPortal)
+            drop.doLast {
+                runBlocking {
+                    portalDeployment.drop()
+                }
+            }
+        }
+        tasks.register(RELEASE_TASK_NAME) { release ->
+            release.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            release.description = "Releases the Maven Central Portal publication"
+            release.mustRunAfter(validate)
+            release.mustRunAfter(zipMavenCentralPortal)
+            release.doLast {
+                runBlocking {
+                    portalDeployment.release()
+                }
+            }
+        }
+        gradle.taskGraph.whenReady { taskGraph ->
+            val allTasks = taskGraph.allTasks.map { it.name }.toSet()
+            check(RELEASE_TASK_NAME !in allTasks || DROP_TASK_NAME !in allTasks) {
+                "Task $RELEASE_TASK_NAME and $DROP_TASK_NAME cannot be executed together"
+            }
         }
     }
 }

@@ -17,3 +17,6 @@ publishOnCentral {
     }
 }
 
+tasks.withType<Sign>().configureEach {
+    enabled = false
+}

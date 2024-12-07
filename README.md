@@ -24,7 +24,12 @@ and targets that do not, such as GitHub Packages.
 
 ### Minimal
 
-Add `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` to your environment
+If you use the legacy Nexus-based publishing,
+add `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` to your environment.
+If you use the new Maven Central Portal,
+add `MAVEN_CENTRAL_PORTAL_USERNAME` and `MAVEN_CENTRAL_PORTAL_PASSWORD`
+(obtain these credentials from the portal user settings page).
+The plugin can also work in mixed mode, with some publications going to the portal and some to Nexus.
 
 ```kotlin
 plugins {
@@ -216,6 +221,56 @@ Consequently, at the moment, the plugin only preconfigures the POM file and the 
 * For every repository with an associated Sonatype Nexus instance, additional tasks are generated to control the
   creation, upload, closure, and release of staging repositories.
 
+### Maven Central Portal publishing
+
+Maven Central recently introduced a new portal for managing the artifacts,
+which will progressively replace the Nexus-based publishing.
+Publishing on the Central Portal goes through the following steps:
+1. the publication is uploaded to project-local maven repository
+2. the local repository is zipped
+3. the bundle is then uploaded to the portal and validated
+4. once the validation is complete, the bundle is released or dropped
+
+The lifecycle is summarized in the following diagram:
+```mermaid
+flowchart LR
+    jar --o signPublication1Publication
+    sourcesJar --o signPublication1Publication
+    javadocJar --o signPublication1Publication
+    jar --o signPublication2Publication
+    sourcesJar --o signPublication2Publication
+    javadocJar --o signPublication2Publication
+    signPublication1Publication --o publishPublication1PublicationToProjectLocalRepository
+    signPublication2Publication --o publishPublication2PublicationToProjectLocalRepository
+    generatePomFileForPublication1Publication --o signPublication1Publication
+    generatePomFileForPublication2Publication --o signPublication2Publication
+    publishPublication1PublicationToProjectLocalRepository --o zipMavenCentralPortalPublication
+    publishPublication2PublicationToProjectLocalRepository --o zipMavenCentralPortalPublication
+    zipMavenCentralPortalPublication --o validateMavenCentralPortalPublication
+    validateMavenCentralPortalPublication --o dropMavenCentralPortalPublication
+    validateMavenCentralPortalPublication --o releaseMavenCentralPortalPublication
+```
+
+In short, select the publications you wish to publish,
+and use the `upload<PublicationName>PublicationToProjectLocalRepository` task to enqueue them for upload,
+then use the `zipMavenCentralPortalPublication` to create a bundle.
+Now, you can interact with the portal using the (`validate`/`release`/`drop`)`MavenCentralPortalPublication` tasks.
+A typical invocation could be:
+
+```console
+$ ./gradlew uploadAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication releaseMavenCentralPortalPublication
+```
+
+If you already have an uploaded bundle and want to manage it using this plugin,
+set the `publishDeploymentId` property to the deployment ID of the bundle you want to manage, e.g.:
+
+```console
+$ ./gradlew -PpublishDeploymentId=8697a629-c07d-4349-9a3f-0f52f3ba74fb dropMavenCentralPortalPublication
+```
+
+If `publishDeploymentId` is set,
+no upload will be performed.
+
 ### Non-Nexus publishing
 
 Launching the `publish[PublicationName]PublicationTo[RepositoryName]Repository` triggers the creation of the required components,
@@ -230,7 +285,7 @@ flowchart LR
     generatePomFileForPublicationNamePublication --o signPublicationNamePublication
 ```
 
-### Nexus publishing
+### Sonatype Nexus publishing
 
 Nexus publishing is a bit more elaborate.
 It requires to select:
@@ -325,8 +380,6 @@ jobs:
 
 If you use publish-on-central in your project, please consider providing a pull request with a link to your project:
 it will provide useful use cases for newcomers to look at.
-
-
 
 ### Java, simple project, kts build file
 * [**gson-extras**](https://github.com/DanySK/gson-extras): extra goodies for Google Gson

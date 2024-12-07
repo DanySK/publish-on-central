@@ -25,12 +25,19 @@ data class NexusStatefulOperation(
     private val password: Provider<String>,
     private val timeOut: Duration,
     private val connectionTimeOut: Duration,
-    private val group: String,
 ) {
     /**
      * Repository description.
      */
     val description by lazy { project.run { "$group:$name:$version" } }
+
+    private val group: String by lazy {
+        project.group.toString().apply {
+            check(isNotBlank()) {
+                "Project $project has no group set"
+            }
+        }
+    }
 
     /**
      * The NexusClient.
