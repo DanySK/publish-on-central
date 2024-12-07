@@ -32,7 +32,6 @@ open class InitializeNexusClient
                 NexusStatefulOperation(
                     project = project,
                     nexusUrl = nexusUrl,
-                    group = project.group.toString(),
                     user = repoToConfigure.user,
                     password = repoToConfigure.password,
                     timeOut = repoToConfigure.nexusTimeOut,
