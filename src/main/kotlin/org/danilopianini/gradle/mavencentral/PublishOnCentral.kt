@@ -68,16 +68,13 @@ class PublishOnCentral : Plugin<Project> {
                 .withType<MavenPublication>()
                 .configureEach { publication ->
                     if (extension.autoConfigureAllPublications.getOrElse(true) || publication in createdPublications) {
-                        project.afterEvaluate {
-                            project.logger.info(
-                                "Populating data of publication {} in {}, group {}",
-                                publication.name,
-                                project,
-                                project.group,
-                            )
-                            publication.groupId = project.group.toString()
-                            publication.configurePomForMavenCentral(extension)
-                        }
+                        project.logger.info(
+                            "Populating data of publication {} in {}, group {}",
+                            publication.name,
+                            project,
+                            project.group,
+                        )
+                        publication.configurePomForMavenCentral(extension)
                         if (publication.signingTasks(project).isEmpty()) {
                             project.configure<SigningExtension> {
                                 sign(publication)
