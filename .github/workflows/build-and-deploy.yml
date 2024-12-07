@@ -125,7 +125,7 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral drop --parallel
+            ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
           working-directory: kt-mp
           should-run-codecov: false
           should-deploy: true
