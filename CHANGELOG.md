@@ -1,3 +1,24 @@
+## [7.0.0](https://github.com/DanySK/publish-on-central/compare/6.0.1...7.0.0) (2024-12-08)
+
+### ⚠ BREAKING CHANGES
+
+* add central portal support (#1224)
+
+### Features
+
+* add central portal support ([#1224](https://github.com/DanySK/publish-on-central/issues/1224)) ([7fd50f3](https://github.com/DanySK/publish-on-central/commit/7fd50f3747691419719068c92d532c8c43d215c2))
+
+### Dependency updates
+
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.3.0 ([#1241](https://github.com/DanySK/publish-on-central/issues/1241)) ([c0309f6](https://github.com/DanySK/publish-on-central/commit/c0309f6214c95bd7f20755c5f73fae8b65dfd45a))
+* **deps:** update plugin publishoncentral to v6.0.1 ([#1239](https://github.com/DanySK/publish-on-central/issues/1239)) ([feef6b8](https://github.com/DanySK/publish-on-central/commit/feef6b80bb7938dead8f3409246acd93aa28f0e1))
+
+### Build and continuous integration
+
+* add the Gradle wrapper `distributionSha256Sum` ([#1240](https://github.com/DanySK/publish-on-central/issues/1240)) ([6f64d5d](https://github.com/DanySK/publish-on-central/commit/6f64d5d8066062ac1691d71edd53f0ae7241845f))
+* revisit the workflow concurrency and canceling policy ([d2bd67f](https://github.com/DanySK/publish-on-central/commit/d2bd67f3cd2089c16fcd8ef8f099a3a91edf2cb7))
+* use ubuntu-24.04 in the dispatch workflow ([459a57c](https://github.com/DanySK/publish-on-central/commit/459a57cfc4219551420904034234d5aa33b1de70))
+
 ## [6.0.1](https://github.com/DanySK/publish-on-central/compare/6.0.0...6.0.1) (2024-12-07)
 
 ### Dependency updates
