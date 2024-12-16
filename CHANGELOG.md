@@ -1,3 +1,24 @@
+## [7.0.1](https://github.com/DanySK/publish-on-central/compare/7.0.0...7.0.1) (2024-12-16)
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.116 ([#1242](https://github.com/DanySK/publish-on-central/issues/1242)) ([0ff49a0](https://github.com/DanySK/publish-on-central/commit/0ff49a0f5d5f1440a080d5d42480cf1ecc3759b0))
+* **deps:** update npm to v10.9.2 ([#1243](https://github.com/DanySK/publish-on-central/issues/1243)) ([3de642b](https://github.com/DanySK/publish-on-central/commit/3de642bdc842409d641fb78c350726e4eba64d05))
+* **deps:** update plugin com.gradle.develocity to v3.19 ([#1248](https://github.com/DanySK/publish-on-central/issues/1248)) ([8d83ca2](https://github.com/DanySK/publish-on-central/commit/8d83ca24066c6985c5f32360587f2ab311071a81))
+* **deps:** update plugin kotlin-qa to v0.78.0 ([#1245](https://github.com/DanySK/publish-on-central/issues/1245)) ([6eb3735](https://github.com/DanySK/publish-on-central/commit/6eb37353053d4e6f93593783d837e268e62a0d95))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.16 ([#1246](https://github.com/DanySK/publish-on-central/issues/1246)) ([7b48baf](https://github.com/DanySK/publish-on-central/commit/7b48baf9d1938e668c92c5bc244df6207a938bfc))
+* **deps:** update plugin publishoncentral to v7 ([#1244](https://github.com/DanySK/publish-on-central/issues/1244)) ([6bcae6e](https://github.com/DanySK/publish-on-central/commit/6bcae6e16ead27ef10b6ec6062636b6ede6f1b1e))
+
+### Documentation
+
+* **deps:** update dependency org.jetbrains.dokka to v2 ([#1253](https://github.com/DanySK/publish-on-central/issues/1253)) ([35825f1](https://github.com/DanySK/publish-on-central/commit/35825f13444ce04457f4390e3c15c491739f441d))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.0.6 ([#1247](https://github.com/DanySK/publish-on-central/issues/1247)) ([e410b67](https://github.com/DanySK/publish-on-central/commit/e410b67c50e0b8bd5663903f2d68fc4924c1870f))
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.2.3 ([#1252](https://github.com/DanySK/publish-on-central/issues/1252)) ([5bde0c4](https://github.com/DanySK/publish-on-central/commit/5bde0c47dd550636e9345d99e8bc18903346a50e))
+* disambiguate the drop task name ([4517982](https://github.com/DanySK/publish-on-central/commit/45179822e791f6f5b46b408e95124ebe6bc4178a))
+
 ## [7.0.0](https://github.com/DanySK/publish-on-central/compare/6.0.1...7.0.0) (2024-12-08)
 
 ### ⚠ BREAKING CHANGES
