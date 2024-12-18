@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Checkout
         uses: DanySK/action-checkout@0.2.22
-      - uses: DanySK/build-check-deploy-gradle-action@3.5.25
+      - uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           deploy-command: >-
             ./gradlew
@@ -66,7 +66,7 @@ jobs:
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.5.25
+        uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           build-command: true
           check-command: true
@@ -111,7 +111,7 @@ jobs:
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.5.25
+        uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           build-command: true
           check-command: true
@@ -156,7 +156,7 @@ jobs:
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.5.25
+        uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           build-command: true
           check-command: true
@@ -217,7 +217,7 @@ jobs:
         with:
           path: 'publish-on-central'
       - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.5.25
+        uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           build-command: true
           check-command: true
@@ -254,7 +254,7 @@ jobs:
         uses: actions/setup-node@v4.1.0
         with:
           node-version-file: package.json
-      - uses: DanySK/build-check-deploy-gradle-action@3.5.25
+      - uses: DanySK/build-check-deploy-gradle-action@3.5.26
         with:
           build-command: true
           check-command: true
