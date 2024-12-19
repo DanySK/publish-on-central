@@ -7,7 +7,7 @@ import java.util.*
 plugins {
     kotlin("multiplatform")
     id("org.danilopianini.publish-on-central")
-    id("org.jetbrains.dokka") version "1.8.10"
+    id("org.jetbrains.dokka")
 }
 
 group = "org.danilopianini"

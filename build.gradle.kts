@@ -43,6 +43,7 @@ dependencies {
     api(gradleApi())
     api(gradleKotlinDsl())
     api(libs.kotlin.gradlePlugin)
+    api(libs.dokka.gradlePlugin)
     api(libs.nexus.publish)
     api(libs.maven.central.api)
     implementation(libs.kotlinx.coroutines)

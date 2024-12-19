@@ -3,11 +3,8 @@ package org.danilopianini.gradle.mavencentral
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.tasks.TaskCollection
-
-/**
- * The full name of the `DokkaTask` class.
- */
-private const val DOKKA_TASK_CLASS_NAME = "org.jetbrains.dokka.gradle.DokkaTask"
+import org.gradle.kotlin.dsl.withType
+import org.jetbrains.dokka.gradle.DokkaTask
 
 /**
  * The id of the Dokka plugin.
@@ -15,30 +12,17 @@ private const val DOKKA_TASK_CLASS_NAME = "org.jetbrains.dokka.gradle.DokkaTask"
 internal const val DOKKA_PLUGIN_ID = "org.jetbrains.dokka"
 
 /**
- * Checks whether a [Task] is actually an instance of the type `DokkaTask`, i.e., an instance of the type
- * named after [DOKKA_TASK_CLASS_NAME].
+ * Checks whether a [Task] is actually an instance of the type [DokkaTask].
  */
-internal val Task.isDokkaTask: Boolean get() =
-    runCatching { Class.forName(DOKKA_TASK_CLASS_NAME).isAssignableFrom(this::class.java) }
-        .getOrElse { this::class.java.name.startsWith(DOKKA_TASK_CLASS_NAME) }
+internal val Task.isDokkaTask: Boolean get() = this is DokkaTask
 
 /**
  * Selects the available Dokka tasks supporting the generation of [docStyle]-style documentation.
  * There may be no such tasks, if the plugin user did not apply the Dokka plugin.
  */
-internal fun Project.dokkaTasksFor(docStyle: DocStyle): TaskCollection<out Task> =
-    tasks.matching {
-        it.isDokkaTask && it.name.startsWith("dokka") && it.name.endsWith(docStyle.name, ignoreCase = true)
-    }
-
-/**
- * If a task is of type `DokkaTask` (cf. [isDokkaTask]), then retrieves the value of its `outputDirectory`
- * property, if any.
- */
-internal val Task.dokkaOutputDirectory: Any get() =
-    when {
-        isDokkaTask ->
-            property("outputDirectory")
-                ?: error("$name has no property 'outputDirectory': Dokka version incompatible with publish-on-central?")
-        else -> error("$name is not of type $DOKKA_TASK_CLASS_NAME")
-    }
+internal fun Project.dokkaTasksFor(docStyle: DocStyle): TaskCollection<out DokkaTask> =
+    tasks
+        .withType<DokkaTask>()
+        .matching {
+            it.name.startsWith("dokka") && it.name.endsWith(docStyle.name, ignoreCase = true)
+        }

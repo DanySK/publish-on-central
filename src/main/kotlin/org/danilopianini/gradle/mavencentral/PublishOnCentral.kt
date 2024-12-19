@@ -115,11 +115,11 @@ class PublishOnCentral : Plugin<Project> {
                         project
                             .dokkaTasksFor(docStyle)
                             .firstOrNull()
-                            ?.also { project.logger.info("Actually $message ${it.name}") }
+                            ?.also { project.logger.info("Actually {} {}", message, it.name) }
                             ?: error("Dokka plugin applied but no task exists for style $docStyle!")
                     }
                 javadocJar.dependsOn(dokkaTask)
-                javadocJar.from(dokkaTask.map { it.dokkaOutputDirectory })
+                javadocJar.from(dokkaTask)
             }
         }
     }
