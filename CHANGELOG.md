@@ -1,3 +1,25 @@
+## [7.0.2](https://github.com/DanySK/publish-on-central/compare/7.0.1...7.0.2) (2024-12-19)
+
+### Dependency updates
+
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.3.1 ([#1249](https://github.com/DanySK/publish-on-central/issues/1249)) ([5bfd77d](https://github.com/DanySK/publish-on-central/commit/5bfd77d603dfd56d3363a96dd8c2567e88ed0767))
+* **deps:** update plugin multijvmtesting to v3.0.1 ([#1250](https://github.com/DanySK/publish-on-central/issues/1250)) ([7a26c80](https://github.com/DanySK/publish-on-central/commit/7a26c8077869cae4b7ecec87836cc2ffe49bd14e))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.17 ([#1251](https://github.com/DanySK/publish-on-central/issues/1251)) ([1f2730f](https://github.com/DanySK/publish-on-central/commit/1f2730f1488b171b4d623da0f536b56b6b2f6841))
+* **deps:** update plugin publishoncentral to v7.0.1 ([#1255](https://github.com/DanySK/publish-on-central/issues/1255)) ([1e76fd1](https://github.com/DanySK/publish-on-central/commit/1e76fd15eee33c243ef28647e82983dccc0228aa))
+
+### Bug Fixes
+
+* improve dokka support ([4103812](https://github.com/DanySK/publish-on-central/commit/410381235b7e8295b5577e72d607b78358408db2))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.0.7 ([#1254](https://github.com/DanySK/publish-on-central/issues/1254)) ([29b4413](https://github.com/DanySK/publish-on-central/commit/29b44135a72e408bda90a7495215a7ce7bd3adfb))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.8 ([#1256](https://github.com/DanySK/publish-on-central/issues/1256)) ([39dc809](https://github.com/DanySK/publish-on-central/commit/39dc809d12ad2c8d15a21f0283a5184e10eb72af))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.9 ([#1257](https://github.com/DanySK/publish-on-central/issues/1257)) ([bfcbd93](https://github.com/DanySK/publish-on-central/commit/bfcbd939883ac80cc35e5f77a6251026c1a6c63a))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.26 ([#1258](https://github.com/DanySK/publish-on-central/issues/1258)) ([1cbdc28](https://github.com/DanySK/publish-on-central/commit/1cbdc2816779500076cac96741980241b22c1241))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.27 ([#1259](https://github.com/DanySK/publish-on-central/issues/1259)) ([40be50a](https://github.com/DanySK/publish-on-central/commit/40be50a2f46a46d98af65c41194191196600d9f1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.5.28 ([#1260](https://github.com/DanySK/publish-on-central/issues/1260)) ([5ede681](https://github.com/DanySK/publish-on-central/commit/5ede6812336db318cf62ce4c95fafbb67a09ada7))
+
 ## [7.0.1](https://github.com/DanySK/publish-on-central/compare/7.0.0...7.0.1) (2024-12-16)
 
 ### Dependency updates
