@@ -1,3 +1,11 @@
+## [7.0.4](https://github.com/DanySK/publish-on-central/compare/7.0.3...7.0.4) (2024-12-20)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.10.1 ([#1267](https://github.com/DanySK/publish-on-central/issues/1267)) ([50b1124](https://github.com/DanySK/publish-on-central/commit/50b1124b40e6f8e1c32e0ec4f103a528e79d4f2f))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.4.1 ([#1268](https://github.com/DanySK/publish-on-central/issues/1268)) ([a742bb2](https://github.com/DanySK/publish-on-central/commit/a742bb235bb5f8f6d967ff647e6c8871d9b0840c))
+* **deps:** update plugin publishoncentral to v7.0.3 ([#1266](https://github.com/DanySK/publish-on-central/issues/1266)) ([f31bcf2](https://github.com/DanySK/publish-on-central/commit/f31bcf27db95deb40301177f5ca8bacfce0ba103))
+
 ## [7.0.3](https://github.com/DanySK/publish-on-central/compare/7.0.2...7.0.3) (2024-12-20)
 
 ### Dependency updates
