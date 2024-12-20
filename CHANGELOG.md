@@ -1,3 +1,16 @@
+## [7.0.3](https://github.com/DanySK/publish-on-central/compare/7.0.2...7.0.3) (2024-12-20)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlinx:kotlinx-coroutines-core to v1.10.0 ([#1264](https://github.com/DanySK/publish-on-central/issues/1264)) ([4712583](https://github.com/DanySK/publish-on-central/commit/471258378dfc3f34fc6540aa2149cc7533723dcd))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.4.0 ([#1265](https://github.com/DanySK/publish-on-central/issues/1265)) ([724a713](https://github.com/DanySK/publish-on-central/commit/724a71368d994a0f51ee25792bd882fa67428ea1))
+* **deps:** update npm to v11 ([#1263](https://github.com/DanySK/publish-on-central/issues/1263)) ([3cd517c](https://github.com/DanySK/publish-on-central/commit/3cd517c8370bd977f682ae800ac3d27fd6c55433))
+* **deps:** update plugin publishoncentral to v7.0.2 ([#1262](https://github.com/DanySK/publish-on-central/issues/1262)) ([e57bceb](https://github.com/DanySK/publish-on-central/commit/e57bceb66ee4d6d7b04e77144a19364a0cdc53e9))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.0.11 ([#1261](https://github.com/DanySK/publish-on-central/issues/1261)) ([b44c7ec](https://github.com/DanySK/publish-on-central/commit/b44c7ecfd977e2231fdd0129d96524849690b223))
+
 ## [7.0.2](https://github.com/DanySK/publish-on-central/compare/7.0.1...7.0.2) (2024-12-19)
 
 ### Dependency updates
