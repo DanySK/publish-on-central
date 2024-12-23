@@ -48,7 +48,6 @@ class PublishOnCentral : Plugin<Project> {
         project.configure<PublishingExtension> {
             val sourcesJarTask = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
             val javadocJarTask = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
-//            project.configureJavadocJarTaskForKtJs(sourcesJarTask)
             project.tasks.matching { it.name == "assemble" }.configureEach {
                 it.dependsOn(sourcesJarTask, javadocJarTask)
             }
