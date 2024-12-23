@@ -20,6 +20,10 @@ class Tests :
             forwardOutput = showOutput,
         )
 
+        "Test test0" {
+            Testkit.projectTest("test0", true)
+        }
+
         "Test ktjs" {
             Testkit.projectTest("ktjs")
         }
@@ -30,9 +34,5 @@ class Tests :
 
         "Test multiproject" {
             Testkit.projectTest("multiproject")
-        }
-
-        "Test test0" {
-            Testkit.projectTest("test0", true)
         }
     })
