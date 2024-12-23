@@ -81,8 +81,6 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
-    // Set to false if you do not want the MavenCentral repository to be automatically configured
-    configureMavenCentral.set(true)
     // The following values are the default, if they are ok with you, just omit them
     projectDescription.set("No description provided")
     projectLongName.set(project.name)

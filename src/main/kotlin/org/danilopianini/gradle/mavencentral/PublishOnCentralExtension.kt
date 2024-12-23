@@ -55,12 +55,6 @@ open class PublishOnCentralExtension(
     val projectLongName: Property<String> = project.propertyWithDefault(project.name)
 
     /**
-     * A property, defaulting to true, that is used to disable the default configuration for Maven Central.
-     * To be used in case of deployment towards only targets other than Maven Central.
-     */
-    val configureMavenCentral: Property<Boolean> = project.propertyWithDefault(true)
-
-    /**
      * A description of the project.
      */
     val projectDescription: Property<String> = project.propertyWithDefault("No description provided")
@@ -111,7 +105,7 @@ open class PublishOnCentralExtension(
     ) {
         val repo = Repository.fromProject(project, name, url)
         repo.apply(configurator)
-        project.afterEvaluate { it.configureRepository(repo) }
+        project.configureRepository(repo)
     }
 
     /**

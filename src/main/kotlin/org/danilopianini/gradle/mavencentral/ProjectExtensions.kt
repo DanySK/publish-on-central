@@ -5,77 +5,26 @@ import kotlinx.coroutines.runBlocking
 import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
 import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.DROP_TASK_NAME
 import org.danilopianini.gradle.mavencentral.PublishPortalDeployment.Companion.RELEASE_TASK_NAME
-import org.gradle.api.Action
 import org.gradle.api.DefaultTask
-import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.Task
+import org.gradle.api.UnknownTaskException
 import org.gradle.api.provider.Property
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
+import org.gradle.api.tasks.TaskProvider
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
-import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 import org.gradle.kotlin.dsl.the
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
 import kotlin.reflect.KClass
 
 internal object ProjectExtensions {
-    /**
-     * The id of the Kotlin/JS plugin.
-     */
-    private const val KOTLIN_JS_PLUGIN = "org.jetbrains.kotlin.js"
-
-    /**
-     * The `jsSourcesJar` [Task] of a Kotlin/JS project.
-     */
-    internal val Project.jsSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("jsSourcesJar")
-
-    /**
-     * The `kotlinSourcesJar` [Task] of a Kotlin/JS or Kotlin/JVM project.
-     */
-    private val Project.kotlinSourcesJar: Jar? get() = tasks.withType<Jar>().findByName("kotlinSourcesJar")
-
-    /**
-     * The list of default sources Jar [Task]s: it may include [kotlinSourcesJar] and [jsSourcesJar],
-     * if they are non-null.
-     */
-    internal val Project.sourcesJarTasks: List<Jar> get() = listOfNotNull(jsSourcesJar, kotlinSourcesJar)
-
-    /**
-     * Executes an action on Kotlin/JS projects only.
-     */
-    internal fun Project.ifKotlinJsProject(action: Action<Plugin<*>>) {
-        plugins.withId(KOTLIN_JS_PLUGIN, action)
-    }
-
-    /**
-     * Configures the provided task to include the `main` source set of a Kotlin/JS project.
-     * The configuration does nothing if the provided task not of type [SourceJar].
-     */
-    fun Project.configureJavadocJarTaskForKtJs(sourcesJarTask: Task) {
-        ifKotlinJsProject { _ ->
-            configure<KotlinJsProjectExtension> {
-                sourceSets.getByName("main") {
-                    (sourcesJarTask as? SourceJar)?.run {
-                        sourceSet(it.kotlin)
-                        sourceSet(it.resources)
-                    } ?: logger.warn(
-                        "source sets of task {} not configured because it is not of type {}",
-                        sourcesJarTask.name,
-                        SourceJar::class.java.name,
-                    )
-                }
-            }
-        }
-    }
-
     /**
      * Reifies this repository setup onto every [PublishingExtension] configuration of the provided [Project].
      */
@@ -111,13 +60,15 @@ internal object ProjectExtensions {
         nexusUrl: String,
     ) {
         val repoName = repoToConfigure.name
-        val nexusClient =
+        val nexusClientCreationTask =
             rootProject.registerTaskIfNeeded(
                 "createNexusClientFor$repoName",
                 InitializeNexusClient::class,
                 repoToConfigure,
                 nexusUrl,
-            ) as InitializeNexusClient
+            )
+
+        fun nexusClient() = (nexusClientCreationTask.get() as InitializeNexusClient).nexusClient
         /*
          * Creates a new staging repository on the Nexus server, or fetches an existing one if the repoId is known.
          */
@@ -129,11 +80,11 @@ internal object ProjectExtensions {
                 val stagingRepoIdsFile =
                     rootProject.layout.buildDirectory.map { it.asFile.resolve(stagingRepoIdsFileName) }
                 outputs.file(stagingRepoIdsFile)
-                dependsOn(nexusClient)
+                dependsOn(nexusClientCreationTask)
                 doLast {
                     rootProject.warnIfCredentialsAreMissing(repoToConfigure)
-                    nexusClient.nexusClient.repoUrl // triggers the initialization of a repository
-                    val repoId = nexusClient.nexusClient.repoId
+                    nexusClient().repoUrl // triggers the initialization of a repository
+                    val repoId = nexusClient().repoId
                     // Write the staging repository ID to build/staging-repo-ids.properties file
                     stagingRepoIdsFile.get().appendText("$repoName=$repoId" + System.lineSeparator())
                     logger.lifecycle("Append repo name {} to file {}", repoId, stagingRepoIdsFile.get().path)
@@ -158,7 +109,7 @@ internal object ProjectExtensions {
         val closeStagingRepository =
             rootProject.registerTaskIfNeeded("closeStagingRepositoryOn$repoName") {
                 doLast {
-                    with(nexusClient.nexusClient) {
+                    with(nexusClient()) {
                         when (client.getStagingRepositoryStateById(repoId).state) {
                             CLOSED -> logger.warn("The staging repository is already closed. Skipping.")
                             else -> close()
@@ -175,7 +126,7 @@ internal object ProjectExtensions {
          */
         val release =
             rootProject.registerTaskIfNeeded("releaseStagingRepositoryOn${repoToConfigure.name}") {
-                doLast { nexusClient.nexusClient.release() }
+                doLast { nexusClient().release() }
                 dependsOn(closeStagingRepository)
                 group = PublishingPlugin.PUBLISH_TASK_GROUP
                 description = "Releases the Nexus repo on ${repoToConfigure.name}. " +
@@ -189,7 +140,7 @@ internal object ProjectExtensions {
          */
         val drop =
             rootProject.registerTaskIfNeeded("dropStagingRepositoryOn${repoToConfigure.name}") {
-                doLast { nexusClient.nexusClient.drop() }
+                doLast { nexusClient().drop() }
                 dependsOn(createStagingRepository)
                 mustRunAfter(uploadAllPublications)
                 mustRunAfter(closeStagingRepository)
@@ -201,46 +152,53 @@ internal object ProjectExtensions {
          * Checks that only release or drop are selected for execution, as they are mutually exclusive.
          */
         gradle.taskGraph.whenReady {
-            if (it.hasTask(release) && it.hasTask(drop)) {
-                error("Mutually exclusive tasks '${release.name}' and '${drop.name}' both selected for execution")
+            val releaseTask = release.get()
+            val dropTask = drop.get()
+            if (it.hasTask(releaseTask) && it.hasTask(dropTask)) {
+                error(
+                    "Mutually exclusive tasks '${releaseTask.name}' and '${dropTask.name}' " +
+                        "are both selected for execution",
+                )
             }
         }
         the<PublishingExtension>().publications.withType<MavenPublication>().configureEach { publication ->
             val publicationName = publication.name.replaceFirstChar(Char::titlecase)
-            project.tasks
-                .register<PublishToMavenRepository>(
-                    "upload${publicationName}To${repoToConfigure.name}Nexus",
-                ).configure { uploadTask ->
-                    uploadTask.repository =
-                        project.repositories.maven { repo ->
-                            repo.name = repoToConfigure.name
-                            repo.url = project.uri(repoToConfigure.url)
-                            repo.credentials {
-                                it.username = repoToConfigure.user.orNull
-                                it.password = repoToConfigure.password.orNull
-                            }
+            val uploadTaskProvider =
+                project.tasks
+                    .register<PublishToMavenRepository>(
+                        "upload${publicationName}To${repoToConfigure.name}Nexus",
+                    )
+            uploadTaskProvider.configure { uploadTask ->
+                uploadTask.repository =
+                    project.repositories.maven { repo ->
+                        repo.name = repoToConfigure.name
+                        repo.url = project.uri(repoToConfigure.url)
+                        repo.credentials {
+                            it.username = repoToConfigure.user.orNull
+                            it.password = repoToConfigure.password.orNull
                         }
-                    uploadTask.publication = publication
-                    publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
-                    tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
-                /*
-                 * We need to make sure that the staging repository is created before we upload anything.
-                 * We also need to make sure that the staging repository is closed *after* we upload
-                 * We also need to make sure that the staging repository is dropped *after* we upload
-                 * Releasing does not need to be explicitly ordered, as it will be performed after closing
-                 */
-                    uploadTask.dependsOn(createStagingRepository)
-                    uploadAllPublications.get().dependsOn(uploadTask)
-                    closeStagingRepository.mustRunAfter(uploadTask)
-                    drop.mustRunAfter(uploadTask)
-                    uploadTask.doFirst {
-                        warnIfCredentialsAreMissing(repoToConfigure)
-                        uploadTask.repository.url = nexusClient.nexusClient.repoUrl
                     }
-                    uploadTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
-                    uploadTask.description = "Uploads the $publicationName publication " +
-                        "to a staging repository on ${repoToConfigure.name} (${repoToConfigure.url.orNull})."
+                uploadTask.publication = publication
+                publication.signingTasks(project).forEach { uploadTask.dependsOn(it) }
+                tasks.withType<Sign>().forEach { uploadTask.mustRunAfter(it) }
+                uploadTask.doFirst {
+                    warnIfCredentialsAreMissing(repoToConfigure)
+                    uploadTask.repository.url = nexusClient().repoUrl
                 }
+                uploadTask.group = PublishingPlugin.PUBLISH_TASK_GROUP
+                uploadTask.description = "Uploads the $publicationName publication " +
+                    "to a staging repository on ${repoToConfigure.name} (${repoToConfigure.url.orNull})."
+            }
+            /*
+             * We need to make sure that the staging repository is created before we upload anything.
+             * We also need to make sure that the staging repository is closed *after* we upload
+             * We also need to make sure that the staging repository is dropped *after* we upload
+             * Releasing does not need to be explicitly ordered, as it will be performed after closing
+             */
+            uploadTaskProvider.get().dependsOn(createStagingRepository)
+            uploadAllPublications.get().dependsOn(uploadTaskProvider)
+            closeStagingRepository.configure { it.mustRunAfter(uploadTaskProvider) }
+            drop.configure { it.mustRunAfter(uploadTaskProvider) }
         }
     }
 
@@ -255,13 +213,21 @@ internal object ProjectExtensions {
         type: KClass<T>,
         vararg parameters: Any = emptyArray(),
         configuration: T.() -> Unit = { },
-    ): Task = tasks.findByName(name) ?: tasks.create(name, type, *parameters).apply(configuration)
+    ): TaskProvider<out Task> =
+        runCatching { tasks.named(name) }
+            .recover { exception ->
+                when (exception) {
+                    is UnknownTaskException ->
+                        tasks.register(name, type, *parameters).apply { configure(configuration) }
+                    else -> throw exception
+                }
+            }.getOrThrow()
 
     fun Project.registerTaskIfNeeded(
         name: String,
         vararg parameters: Any = emptyArray(),
         configuration: DefaultTask.() -> Unit = { },
-    ): Task =
+    ): TaskProvider<out Task> =
         registerTaskIfNeeded(
             name = name,
             type = DefaultTask::class,
@@ -271,36 +237,16 @@ internal object ProjectExtensions {
 
     internal fun Project.addSourcesArtifactIfNeeded(
         publication: MavenPublication,
-        sourcesJarTask: Task,
+        sourcesJarProvider: TaskProvider<out Task>,
     ) {
-        if (sourcesJarTask is SourceJar) {
-            if (jsSourcesJar == null) {
+        sourcesJarProvider.configure { sourcesJarTask ->
+            if (sourcesJarTask is SourceJar && tasks.withType<Jar>().named { it == "jsSourcesJar" }.isEmpty()) {
                 publication.artifact(sourcesJarTask)
                 logger.info(
                     "add sources jar artifact to publication {} from task {}",
                     publication.name,
                     sourcesJarTask.name,
                 )
-            } else {
-                /*
-                 * This is a hack for Kotlin/JS projects.
-                 * These projects already contain tasks named "jsSourcesJar" and "kotlinSourcesJar", generating the
-                 * same jar "<project.name>-js-<project.version>-sources.jar".
-                 * In particular, task kotlinSourcesJar is automatically registered as an artifact to Maven publications
-                 * when they are created. So, adding further sources-jar-generating tasks it troublesome in this
-                 * situation. The following code simply removes the "-js" appendix from the jar file name,
-                 * hence making the jar compliant with Maven Central.
-                 */
-                ifKotlinJsProject { _ ->
-                    project.sourcesJarTasks.forEach {
-                        it.archiveAppendix.set("")
-                        // Better telling the user the plugin is changing the behaviour of default tasks
-                        project.logger.lifecycle(
-                            "remove '-js' appendix from sources jar generated by task {}",
-                            it.name,
-                        )
-                    }
-                }
             }
         }
     }
