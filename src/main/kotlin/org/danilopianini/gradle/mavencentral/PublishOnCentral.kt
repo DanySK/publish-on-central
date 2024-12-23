@@ -149,7 +149,7 @@ class PublishOnCentral : Plugin<Project> {
                     )
                 }
         }
-
+        // React to Dokka application
         project.pluginManager.withPlugin(DOKKA_PLUGIN_ID) { _ ->
             project.logger.info("Dokka plugin found, hence javadocJar will be configured")
             project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
