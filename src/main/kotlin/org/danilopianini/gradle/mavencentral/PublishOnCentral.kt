@@ -59,9 +59,7 @@ class PublishOnCentral : Plugin<Project> {
                             createdPublications += publication
                             publication.from(component)
                             project.addSourcesArtifactIfNeeded(publication, sourcesJarTask)
-                            if (javadocJarTask is JavadocJar) {
-                                publication.artifact(javadocJarTask)
-                            }
+                            publication.artifact(javadocJarTask)
                             publication.pom.packaging = "jar"
                             project.configure<SigningExtension> {
                                 sign(publication)
