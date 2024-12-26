@@ -24,6 +24,10 @@ class Tests :
             Testkit.projectTest("test0", true)
         }
 
+        "Test ktjvm" {
+            Testkit.projectTest("ktjvm")
+        }
+
         "Test ktjs" {
             Testkit.projectTest("ktjs")
         }
