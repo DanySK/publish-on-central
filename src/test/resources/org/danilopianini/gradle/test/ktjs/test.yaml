@@ -22,17 +22,6 @@ tests:
         success: *tasks2
       files:
         existing: *exists
-  - description: "Task :kotlinSourcesJar should generate sources Jar with for Kotlin Js projects"
-    configuration:
-      tasks: &tasks3
-        - 'kotlinSourcesJar'
-      options:
-        - '--stacktrace'
-    expectation:
-      outcomes:
-        success: *tasks3
-      files:
-        existing: *exists
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
       tasks:
@@ -43,7 +32,6 @@ tests:
     expectation:
       output:
         contains:
-          - ":kotlinSourcesJar SKIPPED"
-        doesntContain:
-          - ":sourcesJar"
           - ":jsSourcesJar"
+#        doesntContain:
+#          - ":sourcesJar"

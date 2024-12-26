@@ -3,8 +3,6 @@ package org.danilopianini.gradle.mavencentral
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
-import org.gradle.kotlin.dsl.configure
-import org.jetbrains.kotlin.gradle.dsl.KotlinJsProjectExtension
 import java.io.File
 
 /**
@@ -14,15 +12,6 @@ open class SourceJar : JarWithClassifier("sources") {
     init {
         description = "Assembles a jar archive containing the sources"
         sourceSet("main", false)
-        project.pluginManager.withPlugin(PublishOnCentral.KOTLIN_JS_PLUGIN) { _ ->
-            println("KOTLIN JS APPLIED")
-            project.extensions.configure<KotlinJsProjectExtension> {
-                println("KOTLIN JS EXTENSION")
-                val jsMainSourceSets = sourceSets.getByName("main")
-                sourceSet(jsMainSourceSets.kotlin)
-                sourceSet(jsMainSourceSets.resources)
-            }
-        }
     }
 
     /**
