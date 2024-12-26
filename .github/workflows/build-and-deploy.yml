@@ -17,12 +17,13 @@ jobs:
         with:
           deploy-command: >-
             ./gradlew
-            uploadKotlin
-            uploadPluginMavenToMavenCentralNexus
-            uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
-            close
-            dropStagingRepositoryOnMavenCentral
-            --parallel
+              publishAllPublicationsToProjectLocalRepository
+              uploadKotlin
+              uploadPluginMavenToMavenCentralNexus
+              uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
+              close
+              dropStagingRepositoryOnMavenCentral
+              --parallel
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: >-
             ${{
@@ -71,7 +72,12 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadKotlinOSSRHToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+              publishAllPublicationsToProjectLocalRepository
+              uploadKotlinOSSRHToMavenCentralNexus
+              closeStagingRepositoryOnMavenCentral
+              dropStagingRepositoryOnMavenCentral
+              --parallel
           working-directory: alchemist
           should-run-codecov: false
           should-deploy: true
@@ -116,7 +122,12 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+              publishAllPublicationsToProjectLocalRepository
+              uploadAllPublicationsToMavenCentralNexus
+              closeStagingRepositoryOnMavenCentral 
+              dropStagingRepositoryOnMavenCentral
+              --parallel
           working-directory: kt-mp
           should-run-codecov: false
           should-deploy: true
