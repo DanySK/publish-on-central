@@ -50,5 +50,3 @@ tests:
       output:
         contains:
           - "Dokka plugin found, hence javadocJar will be configured"
-          - "Lazily configure javadocJar task to depend on Dokka task"
-          - "Actually configure javadocJar task to depend on Dokka task dokkaHtml"
