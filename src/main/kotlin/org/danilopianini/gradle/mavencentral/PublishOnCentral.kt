@@ -18,6 +18,7 @@ import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinSoftwareComponent
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
@@ -51,8 +52,10 @@ class PublishOnCentral : Plugin<Project> {
                         publications.register(name, MavenPublication::class.java) { publication ->
                             createdPublications += publication
                             publication.from(component)
-                            publication.artifact(sourcesJarTask)
-                            publication.artifact(javadocJarTask)
+                            if (component !is KotlinSoftwareComponent) {
+                                publication.artifact(sourcesJarTask)
+                                publication.artifact(javadocJarTask)
+                            }
                             publication.pom.packaging = "jar"
                             project.configure<SigningExtension> {
                                 sign(publication)
