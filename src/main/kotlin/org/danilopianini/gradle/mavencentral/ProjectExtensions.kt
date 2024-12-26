@@ -15,7 +15,6 @@ import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.api.tasks.TaskProvider
-import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
@@ -234,22 +233,6 @@ internal object ProjectExtensions {
             parameters = parameters,
             configuration = configuration,
         )
-
-    internal fun Project.addSourcesArtifactIfNeeded(
-        publication: MavenPublication,
-        sourcesJarProvider: TaskProvider<out Task>,
-    ) {
-        sourcesJarProvider.configure { sourcesJarTask ->
-            if (sourcesJarTask is SourceJar && tasks.withType<Jar>().named { it == "jsSourcesJar" }.isEmpty()) {
-                publication.artifact(sourcesJarTask)
-                logger.info(
-                    "add sources jar artifact to publication {} from task {}",
-                    publication.name,
-                    sourcesJarTask.name,
-                )
-            }
-        }
-    }
 
     private fun Project.warnIfCredentialsAreMissing(repository: Repository) {
         if (repository.user.orNull == null) {
