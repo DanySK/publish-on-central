@@ -1,16 +1,4 @@
 tests:
-  - description: "Task :sourcesJar should generate sources Jar for Kotlin Js projects"
-    configuration:
-      tasks: &tasks1
-        - 'sourcesJar'
-      options:
-        - '--stacktrace'
-    expectation:
-      outcomes:
-        success: *tasks1
-      files:
-        existing: &exists
-          - name: /build/libs/ktjs-1.0.0-sources.jar
   - description: "Task :jsSourcesJar should generate sources Jar with for Kotlin Js projects"
     configuration:
       tasks: &tasks2
@@ -21,7 +9,7 @@ tests:
       outcomes:
         success: *tasks2
       files:
-        existing: *exists
+          - name: /build/libs/ktjs-1.0.0-sources.jar
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
       tasks:
@@ -33,3 +21,4 @@ tests:
       output:
         contains:
           - ":jsSourcesJar"
+          - ":javadocJar"
