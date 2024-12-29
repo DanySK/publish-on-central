@@ -175,8 +175,7 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: |
-            COMMAND='./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel'
-            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
+            ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
             IDS="build/staging-repo-ids.properties"
             # Check repo ids file existence
             [[ -e "$IDS" ]] || (
