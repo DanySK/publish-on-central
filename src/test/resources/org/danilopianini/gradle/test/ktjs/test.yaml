@@ -1,8 +1,8 @@
 tests:
-  - description: "Task :jsSourcesJar should generate sources Jar with for Kotlin Js projects"
+  - description: "KotlinJS projects should generate a complete publication"
     configuration:
       tasks: &tasks2
-        - 'jsSourcesJar'
+        - publishAllPublicationsToProjectLocalRepository
       options:
         - '--stacktrace'
     expectation:
@@ -10,7 +10,16 @@ tests:
         success: *tasks2
       files:
         existing:
-          - name: /build/libs/ktjs-1.0.0-sources.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.pom
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.module
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0-javadoc.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0-sources.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.pom
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.module
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.klib
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0-javadoc.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0-sources.jar
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
       tasks:

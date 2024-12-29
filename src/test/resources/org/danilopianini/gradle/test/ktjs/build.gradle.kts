@@ -15,6 +15,11 @@ repositories {
     mavenCentral()
 }
 
+publishOnCentral {
+    repoOwner.set("DanySK")
+    projectDescription.set("test")
+}
+
 kotlin {
     js {
         browser()
@@ -33,4 +38,8 @@ kotlin {
             }
         }
     }
+}
+
+tasks.withType<Sign>().configureEach {
+    enabled = false
 }
