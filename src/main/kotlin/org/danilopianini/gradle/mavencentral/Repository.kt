@@ -1,11 +1,11 @@
 package org.danilopianini.gradle.mavencentral
 
+import java.net.URI
+import java.time.Duration
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.Provider
 import org.gradle.kotlin.dsl.property
-import java.net.URI
-import java.time.Duration
 
 /**
  * A class modelling the concept of target Maven repository.

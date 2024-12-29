@@ -1,4 +1,4 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.nexus
 
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.core.extensions.authentication
@@ -7,11 +7,11 @@ import io.github.gradlenexus.publishplugin.internal.BasicActionRetrier
 import io.github.gradlenexus.publishplugin.internal.NexusClient
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryDescriptor
 import io.github.gradlenexus.publishplugin.internal.StagingRepositoryTransitioner
+import java.net.URI
+import java.time.Duration
 import kotlinx.coroutines.runBlocking
 import org.gradle.api.Project
 import org.gradle.api.provider.Provider
-import java.net.URI
-import java.time.Duration
 import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes.STATUS_CODE_CREATED as HTTP_201_CREATED
 import org.gradle.internal.impldep.com.google.api.client.http.HttpStatusCodes.STATUS_CODE_OK as HTTP_200_OK
 

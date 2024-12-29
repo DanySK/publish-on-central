@@ -33,5 +33,3 @@ tests:
       output:
         contains:
           - ":jsSourcesJar"
-#        doesntContain:
-#          - ":sourcesJar"
