@@ -9,6 +9,7 @@ tests:
       outcomes:
         success: *tasks2
       files:
+        existing:
           - name: /build/libs/ktjs-1.0.0-sources.jar
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
