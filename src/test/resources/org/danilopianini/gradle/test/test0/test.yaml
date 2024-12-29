@@ -2,14 +2,14 @@ tests:
   - description: "pom files get generated"
     configuration:
       tasks:
-        - generatePomFileForJavaOSSRHPublication
+        - generatePomFileForOSSRHPublication
     expectation:
       outcomes:
         success:
-          - generatePomFileForJavaOSSRHPublication
+          - generatePomFileForOSSRHPublication
       files:
         existing:
-          - name: build/publications/javaOSSRH/pom-default.xml
+          - name: build/publications/OSSRH/pom-default.xml
             contentRegex:
               - '\s*<artifactId>test-publish-on-central</artifactId>'
               - '\s*<groupId>io.github.danysk</groupId>'
@@ -35,7 +35,7 @@ tests:
           - zipMavenCentralPortalPublication
           - publishPluginMavenPublicationToGithubRepository
           - publishPluginMavenPublicationToProjectLocalRepository
-          - uploadJavaOSSRHToMavenCentralNexus
+          - uploadOSSRHToMavenCentralNexus
           - uploadPluginMavenToMavenCentralNexus
           - releaseStagingRepositoryOnMavenCentral
           - dropStagingRepositoryOnMavenCentral

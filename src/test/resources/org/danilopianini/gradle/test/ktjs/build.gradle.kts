@@ -1,6 +1,5 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.danilopianini.gradle.mavencentral.DocStyle
 import org.gradle.kotlin.dsl.repositories
 
 @Suppress("DSL_SCOPE_VIOLATION")

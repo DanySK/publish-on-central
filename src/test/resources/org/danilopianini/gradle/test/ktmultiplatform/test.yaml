@@ -3,7 +3,7 @@ tests:
     configuration:
       tasks: &tasks
         - 'generateMetadataFileForJvmPublication'
-        - 'generateMetadataFileForKotlinOSSRHPublication'
+        - 'generateMetadataFileForJsPublication'
         - 'generateMetadataFileForKotlinMultiplatformPublication'
       options:
         - '--stacktrace'
