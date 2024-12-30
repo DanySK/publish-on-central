@@ -1,38 +1,25 @@
 tests:
-  - description: "Task :sourcesJar should generate sources Jar for Kotlin Js projects"
-    configuration:
-      tasks: &tasks1
-        - 'sourcesJar'
-      options:
-        - '--stacktrace'
-    expectation:
-      outcomes:
-        success: *tasks1
-      files:
-        existing: &exists
-          - name: /build/libs/ktjs-1.0.0-sources.jar
-  - description: "Task :jsSourcesJar should generate sources Jar with for Kotlin Js projects"
+  - description: "KotlinJS projects should generate a complete publication"
     configuration:
       tasks: &tasks2
-        - 'jsSourcesJar'
+        - publishAllPublicationsToProjectLocalRepository
       options:
         - '--stacktrace'
     expectation:
       outcomes:
         success: *tasks2
       files:
-        existing: *exists
-  - description: "Task :kotlinSourcesJar should generate sources Jar with for Kotlin Js projects"
-    configuration:
-      tasks: &tasks3
-        - 'kotlinSourcesJar'
-      options:
-        - '--stacktrace'
-    expectation:
-      outcomes:
-        success: *tasks3
-      files:
-        existing: *exists
+        existing:
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.pom
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.module
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0-javadoc.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs/1.0.0/ktjs-1.0.0-sources.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.pom
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.module
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0.klib
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0-javadoc.jar
+          - name: /build/project-local-repository/org/danilopianini/ktjs-js/1.0.0/ktjs-js-1.0.0-sources.jar
   - description: "Publishing should only use :jsSourcesJar to create sources Jars"
     configuration:
       tasks:
@@ -43,7 +30,5 @@ tests:
     expectation:
       output:
         contains:
-          - ":kotlinSourcesJar SKIPPED"
-        doesntContain:
-          - ":sourcesJar"
           - ":jsSourcesJar"
+          - ":javadocJar"

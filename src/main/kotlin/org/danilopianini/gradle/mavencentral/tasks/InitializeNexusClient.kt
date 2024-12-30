@@ -1,10 +1,12 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.tasks
 
+import javax.inject.Inject
+import org.danilopianini.gradle.mavencentral.Repository
+import org.danilopianini.gradle.mavencentral.nexus.NexusStatefulOperation
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
-import javax.inject.Inject
 
 /**
  * A task that creates a Nexus Client operating at the [Repository] [repoToConfigure] with URL [nexusUrl].

@@ -1,10 +1,11 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.tasks
 
+import javax.inject.Inject
+import org.danilopianini.gradle.mavencentral.Repository
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.withType
-import javax.inject.Inject
 
 /**
  * A Zip task that creates a zip file containing the local Maven repository.

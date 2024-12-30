@@ -5,13 +5,12 @@ This plugin is meant to provide an even easier configuration than
 [`io.github.gradle-nexus:publish-plugin`](https://github.com/gradle-nexus/publish-plugin)
 (from which this plugin depends),
 with the goal of supporting highly automated workflows with minimal configuration.
+Moreover, this plugin supports publishing to the new Maven Central Portal.
 
 ## Rationale
 Publishing on Maven Central requires too much configuration?
 Well, I agree.
-This plugin is here to simplify your life by automatically
-scanning all the software components produced by any plugin,
-configuring a corresponding publication,
+This plugin is here to simplify your life by automatically creating a Maven-Central compatible publication
 filling all the information required by OSSRH,
 configuring tasks for generating javadoc and source jar files,
 activating the signing plugin,
@@ -37,8 +36,8 @@ plugins {
 }
 group = "your.group.id" // This must be configured for the generated pom.xml to work correctly
 publishOnCentral {
-  projectUrl.set("https://github.com/DanySK/${project.name}")
-  scmConnection.set("git:git@github.com:DanySK/${project.name}")
+  repoOwner.set("Your-GitHub-username")
+  projectDescription.set("A reasonable description")
 }
 publishing {
   publications {
@@ -81,24 +80,14 @@ group = "your.group.id" // This must be configured for the generated pom.xml to 
  * The plugin comes with defaults that are useful to myself. You should configure it to behave as you please:
  */
 publishOnCentral {
-    // Set to false if you do not want the MavenCentral repository to be automatically configured
-    configureMavenCentral.set(true)
+    repoOwner.set("Your-GitHub-username") // Used to populate the default value for projectUrl and scmConnection
+    projectDescription.set("A reasonable description")
     // The following values are the default, if they are ok with you, just omit them
-    projectDescription.set("No description provided")
     projectLongName.set(project.name)
     licenseName.set("Apache License, Version 2.0")
     licenseUrl.set("http://www.apache.org/licenses/LICENSE-2.0")
-    repoOwner.set("DanySK") // Used to populate the default value for projectUrl and scmConnection
-    projectUrl.set("https://github.com/${repoOwner}/${project.name}")
-    scmConnection.set("scm:git:https://github.com/${repoOwner}/${project.name}")
-    /*
-     * If the project is a Kotlin multiplatform project, Dokka can not generate the Javadocs correctly.
-     * In these cases, the plugin by default may fail.
-     * This option can be used to select a different documentation format for the Dokka engine,
-     * in case you want to publish on Central a jar with a reasonable (altough not Javadoc-compatible content)
-     * we recommend DocStyle.HTML.
-     */
-    docStyle.set(org.danilopianini.gradle.mavencentral.DocStyle.JAVADOC) // alternatives are GFM, HTML, and JEKYLL 
+    projectUrl.set("https://github.com/${repoOwner.get()}/${project.name}")
+    scmConnection.set("scm:git:https://github.com/${repoOwner.get()}/${project.name}")
 
     /*
      * The plugin is pre-configured to fetch credentials for Maven Central from the context in the following order:
@@ -160,6 +149,7 @@ publishing {
         }
     }
 }
+
 /*
  * The plugin automatically adds every publication to the list of objects to sign
  * The configuration of the signing process is left to the user, though,
@@ -172,50 +162,30 @@ signing {
     val signingPassword: String? by project
     useInMemoryPgpKeys(signingKey, signingPassword)
 }
+
 ```
+
+## Dokka
+
+If the dokka plugin is applied, the plugin reacts automatically and uses the HTML output as the javadoc jar.
+Contextually, this plugin disables all `javadoc` tasks, as they are not needed anymore.
 
 ## Kotlin Multiplatform
 
-This plugin can configure Kotlin Multiplatform projects, too, but it needs further configuration.
-The reason is that the Kotlin Multiplatform plugin creates custom publications under the hood,
-and simply creating additional publications based on the `SoftwareComponent`s
-(as this plugin does)
-does not collect all the required artifacts.
-
-Since version 2.0.0, this plugin marks its publications as `[SoftwareComponentName]OSSRH`,
-making it easy to distinguish them by name.
-
-To configure a Kotlin multiplatform project for execution with publish-on-central, use:
-
-```kotlin
-publishOnCentral {
-    // Same as any other publication, see the previous sections.
-}
-
-publishing {
-  publications {
-    publications.withType<MavenPublication>().configureEach {
-      if ("OSSRH" !in name) {
-        artifact(tasks.javadocJar)
-      }
-    }
-  }
-}
-```
-
-Unfortunatly, the Kotlin Multiplatform pre-initializes a sources jar, but not a javadoc jar,
-and Gradle does not allow to inspect the pom packaging or the artifact list without finalizing the publication
-(thus, preventing metadata to get generated).
-
-Consequently, at the moment, the plugin only preconfigures the POM file and the signing.
+This plugin reacts to the application of the Kotlin Multiplatform plugin
+by generating a Javadoc Jar for each KMP publication:
+unfortunately, Kotlin Multiplatform pre-initializes a sources jar, but not a javadoc jar.
+For Kotlin Multiplatform, no special publications are created,
+this plugins configures the existing ones to be compatible with Maven Central.
 
 ## Tasks
 
 * `sourcesJar`: a `Jar` task preconfigured to collect and pack `allSource` from the `main` source set
 * `javadocJar`: a `Jar` task preconfigured to
-    1. Detect if a javadoc tasks exists, and in case depend on it, and pack its output folder
-    2. Detect if a dokkaJavadoc tasks exists, and to the same as above
-* One publishing task for each combination of `SoftwareComponent` and repository,
+    1. package the output of `Javadoc` tasks, if the `java` plugin has been applied; or
+    2. package the output of the Dokka HTML plugin, if the Dokka Gradle plugin has been applied; or
+    3. generate an empty jar, otherwise.
+* A publication named `OSSRH` for each Java, Scala, or Kotlin/JVM repository and relative publication tasks;
   unless manually deactivated, a `MavenCentral` repository is created by default.
 * One publishing task for publishing `All` software components to any target repository
 * For every repository with an associated Sonatype Nexus instance, additional tasks are generated to control the
@@ -251,7 +221,7 @@ flowchart LR
     validateMavenCentralPortalPublication --o releaseMavenCentralPortalPublication
 ```
 
-In short, select the publications you wish to publish,
+In short, select the publications you wish to publish (most likely, the `OSSRH` publication),
 and use the `upload<PublicationName>PublicationToProjectLocalRepository` task to enqueue them for upload,
 then use the `zipMavenCentralPortalPublication` to create a bundle.
 Now, you can interact with the portal using the (`validate`/`release`/`drop`)`MavenCentralPortalPublication` tasks.
@@ -389,7 +359,7 @@ it will provide useful use cases for newcomers to look at.
 ### Java, multiproject, kts build file
 * [**Protelis**](https://github.com/Protelis/Protelis): an aggregate programming language
 
-### Java + Kotlin-jvm + Scala, multiproject, kts build file
+### Java + Kotlin-jvm + Scala + Kotlin multiplatform, multiproject, kts build file
 * [**Alchemist Simulator**](https://github.com/AlchemistSimulator/Alchemist): a simulator for computational ecosystems
 * 
 ### Kotlin-jvm, simple project, kts build file

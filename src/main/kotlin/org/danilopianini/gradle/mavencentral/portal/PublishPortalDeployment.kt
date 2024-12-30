@@ -1,8 +1,11 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.portal
 
 import io.ktor.client.request.forms.InputProvider
 import io.ktor.util.reflect.typeInfo
 import io.ktor.utils.io.streams.asInput
+import java.io.File
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.danilopianini.centralpublisher.api.PublishingApi
@@ -20,9 +23,6 @@ import org.gradle.api.Project
 import org.gradle.api.internal.ConventionTask
 import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.TaskProvider
-import java.io.File
-import kotlin.time.Duration
-import kotlin.time.Duration.Companion.seconds
 
 /**
  * Lazy class acting as a container for stateful operations on Maven Central Portal.

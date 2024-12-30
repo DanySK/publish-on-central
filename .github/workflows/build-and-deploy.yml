@@ -17,9 +17,8 @@ jobs:
         with:
           deploy-command: >-
             ./gradlew
-            uploadKotlin
-            uploadPluginMavenToMavenCentralNexus
-            uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
+            publishAllPublicationsToProjectLocalRepository
+            uploadAllPublicationsToMavenCentralNexus
             close
             dropStagingRepositoryOnMavenCentral
             --parallel
@@ -71,7 +70,15 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadKotlinOSSRHToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+            publishAllPublicationsToProjectLocalRepository
+            uploadOSSRHToMavenCentralNexus
+            uploadJsToMavenCentralNexus
+            uploadJvmToMavenCentralNexus
+            uploadKotlinMultiplatformToMavenCentralNexus
+            closeStagingRepositoryOnMavenCentral
+            dropStagingRepositoryOnMavenCentral
+            --parallel
           working-directory: alchemist
           should-run-codecov: false
           should-deploy: true
@@ -116,7 +123,12 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+            publishAllPublicationsToProjectLocalRepository
+            uploadAllPublicationsToMavenCentralNexus
+            closeStagingRepositoryOnMavenCentral 
+            dropStagingRepositoryOnMavenCentral
+            --parallel
           working-directory: kt-mp
           should-run-codecov: false
           should-deploy: true
@@ -161,8 +173,7 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: |
-            COMMAND='./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel'
-            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
+            ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
             IDS="build/staging-repo-ids.properties"
             # Check repo ids file existence
             [[ -e "$IDS" ]] || (
