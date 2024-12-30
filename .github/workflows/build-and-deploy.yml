@@ -18,9 +18,7 @@ jobs:
           deploy-command: >-
             ./gradlew
             publishAllPublicationsToProjectLocalRepository
-            uploadKotlin
-            uploadPluginMavenToMavenCentralNexus
-            uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
+            uploadAllPublicationsToMavenCentralNexus
             close
             dropStagingRepositoryOnMavenCentral
             --parallel
