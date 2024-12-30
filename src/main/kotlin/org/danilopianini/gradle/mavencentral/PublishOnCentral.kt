@@ -51,7 +51,15 @@ class PublishOnCentral : Plugin<Project> {
         project.pluginManager.withPlugin("java") { _ ->
             project.configure<JavaPluginExtension> {
                 withJavadocJar()
-                withSourcesJar()
+                runCatching {
+                    withSourcesJar()
+                }.onFailure { e ->
+                    project.logger.warn(
+                        "Could not configure the Java extension's sourcesJar task, received {}: {}",
+                        e::class.simpleName,
+                        e.message,
+                    )
+                }
             }
             project.configure<PublishingExtension> {
                 publications { publications ->
