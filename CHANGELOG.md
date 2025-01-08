@@ -1,3 +1,31 @@
+## [8.0.0](https://github.com/DanySK/publish-on-central/compare/7.0.4...8.0.0) (2025-01-08)
+
+### ⚠ BREAKING CHANGES
+
+* drop the `configureMavenCentral` option. Always configure, and remove all calls to `afterEvaluate` and `create`. Add support for Dokka v2. (#1274)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.12 ([#1269](https://github.com/DanySK/publish-on-central/issues/1269)) ([705fbf0](https://github.com/DanySK/publish-on-central/commit/705fbf0cf3262d9eaa128b77121d49c5e37efd9b))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.4.2 ([#1281](https://github.com/DanySK/publish-on-central/issues/1281)) ([7b38077](https://github.com/DanySK/publish-on-central/commit/7b38077ab5f180650433f7da852c13f1fc29b29a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.117 ([#1273](https://github.com/DanySK/publish-on-central/issues/1273)) ([404a18a](https://github.com/DanySK/publish-on-central/commit/404a18a86bd373a7fb242c12b1b11b174df5f1df))
+* **deps:** update plugin multijvmtesting to v3.0.2 ([#1270](https://github.com/DanySK/publish-on-central/issues/1270)) ([80c571d](https://github.com/DanySK/publish-on-central/commit/80c571d7b4ff67c37e4aa4cf593411b1516ece04))
+* **deps:** update plugin multijvmtesting to v3.0.3 ([#1276](https://github.com/DanySK/publish-on-central/issues/1276)) ([7be1c08](https://github.com/DanySK/publish-on-central/commit/7be1c08488de3e9cb080f34a11df91b7782cbf4e))
+* **deps:** update plugin multijvmtesting to v3.1.1 ([#1277](https://github.com/DanySK/publish-on-central/issues/1277)) ([c2c38bf](https://github.com/DanySK/publish-on-central/commit/c2c38bfe8c608e48b55bf023371c2a1d9cf0111b))
+* **deps:** update plugin multijvmtesting to v3.1.2 ([#1278](https://github.com/DanySK/publish-on-central/issues/1278)) ([b2bf38a](https://github.com/DanySK/publish-on-central/commit/b2bf38ae4f6372852266d0f673ba29e5bbdc6221))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.18 ([#1272](https://github.com/DanySK/publish-on-central/issues/1272)) ([a42fdf4](https://github.com/DanySK/publish-on-central/commit/a42fdf4c599bfcb11cce15ad63b9a1bc5b6debad))
+* **deps:** update plugin publishoncentral to v7.0.4 ([#1271](https://github.com/DanySK/publish-on-central/issues/1271)) ([8c9dc5a](https://github.com/DanySK/publish-on-central/commit/8c9dc5a5961c07319476cdbc602f4fbffb71ba31))
+* **deps:** update plugin publishoncentral to v7.0.5-dev0w-f7d1ad3 ([#1283](https://github.com/DanySK/publish-on-central/issues/1283)) ([c404a86](https://github.com/DanySK/publish-on-central/commit/c404a8622daa7923f9e8288d8574139c056c8b1a))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.0.12 ([#1275](https://github.com/DanySK/publish-on-central/issues/1275)) ([3983990](https://github.com/DanySK/publish-on-central/commit/3983990da2c3e8cb0963f61e06f4391ffdd5165e))
+* **deps:** update alchemistsimulator/alchemist action to v36.0.13 ([#1279](https://github.com/DanySK/publish-on-central/issues/1279)) ([0deee14](https://github.com/DanySK/publish-on-central/commit/0deee1435e4c611764a60f944278a7a64c1ff98d))
+
+### Refactoring
+
+* drop the `configureMavenCentral` option. Always configure, and remove all calls to `afterEvaluate` and `create`. Add support for Dokka v2. ([#1274](https://github.com/DanySK/publish-on-central/issues/1274)) ([aa1204e](https://github.com/DanySK/publish-on-central/commit/aa1204edb943049a516c8953c86b34255bbc5637))
+
 ## [7.0.4](https://github.com/DanySK/publish-on-central/compare/7.0.3...7.0.4) (2024-12-20)
 
 ### Dependency updates
