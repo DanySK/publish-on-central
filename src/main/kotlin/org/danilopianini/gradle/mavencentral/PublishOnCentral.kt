@@ -63,9 +63,8 @@ class PublishOnCentral : Plugin<Project> {
             }
             project.configure<PublishingExtension> {
                 publications { publications ->
-                    val name = PUBLICATION_NAME
-                    if (publications.none { it.name == name }) {
-                        publications.register(name, MavenPublication::class.java) { publication ->
+                    if (publications.none { it.name == PUBLICATION_NAME }) {
+                        publications.register(PUBLICATION_NAME, MavenPublication::class.java) { publication ->
                             publication.artifact(project.tasks.withType<Jar>().named("jar"))
                             val javadocJarTask = project.javadocJarTask()
                             javadocJarTask.configure {
@@ -83,7 +82,7 @@ class PublishOnCentral : Plugin<Project> {
                             publication.artifact(sourcesJar)
                             publication.pom.packaging = "jar"
                         }
-                        project.logger.debug("Created new publication $name")
+                        project.logger.debug("Created new publication $PUBLICATION_NAME")
                     }
                 }
             }
