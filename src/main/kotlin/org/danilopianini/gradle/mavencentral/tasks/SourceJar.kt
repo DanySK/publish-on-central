@@ -1,9 +1,9 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.tasks
 
+import java.io.File
 import org.gradle.api.file.SourceDirectorySet
 import org.gradle.api.tasks.SourceSet
 import org.gradle.api.tasks.SourceSetContainer
-import java.io.File
 
 /**
  * A task generating a Jar file with the project source code.

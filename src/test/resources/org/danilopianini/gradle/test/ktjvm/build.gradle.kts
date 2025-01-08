@@ -1,6 +1,5 @@
 plugins {
-    `java-library`
-    `java-gradle-plugin`
+    kotlin("jvm")
     id("org.danilopianini.publish-on-central")
 }
 group = "io.github.danysk"
@@ -14,7 +13,6 @@ publishOnCentral {
         password.set("pwd")
     }
 }
-
 tasks.withType<Sign>().configureEach {
     enabled = false
 }

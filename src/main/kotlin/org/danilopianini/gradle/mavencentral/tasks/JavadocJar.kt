@@ -1,4 +1,4 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.tasks
 
 /**
  * A task generating a Jar file with the Javadoc.

@@ -1,85 +1,106 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.configurePomForMavenCentral
-import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.signingTasks
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.addSourcesArtifactIfNeeded
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureJavadocJarTaskForKtJs
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureRepository
+import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configurePomForMavenCentral
+import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentralPortal
+import org.danilopianini.gradle.mavencentral.tasks.JavadocJar
+import org.danilopianini.gradle.mavencentral.tasks.SourceJar
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.CopySpec
+import org.gradle.api.file.DuplicatesStrategy
+import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
 import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
+import org.jetbrains.dokka.gradle.DokkaTask
+import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 
 /**
  * A Plugin configuring the project for publishing on Maven Central.
  */
 class PublishOnCentral : Plugin<Project> {
-    private companion object {
+    /**
+     * Constants.
+     */
+    companion object {
         /**
          * The name of the publication to be created.
          */
         private const val PUBLICATION_NAME = "OSSRH"
+
+        private fun Project.javadocJarTask() = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
+
+        private fun Project.sourcesJarTask() = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
     }
 
     override fun apply(project: Project) {
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.extensions.create<PublishOnCentralExtension>("publishOnCentral", project)
-        val createdPublications = mutableListOf<MavenPublication>()
-        project.configure<PublishingExtension> {
-            val sourcesJarTask = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
-            val javadocJarTask = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
-            project.configureJavadocJarTaskForKtJs(sourcesJarTask)
-            project.tasks.matching { it.name == "assemble" }.configureEach {
-                it.dependsOn(sourcesJarTask, javadocJarTask)
+        project.pluginManager.withPlugin("java") { _ ->
+            project.configure<JavaPluginExtension> {
+                withJavadocJar()
+                runCatching {
+                    withSourcesJar()
+                }.onFailure { e ->
+                    project.logger.warn(
+                        "Could not configure the Java extension's sourcesJar task, received {}: {}",
+                        e::class.simpleName,
+                        e.message,
+                    )
+                }
             }
-            project.components.configureEach { component ->
+            project.configure<PublishingExtension> {
                 publications { publications ->
-                    val name = "${component.name}$PUBLICATION_NAME"
-                    if (publications.none { it.name == name }) {
-                        publications.register(name, MavenPublication::class.java) { publication ->
-                            createdPublications += publication
-                            publication.from(component)
-                            project.addSourcesArtifactIfNeeded(publication, sourcesJarTask)
-                            if (javadocJarTask is JavadocJar) {
-                                publication.artifact(javadocJarTask)
+                    if (publications.none { it.name == PUBLICATION_NAME }) {
+                        publications.register(PUBLICATION_NAME, MavenPublication::class.java) { publication ->
+                            publication.artifact(project.tasks.withType<Jar>().named("jar"))
+                            val javadocJarTask = project.javadocJarTask()
+                            javadocJarTask.configure {
+                                if (it is JavadocJar) {
+                                    it.from(project.tasks.withType<Javadoc>())
+                                }
                             }
+                            publication.artifact(javadocJarTask)
+                            javadocJarTask.configure {
+                                if (it is CopySpec) {
+                                    it.duplicatesStrategy = DuplicatesStrategy.INCLUDE
+                                }
+                            }
+                            val sourcesJar = project.sourcesJarTask()
+                            publication.artifact(sourcesJar)
                             publication.pom.packaging = "jar"
-                            project.configure<SigningExtension> {
-                                sign(publication)
-                            }
                         }
-                        project.logger.debug("Created new publication $name")
+                        project.logger.debug("Created new publication $PUBLICATION_NAME")
                     }
                 }
             }
+        }
+        project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") { _ ->
+            project.configure<PublishingExtension> {
+                publications.withType<MavenPublication>().all { publication ->
+                    publication.artifact(project.javadocJarTask())
+                }
+            }
+        }
+        project.configure<PublishingExtension> {
             publications
                 .withType<MavenPublication>()
-                .configureEach { publication ->
-                    if (extension.autoConfigureAllPublications.getOrElse(true) || publication in createdPublications) {
-                        project.logger.info(
-                            "Populating data of publication {} in {}, group {}",
-                            publication.name,
-                            project,
-                            project.group,
-                        )
-                        publication.configurePomForMavenCentral(extension)
-                        if (publication.signingTasks(project).isEmpty()) {
-                            project.configure<SigningExtension> {
-                                sign(publication)
-                            }
-                        }
+                .all { publication ->
+                    publication.configurePomForMavenCentral(extension)
+                    project.configure<SigningExtension> {
+                        sign(publication)
                     }
                 }
         }
@@ -88,38 +109,17 @@ class PublishOnCentral : Plugin<Project> {
         }
         // Maven Central Portal
         project.setupMavenCentralPortal()
-        // Initialize Central if needed
-        project.afterEvaluate {
-            if (extension.configureMavenCentral.getOrElse(true)) {
-                project.configureRepository(extension.mavenCentral)
-            }
-        }
-        project.pluginManager.withPlugin("java") { _ ->
-            project.tasks.withType<JavadocJar>().configureEach { javadocJar ->
-                val javadocTask =
-                    checkNotNull(project.tasks.findByName("javadoc") as? Javadoc) {
-                        "Java plugin applied but no Javadoc task existing!"
-                    }
-                javadocJar.dependsOn(javadocTask)
-                javadocJar.from(javadocTask.destinationDir)
-            }
-            project.tasks.withType(SourceJar::class.java).configureEach { it.sourceSet("main", true) }
-        }
-        project.pluginManager.withPlugin(DOKKA_PLUGIN_ID) { _ ->
+        // Initialize Central
+        project.configureRepository(extension.mavenCentral)
+        // React to Dokka application
+        project.pluginManager.withPlugin("org.jetbrains.dokka") { _ ->
             project.logger.info("Dokka plugin found, hence javadocJar will be configured")
-            project.tasks.withType(JavadocJar::class.java).configureEach { javadocJar ->
-                val message = "configure ${javadocJar.name} task to depend on Dokka task"
-                project.logger.info("Lazily $message")
-                val dokkaTask =
-                    extension.docStyle.map { docStyle ->
-                        project
-                            .dokkaTasksFor(docStyle)
-                            .firstOrNull()
-                            ?.also { project.logger.info("Actually {} {}", message, it.name) }
-                            ?: error("Dokka plugin applied but no task exists for style $docStyle!")
-                    }
-                javadocJar.dependsOn(dokkaTask)
-                javadocJar.from(dokkaTask)
+            project.tasks.withType<Javadoc>().configureEach { it.enabled = false }
+            project.tasks.withType<Jar>().matching { "javadoc" in it.name }.configureEach { javadocJar ->
+                javadocJar.from(project.tasks.withType<DokkaGenerateTask>())
+                javadocJar.from(
+                    project.tasks.withType<DokkaTask>().matching { it.name.contains("html", ignoreCase = true) },
+                )
             }
         }
     }

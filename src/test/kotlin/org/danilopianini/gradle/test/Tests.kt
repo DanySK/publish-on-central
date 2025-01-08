@@ -11,7 +11,22 @@ class Tests :
         val sep = File.separator
         val baseFolder = Testkit.DEFAULT_TEST_FOLDER + "org${sep}danilopianini${sep}gradle${sep}test$sep"
 
-        fun Testkit.projectTest(folder: String) = this.test(projectName, baseFolder + folder)
+        fun Testkit.projectTest(
+            folder: String,
+            showOutput: Boolean = false,
+        ) = this.test(
+            projectName,
+            baseFolder + folder,
+            forwardOutput = showOutput,
+        )
+
+        "Test test0" {
+            Testkit.projectTest("test0", true)
+        }
+
+        "Test ktjvm" {
+            Testkit.projectTest("ktjvm")
+        }
 
         "Test ktjs" {
             Testkit.projectTest("ktjs")
@@ -23,9 +38,5 @@ class Tests :
 
         "Test multiproject" {
             Testkit.projectTest("multiproject")
-        }
-
-        "Test test0" {
-            Testkit.projectTest("test0")
         }
     })

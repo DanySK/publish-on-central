@@ -17,9 +17,8 @@ jobs:
         with:
           deploy-command: >-
             ./gradlew
-            uploadKotlin
-            uploadPluginMavenToMavenCentralNexus
-            uploadPublishOnCentralPluginPluginMarkerMavenToMavenCentralNexus
+            publishAllPublicationsToProjectLocalRepository
+            uploadAllPublicationsToMavenCentralNexus
             close
             dropStagingRepositoryOnMavenCentral
             --parallel
@@ -47,7 +46,7 @@ jobs:
           # Idea: the regex matcher of Renovate keeps this string up to date automatically
           # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: alchemistsimulator/alchemist@36.0.13
+          - uses: alchemistsimulator/alchemist@36.1.2
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -71,7 +70,15 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadKotlinOSSRHToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+            publishAllPublicationsToProjectLocalRepository
+            uploadOSSRHToMavenCentralNexus
+            uploadJsToMavenCentralNexus
+            uploadJvmToMavenCentralNexus
+            uploadKotlinMultiplatformToMavenCentralNexus
+            closeStagingRepositoryOnMavenCentral
+            dropStagingRepositoryOnMavenCentral
+            --parallel
           working-directory: alchemist
           should-run-codecov: false
           should-deploy: true
@@ -89,10 +96,8 @@ jobs:
         id: versiontrick
         shell: bash
         run: |
-          # Idea: the regex matcher of Renovate keeps this string up to date automatically
-          # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.3
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -116,7 +121,12 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: >-
-            ./gradlew --include-build ../publish-on-central uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
+            ./gradlew --include-build ../publish-on-central
+            publishAllPublicationsToProjectLocalRepository
+            uploadAllPublicationsToMavenCentralNexus
+            closeStagingRepositoryOnMavenCentral 
+            dropStagingRepositoryOnMavenCentral
+            --parallel
           working-directory: kt-mp
           should-run-codecov: false
           should-deploy: true
@@ -134,10 +144,8 @@ jobs:
         id: versiontrick
         shell: bash
         run: |
-          # Idea: the regex matcher of Renovate keeps this string up to date automatically
-          # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.3
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -161,8 +169,7 @@ jobs:
           build-command: true
           check-command: true
           deploy-command: |
-            COMMAND='./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel'
-            $(echo "$COMMAND") || $(echo "$COMMAND") || $(echo "$COMMAND")
+            ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
             IDS="build/staging-repo-ids.properties"
             # Check repo ids file existence
             [[ -e "$IDS" ]] || (
@@ -195,10 +202,8 @@ jobs:
         id: versiontrick
         shell: bash
         run: |
-          # Idea: the regex matcher of Renovate keeps this string up to date automatically
-          # The version is extracted and used to access the correct version of the scripts
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.3
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""

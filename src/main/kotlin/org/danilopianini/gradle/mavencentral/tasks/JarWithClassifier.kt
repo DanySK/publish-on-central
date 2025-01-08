@@ -1,4 +1,4 @@
-package org.danilopianini.gradle.mavencentral
+package org.danilopianini.gradle.mavencentral.tasks
 
 import org.gradle.api.tasks.bundling.Jar
 

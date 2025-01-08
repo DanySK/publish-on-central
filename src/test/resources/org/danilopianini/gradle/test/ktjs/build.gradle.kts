@@ -1,11 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
-import org.danilopianini.gradle.mavencentral.DocStyle
 import org.gradle.kotlin.dsl.repositories
 
 @Suppress("DSL_SCOPE_VIOLATION")
 plugins {
-    kotlin("js")
+    kotlin("multiplatform")
     id("org.danilopianini.publish-on-central")
 }
 
@@ -16,6 +15,11 @@ repositories {
     mavenCentral()
 }
 
+publishOnCentral {
+    repoOwner.set("DanySK")
+    projectDescription.set("test")
+}
+
 kotlin {
     js {
         browser()
@@ -23,15 +27,19 @@ kotlin {
         binaries.library()
     }
     sourceSets {
-        val main by getting {
+        val jsMain by getting {
             dependencies {
-                implementation(kotlin("stdlib-js"))
+                implementation(kotlin("stdlib"))
             }
         }
-        val test by getting {
+        val jsTest by getting {
             dependencies {
-                implementation(kotlin("test-js"))
+                implementation(kotlin("test"))
             }
         }
     }
+}
+
+tasks.withType<Sign>().configureEach {
+    enabled = false
 }

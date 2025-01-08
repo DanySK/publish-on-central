@@ -1,13 +1,12 @@
 package org.danilopianini.gradle.mavencentral
 
-import org.danilopianini.gradle.mavencentral.MavenPublicationExtensions.configurePomForMavenCentral
-import org.danilopianini.gradle.mavencentral.ProjectExtensions.configureRepository
+import java.time.Duration
+import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefault
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefaultProvider
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.kotlin.dsl.property
-import java.time.Duration
 
 /**
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
@@ -15,14 +14,6 @@ import java.time.Duration
 open class PublishOnCentralExtension(
     val project: Project,
 ) {
-    /**
-     * Whether the plugin should consider all MavenPublications as potentially deliverable on Maven Central,
-     * and should thus configure them appropriately.
-     * If disabled, the publications to be sent on Central must be configured manually by calling
-     * [configurePomForMavenCentral] on them in the buildscript.
-     */
-    val autoConfigureAllPublications: Property<Boolean> = project.propertyWithDefault(true)
-
     /**
      * Easier access to the default Maven Central configuration.
      */
@@ -55,15 +46,9 @@ open class PublishOnCentralExtension(
     val projectLongName: Property<String> = project.propertyWithDefault(project.name)
 
     /**
-     * A property, defaulting to true, that is used to disable the default configuration for Maven Central.
-     * To be used in case of deployment towards only targets other than Maven Central.
-     */
-    val configureMavenCentral: Property<Boolean> = project.propertyWithDefault(true)
-
-    /**
      * A description of the project.
      */
-    val projectDescription: Property<String> = project.propertyWithDefault("No description provided")
+    val projectDescription: Property<String> = project.objects.property<String>()
 
     /**
      * The project's license name.
@@ -78,28 +63,23 @@ open class PublishOnCentralExtension(
     /**
      * For GitHub projects, the owner of the repo. Used for the default values of [projectUrl] and [scmConnection]
      */
-    val repoOwner: Property<String> = project.propertyWithDefault("DanySK")
+    val repoOwner: Property<String> = project.objects.property<String>()
 
     /**
      * The SCM connection of the project.
      */
     val scmConnection: Property<String> =
-        project.objects
-            .property<String>()
-            .convention(repoOwner.map { "scm:git:https://github.com/$it/${project.name}" })
+        project.propertyWithDefaultProvider {
+            "scm:git:https://github.com/${repoOwner.get()}/${project.name}"
+        }
 
     /**
      * The URL of the project.
      */
     val projectUrl: Property<String> =
-        project.objects
-            .property<String>()
-            .convention(repoOwner.map { "https://github.com/$it/${project.name}" })
-
-    /**
-     * The style of `javadoc` artifacts being published on Maven repositories.
-     */
-    val docStyle: Property<DocStyle> = project.objects.property<DocStyle>().convention(DocStyle.JAVADOC)
+        project.propertyWithDefaultProvider {
+            "https://github.com/${repoOwner.get()}/${project.name}"
+        }
 
     /**
      * Utility to configure a new Maven repository as target.
@@ -111,7 +91,7 @@ open class PublishOnCentralExtension(
     ) {
         val repo = Repository.fromProject(project, name, url)
         repo.apply(configurator)
-        project.afterEvaluate { it.configureRepository(repo) }
+        project.configureRepository(repo)
     }
 
     /**

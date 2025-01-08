@@ -1,5 +1,3 @@
-import org.danilopianini.gradle.mavencentral.DocStyle
-import org.danilopianini.gradle.mavencentral.JavadocJar
 import org.jetbrains.kotlin.gradle.plugin.KotlinTarget
 import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
 import java.util.*
@@ -19,9 +17,6 @@ repositories {
 
 kotlin {
     jvm {
-        compilations.all {
-            kotlinOptions.jvmTarget = "1.8"
-        }
         testRuns["test"].executionTask.configure {
             useJUnitPlatform()
         }
@@ -57,8 +52,6 @@ kotlin {
     }
 
     val nativeSetup: KotlinNativeTarget.() -> Unit = {
-        compilations["main"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeMain"])
-        compilations["test"].defaultSourceSet.dependsOn(kotlin.sourceSets["nativeTest"])
         binaries {
             executable()
             sharedLib()
@@ -90,15 +83,6 @@ kotlin {
     tvosArm64(nativeSetup)
     tvosX64(nativeSetup)
     tvosSimulatorArm64(nativeSetup)
-
-    targets.all {
-        compilations.all {
-            kotlinOptions {
-                allWarningsAsErrors = true
-                freeCompilerArgs += listOf("-Xexpect-actual-classes")
-            }
-        }
-    }
 }
 
 signing {
@@ -110,7 +94,6 @@ signing {
 }
 
 publishOnCentral {
-    docStyle.set(DocStyle.HTML)
     projectLongName.set("Template for Kotlin Multiplatform Project")
     projectDescription.set("A template repository for Kotlin Multiplatform projects")
     repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
