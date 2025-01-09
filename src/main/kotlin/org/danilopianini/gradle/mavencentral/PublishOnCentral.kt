@@ -13,7 +13,6 @@ import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
-import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.component.internal.DefaultJvmSoftwareComponent
 import org.gradle.jvm.tasks.Jar
@@ -78,9 +77,6 @@ class PublishOnCentral : Plugin<Project> {
                 }
             }
         }
-        project.tasks.withType<Copy>().matching { it.name in listOf("sourcesJar", "javadocJar") }.configureEach {
-            it.duplicatesStrategy = DuplicatesStrategy.WARN
-        }
         project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") { _ ->
             project.configure<PublishingExtension> {
                 publications.withType<MavenPublication>().all { publication ->
@@ -110,7 +106,8 @@ class PublishOnCentral : Plugin<Project> {
             project.logger.info("Dokka plugin found, hence javadocJar will be configured")
             project.tasks.withType<Javadoc>().configureEach { it.enabled = false }
             project.tasks.withType<Jar>().matching { "javadoc" in it.name }.configureEach { javadocJar ->
-                javadocJar.from(project.tasks.withType<DokkaGenerateTask>())
+                javadocJar.duplicatesStrategy = DuplicatesStrategy.WARN
+                javadocJar.from(project.tasks.withType<DokkaGenerateTask>().matching { "Publication" in it.name })
                 javadocJar.from(
                     project.tasks.withType<DokkaTask>().matching { it.name.contains("html", ignoreCase = true) },
                 )
