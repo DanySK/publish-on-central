@@ -15,6 +15,10 @@ publishOnCentral {
     }
 }
 
+dependencies {
+    api("org.apache.commons:commons-lang3:3.17.0")
+}
+
 tasks.withType<Sign>().configureEach {
     enabled = false
 }

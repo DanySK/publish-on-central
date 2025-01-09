@@ -22,6 +22,8 @@ tests:
               - '\s*<connection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</connection>'
               - '\s*<developerConnection>(\s|\n)*scm:git:https://github\.com/test/test-publish-on-central</developerConnection>'
               - '\s*</scm>'
+              - '\s*<dependencies>'
+              - '\s*<groupId>org.apache.commons</groupId>'
   - description: "release and drop tasks get generated"
     configuration:
       tasks:

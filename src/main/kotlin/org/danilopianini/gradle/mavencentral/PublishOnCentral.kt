@@ -5,17 +5,15 @@ import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configure
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentralPortal
 import org.danilopianini.gradle.mavencentral.tasks.JavadocJar
-import org.danilopianini.gradle.mavencentral.tasks.SourceJar
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.file.CopySpec
-import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.tasks.javadoc.Javadoc
+import org.gradle.jvm.component.internal.DefaultJvmSoftwareComponent
 import org.gradle.jvm.tasks.Jar
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.create
@@ -40,8 +38,6 @@ class PublishOnCentral : Plugin<Project> {
         private const val PUBLICATION_NAME = "OSSRH"
 
         private fun Project.javadocJarTask() = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
-
-        private fun Project.sourcesJarTask() = project.registerTaskIfNeeded("sourcesJar", SourceJar::class)
     }
 
     override fun apply(project: Project) {
@@ -65,21 +61,14 @@ class PublishOnCentral : Plugin<Project> {
                 publications { publications ->
                     if (publications.none { it.name == PUBLICATION_NAME }) {
                         publications.register(PUBLICATION_NAME, MavenPublication::class.java) { publication ->
-                            publication.artifact(project.tasks.withType<Jar>().named("jar"))
-                            val javadocJarTask = project.javadocJarTask()
-                            javadocJarTask.configure {
-                                if (it is JavadocJar) {
-                                    it.from(project.tasks.withType<Javadoc>())
+                            val componentProvider =
+                                project.components.withType<DefaultJvmSoftwareComponent>().named(
+                                    "java",
+                                ) { javaComponent ->
+                                    javaComponent.withJavadocJar()
+                                    javaComponent.withSourcesJar()
                                 }
-                            }
-                            publication.artifact(javadocJarTask)
-                            javadocJarTask.configure {
-                                if (it is CopySpec) {
-                                    it.duplicatesStrategy = DuplicatesStrategy.INCLUDE
-                                }
-                            }
-                            val sourcesJar = project.sourcesJarTask()
-                            publication.artifact(sourcesJar)
+                            publication.from(componentProvider.get())
                             publication.pom.packaging = "jar"
                         }
                         project.logger.debug("Created new publication $PUBLICATION_NAME")
