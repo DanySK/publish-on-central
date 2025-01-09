@@ -7,11 +7,13 @@ import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentral
 import org.danilopianini.gradle.mavencentral.tasks.JavadocJar
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.file.DuplicatesStrategy
 import org.gradle.api.plugins.JavaPluginExtension
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
 import org.gradle.api.publish.maven.plugins.MavenPublishPlugin
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
+import org.gradle.api.tasks.Copy
 import org.gradle.api.tasks.javadoc.Javadoc
 import org.gradle.jvm.component.internal.DefaultJvmSoftwareComponent
 import org.gradle.jvm.tasks.Jar
@@ -75,6 +77,9 @@ class PublishOnCentral : Plugin<Project> {
                     }
                 }
             }
+        }
+        project.tasks.withType<Copy>().matching { it.name in listOf("sourcesJar", "javadocJar") }.configureEach {
+            it.duplicatesStrategy = DuplicatesStrategy.INCLUDE
         }
         project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") { _ ->
             project.configure<PublishingExtension> {
