@@ -97,7 +97,7 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.6
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -145,7 +145,7 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.6
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
@@ -203,7 +203,7 @@ jobs:
         shell: bash
         run: |
           USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.5
+          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.6
           TRICK_RENOVATE
           )
           echo "Scripts update line: \"$USES\""
