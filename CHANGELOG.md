@@ -1,3 +1,19 @@
+## [8.0.1](https://github.com/DanySK/publish-on-central/compare/8.0.0...8.0.1) (2025-01-09)
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.118 ([#1286](https://github.com/DanySK/publish-on-central/issues/1286)) ([0bd0bad](https://github.com/DanySK/publish-on-central/commit/0bd0badf9723c4798749f05ebd4ed5aa7f906b9f))
+* **deps:** update node.js to 22.13 ([#1284](https://github.com/DanySK/publish-on-central/issues/1284)) ([5e80daa](https://github.com/DanySK/publish-on-central/commit/5e80daa9942c3a1c8939866f1176f33497778479))
+* **deps:** update plugin publishoncentral to v8 ([#1285](https://github.com/DanySK/publish-on-central/issues/1285)) ([3c4e278](https://github.com/DanySK/publish-on-central/commit/3c4e278fca3d476e6b1ec0e140df87ff7980495d))
+
+### Bug Fixes
+
+* fix the plugin forgetting the dependencies of Java projects ([#1287](https://github.com/DanySK/publish-on-central/issues/1287)) ([636752f](https://github.com/DanySK/publish-on-central/commit/636752fc42a1d868d69ac4b31b501f52d03936e1))
+
+### Build and continuous integration
+
+* **deps:** update danysk/template-for-kotlin-multiplatform-projects action to v0.2.6 ([#1282](https://github.com/DanySK/publish-on-central/issues/1282)) ([8f1d03f](https://github.com/DanySK/publish-on-central/commit/8f1d03f411e0ea5138e356ed0cbecc6b160fda2d))
+
 ## [8.0.0](https://github.com/DanySK/publish-on-central/compare/7.0.4...8.0.0) (2025-01-08)
 
 ### ⚠ BREAKING CHANGES
