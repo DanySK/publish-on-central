@@ -79,7 +79,7 @@ class PublishOnCentral : Plugin<Project> {
             }
         }
         project.tasks.withType<Copy>().matching { it.name in listOf("sourcesJar", "javadocJar") }.configureEach {
-            it.duplicatesStrategy = DuplicatesStrategy.INCLUDE
+            it.duplicatesStrategy = DuplicatesStrategy.WARN
         }
         project.pluginManager.withPlugin("org.jetbrains.kotlin.multiplatform") { _ ->
             project.configure<PublishingExtension> {
