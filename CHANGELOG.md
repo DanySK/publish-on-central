@@ -1,3 +1,21 @@
+## [8.0.2](https://github.com/DanySK/publish-on-central/compare/8.0.1...8.0.2) (2025-01-25)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.12.1 ([#1294](https://github.com/DanySK/publish-on-central/issues/1294)) ([4ad21f9](https://github.com/DanySK/publish-on-central/commit/4ad21f94aa36a5846450c405dd7ade14971c1b9f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.119 ([#1291](https://github.com/DanySK/publish-on-central/issues/1291)) ([1f06c8d](https://github.com/DanySK/publish-on-central/commit/1f06c8d168bd12a4f97f737a9bc0934f319750b2))
+* **deps:** update plugin multijvmtesting to v3.2.1 ([#1299](https://github.com/DanySK/publish-on-central/issues/1299)) ([34d036e](https://github.com/DanySK/publish-on-central/commit/34d036e86ceae8385caa041cbd73a143d5e9cf88))
+* **deps:** update plugin publishoncentral to v8.0.1 ([#1288](https://github.com/DanySK/publish-on-central/issues/1288)) ([50fe18a](https://github.com/DanySK/publish-on-central/commit/50fe18a84969ace767b8b5577e7525d716c76423))
+
+### Build and continuous integration
+
+* **deps:** update alchemistsimulator/alchemist action to v36.1.3 ([#1280](https://github.com/DanySK/publish-on-central/issues/1280)) ([e2d88d9](https://github.com/DanySK/publish-on-central/commit/e2d88d90596feaf19dbc82ae572e6c1d93b1681b))
+* **deps:** update alchemistsimulator/alchemist action to v37 ([#1292](https://github.com/DanySK/publish-on-central/issues/1292)) ([0125fc1](https://github.com/DanySK/publish-on-central/commit/0125fc1bc1fd009047cfa5fb013bcbf714487928))
+* **deps:** update alchemistsimulator/alchemist action to v37.0.1 ([#1293](https://github.com/DanySK/publish-on-central/issues/1293)) ([d8a21c5](https://github.com/DanySK/publish-on-central/commit/d8a21c5dba0d5c92562b17779daaea989ddc983d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.6.0 ([#1289](https://github.com/DanySK/publish-on-central/issues/1289)) ([91b001f](https://github.com/DanySK/publish-on-central/commit/91b001f016f963e94c30e9c7df37989ffca73654))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.0 ([#1290](https://github.com/DanySK/publish-on-central/issues/1290)) ([af224f4](https://github.com/DanySK/publish-on-central/commit/af224f487d9a34e0a7707adf352313718bc5ce9e))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.3 ([#1297](https://github.com/DanySK/publish-on-central/issues/1297)) ([9849a14](https://github.com/DanySK/publish-on-central/commit/9849a143749a6cc7ccd6b9da228e136984b3da00))
+
 ## [8.0.1](https://github.com/DanySK/publish-on-central/compare/8.0.0...8.0.1) (2025-01-09)
 
 ### Dependency updates
