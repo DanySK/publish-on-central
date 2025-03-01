@@ -1,3 +1,22 @@
+## [8.0.4](https://github.com/DanySK/publish-on-central/compare/8.0.3...8.0.4) (2025-03-01)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.13 ([#1318](https://github.com/DanySK/publish-on-central/issues/1318)) ([4c02a29](https://github.com/DanySK/publish-on-central/commit/4c02a2925701c8856409e897768aebda4772de57))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.6.0 ([#1319](https://github.com/DanySK/publish-on-central/issues/1319)) ([bc90771](https://github.com/DanySK/publish-on-central/commit/bc907711b1f3f0a13b513fa22b22caa005a708fc))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.7.0 ([#1320](https://github.com/DanySK/publish-on-central/issues/1320)) ([52eb0e0](https://github.com/DanySK/publish-on-central/commit/52eb0e04a20f2030544a529951374f544ce0bcd0))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.8.0 ([#1321](https://github.com/DanySK/publish-on-central/issues/1321)) ([921008a](https://github.com/DanySK/publish-on-central/commit/921008a8103327178844ea94d606014a5b4f1574))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.125 ([#1312](https://github.com/DanySK/publish-on-central/issues/1312)) ([3396f27](https://github.com/DanySK/publish-on-central/commit/3396f27c64c897fa9402d94a5848fd07bf179273))
+* **deps:** update node.js to 22.14 ([#1322](https://github.com/DanySK/publish-on-central/issues/1322)) ([451a454](https://github.com/DanySK/publish-on-central/commit/451a454554a7d4b6617f8915276d45a7507f628c))
+* **deps:** update plugin com.gradle.develocity to v3.19.2 ([#1313](https://github.com/DanySK/publish-on-central/issues/1313)) ([74a7c25](https://github.com/DanySK/publish-on-central/commit/74a7c253fcfe851dffca2def4018b7f3f2416250))
+* **deps:** update plugin multijvmtesting to v3.2.3 ([#1314](https://github.com/DanySK/publish-on-central/issues/1314)) ([022772c](https://github.com/DanySK/publish-on-central/commit/022772c1d3ebac8e28ceed43652cca1fce6c3260))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.21 ([#1315](https://github.com/DanySK/publish-on-central/issues/1315)) ([2a3e74b](https://github.com/DanySK/publish-on-central/commit/2a3e74b2be9534e7513ac9f389bb66f741d7491f))
+* **deps:** update plugin publishoncentral to v8.0.3 ([#1316](https://github.com/DanySK/publish-on-central/issues/1316)) ([ac507a7](https://github.com/DanySK/publish-on-central/commit/ac507a70d996041b097fd742028b50dda254d316))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.12 ([#1317](https://github.com/DanySK/publish-on-central/issues/1317)) ([fb2d65d](https://github.com/DanySK/publish-on-central/commit/fb2d65dd7d5536abac2e6743d210eeda8356c1c3))
+
 ## [8.0.3](https://github.com/DanySK/publish-on-central/compare/8.0.2...8.0.3) (2025-02-01)
 
 ### Dependency updates
