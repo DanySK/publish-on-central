@@ -1,3 +1,23 @@
+## [8.0.5](https://github.com/DanySK/publish-on-central/compare/8.0.4...8.0.5) (2025-03-23)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.1.20 ([#1336](https://github.com/DanySK/publish-on-central/issues/1336)) ([b639d9b](https://github.com/DanySK/publish-on-central/commit/b639d9bccc5a7b076d95eb724ba9b073aff003ce))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.8.1 ([#1324](https://github.com/DanySK/publish-on-central/issues/1324)) ([8c99cb6](https://github.com/DanySK/publish-on-central/commit/8c99cb6dd49e3c938d698dde89f77afd61f5e4f8))
+* **deps:** update plugin multijvmtesting to v3.2.4 ([#1337](https://github.com/DanySK/publish-on-central/issues/1337)) ([098edc7](https://github.com/DanySK/publish-on-central/commit/098edc7e1a743b30f9b57c4819c342e1ffcef7f7))
+* **deps:** update plugin publishoncentral to v8.0.4 ([#1323](https://github.com/DanySK/publish-on-central/issues/1323)) ([2202591](https://github.com/DanySK/publish-on-central/commit/2202591358979f343e3d39f9ceef8070d093d7a2))
+* **deps:** update plugin tasktree to v4.0.1 ([#1330](https://github.com/DanySK/publish-on-central/issues/1330)) ([23cd395](https://github.com/DanySK/publish-on-central/commit/23cd39509ae2c69fe7dac8b8ccee02e24c8fd4e6))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v4.3.0 ([#1334](https://github.com/DanySK/publish-on-central/issues/1334)) ([be7dab3](https://github.com/DanySK/publish-on-central/commit/be7dab3669fd8fa22bbec76d44d95bb5a8dca204))
+* **deps:** update alchemistsimulator/alchemist action to v37.1.9 ([#1325](https://github.com/DanySK/publish-on-central/issues/1325)) ([661011c](https://github.com/DanySK/publish-on-central/commit/661011c3d84409463299647a60573302f2f1d8f9))
+* **deps:** update alchemistsimulator/alchemist action to v37.2.1 ([#1326](https://github.com/DanySK/publish-on-central/issues/1326)) ([9094a14](https://github.com/DanySK/publish-on-central/commit/9094a14c2a45bd2f90d7fabf40fab9c4e2d2383b))
+* **deps:** update alchemistsimulator/alchemist action to v39 ([#1329](https://github.com/DanySK/publish-on-central/issues/1329)) ([3752643](https://github.com/DanySK/publish-on-central/commit/3752643fd369670f7ef7d431b5e9b3428badb88d))
+* **deps:** update alchemistsimulator/alchemist action to v41 ([#1332](https://github.com/DanySK/publish-on-central/issues/1332)) ([8b9b5ee](https://github.com/DanySK/publish-on-central/commit/8b9b5eed55490cbb7847a99c238f1812af25413f))
+* **deps:** update alchemistsimulator/alchemist action to v42 ([#1333](https://github.com/DanySK/publish-on-central/issues/1333)) ([aa99cc5](https://github.com/DanySK/publish-on-central/commit/aa99cc5e709811c7b95c136b2f6ff953102496de))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.13 ([#1338](https://github.com/DanySK/publish-on-central/issues/1338)) ([e014695](https://github.com/DanySK/publish-on-central/commit/e014695aa699877a91403ed5c08690f7f5d52d39))
+
 ## [8.0.4](https://github.com/DanySK/publish-on-central/compare/8.0.3...8.0.4) (2025-03-01)
 
 ### Dependency updates
