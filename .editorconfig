@@ -1,3 +1,4 @@
 [*.{kt,kts}]
 ij_kotlin_imports_layout=*
+ktlint_code_style=intellij_idea
 max_line_length=120

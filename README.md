@@ -1,34 +1,43 @@
 # publish-on-central
-A Gradle plugin for streamlined publishing on Maven Central
-(and other Maven / Nexus repositories).
-This plugin is meant to provide an even easier configuration than
-[`io.github.gradle-nexus:publish-plugin`](https://github.com/gradle-nexus/publish-plugin)
-(from which this plugin depends),
-with the goal of supporting highly automated workflows with minimal configuration.
-Moreover, this plugin supports publishing to the new Maven Central Portal.
+
+A Gradle plugin for streamlined publishing to Maven Central.
+
+For publishing to Nexus repositories, please use version 8.x.x or earlier: support for Nexus was removed in 9.x.x as OSSRH was sunset on June 30, 2025.
 
 ## Rationale
-Publishing on Maven Central requires too much configuration?
-Well, I agree.
-This plugin is here to simplify your life by automatically creating a Maven-Central compatible publication
-filling all the information required by OSSRH,
-configuring tasks for generating javadoc and source jar files,
-activating the signing plugin,
-and preparing tasks to upload, close, and release the artifact.
+Publishing to Maven Central often requires extensive configuration. This plugin simplifies the process by:
+- Automatically creating a Maven Central–compatible publication with all required metadata
+- Configuring tasks to generate Javadoc and source JARs
+- Enabling the signing plugin
+- Providing tasks to upload, verify, and release artifacts
 
-This plugin supports both targets that use Sonatype Nexus (such as Maven Central)
-and targets that do not, such as GitHub Packages.
+Support for Sonatype Nexus repositories was dropped in version 9.x.x. However, all standard Maven repositories—such as GitHub Packages and the Maven Central portal—remain supported.
 
 ## Configuration
 
 ### Minimal
 
-If you use the legacy Nexus-based publishing,
-add `MAVEN_CENTRAL_USERNAME` and `MAVEN_CENTRAL_PASSWORD` to your environment.
-If you use the new Maven Central Portal,
-add `MAVEN_CENTRAL_PORTAL_USERNAME` and `MAVEN_CENTRAL_PORTAL_PASSWORD`
-(obtain these credentials from the portal user settings page).
-The plugin can also work in mixed mode, with some publications going to the portal and some to Nexus.
+#### Credentials
+The plugin looks for credentials in the following order:
+
+1. **Environment variables**:
+    - `MAVEN_CENTRAL_PORTAL_USERNAME`
+    - `MAVEN_CENTRAL_PORTAL_PASSWORD`
+2. **Fallback environment variables**:
+    - `MAVEN_CENTRAL_USERNAME`
+    - `MAVEN_CENTRAL_PASSWORD`
+3. **[Gradle properties](https://docs.gradle.org/current/userguide/build_environment.html#sec:gradle_configuration_properties)**:
+    - `mavenCentralPortalUsername`
+    - `mavenCentralPortalPassword`
+4. **Legacy Sonatype properties**:
+    - `sonatypeUsername`
+    - `sonatypePassword`
+    - `ossrhUsername`
+    - `ossrhPassword`
+
+You can obtain credentials from the [Maven Central Portal](https://central.sonatype.com/).
+
+#### Gradle configuration
 
 ```kotlin
 plugins {
@@ -90,44 +99,12 @@ publishOnCentral {
     scmConnection.set("scm:git:https://github.com/${repoOwner.get()}/${project.name}")
 
     /*
-     * The plugin is pre-configured to fetch credentials for Maven Central from the context in the following order:
-     * 1. Environment variables MAVEN_CENTRAL_USERNAME and MAVEN_CENTRAL_PASSWORD
-     * 2. Project properties mavenCentralUsername and mavenCentralPassword
-     * 3. Project properties sonatypeUsername and sonatypePassword
-     * 4. Project properties ossrhUsername and ossrhPassword
-     * 
-     * They can be further customized through values or providers:
-     */
-    mavenCentral.user.set("...")
-    mavenCentral.password.set(provider { "..." })
-
-    /*
      * The publications can be sent to other destinations, e.g. GitHub
      * The task name would be 'publishAllPublicationsToGitHubRepository'
      */
     repository("https://maven.pkg.github.com/OWNER/REPOSITORY", "GitHub") {
         user.set(System.getenv("GITHUB_USERNAME"))
         password.set(System.getenv("GITHUB_TOKEN"))
-    }
-  
-    /*
-     * Here is an example of a repository with a custom Nexus instance
-     */
-    repository("https://some/valid/repo/with/nexus", "MyNexus") {
-        user.set(mavenCentral.user) // mavenCentral is accessible for 
-        password.set(System.getenv("GITHUB_TOKEN"))
-        nexusUrl = "https://some/valid/nexus/instance"
-        // nexusTimeOut and nexusConnectionTimeOut can be configured, too.
-    }
-
-    /*
-     * A simplified handler is available for publishing on the Snapshots repository of Maven Central
-     */
-    if (project.version.endsWith("-SNAPSHOT")) { // Avoid stable versions being pushed there...
-      mavenCentralSnapshotsRepository() // Imports user and password from the configuration for Maven Central
-      // mavenCentralSnapshotsRepository() {
-      //     ...but they can be customized as per any other repository
-      // }
     }
 }
 
@@ -194,7 +171,7 @@ this plugins configures the existing ones to be compatible with Maven Central.
 ### Maven Central Portal publishing
 
 Maven Central recently introduced a new portal for managing the artifacts,
-which will progressively replace the Nexus-based publishing.
+which replaced the Nexus-based publishing.
 Publishing on the Central Portal goes through the following steps:
 1. the publication is uploaded to project-local maven repository
 2. the local repository is zipped
@@ -222,13 +199,13 @@ flowchart LR
 ```
 
 In short, select the publications you wish to publish (most likely, the `OSSRH` publication),
-and use the `upload<PublicationName>PublicationToProjectLocalRepository` task to enqueue them for upload,
+and use the `publish<PublicationName>PublicationToProjectLocalRepository` task to enqueue them for upload,
 then use the `zipMavenCentralPortalPublication` to create a bundle.
 Now, you can interact with the portal using the (`validate`/`release`/`drop`)`MavenCentralPortalPublication` tasks.
 A typical invocation could be:
 
 ```console
-$ ./gradlew uploadAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication releaseMavenCentralPortalPublication
+$ ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication releaseMavenCentralPortalPublication
 ```
 
 If you already have an uploaded bundle and want to manage it using this plugin,
@@ -238,10 +215,30 @@ set the `publishDeploymentId` property to the deployment ID of the bundle you wa
 $ ./gradlew -PpublishDeploymentId=8697a629-c07d-4349-9a3f-0f52f3ba74fb dropMavenCentralPortalPublication
 ```
 
-If `publishDeploymentId` is set,
-no upload will be performed.
+If `publishDeploymentId` is set, no upload will be performed.
 
-### Non-Nexus publishing
+### Excluding large shadowJars / uberJars / fatJars
+
+If you produce a shadow jar with the [Shadow plugin](https://imperceptiblethoughts.com/shadow/introduction/),
+you will find the jar with `all` classifier as part of the OSSRH publication.
+To avoid publishing the shadow jar, you can skip the `shadowRuntimeElements` variant.
+Gradle's `ComponentWithVariants` API lets you hook into any configuration
+that's been turned into a "variant" on a component
+(and Shadow adds its `shadowRuntimeElements` as such).
+Calling `skip()` simply means "don’t expose this variant in any publications".
+
+```kotlin
+afterEvaluate {
+    components.withType<AdhocComponentWithVariants>().named("java").configure {
+        // Shadow creates a "shadowRuntimeElements" configuration which is added as a variant
+        withVariantsFromConfiguration(configurations["shadowRuntimeElements"]) {
+            skip()
+        }
+    }
+}
+```
+
+### Publishing to classic Maven repositories
 
 Launching the `publish[PublicationName]PublicationTo[RepositoryName]Repository` triggers the creation of the required components,
 their signing, and the upload on the target repository.
@@ -253,97 +250,6 @@ flowchart LR
     javadocJar --o signPublicationNamePublication
     signPublicationNamePublication --o publishPublicationNamePublicationToRepositoryNameRepository
     generatePomFileForPublicationNamePublication --o signPublicationNamePublication
-```
-
-### Sonatype Nexus publishing
-
-Nexus publishing is a bit more elaborate.
-It requires to select:
-1. the operation that must be performed (among simple upload, repository closure, and repository release), and
-2. the packages that will be uploaded
-
-Typical invocations could be:
-
-* `./gradlew uploadAllPublicationsToMavenCentralNexus`
-  * Simply uploads all publications on a single staging repository
-* `./gradlew uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral`
-  * Uploads all artifacts and closes the repository
-* `./gradlew uploadAllPublicationsToMavenCentralNexus releaseStagingRepositoryOnMavenCentral`
-  * Uploads all artifacts, closes, and releases the repository
-* `./gradlew uploadAllPublicationsToMavenCentralNexus closeStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral `
-  * Uploads all artifacts, closes the repository, then drops it (dry-deploy)
-
-The idea is that the packages to be uploaded must be selected by picking the right set of
-`upload[Publication]To[Repo]Nexus` tasks,
-and then if further operations are required, either `closeStagingRepositoryOnMavenCentral` or
-`releaseStagingRepositoryOnMavenCentral` can be used to close/release.
-
-The following schema shows the dependencies among tasks in case of upload on Nexus of a project with two publications
-(e.g., a Kotlin-multiplatform project)
-
-```mermaid
-flowchart LR
-    generatePomFileForPublicationName1Publication --o signPublicationName1Publication
-    jar --o signPublicationName1Publication
-    sourcesJar --o signPublicationName1Publication
-    javadocJar --o signPublicationName1Publication
-    signPublicationName1Publication --o uploadPublicationName1ToRepositoryNameNexus
-    jar --o signPublicationName2Publication
-    sourcesJar --o signPublicationName2Publication
-    javadocJar --o signPublicationName2Publication
-    signPublicationName2Publication --o uploadPublicationName2ToRepositoryNameNexus
-    generatePomFileForPublicationName2Publication --o signPublicationName2Publication
-    uploadPublicationName1ToRepositoryNameNexus --o closeStagingRepositoryOnRepositoryName
-    uploadPublicationName2ToRepositoryNameNexus --o closeStagingRepositoryOnRepositoryName
-    closeStagingRepositoryOnRepositoryName --o releaseStagingRepositoryOnRepositoryName
-    createNexusClientForRepositoryName --o createStagingRepositoryOnRepositoryName
-    createStagingRepositoryOnRepositoryName --o uploadPublicationName1ToRepositoryNameNexus
-    createStagingRepositoryOnRepositoryName --o uploadPublicationName2ToRepositoryNameNexus
-```
-
-## Multi-stage upload
-
-This plugin, during the execution of the `createStagingRepositoryOn[Repo]` task, exports a file in
-`build/staging-repo-ids.properties` containing the staging repository ID in the format `[Repo]=<repo-id>`.
-
-This file can be used to export all the repository IDs to the environment, and then use them in other jobs.
-
-An example below shows how to use this feature to upload artifacts to a staging repository from a different job.
-
-```yaml
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    outputs:
-      repositoryId: ${{ steps.createStagingRepository.outputs.MavenCentralStagingRepositoryId }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Build with Gradle
-        run: ./gradlew build
-      - name: Create staging repository
-        id: createStagingRepository
-        # This step creates a staging repository on Maven Central and exports the staging repository ID as an output
-        run: |
-          ./gradlew createStagingRepositoryOnMavenCentral
-          cat build/staging-repo-ids.properties >> $GITHUB_OUTPUT
-
-  release:
-    needs: build
-    matrix:
-      os: [ubuntu-latest, windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-java@v1
-        with:
-          java-version: 11
-      - name: Use staging repository
-        # Use the staging repository ID exported by the previous job to upload artifacts to the same staging repository
-        run: ./gradlew -PstagingRepositoryId=${{ needs.build.outputs.MavenCentral }} uploadAllPublicationsToMavenCentralNexus
-
 ```
 
 ## Usage examples

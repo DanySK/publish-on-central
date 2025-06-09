@@ -11,10 +11,10 @@ tests:
         success: *tasks
       output:
         contains:
-          - releaseStagingRepositoryOnMavenCentral
-          - createStagingRepositoryOnMavenCentral
-          - closeStagingRepositoryOnMavenCentral
-          - uploadAllPublicationsToMavenCentralNexus
+          - zipMavenCentralPortalPublication
+          - validateMavenCentralPortalPublication
+          - releaseMavenCentralPortalPublication
+          - dropMavenCentralPortalPublication
         doesntContain:
           - :releaseStagingRepositoryOnMavenCentral
           - :createStagingRepositoryOnMavenCentral

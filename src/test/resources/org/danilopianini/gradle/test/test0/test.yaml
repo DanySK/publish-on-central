@@ -37,10 +37,6 @@ tests:
           - zipMavenCentralPortalPublication
           - publishPluginMavenPublicationToGithubRepository
           - publishPluginMavenPublicationToProjectLocalRepository
-          - uploadOSSRHToMavenCentralNexus
-          - uploadPluginMavenToMavenCentralNexus
-          - releaseStagingRepositoryOnMavenCentral
-          - dropStagingRepositoryOnMavenCentral
         doesntContain:
           - uploadJavaMavenToGithubNexus
   - description: "sources and javadoc tasks get created"

@@ -11,14 +11,14 @@ import org.gradle.kotlin.dsl.withType
  * A Zip task that creates a zip file containing the local Maven repository.
  */
 open class ZipMavenCentralPortalPublication
-    @Inject
-    constructor() : Zip() {
-        init {
-            group = PublishingPlugin.PUBLISH_TASK_GROUP
-            description = "Creates a zip file containing the project-local Maven repository"
-            from(Repository.projectLocalRepository(project).url)
-            archiveBaseName.set(project.name + "-maven-central-portal")
-            destinationDirectory.set(project.layout.buildDirectory.dir("maven-central-portal"))
-            mustRunAfter(project.tasks.withType<PublishToMavenRepository>())
-        }
+@Inject
+constructor() : Zip() {
+    init {
+        group = PublishingPlugin.PUBLISH_TASK_GROUP
+        description = "Creates a zip file containing the project-local Maven repository"
+        from(Repository.projectLocalRepository(project).url)
+        archiveBaseName.set(project.name + "-maven-central-portal")
+        destinationDirectory.set(project.layout.buildDirectory.dir("maven-central-portal"))
+        mustRunAfter(project.tasks.withType<PublishToMavenRepository>())
     }
+}

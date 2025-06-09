@@ -38,54 +38,33 @@ data class Repository(
      */
     val capitalizedName = name.replaceFirstChar(Char::titlecase)
 
-    override fun toString() = "$name at $url"
+    override fun toString() = "$name at ${url.orNull}"
 
     /**
      * Constants and utility functions.
      */
     companion object {
         /**
-         * The default name of the Maven Central repository.
-         */
-        const val MAVEN_CENTRAL_NAME = "MavenCentral"
-
-        /**
-         * The default URL of Maven Central.
-         */
-        const val MAVEN_CENTRAL_URL = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
-
-        /**
-         * The Sonatype Nexus instance URL of Maven Central.
-         */
-        const val MAVEN_CENTRAL_NEXUS_URL = "https://s01.oss.sonatype.org/service/local/"
-
-        /**
          * Creates a named [Repository] from a [project] and a [name].
          */
-        fun fromProject(
-            project: Project,
-            name: String,
-            url: String,
-        ): Repository =
-            Repository(
-                name = name,
-                url = project.objects.property<String>().value(url),
-                user = project.objects.property(),
-                password = project.objects.property(),
-            )
+        fun fromProject(project: Project, name: String, url: String): Repository = Repository(
+            name = name,
+            url = project.objects.property<String>().value(url),
+            user = project.objects.property(),
+            password = project.objects.property(),
+        )
 
         /**
          * Creates a [Repository] local to the build folder.
          */
-        fun projectLocalRepository(project: Project): Repository =
-            Repository(
-                name = "ProjectLocal",
-                url =
-                    project.layout.buildDirectory
-                        .dir("project-local-repository")
-                        .map { it.asFile.toURI() },
-                user = project.objects.property(),
-                password = project.objects.property(),
-            )
+        fun projectLocalRepository(project: Project): Repository = Repository(
+            name = "ProjectLocal",
+            url =
+            project.layout.buildDirectory
+                .dir("project-local-repository")
+                .map { it.asFile.toURI() },
+            user = project.objects.property(),
+            password = project.objects.property(),
+        )
     }
 }

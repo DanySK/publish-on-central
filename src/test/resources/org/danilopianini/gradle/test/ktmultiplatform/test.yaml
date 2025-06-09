@@ -10,20 +10,6 @@ tests:
     expectation:
       outcomes:
         success: *tasks
-  - description: "gradle should generate nexus lifecycle management tasks in multiplatform projects"
-    configuration:
-      tasks:
-        - tasks
-    expectation:
-      outcomes:
-        success:
-          - tasks
-      output:
-        contains:
-          - releaseStagingRepositoryOnMavenCentral
-          - createStagingRepositoryOnMavenCentral
-          - closeStagingRepositoryOnMavenCentral
-          - uploadAllPublicationsToMavenCentralNexus
   - description: "dokkaHtml works"
     configuration:
       tasks:

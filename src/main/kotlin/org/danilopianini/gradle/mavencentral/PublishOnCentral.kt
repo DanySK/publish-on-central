@@ -1,7 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
 import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configurePomForMavenCentral
-import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentralPortal
 import org.danilopianini.gradle.mavencentral.tasks.JavadocJar
@@ -99,8 +98,6 @@ class PublishOnCentral : Plugin<Project> {
         }
         // Maven Central Portal
         project.setupMavenCentralPortal()
-        // Initialize Central
-        project.configureRepository(extension.mavenCentral)
         // React to Dokka application
         project.pluginManager.withPlugin("org.jetbrains.dokka") { _ ->
             project.logger.info("Dokka plugin found, hence javadocJar will be configured")
