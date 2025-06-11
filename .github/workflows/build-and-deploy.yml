@@ -20,7 +20,7 @@ jobs:
         with:
           check-command: true
           deploy-command: |
-            ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication validateMavenCentralPortalPublication drop
+            ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication validateMavenCentralPortalPublication dropMavenCentralPortalPublication
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
           should-deploy: ${{ runner.os == 'Linux' && steps.release-dev.outputs.release == 'true' }}
