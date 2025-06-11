@@ -1,6 +1,5 @@
 package org.danilopianini.gradle.mavencentral
 
-import java.time.Duration
 import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configureRepository
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefault
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.propertyWithDefaultProvider
@@ -11,35 +10,7 @@ import org.gradle.kotlin.dsl.property
 /**
  * The extension in charge of configuring the publish-on-central plugin on the target [project].
  */
-open class PublishOnCentralExtension(
-    val project: Project,
-) {
-    /**
-     * Easier access to the default Maven Central configuration.
-     */
-    val mavenCentral: Repository =
-        Repository(
-            Repository.MAVEN_CENTRAL_NAME,
-            url = project.propertyWithDefaultProvider { Repository.MAVEN_CENTRAL_URL },
-            user =
-                project.propertyWithDefaultProvider {
-                    System.getenv("MAVEN_CENTRAL_USERNAME")
-                        ?: project.properties["mavenCentralUsername"]?.toString()
-                        ?: project.properties["sonatypeUsername"]?.toString()
-                        ?: project.properties["ossrhUsername"]?.toString()
-                },
-            password =
-                project.propertyWithDefaultProvider {
-                    System.getenv("MAVEN_CENTRAL_PASSWORD")
-                        ?: project.properties["mavenCentralPassword"]?.toString()
-                        ?: project.properties["sonatypePassword"]?.toString()
-                        ?: project.properties["ossrhPassword"]?.toString()
-                },
-            nexusUrl = Repository.MAVEN_CENTRAL_NEXUS_URL,
-            nexusTimeOut = @Suppress("MagicNumber") Duration.ofMinutes(5),
-            nexusConnectTimeOut = Duration.ofMinutes(3),
-        )
-
+open class PublishOnCentralExtension(val project: Project) {
     /**
      * The full project name.
      */
@@ -86,24 +57,14 @@ open class PublishOnCentralExtension(
      */
     @JvmOverloads fun repository(
         url: String,
-        name: String = repositoryNameFromURL(url),
+        name: String = repositoryNameFromURL(
+            url,
+        ),
         configurator: Repository.() -> Unit = { },
     ) {
         val repo = Repository.fromProject(project, name, url)
         repo.apply(configurator)
         project.configureRepository(repo)
-    }
-
-    /**
-     * Utility to pre-configure a deployment towards the Maven Central Snapshots repository.
-     */
-    @JvmOverloads fun mavenCentralSnapshotsRepository(
-        name: String = "MavenCentralSnapshots",
-        configurator: Repository.() -> Unit = { },
-    ) = repository(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/", name = name) {
-        user.set(mavenCentral.user)
-        password.set(mavenCentral.password)
-        apply(configurator)
     }
 
     private companion object {

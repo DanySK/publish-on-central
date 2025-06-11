@@ -29,27 +29,25 @@ internal object ProjectExtensions {
         type: KClass<T>,
         vararg parameters: Any = emptyArray(),
         configuration: T.() -> Unit = { },
-    ): TaskProvider<out Task> =
-        runCatching { tasks.named(name) }
-            .recover { exception ->
-                when (exception) {
-                    is UnknownTaskException ->
-                        tasks.register(name, type, *parameters).apply { configure(configuration) }
-                    else -> throw exception
-                }
-            }.getOrThrow()
+    ): TaskProvider<out Task> = runCatching { tasks.named(name) }
+        .recover { exception ->
+            when (exception) {
+                is UnknownTaskException ->
+                    tasks.register(name, type, *parameters).apply { configure(configuration) }
+                else -> throw exception
+            }
+        }.getOrThrow()
 
     fun Project.registerTaskIfNeeded(
         name: String,
         vararg parameters: Any = emptyArray(),
         configuration: DefaultTask.() -> Unit = { },
-    ): TaskProvider<out Task> =
-        registerTaskIfNeeded(
-            name = name,
-            type = DefaultTask::class,
-            parameters = parameters,
-            configuration = configuration,
-        )
+    ): TaskProvider<out Task> = registerTaskIfNeeded(
+        name = name,
+        type = DefaultTask::class,
+        parameters = parameters,
+        configuration = configuration,
+    )
 
     fun Project.warnIfCredentialsAreMissing(repository: Repository) {
         if (repository.user.orNull == null) {
@@ -76,26 +74,27 @@ internal object ProjectExtensions {
                 checkNotNull(ZipMavenCentralPortalPublication::class.simpleName)
                     .replaceFirstChar { it.lowercase() },
             )
-        val portalDeployment =
-            PublishPortalDeployment(
-                project = project,
-                baseUrl = "https://central.sonatype.com/",
-                user =
-                    project.propertyWithDefaultProvider {
-                        System.getenv("MAVEN_CENTRAL_PORTAL_USERNAME")
-                            ?: project.properties["mavenCentralPortalUsername"]?.toString()
-                            ?: project.properties["centralPortalUsername"]?.toString()
-                            ?: project.properties["centralUsername"]?.toString()
-                    },
-                password =
-                    project.propertyWithDefaultProvider {
-                        System.getenv("MAVEN_CENTRAL_PORTAL_PASSWORD")
-                            ?: project.properties["mavenCentralPortalPassword"]?.toString()
-                            ?: project.properties["centralPortalPassword"]?.toString()
-                            ?: project.properties["centralPassword"]?.toString()
-                    },
-                zipTask = zipMavenCentralPortal,
-            )
+        val portalDeployment = PublishPortalDeployment(
+            project = project,
+            baseUrl = "https://central.sonatype.com/",
+            user =
+            project.propertyWithDefaultProvider {
+                System.getenv("MAVEN_CENTRAL_PORTAL_USERNAME")
+                    ?: System.getenv("MAVEN_CENTRAL_USERNAME")
+                    ?: project.properties["mavenCentralPortalUsername"]?.toString()
+                    ?: project.properties["centralPortalUsername"]?.toString()
+                    ?: project.properties["centralUsername"]?.toString()
+            },
+            password =
+            project.propertyWithDefaultProvider {
+                System.getenv("MAVEN_CENTRAL_PORTAL_PASSWORD")
+                    ?: System.getenv("MAVEN_CENTRAL_PASSWORD")
+                    ?: project.properties["mavenCentralPortalPassword"]?.toString()
+                    ?: project.properties["centralPortalPassword"]?.toString()
+                    ?: project.properties["centralPassword"]?.toString()
+            },
+            zipTask = zipMavenCentralPortal,
+        )
         tasks.register("saveMavenCentralPortalDeploymentId") { save ->
             val fileName = "maven-central-portal-bundle-id"
             val file = rootProject.layout.buildDirectory.map { it.asFile.resolve(fileName) }

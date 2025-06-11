@@ -1,7 +1,6 @@
 package org.danilopianini.gradle.mavencentral
 
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.warnIfCredentialsAreMissing
-import org.danilopianini.gradle.mavencentral.nexus.NexusSupport.configureNexusRepository
 import org.gradle.api.Project
 import org.gradle.api.publish.PublishingExtension
 import org.gradle.api.publish.maven.MavenPublication
@@ -61,9 +60,6 @@ object MavenConfigurationSupport {
                     }
                 }
             }
-        }
-        if (repoToConfigure.nexusUrl != null) {
-            configureNexusRepository(repoToConfigure, repoToConfigure.nexusUrl)
         }
     }
 }

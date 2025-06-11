@@ -9,8 +9,7 @@ import kotlin.time.Duration.Companion.seconds
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.danilopianini.centralpublisher.api.PublishingApi
-import org.danilopianini.centralpublisher.api.PublishingApi.PublishingTypeApiV1PublisherUploadPost.AUTOMATIC
-import org.danilopianini.centralpublisher.api.PublishingApi.PublishingTypeApiV1PublisherUploadPost.USER_MANAGED
+import org.danilopianini.centralpublisher.api.apiV1PublisherUploadPost
 import org.danilopianini.centralpublisher.impl.infrastructure.HttpResponse
 import org.danilopianini.centralpublisher.impl.models.DeploymentResponseFiles
 import org.danilopianini.centralpublisher.impl.models.DeploymentResponseFiles.DeploymentState.FAILED
@@ -39,6 +38,12 @@ data class PublishPortalDeployment(
      */
     val client: PublishingApi by lazy {
         PublishingApi(baseUrl).apply {
+            check(user.isPresent) {
+                "Username for the central portal at $baseUrl is not set."
+            }
+            check(password.isPresent) {
+                "Password for the central portal at $baseUrl is not set."
+            }
             setUsername(user.get())
             setPassword(password.get())
         }
@@ -48,38 +53,23 @@ data class PublishPortalDeployment(
      * THe zip file to upload.
      */
     val fileToUpload: File by lazy {
-        val outputFiles =
-            zipTask
-                .get()
-                .outputs.files
-                .toList()
-        check(outputFiles.size == 1) {
-            "Expected a single output file, found ${outputFiles.size}: ${outputFiles.map { it.absolutePath }}"
-        }
-        outputFiles
-            .first()
-            .apply {
-                check(exists() && isFile) {
-                    "File ${this.absolutePath} does not exist or is not a file, did task ${zipTask.name} run?"
-                }
+        zipTask.get().outputs.files.singleFile.apply {
+            check(exists() && isFile) {
+                "File $absolutePath does not exist or is not a file, did task ${zipTask.name} run?"
             }
+        }
     }
 
     /**
      * Uploads a bundle to the Central Portal, returning the upload id.
      */
     @JvmOverloads
-    suspend fun upload(
-        bundle: File,
-        name: String = bundle.name,
-        releaseAfterUpload: Boolean = false,
-    ): String {
-        val response =
-            client.apiV1PublisherUploadPost(
-                name,
-                if (releaseAfterUpload) AUTOMATIC else USER_MANAGED,
-                InputProvider(bundle.length()) { bundle.inputStream().asInput() },
-            )
+    suspend fun upload(bundle: File, name: String = bundle.name, releaseAfterUpload: Boolean = false): String {
+        val response = client.apiV1PublisherUploadPost(
+            name,
+            releaseAfterUpload = releaseAfterUpload,
+            bundle = InputProvider(bundle.length()) { bundle.inputStream().asInput() },
+        )
         return when (response.status) {
             OK, CREATED -> {
                 project.logger.lifecycle("Bundle from file ${bundle.path} uploaded successfully")
@@ -218,15 +208,11 @@ data class PublishPortalDeployment(
 
         private val waitingTime: Duration = 1.seconds
 
-        private fun maybeUnauthorized(
-            action: String,
-            response: HttpResponse<*>,
-        ): Nothing =
-            when (response.status) {
-                BAD_REQUEST -> error("Authentication failure, make sure that your credentials are correct")
-                UNAUTHORIZED -> error("No active session or not authenticated, check your credentials")
-                FORBIDDEN -> error("User unauthorized to perform the $action action")
-                else -> error("Unexpected response $response")
-            }
+        private fun maybeUnauthorized(action: String, response: HttpResponse<*>): Nothing = when (response.status) {
+            BAD_REQUEST -> error("Authentication failure, make sure that your credentials are correct")
+            UNAUTHORIZED -> error("No active session or not authenticated, check your credentials")
+            FORBIDDEN -> error("User unauthorized to perform the $action action")
+            else -> error("Unexpected response $response")
+        }
     }
 }

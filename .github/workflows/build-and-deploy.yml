@@ -11,241 +11,31 @@ jobs:
         os: [windows, macos, ubuntu]
     runs-on: ${{ matrix.os }}-latest
     steps:
+      - name: Decide whether to release development versions
+        id: release-dev
+        env:
+          RELEASE: false
+        run: echo "release=$RELEASE" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: DanySK/action-checkout@0.2.22
       - uses: DanySK/build-check-deploy-gradle-action@3.7.18
         with:
-          deploy-command: >-
-            ./gradlew
-            publishAllPublicationsToProjectLocalRepository
-            uploadAllPublicationsToMavenCentralNexus
-            close
-            dropStagingRepositoryOnMavenCentral
-            --parallel
+          check-command: true
+          deploy-command: |
+            ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication validateMavenCentralPortalPublication releaseMavenCentralPortalPublication
           should-run-codecov: ${{ runner.os == 'Linux' }}
-          should-deploy: >-
-            ${{
-            runner.os == 'Linux'
-            && !github.event.repository.fork
-            && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-            }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
+          should-deploy: ${{ runner.os == 'Linux' && steps.release-dev.outputs.release == 'true' }}
+          gradle-publish-secret: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+          gradle-publish-key: ${{ secrets.GRADLE_PUBLISH_KEY }}
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
           maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
           signing-key: ${{ secrets.SIGNING_KEY }}
           signing-password: ${{ secrets.SIGNING_PASSWORD }}
-  test-alchemist-deployment:
-    runs-on: ubuntu-latest
-    if: >-
-      !github.event.repository.fork
-      && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    steps:
-      - name: Compute the version of Alchemist
-        id: alchemist
-        shell: bash
-        run: |
-          # Idea: the regex matcher of Renovate keeps this string up to date automatically
-          # The version is extracted and used to access the correct version of the scripts
-          USES=$(cat <<TRICK_RENOVATE
-          - uses: alchemistsimulator/alchemist@42.0.1
-          TRICK_RENOVATE
-          )
-          echo "Scripts update line: \"$USES\""
-          echo "Computed version: \"${USES#*@}\""
-          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
-      - name: Checkout Alchemist ${{ steps.alchemist.outputs.version }}
-        uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: '0'
-          path: 'alchemist'
-          ref: "${{ steps.alchemist.outputs.version }}"
-          repository: 'AlchemistSimulator/Alchemist'
-          submodules: 'recursive'
-      - name: Checkout publish-on-central
-        uses: actions/checkout@v4.2.2
-        with:
-          path: 'publish-on-central'
-      - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.7.18
-        with:
-          build-command: true
-          check-command: true
-          deploy-command: >-
-            ./gradlew --include-build ../publish-on-central
-            publishAllPublicationsToProjectLocalRepository
-            uploadOSSRHToMavenCentralNexus
-            uploadJsToMavenCentralNexus
-            uploadJvmToMavenCentralNexus
-            uploadKotlinMultiplatformToMavenCentralNexus
-            closeStagingRepositoryOnMavenCentral
-            dropStagingRepositoryOnMavenCentral
-            --parallel
-          working-directory: alchemist
-          should-run-codecov: false
-          should-deploy: true
-          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          signing-key: ${{ secrets.SIGNING_KEY }}
-          signing-password: ${{ secrets.SIGNING_PASSWORD }}
-  test-kt-multiplatform-deployment:
-    runs-on: ubuntu-latest
-    if: >-
-      !github.event.repository.fork
-      && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    steps:
-      - name: Compute the version of the target test project
-        id: versiontrick
-        shell: bash
-        run: |
-          USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.8
-          TRICK_RENOVATE
-          )
-          echo "Scripts update line: \"$USES\""
-          echo "Computed version: \"${USES#*@}\""
-          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
-      - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: '0'
-          path: 'kt-mp'
-          ref: "${{ steps.versiontrick.outputs.version }}"
-          repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
-          submodules: 'recursive'
-      - name: Checkout publish-on-central
-        uses: actions/checkout@v4.2.2
-        with:
-          path: 'publish-on-central'
-      - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.7.18
-        with:
-          build-command: true
-          check-command: true
-          deploy-command: >-
-            ./gradlew --include-build ../publish-on-central
-            publishAllPublicationsToProjectLocalRepository
-            uploadAllPublicationsToMavenCentralNexus
-            closeStagingRepositoryOnMavenCentral 
-            dropStagingRepositoryOnMavenCentral
-            --parallel
-          working-directory: kt-mp
-          should-run-codecov: false
-          should-deploy: true
-          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          signing-key: ${{ secrets.SIGNING_KEY }}
-          signing-password: ${{ secrets.SIGNING_PASSWORD }}
-  test-multi-stage-deployment:
-    runs-on: ubuntu-latest
-    if: >-
-      !github.event.repository.fork
-      && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    steps:
-      - name: Compute the version of the target test project
-        id: versiontrick
-        shell: bash
-        run: |
-          USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.8
-          TRICK_RENOVATE
-          )
-          echo "Scripts update line: \"$USES\""
-          echo "Computed version: \"${USES#*@}\""
-          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
-      - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: '0'
-          path: 'kt-mp-multi-stage'
-          ref: "${{ steps.versiontrick.outputs.version }}"
-          repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
-          submodules: 'recursive'
-      - name: Checkout publish-on-central
-        uses: actions/checkout@v4.2.2
-        with:
-          path: 'publish-on-central'
-      - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.7.18
-        with:
-          build-command: true
-          check-command: true
-          deploy-command: |
-            ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral dropStagingRepositoryOnMavenCentral --parallel
-            IDS="build/staging-repo-ids.properties"
-            # Check repo ids file existence
-            [[ -e "$IDS" ]] || (
-              echo "No $IDS" && exit 2
-            )
-            [[ "$(wc -l "$IDS")" =~ ^1' '.*$ ]] || (
-              echo "$IDS has too many lines (1 expected): $(wc -l "$IDS")" &&
-              cat "$IDS" &&
-              exit 3
-            )
-            [[ "$(cat build/staging-repo-ids.properties)" =~ ^MavenCentral=[a-zA-Z0-9]+-[0-9]+$ ]] || (
-              echo "$IDS has not the expected content" &&
-              cat "$IDS" &&
-              exit 4
-            )
-          working-directory: kt-mp-multi-stage
-          should-run-codecov: false
-          should-deploy: true
-          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          signing-key: ${{ secrets.SIGNING_KEY }}
-          signing-password: ${{ secrets.SIGNING_PASSWORD }}
-  test-drop-repo-task-regression:
-    runs-on: ubuntu-latest
-    if: >-
-      !github.event.repository.fork
-      && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-    steps:
-      - name: Compute the version of the target test project
-        id: versiontrick
-        shell: bash
-        run: |
-          USES=$(cat <<TRICK_RENOVATE
-          - uses: DanySK/template-for-kotlin-multiplatform-projects@0.2.8
-          TRICK_RENOVATE
-          )
-          echo "Scripts update line: \"$USES\""
-          echo "Computed version: \"${USES#*@}\""
-          echo "version=${USES#*@}" >> $GITHUB_OUTPUT
-      - name: Checkout Template-for-Kotlin-Multiplatform-Projects ${{ steps.versiontrick.outputs.version }}
-        uses: actions/checkout@v4.2.2
-        with:
-          fetch-depth: '0'
-          path: 'kt-mp-drop-task'
-          ref: "${{ steps.versiontrick.outputs.version }}"
-          repository: 'DanySK/Template-for-Kotlin-Multiplatform-Projects'
-          submodules: 'recursive'
-      - name: Checkout publish-on-central
-        uses: actions/checkout@v4.2.2
-        with:
-          path: 'publish-on-central'
-      - name: Dry-deploy
-        uses: DanySK/build-check-deploy-gradle-action@3.7.18
-        with:
-          build-command: true
-          check-command: true
-          deploy-command: |
-            ./gradlew --include-build ../publish-on-central createStagingRepositoryOnMavenCentral --parallel
-            [[ -e "build/staging-repo-ids.properties" ]] || (echo "No staging repo ID found" && exit 1)
-            REPO_ID="$(cat build/staging-repo-ids.properties)"
-            echo "Staging repo ID to be closed: $REPO_ID"
-            ./gradlew --include-build ../publish-on-central -PstagingRepositoryId="$REPO_ID" dropStagingRepositoryOnMavenCentral --parallel
-          working-directory: kt-mp-drop-task
-          should-run-codecov: false
-          should-deploy: true
-          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
-          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
-          signing-key: ${{ secrets.SIGNING_KEY }}
-          signing-password: ${{ secrets.SIGNING_PASSWORD }}
+
   release:
     needs:
       - build
-      - test-alchemist-deployment
-      - test-kt-multiplatform-deployment
-      - test-multi-stage-deployment
-      - test-drop-repo-task-regression
     runs-on: ubuntu-latest
     if: >-
       !github.event.repository.fork
@@ -281,10 +71,6 @@ jobs:
     needs:
       - build
       - release
-      - test-alchemist-deployment
-      - test-kt-multiplatform-deployment
-      - test-multi-stage-deployment
-      - test-drop-repo-task-regression
     if: >-
       always() && (
         contains(join(needs.*.result, ','), 'failure')
