@@ -15,17 +15,20 @@ jobs:
         uses: DanySK/action-checkout@0.2.22
       - uses: DanySK/build-check-deploy-gradle-action@3.7.18
         with:
+          check-command: 'false'
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: false
       - uses: actions/upload-artifact@v4.6.2
         if: ${{ runner.os == 'Linux' }}
         with:
           name: gradle-home
+          include-hidden-files: true
           path: ~/.gradle
       - uses: actions/upload-artifact@v4.6.2
         if: ${{ runner.os == 'Linux' }}
         with:
           name: local-repo-cache
+          include-hidden-files: true
           path: |
             .gradle
             .kotlin
