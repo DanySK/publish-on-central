@@ -11,14 +11,25 @@ jobs:
         os: [windows, macos, ubuntu]
     runs-on: ${{ matrix.os }}-latest
     steps:
+      - name: Decide whether to release development versions
+        id: release-dev
+        run: echo "release=true" >> $GITHUB_OUTPUT
       - name: Checkout
         uses: DanySK/action-checkout@0.2.22
       - uses: DanySK/build-check-deploy-gradle-action@3.7.18
         with:
           check-command: true
+          deploy-command: |
+            ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication releaseStagingRepositoryOnMavenCentral
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
-          should-deploy: false
+          should-deploy: ${{ runner.os == 'Linux' && steps.release-dev.outputs.release == 'true' }}
+          gradle-publish-secret: ${{ secrets.GRADLE_PUBLISH_SECRET }}
+          gradle-publish-key: ${{ secrets.GRADLE_PUBLISH_KEY }}
+          maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          maven-central-password: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
+          signing-key: ${{ secrets.SIGNING_KEY }}
+          signing-password: ${{ secrets.SIGNING_PASSWORD }}
       - uses: actions/upload-artifact@v4.6.2
         if: ${{ runner.os == 'Linux' }}
         with:
