@@ -1,3 +1,18 @@
+## [9.0.1](https://github.com/DanySK/publish-on-central/compare/9.0.0...9.0.1) (2025-06-11)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.14.2 ([#1376](https://github.com/DanySK/publish-on-central/issues/1376)) ([871cb8e](https://github.com/DanySK/publish-on-central/commit/871cb8e68e3e7c12e58bf2fd432017a8297a3b5c))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v3.1.0 ([#1386](https://github.com/DanySK/publish-on-central/issues/1386)) ([001920e](https://github.com/DanySK/publish-on-central/commit/001920e7b37e3506a9bbe5059e4846f1877f8e7f))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.133 ([#1379](https://github.com/DanySK/publish-on-central/issues/1379)) ([6e2a5f4](https://github.com/DanySK/publish-on-central/commit/6e2a5f440132396fffa9e217acfc33dbc96dfecf))
+* **deps:** update plugin com.gradle.develocity to v4.0.2 ([#1380](https://github.com/DanySK/publish-on-central/issues/1380)) ([7102958](https://github.com/DanySK/publish-on-central/commit/7102958aa51a39a1c4080d73f987ddbe71423607))
+* **deps:** update plugin gitsemver to v5.1.4 ([#1381](https://github.com/DanySK/publish-on-central/issues/1381)) ([17a48bf](https://github.com/DanySK/publish-on-central/commit/17a48bf8d0b58b6ac60b9c597010d97261e5dbe6))
+
+### Build and continuous integration
+
+* don't retry failed releases ([58c09ad](https://github.com/DanySK/publish-on-central/commit/58c09adfdf118a746e65fe4ee3299bb532b88edb))
+* fix the release task name ([14e8dc0](https://github.com/DanySK/publish-on-central/commit/14e8dc0d1438a1924aebf851a02112cb4a23edee))
+
 ## [9.0.0](https://github.com/DanySK/publish-on-central/compare/8.0.7...9.0.0) (2025-06-11)
 
 ### ⚠ BREAKING CHANGES
