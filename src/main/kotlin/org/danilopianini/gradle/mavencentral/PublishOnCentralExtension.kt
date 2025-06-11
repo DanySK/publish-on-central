@@ -57,7 +57,9 @@ open class PublishOnCentralExtension(val project: Project) {
      */
     @JvmOverloads fun repository(
         url: String,
-        name: String = repositoryNameFromURL(url),
+        name: String = repositoryNameFromURL(
+            url,
+        ),
         configurator: Repository.() -> Unit = { },
     ) {
         val repo = Repository.fromProject(project, name, url)
