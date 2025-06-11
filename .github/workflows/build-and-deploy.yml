@@ -17,6 +17,7 @@ jobs:
         with:
           check-command: true
           should-run-codecov: ${{ runner.os == 'Linux' }}
+          codecov-token: ${{ secrets.CODECOV_TOKEN }}
           should-deploy: false
       - uses: actions/upload-artifact@v4.6.2
         if: ${{ runner.os == 'Linux' }}
