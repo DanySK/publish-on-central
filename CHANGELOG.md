@@ -1,3 +1,14 @@
+## [9.0.2](https://github.com/DanySK/publish-on-central/compare/9.0.1...9.0.2) (2025-06-11)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin:kotlin-gradle-plugin to v2.1.21 ([#1377](https://github.com/DanySK/publish-on-central/issues/1377)) ([886f6e3](https://github.com/DanySK/publish-on-central/commit/886f6e3f1a21b8c40c6a41abf57ea4ce4d1ca962))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.26 ([#1384](https://github.com/DanySK/publish-on-central/issues/1384)) ([8910aa7](https://github.com/DanySK/publish-on-central/commit/8910aa728b56f1fc95c4d4bd3c4ce41c61528eab))
+
+### Build and continuous integration
+
+* enable parallel builds by default ([#1395](https://github.com/DanySK/publish-on-central/issues/1395)) ([cb99d0b](https://github.com/DanySK/publish-on-central/commit/cb99d0b8dd25d216b857560c228977b24c6f1538))
+
 ## [9.0.1](https://github.com/DanySK/publish-on-central/compare/9.0.0...9.0.1) (2025-06-11)
 
 ### Dependency updates
