@@ -53,13 +53,9 @@ data class PublishPortalDeployment(
      * THe zip file to upload.
      */
     val fileToUpload: File by lazy {
-        val outputFiles = zipTask.get().outputs.files.toList()
-        check(outputFiles.size == 1) {
-            "Expected a single output file, found ${outputFiles.size}: ${outputFiles.map { it.absolutePath }}"
-        }
-        outputFiles.first().apply {
+        zipTask.get().outputs.files.singleFile.apply {
             check(exists() && isFile) {
-                "File ${this.absolutePath} does not exist or is not a file, did task ${zipTask.name} run?"
+                "File $absolutePath does not exist or is not a file, did task ${zipTask.name} run?"
             }
         }
     }
