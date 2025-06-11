@@ -15,7 +15,7 @@ jobs:
         uses: DanySK/action-checkout@0.2.22
       - uses: DanySK/build-check-deploy-gradle-action@3.7.18
         with:
-          check-command: 'false'
+          check-command: true
           should-run-codecov: ${{ runner.os == 'Linux' }}
           should-deploy: false
       - uses: actions/upload-artifact@v4.6.2
