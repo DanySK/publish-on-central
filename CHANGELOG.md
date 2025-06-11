@@ -1,3 +1,22 @@
+## [9.0.0](https://github.com/DanySK/publish-on-central/compare/8.0.7...9.0.0) (2025-06-11)
+
+### ⚠ BREAKING CHANGES
+
+* drop support for Sonatype Nexus and OSSRH, as OSSRH will be sunset on June 30, 2025. Users are advised to switch to the Central Portal Publisher Service.
+
+### Features
+
+* drop support for Sonatype Nexus and OSSRH, as OSSRH will be sunset on June 30, 2025. Users are advised to switch to the Central Portal Publisher Service. ([1570092](https://github.com/DanySK/publish-on-central/commit/1570092e7a005300cd05d42592bcf20f86a1bd7c))
+
+### Dependency updates
+
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v2.10.0 ([#1374](https://github.com/DanySK/publish-on-central/issues/1374)) ([023873f](https://github.com/DanySK/publish-on-central/commit/023873ff1ea154b474a385a995c4dbad5bc9b9e1))
+* **deps:** update plugin publishoncentral to v8.0.7 ([#1372](https://github.com/DanySK/publish-on-central/issues/1372)) ([e724c46](https://github.com/DanySK/publish-on-central/commit/e724c46e91978ce664c1c00d28953c15e54df27c))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.18 ([#1373](https://github.com/DanySK/publish-on-central/issues/1373)) ([72ea029](https://github.com/DanySK/publish-on-central/commit/72ea02927076ba7b9553f543a7cc5cdee772d6ca))
+
 ## [8.0.7](https://github.com/DanySK/publish-on-central/compare/8.0.6...8.0.7) (2025-05-03)
 
 ### Dependency updates
