@@ -1,3 +1,18 @@
+## [9.0.4](https://github.com/DanySK/publish-on-central/compare/9.0.3...9.0.4) (2025-06-25)
+
+### Dependency updates
+
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v3.1.1 ([#1401](https://github.com/DanySK/publish-on-central/issues/1401)) ([72d185b](https://github.com/DanySK/publish-on-central/commit/72d185b1a2ff764ba5414bfe4ad5fa002f0af19e))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v3.2.0 ([#1406](https://github.com/DanySK/publish-on-central/issues/1406)) ([97d2e0c](https://github.com/DanySK/publish-on-central/commit/97d2e0c72e826ed44d9074716e3807a244861897))
+* **deps:** update plugin kotlin-qa to v0.89.2 ([#1402](https://github.com/DanySK/publish-on-central/issues/1402)) ([468f33f](https://github.com/DanySK/publish-on-central/commit/468f33ff3e069c62ac47bf61d1ca42357edfb1de))
+* **deps:** update plugin multijvmtesting to v3.5.2 ([#1403](https://github.com/DanySK/publish-on-central/issues/1403)) ([e547635](https://github.com/DanySK/publish-on-central/commit/e5476356203cf7a7fb93b98a3338e3a23dbf79f6))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.27 ([#1404](https://github.com/DanySK/publish-on-central/issues/1404)) ([a18749c](https://github.com/DanySK/publish-on-central/commit/a18749c133500c022863e72486b5cce7d1da728a))
+* **deps:** update plugin publishoncentral to v9.0.3 ([#1405](https://github.com/DanySK/publish-on-central/issues/1405)) ([ae01db3](https://github.com/DanySK/publish-on-central/commit/ae01db3d147da9bf5e271847db3a7dd3f3de3510))
+
+### Bug Fixes
+
+* **deps:** drop hard dependency on kotlinx-coroutines ([#1407](https://github.com/DanySK/publish-on-central/issues/1407)) ([a69299d](https://github.com/DanySK/publish-on-central/commit/a69299d31b8cc5340ff86989c644c2bc2055f402))
+
 ## [9.0.3](https://github.com/DanySK/publish-on-central/compare/9.0.2...9.0.3) (2025-06-23)
 
 ### Dependency updates
