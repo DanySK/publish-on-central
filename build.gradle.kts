@@ -45,7 +45,6 @@ dependencies {
     implementation(libs.maven.central.api)
     implementation(libs.kotlin.gradlePlugin)
     implementation(libs.dokka.gradlePlugin)
-    implementation(libs.kotlinx.coroutines)
     testImplementation(libs.testkit)
     testImplementation(libs.bundles.kotlin.testing)
 }
