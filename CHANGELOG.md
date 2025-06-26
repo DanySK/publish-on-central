@@ -1,3 +1,22 @@
+## [9.0.5](https://github.com/DanySK/publish-on-central/compare/9.0.4...9.0.5) (2025-06-26)
+
+### Dependency updates
+
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v3.3.0 ([#1409](https://github.com/DanySK/publish-on-central/issues/1409)) ([7e17602](https://github.com/DanySK/publish-on-central/commit/7e17602cbb310d19c367ba2e41f377500ef501af))
+* **deps:** update plugin kotlin-qa to v0.86.2 ([#1411](https://github.com/DanySK/publish-on-central/issues/1411)) ([68bb6ea](https://github.com/DanySK/publish-on-central/commit/68bb6ea21519ccd2367fca9e2df09e2953c02f19))
+* **deps:** update plugin kotlin-qa to v0.87.1 ([#1416](https://github.com/DanySK/publish-on-central/issues/1416)) ([836732e](https://github.com/DanySK/publish-on-central/commit/836732ef997277b74f1e5d4813e8d78a938df09d))
+* **deps:** update plugin kotlin-qa to v0.88.0 ([#1417](https://github.com/DanySK/publish-on-central/issues/1417)) ([80c6c02](https://github.com/DanySK/publish-on-central/commit/80c6c02562508f819a8b68df1c14910f4324f563))
+* **deps:** update plugin multijvmtesting to v3.4.3 ([#1412](https://github.com/DanySK/publish-on-central/issues/1412)) ([2beabc2](https://github.com/DanySK/publish-on-central/commit/2beabc22bcb5e5797979f7013b4374fc93005423))
+* **deps:** update plugin publishoncentral to v9.0.4 ([#1408](https://github.com/DanySK/publish-on-central/issues/1408)) ([6ff81b5](https://github.com/DanySK/publish-on-central/commit/6ff81b53b752f1b6c5f7bdac94eec47fc3825b37))
+
+### Revert previous changes
+
+* revert recent updates that broke the plugin functionality ([7fa1be8](https://github.com/DanySK/publish-on-central/commit/7fa1be8d3bcbdb8889a98bef8c5a82238749c17f))
+
+### Build and continuous integration
+
+* always publish this plugin as a form of end-to-end test ([5c76479](https://github.com/DanySK/publish-on-central/commit/5c764791f15e725315e77a0ba0700130147963af))
+
 ## [9.0.4](https://github.com/DanySK/publish-on-central/compare/9.0.3...9.0.4) (2025-06-25)
 
 ### Dependency updates
