@@ -11,21 +11,23 @@ jobs:
         os: [windows, macos, ubuntu]
     runs-on: ${{ matrix.os }}-latest
     steps:
-      - name: Decide whether to release development versions
-        id: release-dev
-        env:
-          RELEASE: false
-        run: echo "release=$RELEASE" >> $GITHUB_OUTPUT
+      - name: Find if secrets are available
+        id: secrets
+        uses: DanySK/are-secrets-available@1.0.0
+        with:
+          secrets: ${{ toJson(secrets) }}
       - name: Checkout
         uses: DanySK/action-checkout@0.2.22
       - uses: DanySK/build-check-deploy-gradle-action@4.0.1
         with:
           check-command: true
           deploy-command: |
-            ./gradlew publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication validateMavenCentralPortalPublication releaseMavenCentralPortalPublication
+            mkdir -p build
+            rsync -av --exclude build/ --exclude '.*' ./ build/self/
+            ./gradlew --include-build=build/self publishAllPublicationsToProjectLocalRepository zipMavenCentralPortalPublication validateMavenCentralPortalPublication releaseMavenCentralPortalPublication
           should-run-codecov: ${{ runner.os == 'Linux' }}
           codecov-token: ${{ secrets.CODECOV_TOKEN }}
-          should-deploy: ${{ runner.os == 'Linux' && steps.release-dev.outputs.release == 'true' }}
+          should-deploy: ${{ runner.os == 'Linux' && steps.secrets.outputs.has-secrets == 'true' }}
           gradle-publish-secret: ${{ secrets.GRADLE_PUBLISH_SECRET }}
           gradle-publish-key: ${{ secrets.GRADLE_PUBLISH_KEY }}
           maven-central-username: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
