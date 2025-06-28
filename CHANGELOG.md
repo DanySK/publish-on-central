@@ -1,3 +1,14 @@
+## [9.0.6](https://github.com/DanySK/publish-on-central/compare/9.0.5...9.0.6) (2025-06-28)
+
+### Dependency updates
+
+* **deps:** update node.js to 22.17 ([#1421](https://github.com/DanySK/publish-on-central/issues/1421)) ([8760875](https://github.com/DanySK/publish-on-central/commit/87608755734eefc27f8b998ccc2f8461f5979b41))
+* **deps:** update plugin publishoncentral to v9 ([fc26d60](https://github.com/DanySK/publish-on-central/commit/fc26d60043e33eb5bb4f14a42d88201fdd071e3d))
+
+### Bug Fixes
+
+* add an early verification that coroutine spilling works ([#1423](https://github.com/DanySK/publish-on-central/issues/1423)) ([53717f8](https://github.com/DanySK/publish-on-central/commit/53717f81140efc32290010b7c02eee6cadb36195))
+
 ## [9.0.5](https://github.com/DanySK/publish-on-central/compare/9.0.4...9.0.5) (2025-06-26)
 
 ### Dependency updates
