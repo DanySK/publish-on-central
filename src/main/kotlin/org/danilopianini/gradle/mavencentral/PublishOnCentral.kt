@@ -1,5 +1,8 @@
 package org.danilopianini.gradle.mavencentral
 
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configurePomForMavenCentral
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.registerTaskIfNeeded
 import org.danilopianini.gradle.mavencentral.ProjectExtensions.setupMavenCentralPortal
@@ -41,6 +44,17 @@ class PublishOnCentral : Plugin<Project> {
     }
 
     override fun apply(project: Project) {
+        runBlocking {
+            launch {
+                val a = "A"
+                val b = "B"
+                val c = "C"
+                delay(10)
+                project.logger.trace("Coroutine spilling support test: {}", a + b + c)
+                delay(10)
+                project.logger.trace("Coroutine spilling support verified")
+            }
+        }
         project.plugins.apply(MavenPublishPlugin::class.java)
         project.plugins.apply(SigningPlugin::class.java)
         val extension = project.extensions.create<PublishOnCentralExtension>("publishOnCentral", project)
