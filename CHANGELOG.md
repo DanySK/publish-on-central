@@ -1,3 +1,15 @@
+## [9.0.7](https://github.com/DanySK/publish-on-central/compare/9.0.6...9.0.7) (2025-07-04)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v8.14.3 ([#1431](https://github.com/DanySK/publish-on-central/issues/1431)) ([d9153c9](https://github.com/DanySK/publish-on-central/commit/d9153c9ce7125a22c165aaedd75c94c4d7f3ccef))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.134 ([#1427](https://github.com/DanySK/publish-on-central/issues/1427)) ([df9db91](https://github.com/DanySK/publish-on-central/commit/df9db91ca578681babeba4d2b26e4ff0f772692a))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.135 ([#1429](https://github.com/DanySK/publish-on-central/issues/1429)) ([d0f54b6](https://github.com/DanySK/publish-on-central/commit/d0f54b6bc0b1c838ebd54c1b02ad4e2f26d4829e))
+* **deps:** update npm to v11 ([23f6933](https://github.com/DanySK/publish-on-central/commit/23f69333dadcc90b1934c9af27fcdf00da2d7ff9))
+* **deps:** update plugin gitsemver to v5.1.5 ([#1426](https://github.com/DanySK/publish-on-central/issues/1426)) ([c80a8fe](https://github.com/DanySK/publish-on-central/commit/c80a8fe9f62664409a78236f433aa44f6a32e7af))
+* **deps:** update plugin gitsemver to v5.1.6 ([#1428](https://github.com/DanySK/publish-on-central/issues/1428)) ([a675ee8](https://github.com/DanySK/publish-on-central/commit/a675ee80cef8916dfbd75ecb9343a4c072a165d1))
+* **deps:** update plugin publishoncentral to v9.0.6 ([#1425](https://github.com/DanySK/publish-on-central/issues/1425)) ([1331958](https://github.com/DanySK/publish-on-central/commit/133195860a55904eb2407590244fbbb5ec2036be))
+
 ## [9.0.6](https://github.com/DanySK/publish-on-central/compare/9.0.5...9.0.6) (2025-06-28)
 
 ### Dependency updates
