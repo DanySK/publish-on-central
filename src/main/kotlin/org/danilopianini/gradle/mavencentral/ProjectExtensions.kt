@@ -97,13 +97,13 @@ internal object ProjectExtensions {
         )
         tasks.register("saveMavenCentralPortalDeploymentId") { save ->
             val fileName = "maven-central-portal-bundle-id"
-            val file = rootProject.layout.buildDirectory.map { it.asFile.resolve(fileName) }
+            val file = project.layout.buildDirectory.map { it.asFile.resolve(fileName) }
             save.group = PublishingPlugin.PUBLISH_TASK_GROUP
-            save.description = "Saves the Maven Central Portal deployment ID locally in ${file.get().absolutePath}"
+            save.description = "Saves the Maven Central Portal deployment ID locally"
             save.dependsOn(zipMavenCentralPortal)
             save.outputs.file(file)
             save.doLast {
-                file.get().writeText("${portalDeployment.fileToUpload}=${portalDeployment.deploymentId}\n")
+                file.get().writeText(portalDeployment.deploymentId)
             }
         }
         val validate =
