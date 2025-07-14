@@ -1,3 +1,16 @@
+## [9.0.8](https://github.com/DanySK/publish-on-central/compare/9.0.7...9.0.8) (2025-07-14)
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.136 ([#1434](https://github.com/DanySK/publish-on-central/issues/1434)) ([8ea3ff4](https://github.com/DanySK/publish-on-central/commit/8ea3ff4b0729e9b736326ed249859399651bc33f))
+* **deps:** update plugin gitsemver to v5.1.7 ([#1432](https://github.com/DanySK/publish-on-central/issues/1432)) ([e79fff0](https://github.com/DanySK/publish-on-central/commit/e79fff0654fa1433e388f15d4d84dd7d4cda3882))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.28 ([#1437](https://github.com/DanySK/publish-on-central/issues/1437)) ([082aa59](https://github.com/DanySK/publish-on-central/commit/082aa59330a00d93dfffcce4cb45b3c55d5a74d6))
+* **deps:** update plugin publishoncentral to v9.0.7 ([#1433](https://github.com/DanySK/publish-on-central/issues/1433)) ([935df8b](https://github.com/DanySK/publish-on-central/commit/935df8bcd30903ac979603b1946b7a2791bd3c10))
+
+### Bug Fixes
+
+* avoid saved bundle ids overwrite in multiprojects ([#1438](https://github.com/DanySK/publish-on-central/issues/1438)) ([4a8088a](https://github.com/DanySK/publish-on-central/commit/4a8088a8502e4b8fe06174e89f936767d2350f54))
+
 ## [9.0.7](https://github.com/DanySK/publish-on-central/compare/9.0.6...9.0.7) (2025-07-04)
 
 ### Dependency updates
