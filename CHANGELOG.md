@@ -1,3 +1,16 @@
+## [9.1.0](https://github.com/DanySK/publish-on-central/compare/9.0.8...9.1.0) (2025-07-29)
+
+### Features
+
+* autodetect projects with no sources and skip their publication ([#1445](https://github.com/DanySK/publish-on-central/issues/1445)) ([aa7791f](https://github.com/DanySK/publish-on-central/commit/aa7791f431940271d8f355aa9f4bc058ed14e332))
+
+### Dependency updates
+
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.137 ([#1441](https://github.com/DanySK/publish-on-central/issues/1441)) ([545255b](https://github.com/DanySK/publish-on-central/commit/545255b1c0a76b853bb856554f1df41b9a954bde))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.138 ([#1443](https://github.com/DanySK/publish-on-central/issues/1443)) ([146d055](https://github.com/DanySK/publish-on-central/commit/146d0559e0c6d666e0470a9da3fba99d0c351e54))
+* **deps:** update plugin com.gradle.develocity to v4.1 ([#1440](https://github.com/DanySK/publish-on-central/issues/1440)) ([f35688a](https://github.com/DanySK/publish-on-central/commit/f35688aada293c65eb5253590bc239c97c737157))
+* **deps:** update plugin publishoncentral to v9.0.8 ([#1439](https://github.com/DanySK/publish-on-central/issues/1439)) ([2e7de09](https://github.com/DanySK/publish-on-central/commit/2e7de094d349c3df44462921ef9606f74434f863))
+
 ## [9.0.8](https://github.com/DanySK/publish-on-central/compare/9.0.7...9.0.8) (2025-07-14)
 
 ### Dependency updates
