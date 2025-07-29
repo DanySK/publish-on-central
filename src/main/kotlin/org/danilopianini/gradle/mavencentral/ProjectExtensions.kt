@@ -1,13 +1,13 @@
 package org.danilopianini.gradle.mavencentral
 
 import kotlin.reflect.KClass
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.runBlocking
 import org.danilopianini.gradle.mavencentral.MavenConfigurationSupport.configureRepository
 import org.danilopianini.gradle.mavencentral.portal.PublishPortalDeployment
 import org.danilopianini.gradle.mavencentral.portal.PublishPortalDeployment.Companion.DROP_TASK_NAME
 import org.danilopianini.gradle.mavencentral.portal.PublishPortalDeployment.Companion.RELEASE_TASK_NAME
 import org.danilopianini.gradle.mavencentral.tasks.ZipMavenCentralPortalPublication
-import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.UnknownTaskException
@@ -38,17 +38,6 @@ internal object ProjectExtensions {
             }
         }.getOrThrow()
 
-    fun Project.registerTaskIfNeeded(
-        name: String,
-        vararg parameters: Any = emptyArray(),
-        configuration: DefaultTask.() -> Unit = { },
-    ): TaskProvider<out Task> = registerTaskIfNeeded(
-        name = name,
-        type = DefaultTask::class,
-        parameters = parameters,
-        configuration = configuration,
-    )
-
     fun Project.warnIfCredentialsAreMissing(repository: Repository) {
         if (repository.user.orNull == null) {
             logger.warn(
@@ -69,7 +58,7 @@ internal object ProjectExtensions {
 
     fun Project.setupMavenCentralPortal() {
         configureRepository(Repository.projectLocalRepository(project))
-        val zipMavenCentralPortal =
+        val zipMavenCentralPortal: TaskProvider<ZipMavenCentralPortalPublication> =
             tasks.register<ZipMavenCentralPortalPublication>(
                 checkNotNull(ZipMavenCentralPortalPublication::class.simpleName)
                     .replaceFirstChar { it.lowercase() },
@@ -95,6 +84,14 @@ internal object ProjectExtensions {
             },
             zipTask = zipMavenCentralPortal,
         )
+        fun Task.ifThereAreInputFiles(block: suspend CoroutineScope.() -> Unit) = doLast {
+            when {
+                zipMavenCentralPortal.get().inputs.files.isEmpty -> project.logger.lifecycle(
+                    "No input files available for ${project.name}'s Maven Publication, skipping $name",
+                )
+                else -> runBlocking(block = block)
+            }
+        }
         tasks.register("saveMavenCentralPortalDeploymentId") { save ->
             val fileName = "maven-central-portal-bundle-id"
             val file = project.layout.buildDirectory.map { it.asFile.resolve(fileName) }
@@ -102,42 +99,27 @@ internal object ProjectExtensions {
             save.description = "Saves the Maven Central Portal deployment ID locally"
             save.dependsOn(zipMavenCentralPortal)
             save.outputs.file(file)
-            save.doLast {
-                file.get().writeText(portalDeployment.deploymentId)
-            }
+            save.ifThereAreInputFiles { file.get().writeText(portalDeployment.deploymentId) }
         }
-        val validate =
-            tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
-                validate.group = PublishingPlugin.PUBLISH_TASK_GROUP
-                validate.description = "Validates the Maven Central Portal publication, uploading if needed"
-                validate.mustRunAfter(zipMavenCentralPortal)
-                validate.doLast {
-                    runBlocking {
-                        portalDeployment.validate()
-                    }
-                }
-            }
+        val validate = tasks.register(PublishPortalDeployment.VALIDATE_TASK_NAME) { validate ->
+            validate.group = PublishingPlugin.PUBLISH_TASK_GROUP
+            validate.description = "Validates the Maven Central Portal publication, uploading if needed"
+            validate.mustRunAfter(zipMavenCentralPortal)
+            validate.ifThereAreInputFiles { portalDeployment.validate() }
+        }
         tasks.register(DROP_TASK_NAME) { drop ->
             drop.group = PublishingPlugin.PUBLISH_TASK_GROUP
             drop.description = "Drops the Maven Central Portal publication"
             drop.mustRunAfter(validate)
             drop.mustRunAfter(zipMavenCentralPortal)
-            drop.doLast {
-                runBlocking {
-                    portalDeployment.drop()
-                }
-            }
+            drop.ifThereAreInputFiles { portalDeployment.drop() }
         }
         tasks.register(RELEASE_TASK_NAME) { release ->
             release.group = PublishingPlugin.PUBLISH_TASK_GROUP
             release.description = "Releases the Maven Central Portal publication"
             release.mustRunAfter(validate)
             release.mustRunAfter(zipMavenCentralPortal)
-            release.doLast {
-                runBlocking {
-                    portalDeployment.release()
-                }
-            }
+            release.ifThereAreInputFiles { portalDeployment.release() }
         }
         gradle.taskGraph.whenReady { taskGraph ->
             val allTasks = taskGraph.allTasks.map { it.name }.toSet()
