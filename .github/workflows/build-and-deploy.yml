@@ -17,7 +17,7 @@ jobs:
         with:
           secrets: ${{ toJson(secrets) }}
       - name: Checkout
-        uses: DanySK/action-checkout@0.2.23
+        uses: DanySK/action-checkout@0.2.24
       - uses: DanySK/build-check-deploy-gradle-action@4.0.3
         with:
           check-command: true
