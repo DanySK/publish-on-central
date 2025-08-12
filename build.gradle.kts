@@ -35,6 +35,7 @@ repositories {
 }
 
 multiJvm {
+    jvmVersionForCompilation.set(17)
     maximumSupportedJvmVersion.set(latestJavaSupportedByGradle)
 }
 

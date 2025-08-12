@@ -7,7 +7,6 @@
 plugins {
     // Support convention plugins written in Kotlin. Convention plugins are build scripts in 'src/main' that automatically become available as plugins in the main build.
     `kotlin-dsl`
-    id("org.danilopianini.multi-jvm-test-plugin") version "0.5.6"
 }
 
 repositories {
@@ -17,9 +16,10 @@ repositories {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(17)
     }
 }
+
 
 dependencies {
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin")

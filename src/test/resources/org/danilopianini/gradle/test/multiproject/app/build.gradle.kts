@@ -7,6 +7,7 @@
 plugins {
     id("multiproject.kotlin-application-conventions")
     id("org.danilopianini.multi-jvm-test-plugin")
+    id("org.danilopianini.publish-on-central")
 }
 
 dependencies {
