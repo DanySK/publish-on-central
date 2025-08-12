@@ -18,10 +18,10 @@ import org.gradle.kotlin.dsl.property
 import org.gradle.kotlin.dsl.register
 
 internal object ProjectExtensions {
-    inline fun <reified T> Project.propertyWithDefault(default: T?): Property<T> =
+    inline fun <reified T : Any> Project.propertyWithDefault(default: T?): Property<T> =
         objects.property<T>().apply { convention(default) }
 
-    inline fun <reified T> Project.propertyWithDefaultProvider(noinline default: () -> T?): Property<T> =
+    inline fun <reified T : Any> Project.propertyWithDefaultProvider(noinline default: () -> T?): Property<T> =
         objects.property<T>().apply { convention(provider(default)) }
 
     fun <T : Task> Project.registerTaskIfNeeded(
