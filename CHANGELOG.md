@@ -1,3 +1,30 @@
+## [9.1.1](https://github.com/DanySK/publish-on-central/compare/9.1.0...9.1.1) (2025-08-12)
+
+### ⚠ BREAKING CHANGES
+
+* **core-deps:** update dependency gradle to v9, require Java 17+ (#1461)
+
+### Dependency updates
+
+* **core-deps:** update dependency gradle to v9, require Java 17+ ([#1461](https://github.com/DanySK/publish-on-central/issues/1461)) ([029f3a4](https://github.com/DanySK/publish-on-central/commit/029f3a4d68aff739e542a7cc38ff4cca6dde3324))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.139 ([#1451](https://github.com/DanySK/publish-on-central/issues/1451)) ([52dc971](https://github.com/DanySK/publish-on-central/commit/52dc9711f1c8d3f1283e3aaf2c39a5eea9cde2ce))
+* **deps:** update node.js to 22.18 ([#1449](https://github.com/DanySK/publish-on-central/issues/1449)) ([afa8dfc](https://github.com/DanySK/publish-on-central/commit/afa8dfc7c7cf34af0546a469f93e3d1945b12b75))
+* **deps:** update plugin gitsemver to v6 ([#1459](https://github.com/DanySK/publish-on-central/issues/1459)) ([366c3ff](https://github.com/DanySK/publish-on-central/commit/366c3ff37a711f0a0c24eba642f51fd093cd02b4))
+* **deps:** update plugin publishoncentral to v9.1.0 ([#1447](https://github.com/DanySK/publish-on-central/issues/1447)) ([5722c6c](https://github.com/DanySK/publish-on-central/commit/5722c6c7d33737f8061f85ca981f12414e7c1791))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v4.3.0 ([#1454](https://github.com/DanySK/publish-on-central/issues/1454)) ([736ed1c](https://github.com/DanySK/publish-on-central/commit/736ed1c713038241bef013819e7b7cb9a1d0dca3))
+* **deps:** update actions/checkout action to v5 ([#1455](https://github.com/DanySK/publish-on-central/issues/1455)) ([a069897](https://github.com/DanySK/publish-on-central/commit/a069897fde4a65fd47dfd41cf869745fe7ab79dc))
+* **deps:** update danysk/action-checkout action to v0.2.23 ([#1456](https://github.com/DanySK/publish-on-central/issues/1456)) ([ab3650c](https://github.com/DanySK/publish-on-central/commit/ab3650ce71789e7cdb1de004d32c4ef8ef4c68a0))
+* **deps:** update danysk/action-checkout action to v0.2.24 ([#1458](https://github.com/DanySK/publish-on-central/issues/1458)) ([e44cb17](https://github.com/DanySK/publish-on-central/commit/e44cb17bb4a1dde3bbb47893e9518bd94b22de01))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.2 ([#1450](https://github.com/DanySK/publish-on-central/issues/1450)) ([5da1512](https://github.com/DanySK/publish-on-central/commit/5da1512cbbcfa34374d28f42b0ab9da1c1209e52))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.3 ([#1452](https://github.com/DanySK/publish-on-central/issues/1452)) ([a67d3e5](https://github.com/DanySK/publish-on-central/commit/a67d3e593fe77ac2c4105c5f71e70443a790fa65))
+
+### General maintenance
+
+* remove support for nullable types in property-creation helper methods ([#1460](https://github.com/DanySK/publish-on-central/issues/1460)) ([86077ac](https://github.com/DanySK/publish-on-central/commit/86077ac12e500111730990a141b1c5a1aa92003a))
+
 ## [9.1.0](https://github.com/DanySK/publish-on-central/compare/9.0.8...9.1.0) (2025-07-29)
 
 ### Features
