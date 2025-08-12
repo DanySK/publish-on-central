@@ -10,7 +10,7 @@ import org.gradle.kotlin.dsl.withType
 /**
  * A Zip task that creates a zip file containing the local Maven repository.
  */
-open class ZipMavenCentralPortalPublication @Inject constructor() : Zip() {
+abstract class ZipMavenCentralPortalPublication @Inject constructor() : Zip() {
     init {
         group = PublishingPlugin.PUBLISH_TASK_GROUP
         description = "Creates a zip file containing the project-local Maven repository"

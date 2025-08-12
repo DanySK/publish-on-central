@@ -1,6 +1,7 @@
 plugins {
+    java
     id("org.danilopianini.publish-on-central")
-    id("org.danilopianini.multi-jvm-test-plugin") version "0.5.6"
+    id("org.danilopianini.multi-jvm-test-plugin") version "4.0.1"
 }
 group = "io.github.danysk"
 version = "0.1.0"
@@ -10,9 +11,3 @@ java {
         languageVersion = JavaLanguageVersion.of(8)
     }
 }
-
-/*
-subprojects {
-    apply(plugin = "org.danilopianini.publish-on-central")
-}
- */

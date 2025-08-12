@@ -5,6 +5,7 @@
  */
 
 plugins {
+    id("org.danilopianini.publish-on-central")
     id("multiproject.kotlin-library-conventions")
     id("org.danilopianini.multi-jvm-test-plugin")
 }
