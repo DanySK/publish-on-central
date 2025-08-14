@@ -1,3 +1,14 @@
+## [9.1.3](https://github.com/DanySK/publish-on-central/compare/9.1.2...9.1.3) (2025-08-14)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.2.10 ([#1465](https://github.com/DanySK/publish-on-central/issues/1465)) ([f83c099](https://github.com/DanySK/publish-on-central/commit/f83c099d1ddfa61a405137ca52b350c6f912bfaf))
+* **deps:** update plugin kotlin-qa to v0.93.0 ([#1446](https://github.com/DanySK/publish-on-central/issues/1446)) ([b1d47d4](https://github.com/DanySK/publish-on-central/commit/b1d47d427c3c19e6a80633ea57a9e683597fbc1f))
+* **deps:** update plugin kotlin-qa to v0.93.1 ([#1466](https://github.com/DanySK/publish-on-central/issues/1466)) ([c2edad8](https://github.com/DanySK/publish-on-central/commit/c2edad859591b921a7a1bd370d74f4bde9d4b607))
+* **deps:** update plugin multijvmtesting to v4 ([#1453](https://github.com/DanySK/publish-on-central/issues/1453)) ([4461ae7](https://github.com/DanySK/publish-on-central/commit/4461ae779018820927acdcb15120c63b9281dd52))
+* **deps:** update plugin multijvmtesting to v4.0.2 ([#1463](https://github.com/DanySK/publish-on-central/issues/1463)) ([84f3206](https://github.com/DanySK/publish-on-central/commit/84f32065f3f2a1cca5bc51111c8ae75015521849))
+* **deps:** update plugin publishoncentral to v9.1.2 ([#1462](https://github.com/DanySK/publish-on-central/issues/1462)) ([db70e25](https://github.com/DanySK/publish-on-central/commit/db70e25339f12bb141735be3b5841ed689dadc6b))
+
 ## [9.1.2](https://github.com/DanySK/publish-on-central/compare/9.1.1...9.1.2) (2025-08-13)
 
 ### Dependency updates
