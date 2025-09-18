@@ -1,3 +1,20 @@
+## [9.1.5](https://github.com/DanySK/publish-on-central/compare/9.1.4...9.1.5) (2025-09-18)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.1.0 ([#1510](https://github.com/DanySK/publish-on-central/issues/1510)) ([708e143](https://github.com/DanySK/publish-on-central/commit/708e143c21a5c618719f32e859191eb336e4ab86))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.142 ([#1503](https://github.com/DanySK/publish-on-central/issues/1503)) ([fb5b2db](https://github.com/DanySK/publish-on-central/commit/fb5b2dbbe064f91d4e40c964a81b40e10bdc46b7))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.143 ([#1504](https://github.com/DanySK/publish-on-central/issues/1504)) ([88221c2](https://github.com/DanySK/publish-on-central/commit/88221c2ea6e9d168d96a01a0363aeb18dbf3af40))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.144 ([#1508](https://github.com/DanySK/publish-on-central/issues/1508)) ([86e5347](https://github.com/DanySK/publish-on-central/commit/86e534780c7bd165f4a57f736618e6dda6ecf061))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.145 ([#1509](https://github.com/DanySK/publish-on-central/issues/1509)) ([f643a2b](https://github.com/DanySK/publish-on-central/commit/f643a2b2a9f5c9281bcccebd71f065a0f1d782f5))
+* **deps:** update plugin com.gradle.develocity to v4.2 ([#1507](https://github.com/DanySK/publish-on-central/issues/1507)) ([e377e00](https://github.com/DanySK/publish-on-central/commit/e377e0052be473a6c51566dfe5291f473b8da528))
+* **deps:** update plugin gitsemver to v7.0.3 ([#1498](https://github.com/DanySK/publish-on-central/issues/1498)) ([93fbc4c](https://github.com/DanySK/publish-on-central/commit/93fbc4ccaea1ec0588a9f0fc1fab5e697a8e4483))
+* **deps:** update plugin kotlin-qa to v0.94.1 ([#1499](https://github.com/DanySK/publish-on-central/issues/1499)) ([d7c9958](https://github.com/DanySK/publish-on-central/commit/d7c9958d2bd7598671c92417998062bcf1033dcb))
+* **deps:** update plugin kotlin-qa to v0.95.0 ([#1505](https://github.com/DanySK/publish-on-central/issues/1505)) ([603cfad](https://github.com/DanySK/publish-on-central/commit/603cfad7e9114eedc9ede87bc87998fc7ce2831f))
+* **deps:** update plugin multijvmtesting to v4.1.1 ([#1500](https://github.com/DanySK/publish-on-central/issues/1500)) ([83d112e](https://github.com/DanySK/publish-on-central/commit/83d112e1eee56fb00bb6af3dd1722e630a961575))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.1 ([#1501](https://github.com/DanySK/publish-on-central/issues/1501)) ([d619b6f](https://github.com/DanySK/publish-on-central/commit/d619b6f332054d7014ef8a6e949d02d870c8f10c))
+* **deps:** update plugin publishoncentral to v9.1.4 ([#1502](https://github.com/DanySK/publish-on-central/issues/1502)) ([f765cb0](https://github.com/DanySK/publish-on-central/commit/f765cb0f5835df67a264de9c617fd68387837838))
+
 ## [9.1.4](https://github.com/DanySK/publish-on-central/compare/9.1.3...9.1.4) (2025-09-10)
 
 ### Dependency updates
