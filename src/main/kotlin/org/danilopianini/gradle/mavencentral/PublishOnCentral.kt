@@ -130,8 +130,9 @@ class PublishOnCentral : Plugin<Project> {
                             project.tasks.matching { task ->
                                 task.name.contains("dokkaGenerate", ignoreCase = true)
                             }
+                        } else {
+                            it
                         }
-                        it
                     },
                 )
             }
