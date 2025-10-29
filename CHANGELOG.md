@@ -1,3 +1,17 @@
+## [9.1.7](https://github.com/DanySK/publish-on-central/compare/9.1.6...9.1.7) (2025-10-29)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.2.0 ([#1542](https://github.com/DanySK/publish-on-central/issues/1542)) ([2dde8f1](https://github.com/DanySK/publish-on-central/commit/2dde8f166c1c633a31152f88e1407b1768bd5fa5))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.150 ([#1538](https://github.com/DanySK/publish-on-central/issues/1538)) ([511604c](https://github.com/DanySK/publish-on-central/commit/511604cd5d2c9bc4ec5617fb9041c72f565a36ba))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.151 ([#1539](https://github.com/DanySK/publish-on-central/issues/1539)) ([29717d6](https://github.com/DanySK/publish-on-central/commit/29717d6968b54d93d8bd67142d5b0c57495eb8b6))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.152 ([#1540](https://github.com/DanySK/publish-on-central/issues/1540)) ([a74f56e](https://github.com/DanySK/publish-on-central/commit/a74f56e30bc361f9896b7192b45e72298cbfa142))
+* **deps:** update plugin gitsemver to v7.0.5 ([#1533](https://github.com/DanySK/publish-on-central/issues/1533)) ([efa39ef](https://github.com/DanySK/publish-on-central/commit/efa39ef4dda8a02fe4483cae92f1c49da4807b34))
+* **deps:** update plugin gitsemver to v7.0.6 ([#1541](https://github.com/DanySK/publish-on-central/issues/1541)) ([7fd08c5](https://github.com/DanySK/publish-on-central/commit/7fd08c5b7fec0e7c3307f3518472b744faf26004))
+* **deps:** update plugin kotlin-qa to v0.95.2 ([#1536](https://github.com/DanySK/publish-on-central/issues/1536)) ([996d0a0](https://github.com/DanySK/publish-on-central/commit/996d0a011086355da4d65158d954576ae2703fc7))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.3 ([#1534](https://github.com/DanySK/publish-on-central/issues/1534)) ([4134abb](https://github.com/DanySK/publish-on-central/commit/4134abb39cc2e29e2c90fba953d14f42706a2cf6))
+* **deps:** update plugin publishoncentral to v9.1.6 ([#1535](https://github.com/DanySK/publish-on-central/issues/1535)) ([914a44d](https://github.com/DanySK/publish-on-central/commit/914a44d1302ba3e76e6b9a9911f6ee8cd283b2ca))
+
 ## [9.1.6](https://github.com/DanySK/publish-on-central/compare/9.1.5...9.1.6) (2025-10-23)
 
 ### Dependency updates
