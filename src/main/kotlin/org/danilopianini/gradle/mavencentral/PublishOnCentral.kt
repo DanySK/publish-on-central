@@ -120,7 +120,20 @@ class PublishOnCentral : Plugin<Project> {
                 javadocJar.duplicatesStrategy = DuplicatesStrategy.WARN
                 javadocJar.from(project.tasks.withType<DokkaGenerateTask>().matching { "Publication" in it.name })
                 javadocJar.from(
-                    project.tasks.withType<DokkaTask>().matching { it.name.contains("html", ignoreCase = true) },
+                    project.tasks.matching { task ->
+                        task.name.contains(
+                            "dokkaGeneratePublicationHtml",
+                            ignoreCase = true,
+                        )
+                    }.let {
+                        if (it.isEmpty()) {
+                            project.tasks.matching { task ->
+                                task.name.contains("dokkaGenerate", ignoreCase = true)
+                            }
+                        } else {
+                            it
+                        }
+                    },
                 )
             }
         }
