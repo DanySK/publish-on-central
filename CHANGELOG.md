@@ -1,3 +1,18 @@
+## [9.1.10](https://github.com/DanySK/publish-on-central/compare/9.1.9...9.1.10) (2026-01-16)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.3.0 ([#1592](https://github.com/DanySK/publish-on-central/issues/1592)) ([0a43289](https://github.com/DanySK/publish-on-central/commit/0a4328931cbab74f4a84e2ab44514098e7fbba79))
+* **deps:** update node.js to 24.13 ([#1588](https://github.com/DanySK/publish-on-central/issues/1588)) ([f0c13e0](https://github.com/DanySK/publish-on-central/commit/f0c13e0290ce6a44cce404f0754a262fe2391162))
+* **deps:** update plugin com.gradle.develocity to v4.3.1 ([#1590](https://github.com/DanySK/publish-on-central/issues/1590)) ([45816fc](https://github.com/DanySK/publish-on-central/commit/45816fcabb1f44cd08d10af15966bcc9c822aeda))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.6 ([#1584](https://github.com/DanySK/publish-on-central/issues/1584)) ([768c2bc](https://github.com/DanySK/publish-on-central/commit/768c2bc745d569d2b5d790e3fbad3e4a8c70836a))
+* **deps:** update plugin publishoncentral to v9.1.9 ([#1585](https://github.com/DanySK/publish-on-central/issues/1585)) ([e746573](https://github.com/DanySK/publish-on-central/commit/e746573a1627b7d664437919be4e010f46533dfe))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.2.0 ([#1589](https://github.com/DanySK/publish-on-central/issues/1589)) ([493a767](https://github.com/DanySK/publish-on-central/commit/493a7674e212b214438e77326cab8470784c7a64))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.18 ([#1587](https://github.com/DanySK/publish-on-central/issues/1587)) ([1422cb1](https://github.com/DanySK/publish-on-central/commit/1422cb1ad61790bba8466cf613524e22f29a9b12))
+
 ## [9.1.9](https://github.com/DanySK/publish-on-central/compare/9.1.8...9.1.9) (2025-12-16)
 
 ### Dependency updates
