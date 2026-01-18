@@ -24,7 +24,6 @@ import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 
 /**
@@ -118,9 +117,13 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.withType<Javadoc>().configureEach { it.enabled = false }
             project.tasks.withType<Jar>().matching { "javadoc" in it.name }.configureEach { javadocJar ->
                 javadocJar.duplicatesStrategy = DuplicatesStrategy.WARN
-                javadocJar.from(project.tasks.withType<DokkaGenerateTask>().matching { "Publication" in it.name })
                 javadocJar.from(
-                    project.tasks.withType<DokkaTask>().matching { it.name.contains("html", ignoreCase = true) },
+                    project.tasks.withType<DokkaGenerateTask>()
+                        .matching { "Publication" in it.name },
+                )
+                javadocJar.from(
+                    project.tasks.withType<DokkaGenerateTask>()
+                        .matching { it.name.contains("html", ignoreCase = true) },
                 )
             }
         }
