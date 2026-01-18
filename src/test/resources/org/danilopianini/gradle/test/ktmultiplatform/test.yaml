@@ -10,17 +10,17 @@ tests:
     expectation:
       outcomes:
         success: *tasks
-  - description: "dokkaHtml works"
+  - description: "dokkaGeneratePublicationHtml works"
     configuration:
       tasks:
-        - dokkaHtml
+        - dokkaGeneratePublicationHtml
       options:
         - '--stacktrace'
     expectation:
       outcomes:
         success:
-          - dokkaHtml
-  - description: "javadocJar should rely on dokkaHtml instead of dokkaJavadoc"
+          - dokkaGeneratePublicationHtml
+  - description: "javadocJar should rely on dokkaGeneratePublicationHtml instead of dokkaJavadoc"
     configuration:
       tasks:
         - javadocJar
@@ -30,7 +30,7 @@ tests:
     expectation:
       outcomes:
         success:
-          - dokkaHtml
+          - dokkaGeneratePublicationHtml
         notExecuted:
           - dokkaJavadoc
       output:
