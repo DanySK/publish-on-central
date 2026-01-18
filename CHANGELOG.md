@@ -1,3 +1,25 @@
+## [9.1.11](https://github.com/DanySK/publish-on-central/compare/9.1.10...9.1.11) (2026-01-18)
+
+### Dependency updates
+
+* **deps:** update plugin gitsemver to v7.0.9 ([#1593](https://github.com/DanySK/publish-on-central/issues/1593)) ([afb5294](https://github.com/DanySK/publish-on-central/commit/afb52944cfd3a71a3b99e2b7ff43b9c85cc0e970))
+* **deps:** update plugin kotlin-qa to v0.100.1 ([#1586](https://github.com/DanySK/publish-on-central/issues/1586)) ([7e3a232](https://github.com/DanySK/publish-on-central/commit/7e3a23221a2a2e9cdd22d9f366f7f5510a26d6b9))
+* **deps:** update plugin kotlin-qa to v0.98.2 ([#1556](https://github.com/DanySK/publish-on-central/issues/1556)) ([4daed6c](https://github.com/DanySK/publish-on-central/commit/4daed6c58e6879c2969d1882ab46c92e2287bc2c))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.7 ([#1591](https://github.com/DanySK/publish-on-central/issues/1591)) ([00a8ee1](https://github.com/DanySK/publish-on-central/commit/00a8ee16b5e844d4f5d51c52f6ecd48bd35a03bc))
+* **deps:** update plugin publishoncentral to v9.1.10 ([#1594](https://github.com/DanySK/publish-on-central/issues/1594)) ([3c5f26a](https://github.com/DanySK/publish-on-central/commit/3c5f26a8abe04c0a06d00a9a04388653b3665382))
+
+### Documentation
+
+* enable Dokka V2 ([88d4b1a](https://github.com/DanySK/publish-on-central/commit/88d4b1ab63ca1da2754e8773138a55e68cf67ab5))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.19 ([#1595](https://github.com/DanySK/publish-on-central/issues/1595)) ([8c95ef9](https://github.com/DanySK/publish-on-central/commit/8c95ef9bca091d47449305492f0411c4a6917886))
+
+### Style improvements
+
+* import the style configuration from AlchemistSimulator/Alchemist ([#1596](https://github.com/DanySK/publish-on-central/issues/1596)) ([04d4f53](https://github.com/DanySK/publish-on-central/commit/04d4f537455ca98e6c88ca8b2f473e3213f217b0))
+
 ## [9.1.10](https://github.com/DanySK/publish-on-central/compare/9.1.9...9.1.10) (2026-01-16)
 
 ### Dependency updates
