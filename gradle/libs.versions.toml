@@ -1,6 +1,6 @@
 [versions]
 dokka = "2.0.0"
-kotest = "6.1.1"
+kotest = "6.1.2"
 kotlin = "2.3.0"
 testkit = "0.9.0"
 
