@@ -1,3 +1,19 @@
+## [9.1.13](https://github.com/DanySK/publish-on-central/compare/9.1.12...9.1.13) (2026-02-13)
+
+### Dependency updates
+
+* **core-deps:** update dependency org.jetbrains.kotlin.jvm to v2.3.10 ([#1621](https://github.com/DanySK/publish-on-central/issues/1621)) ([3d35b34](https://github.com/DanySK/publish-on-central/commit/3d35b3490ab4bee77dbbd0ca1d9b3e138145d169))
+* **deps:** update kotest to v6.1.3 ([#1622](https://github.com/DanySK/publish-on-central/issues/1622)) ([54efabd](https://github.com/DanySK/publish-on-central/commit/54efabdbc471053b80be605a0511549f87261314))
+* **deps:** update plugin kotlin-qa to v0.100.3 ([#1616](https://github.com/DanySK/publish-on-central/issues/1616)) ([70f4a91](https://github.com/DanySK/publish-on-central/commit/70f4a91e25120eb11db9ea58dfda4b53268af2f0))
+* **deps:** update plugin kotlin-qa to v0.101.0 ([#1618](https://github.com/DanySK/publish-on-central/issues/1618)) ([5fddb14](https://github.com/DanySK/publish-on-central/commit/5fddb14a2dfc2958bdc65f2535d62401a9aa64f0))
+* **deps:** update plugin kotlin-qa to v0.101.1 ([#1624](https://github.com/DanySK/publish-on-central/issues/1624)) ([992b1e1](https://github.com/DanySK/publish-on-central/commit/992b1e111c44c7c46398734b1a958cd6f6e4b92e))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.9 ([#1623](https://github.com/DanySK/publish-on-central/issues/1623)) ([b95afed](https://github.com/DanySK/publish-on-central/commit/b95afed8e12e41b9f6d333d39495d33b93777891))
+* **deps:** update plugin publishoncentral to v9.1.12 ([#1617](https://github.com/DanySK/publish-on-central/issues/1617)) ([ba06707](https://github.com/DanySK/publish-on-central/commit/ba067078e6e3a4032040cbc5f55f7326616dd6d4))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.23 ([#1619](https://github.com/DanySK/publish-on-central/issues/1619)) ([70d4d9a](https://github.com/DanySK/publish-on-central/commit/70d4d9a858f67b1f160fbd42b22934e4ab0f3412))
+
 ## [9.1.12](https://github.com/DanySK/publish-on-central/compare/9.1.11...9.1.12) (2026-01-30)
 
 ### Dependency updates
