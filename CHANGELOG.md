@@ -1,3 +1,28 @@
+## [9.1.14](https://github.com/DanySK/publish-on-central/compare/9.1.13...9.1.14) (2026-03-19)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.3.20 ([#1640](https://github.com/DanySK/publish-on-central/issues/1640)) ([5ed788d](https://github.com/DanySK/publish-on-central/commit/5ed788dcda102e092cbb7ee2bab8ca436a0a1e86))
+* **deps:** bump tar and npm ([02d3d9d](https://github.com/DanySK/publish-on-central/commit/02d3d9d54a2996953603f8fa3f0dbda8d3128f47))
+* **deps:** update kotest to v6.1.4 ([#1629](https://github.com/DanySK/publish-on-central/issues/1629)) ([83dcf8c](https://github.com/DanySK/publish-on-central/commit/83dcf8cc9895bec39329ab14f3f828d375245e96))
+* **deps:** update kotest to v6.1.5 ([#1636](https://github.com/DanySK/publish-on-central/issues/1636)) ([ebf7263](https://github.com/DanySK/publish-on-central/commit/ebf7263d68bcb8b7919ccf6a304e152de13e98ef))
+* **deps:** update kotest to v6.1.6 ([#1637](https://github.com/DanySK/publish-on-central/issues/1637)) ([4b2b07a](https://github.com/DanySK/publish-on-central/commit/4b2b07ac9489fe1de5fb7b81f4cc3209698bd13c))
+* **deps:** update kotest to v6.1.7 ([#1639](https://github.com/DanySK/publish-on-central/issues/1639)) ([1515a6c](https://github.com/DanySK/publish-on-central/commit/1515a6cfc838b7b55758a5bc52d0ec34a4c03449))
+* **deps:** update node.js to 24.14 ([#1630](https://github.com/DanySK/publish-on-central/issues/1630)) ([0974631](https://github.com/DanySK/publish-on-central/commit/097463175348cd46240a1bb0c2147059a2f1d1d1))
+* **deps:** update plugin gitsemver to v7.0.12 ([#1626](https://github.com/DanySK/publish-on-central/issues/1626)) ([693089f](https://github.com/DanySK/publish-on-central/commit/693089f711899e50367705b9d5c3fb19a94107fc))
+* **deps:** update plugin gitsemver to v7.0.13 ([#1634](https://github.com/DanySK/publish-on-central/issues/1634)) ([fafe993](https://github.com/DanySK/publish-on-central/commit/fafe9939c0daadebadf948cb88116ff164eb8452))
+* **deps:** update plugin gradlepluginpublish to v2.1.0 ([#1632](https://github.com/DanySK/publish-on-central/issues/1632)) ([472c3e5](https://github.com/DanySK/publish-on-central/commit/472c3e53290353f052f0a8be4f32331c53de9102))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.10 ([#1635](https://github.com/DanySK/publish-on-central/issues/1635)) ([94a947a](https://github.com/DanySK/publish-on-central/commit/94a947a741310f34bcd9dc86b09fc735be91aaec))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.11 ([#1641](https://github.com/DanySK/publish-on-central/issues/1641)) ([b501c55](https://github.com/DanySK/publish-on-central/commit/b501c558de2e5aa70ea1403f0befb815345477a6))
+* **deps:** update plugin publishoncentral to v9.1.13 ([#1627](https://github.com/DanySK/publish-on-central/issues/1627)) ([f3665f1](https://github.com/DanySK/publish-on-central/commit/f3665f18dbbb1ed1442a1bc1574faa90cc5f9864))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.3.0 ([#1631](https://github.com/DanySK/publish-on-central/issues/1631)) ([521cd1f](https://github.com/DanySK/publish-on-central/commit/521cd1f751346a20800310cecdbe37841d92872f))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.24 ([#1628](https://github.com/DanySK/publish-on-central/issues/1628)) ([1362684](https://github.com/DanySK/publish-on-central/commit/1362684681c59ff82d996c25a493d411d8e22187))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.25 ([#1642](https://github.com/DanySK/publish-on-central/issues/1642)) ([a82c4ea](https://github.com/DanySK/publish-on-central/commit/a82c4eaeca41e4c045c319a9853c6133efa4d2a0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.26 ([#1644](https://github.com/DanySK/publish-on-central/issues/1644)) ([adf11a3](https://github.com/DanySK/publish-on-central/commit/adf11a374feacb627f6ecf4b784a996652eee9e3))
+
 ## [9.1.13](https://github.com/DanySK/publish-on-central/compare/9.1.12...9.1.13) (2026-02-13)
 
 ### Dependency updates
