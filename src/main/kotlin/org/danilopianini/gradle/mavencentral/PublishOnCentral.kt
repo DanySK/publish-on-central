@@ -41,6 +41,15 @@ class PublishOnCentral : Plugin<Project> {
         private const val PUBLICATION_NAME = "OSSRH"
 
         private fun Project.javadocJarTask() = project.registerTaskIfNeeded("javadocJar", JavadocJar::class)
+
+        private fun Project.dokkaV2HtmlTasks() = tasks.withType<DokkaGenerateTask>().matching {
+            it.name.contains("publication", ignoreCase = true) &&
+                it.name.contains("html", ignoreCase = true)
+        }
+
+        private fun Project.dokkaV1HtmlTasks() = tasks.withType<DokkaTask>().matching {
+            it.name.contains("html", ignoreCase = true)
+        }
     }
 
     override fun apply(project: Project) {
@@ -118,10 +127,12 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.withType<Javadoc>().configureEach { it.enabled = false }
             project.tasks.withType<Jar>().matching { "javadoc" in it.name }.configureEach { javadocJar ->
                 javadocJar.duplicatesStrategy = DuplicatesStrategy.WARN
-                javadocJar.from(project.tasks.withType<DokkaGenerateTask>().matching { "Publication" in it.name })
-                javadocJar.from(
-                    project.tasks.withType<DokkaTask>().matching { it.name.contains("html", ignoreCase = true) },
-                )
+                val dokkaV2HtmlTasks = project.dokkaV2HtmlTasks()
+                if (dokkaV2HtmlTasks.isNotEmpty()) {
+                    javadocJar.from(dokkaV2HtmlTasks)
+                } else {
+                    javadocJar.from(project.dokkaV1HtmlTasks())
+                }
             }
         }
     }
