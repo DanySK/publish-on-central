@@ -6,10 +6,14 @@ import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.api.publish.plugins.PublishingPlugin
 import org.gradle.api.tasks.bundling.Zip
 import org.gradle.kotlin.dsl.withType
+import org.gradle.work.DisableCachingByDefault
 
 /**
  * A Zip task that creates a zip file containing the local Maven repository.
  */
+@DisableCachingByDefault(
+    because = "The archive content depends on publishing outputs produced during the current build",
+)
 abstract class ZipMavenCentralPortalPublication @Inject constructor() : Zip() {
     init {
         group = PublishingPlugin.PUBLISH_TASK_GROUP
