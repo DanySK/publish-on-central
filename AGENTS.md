@@ -30,7 +30,7 @@ These instructions apply to the entire repository.
 - If you change build logic, plugin wiring, publication setup, or task registration, consider running additional focused verification commands only if `build` is insufficient to cover the change.
 - Tests are primarily Gradle TestKit integration tests driven by fixture projects under `src/test/resources/org/danilopianini/gradle/test/`.
 - When adding coverage for a new scenario, prefer adding or extending a fixture project plus a TestKit-backed test instead of only adding a narrow unit test.
-- Test output is intentionally verbose; do not “simplify” logging unless explicitly requested.
+- Test output is intentionally verbose; do not "simplify" logging unless explicitly requested.
 
 ## Toolchain Expectations
 - Java toolchains are managed via Gradle. Compilation is configured for Java 17.
