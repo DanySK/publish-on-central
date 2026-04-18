@@ -127,12 +127,16 @@ class PublishOnCentral : Plugin<Project> {
             project.tasks.withType<Javadoc>().configureEach { it.enabled = false }
             project.tasks.withType<Jar>().matching { "javadoc" in it.name }.configureEach { javadocJar ->
                 javadocJar.duplicatesStrategy = DuplicatesStrategy.WARN
-                val dokkaV2HtmlTasks = project.dokkaV2HtmlTasks()
-                if (dokkaV2HtmlTasks.isNotEmpty()) {
-                    javadocJar.from(dokkaV2HtmlTasks)
-                } else {
-                    javadocJar.from(project.dokkaV1HtmlTasks())
-                }
+                javadocJar.from(
+                    project.provider {
+                        val dokkaV2HtmlTasks = project.dokkaV2HtmlTasks()
+                        if (dokkaV2HtmlTasks.names.isNotEmpty()) {
+                            dokkaV2HtmlTasks
+                        } else {
+                            project.dokkaV1HtmlTasks()
+                        }
+                    },
+                )
             }
         }
     }
