@@ -1,3 +1,44 @@
+## [9.1.15](https://github.com/DanySK/publish-on-central/compare/9.1.14...9.1.15) (2026-04-19)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.4.1 ([#1669](https://github.com/DanySK/publish-on-central/issues/1669)) ([6953767](https://github.com/DanySK/publish-on-central/commit/69537671b7fb004fc7b1ea993f58ae4e6af5d0a1))
+* **deps:** bump picomatch ([0d451fc](https://github.com/DanySK/publish-on-central/commit/0d451fcdec26c0f6f7b79b21ae239725a0a61c53))
+* **deps:** update kotest to v6.1.10 ([#1660](https://github.com/DanySK/publish-on-central/issues/1660)) ([b0fbcd5](https://github.com/DanySK/publish-on-central/commit/b0fbcd5c8d4dccd37484378ff265b81cd41bdf16))
+* **deps:** update kotest to v6.1.11 ([#1664](https://github.com/DanySK/publish-on-central/issues/1664)) ([b6e4b94](https://github.com/DanySK/publish-on-central/commit/b6e4b942659731c379baecc9741e1f68486638ea))
+* **deps:** update kotest to v6.1.8 ([#1650](https://github.com/DanySK/publish-on-central/issues/1650)) ([bfcfe7e](https://github.com/DanySK/publish-on-central/commit/bfcfe7ef9d6724e2260575178f18215acecf7765))
+* **deps:** update kotest to v6.1.9 ([#1651](https://github.com/DanySK/publish-on-central/issues/1651)) ([62f00a9](https://github.com/DanySK/publish-on-central/commit/62f00a95e3d60683ae349b5893b7163417d6caf3))
+* **deps:** update node.js to 24.15 ([#1666](https://github.com/DanySK/publish-on-central/issues/1666)) ([3286316](https://github.com/DanySK/publish-on-central/commit/328631683787de981a667d32f6765af3c0fcda95))
+* **deps:** update plugin com.gradle.develocity to v4.4.0 ([#1653](https://github.com/DanySK/publish-on-central/issues/1653)) ([d755fdd](https://github.com/DanySK/publish-on-central/commit/d755fdda957c1ef32eafa39773f99d1608909f37))
+* **deps:** update plugin gitsemver to v7.0.15 ([#1647](https://github.com/DanySK/publish-on-central/issues/1647)) ([349201d](https://github.com/DanySK/publish-on-central/commit/349201dff9708bf89fa93bc26cea6e9f399b3696))
+* **deps:** update plugin gitsemver to v7.0.16 ([#1656](https://github.com/DanySK/publish-on-central/issues/1656)) ([67b8d79](https://github.com/DanySK/publish-on-central/commit/67b8d790124a15ed7c41de655edae86f8bd7cb83))
+* **deps:** update plugin gradlepluginpublish to v2.1.1 ([#1646](https://github.com/DanySK/publish-on-central/issues/1646)) ([fa25506](https://github.com/DanySK/publish-on-central/commit/fa25506346476a497b1b25e2dd774ef2e8669b34))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.12 ([#1648](https://github.com/DanySK/publish-on-central/issues/1648)) ([e568bd3](https://github.com/DanySK/publish-on-central/commit/e568bd3f167ddded28927473c89d02e5d0ba364f))
+* **deps:** update plugin publishoncentral to v9.1.14 ([#1645](https://github.com/DanySK/publish-on-central/issues/1645)) ([06e6834](https://github.com/DanySK/publish-on-central/commit/06e6834ad5cd7eb924bca11bb46e5dc6dc0d30ed))
+
+### Bug Fixes
+
+* prefer Dokka v2 when enabled ([#1668](https://github.com/DanySK/publish-on-central/issues/1668)) ([59bb28a](https://github.com/DanySK/publish-on-central/commit/59bb28a4f4a924442b6ad33d5ea5f9b5e67c5973))
+
+### Documentation
+
+* add repository agent instructions ([#1667](https://github.com/DanySK/publish-on-central/issues/1667)) ([d6f151a](https://github.com/DanySK/publish-on-central/commit/d6f151ada5e570af5b897cff666e3e4f2a05ebce))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.27 ([#1649](https://github.com/DanySK/publish-on-central/issues/1649)) ([3ff6e18](https://github.com/DanySK/publish-on-central/commit/3ff6e18bdabfcb77ee0c7180929a9eac325043c9))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.28 ([#1652](https://github.com/DanySK/publish-on-central/issues/1652)) ([3c619b7](https://github.com/DanySK/publish-on-central/commit/3c619b747ea4f8853d6dae334a372e31be5997f0))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.29 ([#1657](https://github.com/DanySK/publish-on-central/issues/1657)) ([82ec745](https://github.com/DanySK/publish-on-central/commit/82ec7450f12f32769b0ac204f60a6de0408d6f13))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.30 ([#1658](https://github.com/DanySK/publish-on-central/issues/1658)) ([cac36d3](https://github.com/DanySK/publish-on-central/commit/cac36d3c6fbfdccb15c6502098757e3850f5d697))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.31 ([#1662](https://github.com/DanySK/publish-on-central/issues/1662)) ([248a054](https://github.com/DanySK/publish-on-central/commit/248a0547ddcabf8445334f4fcd87889e20b0a7a2))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.32 ([#1665](https://github.com/DanySK/publish-on-central/issues/1665)) ([e04307d](https://github.com/DanySK/publish-on-central/commit/e04307da20347c8a6f3e5f4c2b34cfad715f3896))
+
+### General maintenance
+
+* **deps-dev:** bump handlebars from 4.7.8 to 4.7.9 ([44a6424](https://github.com/DanySK/publish-on-central/commit/44a6424a6b66a4e631d12ef5520490cf455ccd25))
+* **deps-dev:** bump lodash from 4.17.23 to 4.18.1 ([262129d](https://github.com/DanySK/publish-on-central/commit/262129d554de7f394644f4941845b646a7d7e050))
+* **deps-dev:** bump lodash-es from 4.17.23 to 4.18.1 ([380fae3](https://github.com/DanySK/publish-on-central/commit/380fae3978ff9b09e6cb7c3514eeee2141817d7a))
+
 ## [9.1.14](https://github.com/DanySK/publish-on-central/compare/9.1.13...9.1.14) (2026-03-19)
 
 ### Dependency updates
