@@ -24,7 +24,6 @@ import org.gradle.kotlin.dsl.withType
 import org.gradle.plugins.signing.Sign
 import org.gradle.plugins.signing.SigningExtension
 import org.gradle.plugins.signing.SigningPlugin
-import org.jetbrains.dokka.gradle.DokkaTask
 import org.jetbrains.dokka.gradle.tasks.DokkaGenerateTask
 
 /**
@@ -47,8 +46,9 @@ class PublishOnCentral : Plugin<Project> {
                 it.name.contains("html", ignoreCase = true)
         }
 
-        private fun Project.dokkaV1HtmlTasks() = tasks.withType<DokkaTask>().matching {
-            it.name.contains("html", ignoreCase = true)
+        private fun Project.legacyDokkaHtmlTasks() = tasks.matching {
+            it.group == "dokka" &&
+                it.name.contains("html", ignoreCase = true)
         }
     }
 
@@ -133,7 +133,7 @@ class PublishOnCentral : Plugin<Project> {
                         if (dokkaV2HtmlTasks.names.isNotEmpty()) {
                             dokkaV2HtmlTasks
                         } else {
-                            project.dokkaV1HtmlTasks()
+                            project.legacyDokkaHtmlTasks()
                         }
                     },
                 )
