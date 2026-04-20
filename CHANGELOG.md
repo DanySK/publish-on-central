@@ -1,3 +1,20 @@
+## [9.2.0](https://github.com/DanySK/publish-on-central/compare/9.1.15...9.2.0) (2026-04-20)
+
+### Dependency updates
+
+* **api-deps:** update dokka to v2.2.0 ([#1676](https://github.com/DanySK/publish-on-central/issues/1676)) ([b7e1f80](https://github.com/DanySK/publish-on-central/commit/b7e1f801f823e30a9780bbabc289d2dcd3d59809))
+* **deps:** update plugin com.gradle.develocity to v4.4.1 ([#1675](https://github.com/DanySK/publish-on-central/issues/1675)) ([640ccf7](https://github.com/DanySK/publish-on-central/commit/640ccf7f646a6f0865ed21e5ead13e57f73c36e6))
+* **deps:** update plugin kotlin-qa to v1.4.0 ([#1670](https://github.com/DanySK/publish-on-central/issues/1670)) ([2e70dff](https://github.com/DanySK/publish-on-central/commit/2e70dff348c1b71fea9d557896dfad28b54b8a42))
+* **deps:** update plugin kotlin-qa to v1.4.1 ([#1677](https://github.com/DanySK/publish-on-central/issues/1677)) ([ec74dc1](https://github.com/DanySK/publish-on-central/commit/ec74dc1381a68179460867fb01fc77733cd3c5c2))
+* **deps:** update plugin multijvmtesting to v4.2.0 ([#1516](https://github.com/DanySK/publish-on-central/issues/1516)) ([077d1e1](https://github.com/DanySK/publish-on-central/commit/077d1e12124fac6b6341b491a61a525b60b9cd5b))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.13 ([#1672](https://github.com/DanySK/publish-on-central/issues/1672)) ([3c2891d](https://github.com/DanySK/publish-on-central/commit/3c2891d035e32cfb9655f277ccd0246e1ce804f1))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.14 ([#1673](https://github.com/DanySK/publish-on-central/issues/1673)) ([7791c2d](https://github.com/DanySK/publish-on-central/commit/7791c2d4777913dbda7f58d5b2ab9873e707b624))
+* **deps:** update plugin publishoncentral to v9.1.15 ([#1671](https://github.com/DanySK/publish-on-central/issues/1671)) ([21e4d0a](https://github.com/DanySK/publish-on-central/commit/21e4d0af8c516bd1d147fa298f4abb96f182592b))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v6.4.0 ([#1674](https://github.com/DanySK/publish-on-central/issues/1674)) ([1e42e3b](https://github.com/DanySK/publish-on-central/commit/1e42e3b0793a23dd56ae29e722ce403c8169c30a))
+
 ## [9.1.15](https://github.com/DanySK/publish-on-central/compare/9.1.14...9.1.15) (2026-04-19)
 
 ### Dependency updates
