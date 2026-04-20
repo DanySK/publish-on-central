@@ -46,9 +46,11 @@ class PublishOnCentral : Plugin<Project> {
                 it.name.contains("html", ignoreCase = true)
         }
 
-        private fun Project.legacyDokkaHtmlTasks() = tasks.matching {
-            it.group == "dokka" &&
-                it.name.contains("html", ignoreCase = true)
+        // Dokka 2.2 deprecates the v1 task type, but we still need to detect it to keep legacy/helper setups publishing
+        // a non-empty javadoc artifact when publication HTML helpers are unavailable.
+        @Suppress("DEPRECATION")
+        private fun Project.legacyDokkaHtmlTasks() = tasks.withType<org.jetbrains.dokka.gradle.DokkaTask>().matching {
+            it.name.contains("html", ignoreCase = true)
         }
     }
 
