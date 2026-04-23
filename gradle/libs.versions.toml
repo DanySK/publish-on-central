@@ -1,7 +1,7 @@
 [versions]
 dokka = "2.2.0"
 kotest = "6.1.11"
-kotlin = "2.3.20"
+kotlin = "2.3.21"
 testkit = "0.9.0"
 
 [libraries]
