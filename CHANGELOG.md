@@ -1,3 +1,13 @@
+## [9.2.2](https://github.com/DanySK/publish-on-central/compare/9.2.1...9.2.2) (2026-04-28)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.5.0 ([#1689](https://github.com/DanySK/publish-on-central/issues/1689)) ([529d12f](https://github.com/DanySK/publish-on-central/commit/529d12fe9581d3d4b91b94c9266be3c3572c5665))
+* **deps:** update plugin kotlin-qa to v1.5.1 ([#1684](https://github.com/DanySK/publish-on-central/issues/1684)) ([fa60fc6](https://github.com/DanySK/publish-on-central/commit/fa60fc665e8b263fe8acfb46932023ed892c5cd6))
+* **deps:** update plugin kotlin-qa to v1.6.0 ([#1686](https://github.com/DanySK/publish-on-central/issues/1686)) ([92a2735](https://github.com/DanySK/publish-on-central/commit/92a2735062c3f75df19d0f0eb3614a2e7191b322))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.15 ([#1682](https://github.com/DanySK/publish-on-central/issues/1682)) ([11c642f](https://github.com/DanySK/publish-on-central/commit/11c642f49bdf3ce8b5a9e6d161d1bd4c5fff4045))
+* **deps:** update plugin publishoncentral to v9.2.1 ([#1685](https://github.com/DanySK/publish-on-central/issues/1685)) ([5fa84ab](https://github.com/DanySK/publish-on-central/commit/5fa84ab868d054fbd66a912d873ab691ae70a420))
+
 ## [9.2.1](https://github.com/DanySK/publish-on-central/compare/9.2.0...9.2.1) (2026-04-23)
 
 ### Dependency updates
