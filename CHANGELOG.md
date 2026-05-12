@@ -1,3 +1,14 @@
+## [9.2.4](https://github.com/DanySK/publish-on-central/compare/9.2.3...9.2.4) (2026-05-12)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.5.1 ([#1697](https://github.com/DanySK/publish-on-central/issues/1697)) ([2ee7f12](https://github.com/DanySK/publish-on-central/commit/2ee7f12b66e8cd693b9a62bb6357bc1a83045115))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4 ([#1696](https://github.com/DanySK/publish-on-central/issues/1696)) ([cace7b6](https://github.com/DanySK/publish-on-central/commit/cace7b674b70638524537277e15b685ee3953670))
+* **deps:** update plugin gitsemver to v7.0.19 ([#1698](https://github.com/DanySK/publish-on-central/issues/1698)) ([0e58f18](https://github.com/DanySK/publish-on-central/commit/0e58f18cadabff1e8150f2b5bdadf0046b10af80))
+* **deps:** update plugin multijvmtesting to v4.3.6 ([#1700](https://github.com/DanySK/publish-on-central/issues/1700)) ([5b6d839](https://github.com/DanySK/publish-on-central/commit/5b6d839e3c17d459353a1c26b8ed9375246b3151))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.17 ([#1699](https://github.com/DanySK/publish-on-central/issues/1699)) ([ecf9377](https://github.com/DanySK/publish-on-central/commit/ecf9377a4fcb055fb876f725abe4ffe974da72d7))
+* **deps:** update plugin publishoncentral to v9.2.3 ([#1695](https://github.com/DanySK/publish-on-central/issues/1695)) ([2c61a77](https://github.com/DanySK/publish-on-central/commit/2c61a778123f0f57560555dbcd992f6f298f00bc))
+
 ## [9.2.3](https://github.com/DanySK/publish-on-central/compare/9.2.2...9.2.3) (2026-05-08)
 
 ### Dependency updates
