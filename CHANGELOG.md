@@ -1,3 +1,34 @@
+## [9.2.6](https://github.com/DanySK/publish-on-central/compare/9.2.5...9.2.6) (2026-06-19)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.6.0 ([#1734](https://github.com/DanySK/publish-on-central/issues/1734)) ([5710b90](https://github.com/DanySK/publish-on-central/commit/5710b90361b0d005d3dfce0d21ae5d383fbe5b1e))
+* **deps:** bump tar and npm ([817f849](https://github.com/DanySK/publish-on-central/commit/817f8497aec6cd34740c700d65b56276fca54ddd))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.1.1 ([03568cc](https://github.com/DanySK/publish-on-central/commit/03568cc5dd7280b55d59721b362a9d0f92537631))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.2.1 ([#1725](https://github.com/DanySK/publish-on-central/issues/1725)) ([5c6dec4](https://github.com/DanySK/publish-on-central/commit/5c6dec489241c461030faf5f34987b6b5d6d108b))
+* **deps:** update kotest to v6.2.0 ([#1722](https://github.com/DanySK/publish-on-central/issues/1722)) ([401e82d](https://github.com/DanySK/publish-on-central/commit/401e82d570227d5c39b70a0491ecf5c7c525b027))
+* **deps:** update kotest to v6.2.1 ([#1728](https://github.com/DanySK/publish-on-central/issues/1728)) ([b28c2c9](https://github.com/DanySK/publish-on-central/commit/b28c2c96839fe97174754a99cb91759d0b5876bf))
+* **deps:** update plugin com.gradle.develocity to v4.4.3 ([#1723](https://github.com/DanySK/publish-on-central/issues/1723)) ([ea9d4fa](https://github.com/DanySK/publish-on-central/commit/ea9d4fa3dde3c85c0a2acf9f51c8e0c5cbb5704e))
+* **deps:** update plugin gitsemver to v7.0.22 ([#1721](https://github.com/DanySK/publish-on-central/issues/1721)) ([36e386b](https://github.com/DanySK/publish-on-central/commit/36e386b04a5985d46259fe44a00328b6148f669f))
+* **deps:** update plugin kotlin-qa to v1.7.1 ([#1718](https://github.com/DanySK/publish-on-central/issues/1718)) ([17c2ea6](https://github.com/DanySK/publish-on-central/commit/17c2ea6409076cb619e5bca9347bed27100aebd1))
+* **deps:** update plugin multijvmtesting to v4.5.1 ([#1715](https://github.com/DanySK/publish-on-central/issues/1715)) ([75f2809](https://github.com/DanySK/publish-on-central/commit/75f28095a2879d1c92060aaa62fd357934925623))
+* **deps:** update plugin multijvmtesting to v4.5.2 ([#1732](https://github.com/DanySK/publish-on-central/issues/1732)) ([6e58acd](https://github.com/DanySK/publish-on-central/commit/6e58acda3effe0a7870ccbceeeb5a6e1f80f6064))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.18 ([#1716](https://github.com/DanySK/publish-on-central/issues/1716)) ([378b3f4](https://github.com/DanySK/publish-on-central/commit/378b3f48a18c4aaf238ed54297d011792a213644))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.19 ([#1733](https://github.com/DanySK/publish-on-central/issues/1733)) ([c44842d](https://github.com/DanySK/publish-on-central/commit/c44842dbadda691d005a8a788d3e2765ffdb3d82))
+* **deps:** update plugin publishoncentral to v9.2.5 ([#1717](https://github.com/DanySK/publish-on-central/issues/1717)) ([559ae41](https://github.com/DanySK/publish-on-central/commit/559ae41e4169edcad71b32a83b3ddf458240883c))
+
+### Build and continuous integration
+
+* **deps:** update actions/checkout action to v7 ([#1729](https://github.com/DanySK/publish-on-central/issues/1729)) ([5a73d31](https://github.com/DanySK/publish-on-central/commit/5a73d31d9f15af0320d238366532ad18c864ed36))
+* **deps:** update danysk/action-checkout action to v0.2.30 ([#1730](https://github.com/DanySK/publish-on-central/issues/1730)) ([3a19d5d](https://github.com/DanySK/publish-on-central/commit/3a19d5dfc394eecb1e58c955d68182accf47e074))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.34 ([#1719](https://github.com/DanySK/publish-on-central/issues/1719)) ([c2ef693](https://github.com/DanySK/publish-on-central/commit/c2ef693c166fd8775bfcb6f3e4c35304f1e51a55))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.35 ([#1720](https://github.com/DanySK/publish-on-central/issues/1720)) ([c6dd61d](https://github.com/DanySK/publish-on-central/commit/c6dd61d36e7e5c6ef1ee19aba72db5fc85181360))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.36 ([#1724](https://github.com/DanySK/publish-on-central/issues/1724)) ([d402f78](https://github.com/DanySK/publish-on-central/commit/d402f78cb752dc2927a3de7e6d93becbb239c2d2))
+
+### General maintenance
+
+* **deps-dev:** bump js-yaml from 4.1.1 to 4.2.0 ([fe89d52](https://github.com/DanySK/publish-on-central/commit/fe89d52638c609111ef929db237daa80efd2895e))
+
 ## [9.2.5](https://github.com/DanySK/publish-on-central/compare/9.2.4...9.2.5) (2026-06-03)
 
 ### Dependency updates
