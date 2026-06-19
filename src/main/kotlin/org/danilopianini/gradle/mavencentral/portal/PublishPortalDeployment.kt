@@ -84,7 +84,7 @@ data class PublishPortalDeployment(
      * Lazily computed staging repository descriptor.
      */
     val deploymentId: String by lazy {
-        when (val idFromProperty = project.properties[PUBLISH_DEPLOYMENT_ID_PROPERTY_NAME]) {
+        when (val idFromProperty = project.findProperty(PUBLISH_DEPLOYMENT_ID_PROPERTY_NAME)) {
             null -> {
                 runBlocking { upload(fileToUpload) }
             }
