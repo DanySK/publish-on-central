@@ -70,17 +70,17 @@ internal object ProjectExtensions {
             project.propertyWithDefaultProvider {
                 System.getenv("MAVEN_CENTRAL_PORTAL_USERNAME")
                     ?: System.getenv("MAVEN_CENTRAL_USERNAME")
-                    ?: project.properties["mavenCentralPortalUsername"]?.toString()
-                    ?: project.properties["centralPortalUsername"]?.toString()
-                    ?: project.properties["centralUsername"]?.toString()
+                    ?: project.findProperty("mavenCentralPortalUsername")?.toString()
+                    ?: project.findProperty("centralPortalUsername")?.toString()
+                    ?: project.findProperty("centralUsername")?.toString()
             },
             password =
             project.propertyWithDefaultProvider {
                 System.getenv("MAVEN_CENTRAL_PORTAL_PASSWORD")
                     ?: System.getenv("MAVEN_CENTRAL_PASSWORD")
-                    ?: project.properties["mavenCentralPortalPassword"]?.toString()
-                    ?: project.properties["centralPortalPassword"]?.toString()
-                    ?: project.properties["centralPassword"]?.toString()
+                    ?: project.findProperty("mavenCentralPortalPassword")?.toString()
+                    ?: project.findProperty("centralPortalPassword")?.toString()
+                    ?: project.findProperty("centralPassword")?.toString()
             },
             zipTask = zipMavenCentralPortal,
         )
