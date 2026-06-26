@@ -1,3 +1,18 @@
+## [9.2.7](https://github.com/DanySK/publish-on-central/compare/9.2.6...9.2.7) (2026-06-26)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.6.1 ([#1741](https://github.com/DanySK/publish-on-central/issues/1741)) ([b751df0](https://github.com/DanySK/publish-on-central/commit/b751df0730b719cae86fda02ca545c14126ade22))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.3.0 ([#1739](https://github.com/DanySK/publish-on-central/issues/1739)) ([4588105](https://github.com/DanySK/publish-on-central/commit/4588105b076877b196bf8c48d5db700b3fa82099))
+* **deps:** update node.js to 24.17 ([#1736](https://github.com/DanySK/publish-on-central/issues/1736)) ([15d6d46](https://github.com/DanySK/publish-on-central/commit/15d6d46a66f5c9f4afe239f0c1022d3ed7d23051))
+* **deps:** update node.js to 24.18 ([#1740](https://github.com/DanySK/publish-on-central/issues/1740)) ([86c083f](https://github.com/DanySK/publish-on-central/commit/86c083f892d3c7ea0c9632fb1e49387b78700519))
+* **deps:** update plugin publishoncentral to v9.2.6 ([#1735](https://github.com/DanySK/publish-on-central/issues/1735)) ([9751cab](https://github.com/DanySK/publish-on-central/commit/9751cab9866d923d6252687ba4e9814b6d2bbbce))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.37 ([#1737](https://github.com/DanySK/publish-on-central/issues/1737)) ([4bdd4d4](https://github.com/DanySK/publish-on-central/commit/4bdd4d41cd94a56f7172270b429364e78af7ed89))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.38 ([#1738](https://github.com/DanySK/publish-on-central/issues/1738)) ([75264dd](https://github.com/DanySK/publish-on-central/commit/75264ddfd88c932d151858261debb8c7a0f773fa))
+
 ## [9.2.6](https://github.com/DanySK/publish-on-central/compare/9.2.5...9.2.6) (2026-06-19)
 
 ### Dependency updates
