@@ -1,3 +1,21 @@
+## [9.2.8](https://github.com/DanySK/publish-on-central/compare/9.2.7...9.2.8) (2026-07-14)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.4.10 ([#1752](https://github.com/DanySK/publish-on-central/issues/1752)) ([53ee2d4](https://github.com/DanySK/publish-on-central/commit/53ee2d4c645769d6bead94c2c9f5c2f5b88910bc))
+* **deps:** update kotest to v6.2.2 ([#1749](https://github.com/DanySK/publish-on-central/issues/1749)) ([708e1a6](https://github.com/DanySK/publish-on-central/commit/708e1a6a4102931ec788abca74311041089f34d0))
+* **deps:** update plugin com.gradle.develocity to v4.5.0 ([#1747](https://github.com/DanySK/publish-on-central/issues/1747)) ([8cbaaca](https://github.com/DanySK/publish-on-central/commit/8cbaaca3ef51d9bb72dbd9e2984515f8460ca770))
+* **deps:** update plugin kotlin-qa to v1.8.0 ([#1746](https://github.com/DanySK/publish-on-central/issues/1746)) ([6d8e741](https://github.com/DanySK/publish-on-central/commit/6d8e741aa273fe8755109835b87247e77abb53e2))
+* **deps:** update plugin multijvmtesting to v4.5.3 ([#1742](https://github.com/DanySK/publish-on-central/issues/1742)) ([ef15fef](https://github.com/DanySK/publish-on-central/commit/ef15fef57194048bd04a3087002d1a81f01a9fa9))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.20 ([#1743](https://github.com/DanySK/publish-on-central/issues/1743)) ([d140072](https://github.com/DanySK/publish-on-central/commit/d1400720830a3040061c9270daca9660d9bcb3d7))
+* **deps:** update plugin publishoncentral to v9.2.7 ([#1744](https://github.com/DanySK/publish-on-central/issues/1744)) ([ed0fd74](https://github.com/DanySK/publish-on-central/commit/ed0fd745f2ae61a854c08343e09d7ed3507e6112))
+
+### Build and continuous integration
+
+* **deps:** update actions/setup-node action to v7 ([#1751](https://github.com/DanySK/publish-on-central/issues/1751)) ([e11da29](https://github.com/DanySK/publish-on-central/commit/e11da29c200f18bcde6b2522159f18cf79974ee5))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.39 ([#1745](https://github.com/DanySK/publish-on-central/issues/1745)) ([a754a8e](https://github.com/DanySK/publish-on-central/commit/a754a8ecb3f6209685928b231021278bf910386c))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.40 ([#1748](https://github.com/DanySK/publish-on-central/issues/1748)) ([80962ba](https://github.com/DanySK/publish-on-central/commit/80962ba50ebed55ccb7b082ed0e83190304f3d57))
+
 ## [9.2.7](https://github.com/DanySK/publish-on-central/compare/9.2.6...9.2.7) (2026-06-26)
 
 ### Dependency updates
