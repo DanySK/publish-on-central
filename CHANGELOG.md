@@ -1,3 +1,17 @@
+## [9.2.10](https://github.com/DanySK/publish-on-central/compare/9.2.9...9.2.10) (2026-08-19)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.7.1 ([#1775](https://github.com/DanySK/publish-on-central/issues/1775)) ([1e080de](https://github.com/DanySK/publish-on-central/commit/1e080deb97801317bc9edd8b7de5dd61b5ff0a51))
+* **deps:** update kotest to v6.2.4 ([#1774](https://github.com/DanySK/publish-on-central/issues/1774)) ([cfef074](https://github.com/DanySK/publish-on-central/commit/cfef074be993ce33b83bca5eaac928af9eff4553))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.22 ([#1770](https://github.com/DanySK/publish-on-central/issues/1770)) ([70167d7](https://github.com/DanySK/publish-on-central/commit/70167d763b11306f5e6453d6222515b68be5110c))
+* **deps:** update plugin publishoncentral to v9.2.9 ([#1771](https://github.com/DanySK/publish-on-central/issues/1771)) ([64577d2](https://github.com/DanySK/publish-on-central/commit/64577d29b56d64251e2e3f3fd1d184e19ab23ad6))
+* **deps:** update plugin tasktree to v4.0.2 ([#1772](https://github.com/DanySK/publish-on-central/issues/1772)) ([6272317](https://github.com/DanySK/publish-on-central/commit/627231705345969897ac2c09a80179f439ee009e))
+
+### General maintenance
+
+* **deps-dev:** bump js-yaml from 4.2.0 to 4.3.1 ([9d5c452](https://github.com/DanySK/publish-on-central/commit/9d5c452b0bcf60e1af29a5a6a2e577ce9248e07a))
+
 ## [9.2.9](https://github.com/DanySK/publish-on-central/compare/9.2.8...9.2.9) (2026-08-07)
 
 ### Dependency updates
