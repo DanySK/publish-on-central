@@ -1,3 +1,19 @@
+## [9.2.11](https://github.com/DanySK/publish-on-central/compare/9.2.10...9.2.11) (2026-09-07)
+
+### Dependency updates
+
+* **core-deps:** update kotlin monorepo to v2.4.20 ([#1783](https://github.com/DanySK/publish-on-central/issues/1783)) ([c2d75de](https://github.com/DanySK/publish-on-central/commit/c2d75de78231ca4b29ba16d23637fc9e9826e0c1))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.6.1 ([#1780](https://github.com/DanySK/publish-on-central/issues/1780)) ([669895c](https://github.com/DanySK/publish-on-central/commit/669895ce0676806d00628029a913286ba13ebd23))
+* **deps:** update node.js to 24.20 ([#1782](https://github.com/DanySK/publish-on-central/issues/1782)) ([9878139](https://github.com/DanySK/publish-on-central/commit/9878139441d980f9dab9b86b60a365b34a5bdf73))
+* **deps:** update plugin kotlin-qa to v1.9.0 ([#1781](https://github.com/DanySK/publish-on-central/issues/1781)) ([9f0bb2a](https://github.com/DanySK/publish-on-central/commit/9f0bb2a1527c34cd33e677e71e54f3b0a26578e1))
+* **deps:** update plugin multijvmtesting to v4.5.6 ([#1776](https://github.com/DanySK/publish-on-central/issues/1776)) ([35bf007](https://github.com/DanySK/publish-on-central/commit/35bf0076011762f869691bb4a58a85de396548fa))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.23 ([#1777](https://github.com/DanySK/publish-on-central/issues/1777)) ([b89fac5](https://github.com/DanySK/publish-on-central/commit/b89fac507786e0d3c9efe98263a827ce56673241))
+* **deps:** update plugin publishoncentral to v9.2.10 ([#1778](https://github.com/DanySK/publish-on-central/issues/1778)) ([c0c13ed](https://github.com/DanySK/publish-on-central/commit/c0c13ed03c4842501bf6c745f669eb43e4e6fcbb))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.44 ([#1779](https://github.com/DanySK/publish-on-central/issues/1779)) ([7b31984](https://github.com/DanySK/publish-on-central/commit/7b319844c03068745166ca46f3b5a1b645a5f2ac))
+
 ## [9.2.10](https://github.com/DanySK/publish-on-central/compare/9.2.9...9.2.10) (2026-08-19)
 
 ### Dependency updates
