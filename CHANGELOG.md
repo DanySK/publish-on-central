@@ -1,3 +1,33 @@
+## [9.2.12](https://github.com/DanySK/publish-on-central/compare/9.2.11...9.2.12) (2026-09-25)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.8.0 ([94afc1f](https://github.com/DanySK/publish-on-central/commit/94afc1f6a2d232e3e7bae773e737ad12bacf5396))
+* **deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.6.2 ([#1789](https://github.com/DanySK/publish-on-central/issues/1789)) ([16693ca](https://github.com/DanySK/publish-on-central/commit/16693ca4c80f99c9ad6e8035e0a2b7f9518328ba))
+* **deps:** update kotest to v6.2.5 ([#1796](https://github.com/DanySK/publish-on-central/issues/1796)) ([b6bec3d](https://github.com/DanySK/publish-on-central/commit/b6bec3dab31f671aa73abf6ff18514bb2c8b2c3d))
+* **deps:** update node.js to 24.21 ([#1794](https://github.com/DanySK/publish-on-central/issues/1794)) ([e734d2c](https://github.com/DanySK/publish-on-central/commit/e734d2c997a960517865f3520a78ff849a8adc18))
+* **deps:** update plugin com.gradle.develocity to v4.5.1 ([#1790](https://github.com/DanySK/publish-on-central/issues/1790)) ([8fe6dfc](https://github.com/DanySK/publish-on-central/commit/8fe6dfc8d442a34fdcb3b4d8800f4bfa1eb308c0))
+* **deps:** update plugin gitsemver to v7.0.24 ([#1786](https://github.com/DanySK/publish-on-central/issues/1786)) ([ba12a2d](https://github.com/DanySK/publish-on-central/commit/ba12a2db07102971272ba5ac460dd3951e645567))
+* **deps:** update plugin gradlepluginpublish to v2.2.0 ([#1792](https://github.com/DanySK/publish-on-central/issues/1792)) ([07e4643](https://github.com/DanySK/publish-on-central/commit/07e4643c48b157f85bf842decfe75f56edfea59a))
+* **deps:** update plugin gradlepluginpublish to v2.2.1 ([da4b11a](https://github.com/DanySK/publish-on-central/commit/da4b11a35668f51494e28ebcbd91106edd0d564c))
+* **deps:** update plugin kotlin-qa to v1.9.1 ([#1797](https://github.com/DanySK/publish-on-central/issues/1797)) ([77be157](https://github.com/DanySK/publish-on-central/commit/77be15735ca75a1f04c6e31b814e29b1ee26e9d1))
+* **deps:** update plugin kotlin-qa to v1.9.2 ([#1798](https://github.com/DanySK/publish-on-central/issues/1798)) ([2282298](https://github.com/DanySK/publish-on-central/commit/2282298bd9da3d21693e743beaff36e253b04f91))
+* **deps:** update plugin kotlin-qa to v1.9.3 ([#1805](https://github.com/DanySK/publish-on-central/issues/1805)) ([b7db44e](https://github.com/DanySK/publish-on-central/commit/b7db44e9a82c2daa099425e54acd4d6137fe5197))
+* **deps:** update plugin multijvmtesting to v4.5.7 ([#1799](https://github.com/DanySK/publish-on-central/issues/1799)) ([4319466](https://github.com/DanySK/publish-on-central/commit/4319466fe9619383069489395b5f24512aa4ba2d))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.1.24 ([3dfded8](https://github.com/DanySK/publish-on-central/commit/3dfded88b4548bf6929c1af9693a94f3800bb35b))
+* **deps:** update plugin publishoncentral to v9.2.11 ([#1788](https://github.com/DanySK/publish-on-central/issues/1788)) ([161d645](https://github.com/DanySK/publish-on-central/commit/161d6456d5c24647793497de680753aa4d0828bd))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.45 ([#1791](https://github.com/DanySK/publish-on-central/issues/1791)) ([2e1ff40](https://github.com/DanySK/publish-on-central/commit/2e1ff4087426457ffec4836472b6d0343ce78094))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.46 ([#1800](https://github.com/DanySK/publish-on-central/issues/1800)) ([a353d6f](https://github.com/DanySK/publish-on-central/commit/a353d6f0af0f5554939037b0fb302d0ae1463cb8))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.47 ([#1801](https://github.com/DanySK/publish-on-central/issues/1801)) ([1d39efd](https://github.com/DanySK/publish-on-central/commit/1d39efd10ac64d2b547a4bf0ed70c23eab2bab5d))
+* **deps:** update dependency ubuntu to v26 ([#1802](https://github.com/DanySK/publish-on-central/issues/1802)) ([83812bf](https://github.com/DanySK/publish-on-central/commit/83812bfd10ff86b751ff28769078ae6d77b8bd3e))
+
+### General maintenance
+
+* **deps-dev:** bump js-yaml from 4.3.1 to 4.3.2 ([cbd3452](https://github.com/DanySK/publish-on-central/commit/cbd34526dc358714c0318c15f6278019a981495b))
+
 ## [9.2.11](https://github.com/DanySK/publish-on-central/compare/9.2.10...9.2.11) (2026-09-07)
 
 ### Dependency updates
