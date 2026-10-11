@@ -8,7 +8,8 @@
       "description": "Trigger a minor update on some dependencies",
       "matchPackageNames": [
         "io.github.gradle-nexus.publish-plugin",
-        "io.github.gradle-nexus.publish-plugin"
+        "io.github.gradle-nexus.publish-plugin",
+        "org.danilopianini:maven-central-portal-kotlin-api-jvm"
       ],
       "semanticCommitScope": "api-deps"
     }
