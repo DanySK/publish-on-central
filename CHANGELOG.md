@@ -1,3 +1,24 @@
+## [9.3.0](https://github.com/DanySK/publish-on-central/compare/9.2.15...9.3.0) (2026-11-06)
+
+### Dependency updates
+
+* **api-deps:** update dependency org.danilopianini:maven-central-portal-kotlin-api-jvm to v4.8.2 ([81fcb93](https://github.com/DanySK/publish-on-central/commit/81fcb93564be67d7f602723c3c0fd63dc35e95a9))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.158 ([#1841](https://github.com/DanySK/publish-on-central/issues/1841)) ([c8a0f82](https://github.com/DanySK/publish-on-central/commit/c8a0f82024fb60debc22d7c752ecd4b2b4ba209c))
+* **deps:** update node.js to v26 ([#1839](https://github.com/DanySK/publish-on-central/issues/1839)) ([e1e9092](https://github.com/DanySK/publish-on-central/commit/e1e9092fe0ca0891d181659be61dad533934fb65))
+* **deps:** update plugin gitsemver to v7.2.0 ([#1836](https://github.com/DanySK/publish-on-central/issues/1836)) ([d4b486e](https://github.com/DanySK/publish-on-central/commit/d4b486ec9a6719f8b10d5b42e2438502ce6836e1))
+* **deps:** update plugin gitsemver to v7.3.0 ([eb76109](https://github.com/DanySK/publish-on-central/commit/eb76109fd2fc927de1d246a0020014c8c8f270eb))
+* **deps:** update plugin multijvmtesting to v4.5.11 ([0d4f213](https://github.com/DanySK/publish-on-central/commit/0d4f2130d9f08d5f85ba8da4b550dd4108130e73))
+* **deps:** update plugin publishoncentral to v9.2.15 ([#1835](https://github.com/DanySK/publish-on-central/issues/1835)) ([a82861a](https://github.com/DanySK/publish-on-central/commit/a82861a9eb77ccf322a31bf92c1a42393e04021c))
+
+### Documentation
+
+* **deps:** update dokka to v2.3.0 ([#1842](https://github.com/DanySK/publish-on-central/issues/1842)) ([c92c6c4](https://github.com/DanySK/publish-on-central/commit/c92c6c4fcea2c36b89c06441cd3621c6d8763197))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.50 ([900120d](https://github.com/DanySK/publish-on-central/commit/900120d3ab5e36f01c0e95db7a62a47824173af1))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.51 ([f6e3f30](https://github.com/DanySK/publish-on-central/commit/f6e3f30200ea5768627e7441e511106e00d7b690))
+
 ## [9.2.15](https://github.com/DanySK/publish-on-central/compare/9.2.14...9.2.15) (2026-10-20)
 
 ### Dependency updates
