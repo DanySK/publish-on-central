@@ -1,3 +1,10 @@
+## [9.3.2](https://github.com/DanySK/publish-on-central/compare/9.3.1...9.3.2) (2026-11-10)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.9.1 ([#1847](https://github.com/DanySK/publish-on-central/issues/1847)) ([af87362](https://github.com/DanySK/publish-on-central/commit/af87362bc42bd484edf6ec38398faa2b0e12f316))
+* **deps:** update plugin publishoncentral to v9.3.1 ([#1846](https://github.com/DanySK/publish-on-central/issues/1846)) ([372daca](https://github.com/DanySK/publish-on-central/commit/372daca119f2d0e062616b39705760fff389cf11))
+
 ## [9.3.1](https://github.com/DanySK/publish-on-central/compare/9.3.0...9.3.1) (2026-11-06)
 
 ### Dependency updates
