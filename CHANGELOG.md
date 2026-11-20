@@ -1,3 +1,16 @@
+## [9.3.3](https://github.com/DanySK/publish-on-central/compare/9.3.2...9.3.3) (2026-11-20)
+
+### Dependency updates
+
+* **core-deps:** update gradle to v9.9.2 ([#1852](https://github.com/DanySK/publish-on-central/issues/1852)) ([51a04a8](https://github.com/DanySK/publish-on-central/commit/51a04a8f0937698eba1bda7af399985b4f55aa75))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.159 ([#1851](https://github.com/DanySK/publish-on-central/issues/1851)) ([c9bb003](https://github.com/DanySK/publish-on-central/commit/c9bb0030f339704f09d5e90e759b06b1082adfff))
+* **deps:** update kotest to v6.2.7 ([#1849](https://github.com/DanySK/publish-on-central/issues/1849)) ([d0ef324](https://github.com/DanySK/publish-on-central/commit/d0ef3247b74f51901c55a1c4707104e0ddbb55d8))
+* **deps:** update plugin publishoncentral to v9.3.2 ([2a21831](https://github.com/DanySK/publish-on-central/commit/2a2183158f80494b548935dcb5bfa8f9ce9afdfe))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v4.0.52 ([#1850](https://github.com/DanySK/publish-on-central/issues/1850)) ([8aab6bb](https://github.com/DanySK/publish-on-central/commit/8aab6bb97df4270ad7f260ff5a81e67394bb000c))
+
 ## [9.3.2](https://github.com/DanySK/publish-on-central/compare/9.3.1...9.3.2) (2026-11-10)
 
 ### Dependency updates
